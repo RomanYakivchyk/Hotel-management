@@ -17,29 +17,47 @@
 
 
     <script>
-$(document).ready(function(){
-  $("#inputSearch").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#clientTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
+			$(document).ready(function(){
+				$("#inputSearch").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$("#clientTable tr").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
 
-
-
-
-
-
-
-
-
-
-    </script>
+				$('#confirm-delete').on('show.bs.modal', function(e) {
+					$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+					var link = $(e.relatedTarget)
+					var clientName = link.data('client');
+					$(this).find('.modal-body h5').text(clientName);
+				});
+			});
+		</script>
 
 </head>
 <body class="bg-light">
 <div th:insert="header.html"></div>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <small>Видалити дані клієнта?</small>
+                </h3>
+            </div>
+            <div class="modal-body">
+                <h5></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Назад</button>
+                <a class="btn btn-danger btn-ok">Видалити</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <br>
     <p>Type something in the input field to search the table for first names, last names or emails:</p>
@@ -62,15 +80,18 @@ $(document).ready(function(){
                     <div th:with="phoneNumber=${client.phoneNumber}"
                          th:class="font-weight-light"
                          th:text="'('+${#strings.substring(phoneNumber,0,3)}+')'
-                             +' '+${#strings.substring(phoneNumber,3,5)}
-                             +'-'+${#strings.substring(phoneNumber,5,7)}
-                             +'-'+${#strings.substring(phoneNumber,7)}">
+								+' '+${#strings.substring(phoneNumber,3,5)}
+								+'-'+${#strings.substring(phoneNumber,5,7)}
+								+'-'+${#strings.substring(phoneNumber,7)}">
                     </div>
                 </td>
                 <td><p class="float-right">
-                    <a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">
-                        <i class="fas fa-pencil-alt" aria-hidden="true"></i></a>&emsp;&emsp;
-                    <a th:href="@{/client/{clientId}/remove(clientId=${client.id})}"><i class="far fa-trash-alt text-secondary" aria-hidden="true"></i></a>
+								<span><a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">
+								<i class="fas fa-pencil-alt" aria-hidden="true"></i></a>&emsp;&emsp;</span>
+                    <span><a href="#" th:data-href="@{/client/{clientId}/remove(clientId=${client.id})}"
+                             th:data-client="${client.name}+' '+${client.otherClientInfo}" data-toggle="modal"
+                             data-target="#confirm-delete">
+									<i class="far fa-trash-alt text-secondary" aria-hidden="true"></i></a></span>
                 </td>
             </tr>
             </tbody>
