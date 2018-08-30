@@ -60,7 +60,7 @@
 
 <div class="container">
     <br>
-    <p>Type something in the input field to search the table for first names, last names or emails:</p>
+    <p th:class="text-">Введіть ім'я, номер телефону або email:</p>
     <input class="form-control" id="inputSearch" type="text" placeholder="Пошук..">
     <br>
     <div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -75,8 +75,8 @@
             </thead>
             <tbody id="clientTable">
             <tr th:each="client : ${clientPage.content}">
-                <td><span th:text="${client.name}"/>
-                    <span th:text="${client.otherClientInfo}"/>
+                <td><span class="font-weight-bold text-secondary" th:text="${client.name}"/>
+                    <span class="font-weight-bold text-secondary" th:text="${client.otherClientInfo}"/>
                     <div th:with="phoneNumber=${client.phoneNumber}"
                          th:class="font-weight-light"
                          th:text="'('+${#strings.substring(phoneNumber,0,3)}+')'

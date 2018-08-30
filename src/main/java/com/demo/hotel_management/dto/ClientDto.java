@@ -12,16 +12,14 @@ import javax.validation.constraints.Pattern;
 public class ClientDto {
 
     private Long id;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "{validation.client.name.message}")
+    @NotEmpty(message = "{validation.client.name.message}")
     private String name;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "{validation.client.other_info.message}")
+    @NotEmpty(message = "{validation.client.other_info.message}")
     private String otherClientInfo;
-    @NotNull
-    @NotEmpty
-    @Pattern(regexp = "^0[1-9]{9}$",message = "validation.client.phone.message")
+    @Pattern(regexp = "^0[1-9]{9}$", message = "{validation.client.phone.message}")
     private String phoneNumber;
-    @Email(message = "validation.client.email.message")
+    @Email(message = "{validation.client.email.message}")
     private String email;
 }

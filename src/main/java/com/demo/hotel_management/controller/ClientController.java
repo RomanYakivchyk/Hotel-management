@@ -1,7 +1,9 @@
 package com.demo.hotel_management.controller;
 
 import com.demo.hotel_management.dto.ClientDto;
+import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.service.ClientService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
+@Slf4j
 public class ClientController {
-
-    private static Logger logger = LoggerFactory.getLogger(ClientController.class);
 
     private static int currentPage = 1;
     private static int pageSize = 5;
@@ -34,6 +35,9 @@ public class ClientController {
             Model model,
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size) {
+
+        log.debug("model={}, page={}, size={}", model.toString(), page.orElse(currentPage), size.orElse(pageSize));
+
         page.ifPresent(p -> currentPage = p);
         size.ifPresent(s -> pageSize = s);
 
@@ -49,32 +53,46 @@ public class ClientController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
+
+        log.debug("model={}, page={}, size={}", model.toString(), page.orElse(currentPage), size.orElse(pageSize));
+
         return "listClients.html";
     }
 
     @RequestMapping(value = {"/clients/add", "/client/{clientId}/edit"}, method = RequestMethod.GET)
     public String clientEditForm(Model model, @PathVariable(required = false) Long clientId) {
+        log.debug("model={}, clientId={}", clientId);
+
         if (null != clientId) {
             model.addAttribute("clientModel", clientService.findById(clientId));
         } else {
             model.addAttribute("clientModel", new ClientDto());
         }
+
+        log.debug("model={}, clientId={}", clientId);
         return "clientForm.html";
     }
 
     @RequestMapping(path = "/clients/update", method = RequestMethod.POST)
     public String clientEdit(@Valid @ModelAttribute("clientModel") ClientDto clientDto, BindingResult result, Model model) {
+        log.debug("clientDto={}, bindingErrors={}, bindingErrorsFields={}, model={}",
+                clientDto, result.hasErrors(), result.getFieldErrors(), model);
+
         if (result.hasErrors()) {
             model.addAttribute("clientModel", clientDto);
             return "clientForm.html";
         }
-        clientService.saveClient(clientDto);
+        ClientDto savedClient = clientService.saveClient(clientDto);
+
+        log.debug("model={}, savedClientDto={}", model, savedClient);
         return "redirect:/clients";
     }
 
     @RequestMapping(path = "/client/{clientId}/remove", method = RequestMethod.GET)
     public String removeClient(@PathVariable Long clientId) {
+        log.debug("clientId={}", clientId);
         clientService.removeClient(clientId);
+        log.debug("clientId={}", clientId);
         return "redirect:/clients";
     }
 }
