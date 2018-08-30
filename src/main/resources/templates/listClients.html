@@ -59,7 +59,13 @@ $(document).ready(function(){
             <tr th:each="client : ${clientPage.content}">
                 <td><span th:text="${client.name}"/>
                     <span th:text="${client.otherClientInfo}"/>
-                    <div th:class="font-weight-light" th:text="${client.phoneNumber}"/>
+                    <div th:with="phoneNumber=${client.phoneNumber}"
+                         th:class="font-weight-light"
+                         th:text="'('+${#strings.substring(phoneNumber,0,3)}+')'
+                             +' '+${#strings.substring(phoneNumber,3,5)}
+                             +'-'+${#strings.substring(phoneNumber,5,7)}
+                             +'-'+${#strings.substring(phoneNumber,7)}">
+                    </div>
                 </td>
                 <td><p class="float-right">
                     <a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">

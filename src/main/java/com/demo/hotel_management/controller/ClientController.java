@@ -9,8 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,7 +63,11 @@ public class ClientController {
     }
 
     @RequestMapping(path = "/clients/update", method = RequestMethod.POST)
-    public String clientEdit(@ModelAttribute ClientDto clientDto) {
+    public String clientEdit(@Valid @ModelAttribute("clientModel") ClientDto clientDto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("clientModel", clientDto);
+            return "clientForm.html";
+        }
         clientService.saveClient(clientDto);
         return "redirect:/clients";
     }

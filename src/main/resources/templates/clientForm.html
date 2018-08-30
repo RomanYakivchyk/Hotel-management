@@ -16,39 +16,38 @@
 <div th:insert="header.html"></div>
 <div class="container col-md-6" style="float: none; margin: 0 auto;">
     <form class="needs-validation" action="#" th:action="@{/clients/update}" th:object="${clientModel}" method="post">
-        <h3 class="mb-3 mt-5" th:text="((*{id} == null)?'Редагувати':'Додати') + ' дані клієнта'"></h3>
+        <h3 class="mb-3 mt-5" th:text="((*{id} == null)?'Додати':'Редагувати') + ' дані клієнта'"></h3>
         <input th:type="hidden" name="id" th:field="*{id}">
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="clientName">Ім'я</label>
                 <input type="text" th:field="*{name}" value="*{name}" class="form-control" id="clientName">
+                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="otherClientInfo">Додаткові дані
                     <span class="text-secondary">(Прізвище, Звідки..)</span></label>
                 <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}" class="form-control"
                        id="otherClientInfo">
+                <div class="text-danger" th:if="${#fields.hasErrors('otherClientInfo')}" th:errors="*{otherClientInfo}"></div>
             </div>
         </div>
         <div class="mb-3">
             <label for="phoneNumber">Номер телефону</label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">+38</span>
-                </div>
                 <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}" class="form-control"
-                       id="phoneNumber">
-            </div>
+                   placeholder="(0_ _) _ _-_ _-_ _ _" id="phoneNumber">
+            <div class="text-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
         </div>
         <div class="mb-3">
             <label for="email">Email<span class="text-secondary">&nbsp;(Не обов'язково)</span></label>
             <input type="text" th:field="*{email}" value="*{email}" class="form-control" id="email"
                    placeholder="example@gmail.com">
+            <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
         </div>
         <br>
         <hr class="mt-2">
         <button class="btn btn-primary btn-block" type="submit">Зберегти</button>
-        <button class="btn btn-light btn-block" onclick="location.href = '/clients';">Відмінити</button>
+        <div class="text-center mt-2"><a th:class="text-secondary" th:href="@{/clients}">Відмінити</a></div>
     </form>
 </div>
 </body>
