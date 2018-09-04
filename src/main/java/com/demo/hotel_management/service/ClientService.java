@@ -37,6 +37,12 @@ public class ClientService {
         return entityDtoConverter.convertClientEntityToDto(foundClient);
     }
 
+    public List<ClientDto> findAll(){
+        return StreamSupport.stream(clientRepository.findAll().spliterator(), false)
+                .map(entityDtoConverter::convertClientEntityToDto)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     public Page<ClientDto> findPaginated(Pageable pageable) {
         log.debug("pageable={}", pageable);
 

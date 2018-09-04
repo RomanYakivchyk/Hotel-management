@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+//todo add "Add client" button to the view
 @Controller
 @Slf4j
 public class ClientController {
@@ -69,7 +69,7 @@ public class ClientController {
             model.addAttribute("clientModel", new ClientDto());
         }
 
-        log.debug("model={}, clientId={}", clientId);
+        log.debug("model={}, clientId={}", model, clientId);
         return "clientForm.html";
     }
 

@@ -79,40 +79,41 @@
 <body class="bg-light">
 <div th:insert="header.html"></div>
 <div class="container col-md-6" style="float: none; margin: 0 auto;">
-    <form class="needs-validation" action="#" th:action="@{}" th:object="${}" method="post">
-        <!--<h3 class="mb-3 mt-5" th:text="((*{id} == null)?'Додати':'Редагувати') + ' дані клієнта'"></h3>-->
-        <!--<input th:type="hidden" name="id" th:field="*{id}">-->
+    <form class="needs-validation" action="#" th:action="@{/vacations/update}"
+          th:object="${vacationModel}" method="post">
+        <h3 class="mb-3 mt-5" th:text="((*{vacationId} == null)?'Додати':'Редагувати') + ' бронювання'"></h3>
+        <input th:type="hidden" th:value="*{vacationId}" th:field="*{vacationId}">
         <div class="row">
-            <div class="col-md-8 mb-3">
+            <div class="col-md-8 mb-3 form-group">
                 <label for="clientName">Клієнт</label>
                 <div>
                     <select class="selectpicker form-control"
-                            th:field="${vacationModel.clientId}"
+                            th:field="*{clientId}"
                             data-style="btn-primary" data-live-search="true" id="clientName">
                         <option th:each="client : ${clients}"
-                                th:value="${client.id}" th:text="${client.name}"></option>
+                                th:value="${client.id}"
+                                th:text="${client.name}+' '+${client.otherClientInfo}+' ('+${client.phoneNumber}+')'"></option>
                     </select>
                 </div>
-                <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
-            <div class="col-md-4 mb-3">
-                <label for="otherClientInfo">Кількість гостей</label>
-                <input type="text" th:field="*{}" value="*{}" class="form-control"
-                       id="otherClientInfo">
-                <div class="text-danger" th:if="${#fields.hasErrors('otherClientInfo')}"
-                     th:errors="*{otherClientInfo}"></div>
+            <div class="col-md-4 mb-3 form-group">
+                <label for="residentsCount">Кількість гостей</label>
+                <input type="number" min="1" max="20" th:field="*{residentsCount}" value="*{residentsCount}" class="form-control"
+                       id="residentsCount">
+                <div class="text-danger" th:if="${#fields.hasErrors('residentsCount')}"
+                     th:errors="*{residentsCount}"></div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 mb-3">
+            <div class="col-md-8 mb-3 form-group">
                 <label for="arrivalDate">Дата приїзду</label>
                 <input type="text" th:field="*{arrivalDate}" value="*{arrivalDate}" class="form-control"
                        id="arrivalDate">
                 <div class="text-danger" th:if="${#fields.hasErrors('arrivalDate')}" th:errors="*{arrivalDate}"></div>
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 form-group">
                 <label for="arrivalDayPart">Час</label>
-                <select class="selectpicker" data-width="100%" th:field="${vacationModel.arrivalDayPart}"
+                <select class="selectpicker" data-width="100%" th:field="*{arrivalDayPart}"
                         data-style="btn-primary" id="arrivalDayPart">
                     <option th:value="1">Ранок</option>
                     <option th:value="2">День</option>
@@ -121,14 +122,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 mb-3">
+            <div class="col-md-8 mb-3 form-group">
                 <label for="leaveDate">Дата від'їзду</label>
                 <input type="text" th:field="*{leaveDate}" value="*{leaveDate}" class="form-control" id="leaveDate">
                 <div class="text-danger" th:if="${#fields.hasErrors('leaveDate')}" th:errors="*{leaveDate}"></div>
             </div>
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4 mb-3 form-group">
                 <label for="leaveDayPart">Час</label>
-                <select class="selectpicker" data-width="100%" th:field="${vacationModel.leaveDayPart}"
+                <select class="selectpicker" data-width="100%" th:field="*{leaveDayPart}"
                         data-style="btn-primary" id="leaveDayPart">
                     <option th:value="1">Ранок</option>
                     <option th:value="2">День</option>
@@ -137,25 +138,25 @@
             </div>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 form-group">
             <label for="rooms">Кімнати</label>
-            <select class="selectpicker" data-width="100%" data-style="btn-primary" id="rooms"
-                    multiple data-size="6" title="Вибрати кімнати..">
+            <select class="selectpicker" data-width="100%" th:field="*{roomIds}" th:value="*{roomIds}" data-style="btn-primary" id="rooms"
+                    multiple data-size="8" title="Вибрати кімнати..">
 
                 <optgroup label="Будинок 1" data-icon="fas fa-home">
-                    <option>Кімната 1</option>
-                    <option>Кімната 2</option>
-                    <option>Кімната 3</option>
-                    <option>Кімната 4</option>
-                    <option>2-й поверх</option>
+                    <option th:value="1">Кімната 1</option>
+                    <option th:value="2">Кімната 2</option>
+                    <option th:value="3">Кімната 3</option>
+                    <option th:value="4">Кімната 4</option>
+                    <option th:value="5">2-й поверх</option>
                 </optgroup>
                 <optgroup label="Будинок 2" data-icon="fas fa-home">
-                    <option>Кімната 5</option>
-                    <option>Кімната 6</option>
+                    <option th:value="6">Кімната 5</option>
+                    <option th:value="7">Кімната 6</option>
                 </optgroup>
                 <optgroup label="Будинок 3" data-icon="fas fa-home">
-                    <option>Кімната 7</option>
-                    <option>Кімната 8</option>
+                    <option th:value="8">Кімната 7</option>
+                    <option th:value="9">Кімната 8</option>
                 </optgroup>
             </select>
         </div>
