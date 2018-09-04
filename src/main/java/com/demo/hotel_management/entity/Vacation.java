@@ -2,6 +2,7 @@ package com.demo.hotel_management.entity;
 
 import com.demo.hotel_management.utils.custom_validators.ValidateDateRange;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Entity
@@ -19,22 +21,15 @@ public class Vacation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @NotNull
-    @Min(1)
-    @Max(20)
     private Integer residentsCount;
 
-    @NotNull
-    @ValidateDateRange
     @Embedded
     private CustomDate vacationDate;
     private Boolean withChildren;
-    private Boolean withAnimals;
 
     @OneToMany(mappedBy = "vacation")
     private Set<RoomVacation> roomVacationSet = new HashSet<>();
@@ -43,24 +38,37 @@ public class Vacation {
     @Access(AccessType.FIELD)
     @Data
     public static class CustomDate {
-        @NotNull
+
         private LocalDate arrivalDate;
 
-        @NotNull
         @Enumerated(EnumType.STRING)
         private Vacation.DayPart arrivalDayPart;
 
-        @NotNull
         private LocalDate leaveDate;
 
-        @NotNull
         @Enumerated(EnumType.STRING)
         private Vacation.DayPart leaveDayPart;
+
     }
 
-    enum DayPart {
-        MORNING,
-        AFTERNOON,
-        EVENING
+    @Getter
+    public enum DayPart {
+
+        MORNING(1),
+        AFTERNOON(2),
+        EVENING(3);
+
+        DayPart(Integer dayPartNumber) {
+            this.dayPartNumber = dayPartNumber;
+        }
+
+        Integer dayPartNumber;
+
+        public static DayPart getDayPartByNumber(Integer dayPartNumber) {
+            if (dayPartNumber == 1) return MORNING;
+            else if (dayPartNumber == 2) return AFTERNOON;
+            else if (dayPartNumber == 3) return EVENING;
+            throw new NoSuchElementException();
+        }
     }
 }

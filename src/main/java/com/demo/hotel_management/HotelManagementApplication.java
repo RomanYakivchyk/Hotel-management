@@ -1,5 +1,6 @@
 package com.demo.hotel_management;
 
+import com.demo.hotel_management.entity.Vacation;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;

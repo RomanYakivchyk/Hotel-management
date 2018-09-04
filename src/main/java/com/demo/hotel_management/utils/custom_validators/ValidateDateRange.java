@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RUNTIME)
 @Documented
 @Constraint(validatedBy = {DateRangeValidator.class})
