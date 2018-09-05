@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Client</title>
+    <title>Vacation form</title>
     <meta charset="utf-8">
 
-<!--font awesome-->
+    <!--font awesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
@@ -39,6 +39,7 @@
 
 
 
+
     </script>
     <!---->
 
@@ -52,7 +53,9 @@
         var arrivalDatePicker, leaveDatePicker, arrivalDateConfig, leaveDateConfig;
         arrivalDateConfig = {
             locale: 'ru-ru',
+            format: 'dd/mm/yyyy',
             uiLibrary: 'bootstrap4',
+            keyboardNavigation: true,
             modal: true, header: true, footer: true,
             maxDate: function () {
                 return $('#leaveDate').val();
@@ -60,7 +63,9 @@
         };
         leaveDateConfig = {
             locale: 'ru-ru',
+            format: 'dd/mm/yyyy',
             uiLibrary: 'bootstrap4',
+            keyboardNavigation: true,
             modal: true, header: true, footer: true,
             minDate: function () {
                 return $('#arrivalDate').val();
@@ -71,9 +76,14 @@
             leaveDatePicker = $('#leaveDate').datepicker(leaveDateConfig);
         });
 
+
     </script>
     <!---->
-
+<style>
+    .border {
+     border: 2px solid grey;
+    }
+</style>
 
 </head>
 <body class="bg-light">
@@ -86,19 +96,22 @@
         <div class="row">
             <div class="col-md-8 mb-3 form-group">
                 <label for="clientName">Клієнт</label>
+                <span class="float-right"><a th:href="@{/clients/add}">новий клієнт</a></span>
                 <div>
                     <select class="selectpicker form-control"
                             th:field="*{clientId}"
-                            data-style="btn-primary" data-live-search="true" id="clientName">
-                        <option th:each="client : ${clients}"
-                                th:value="${client.id}"
-                                th:text="${client.name}+' '+${client.otherClientInfo}+' ('+${client.phoneNumber}+')'"></option>
+                            data-live-search="true"  title="Вибрати клієнта"
+                            data-style="bg-white border" id="clientName">
+                        <option th:each="cl : ${clients}"
+                                th:value="${cl.id}"
+                                th:text="${cl.name}+' '+${cl.otherClientInfo}+' ('+${cl.phoneNumber}+')'"></option>
                     </select>
                 </div>
             </div>
             <div class="col-md-4 mb-3 form-group">
                 <label for="residentsCount">Кількість гостей</label>
-                <input type="number" min="1" max="20" th:field="*{residentsCount}" value="*{residentsCount}" class="form-control"
+                <input type="number" min="1" max="20" th:field="*{residentsCount}" value="*{residentsCount}"
+                       class="form-control"
                        id="residentsCount">
                 <div class="text-danger" th:if="${#fields.hasErrors('residentsCount')}"
                      th:errors="*{residentsCount}"></div>
@@ -113,8 +126,9 @@
             </div>
             <div class="col-md-4 mb-3 form-group">
                 <label for="arrivalDayPart">Час</label>
-                <select class="selectpicker" data-width="100%" th:field="*{arrivalDayPart}"
-                        data-style="btn-primary" id="arrivalDayPart">
+                <select class="selectpicker" data-style="bg-white border" data-width="100%"
+                        th:field="*{arrivalDayPart}"
+                        id="arrivalDayPart">
                     <option th:value="1">Ранок</option>
                     <option th:value="2">День</option>
                     <option th:value="3">Вечір</option>
@@ -130,7 +144,7 @@
             <div class="col-md-4 mb-3 form-group">
                 <label for="leaveDayPart">Час</label>
                 <select class="selectpicker" data-width="100%" th:field="*{leaveDayPart}"
-                        data-style="btn-primary" id="leaveDayPart">
+                        data-style="bg-white border" id="leaveDayPart">
                     <option th:value="1">Ранок</option>
                     <option th:value="2">День</option>
                     <option th:value="3">Вечір</option>
@@ -140,8 +154,9 @@
 
         <div class="mb-3 form-group">
             <label for="rooms">Кімнати</label>
-            <select class="selectpicker" data-width="100%" th:field="*{roomIds}" th:value="*{roomIds}" data-style="btn-primary" id="rooms"
-                    multiple data-size="8" title="Вибрати кімнати..">
+            <select class="selectpicker" data-width="100%" th:field="*{roomIds}" th:value="*{roomIds}"
+                    data-style="bg-white border" id="rooms"
+                    multiple data-size="8" title="Вибрати кімнати">
 
                 <optgroup label="Будинок 1" data-icon="fas fa-home">
                     <option th:value="1">Кімната 1</option>

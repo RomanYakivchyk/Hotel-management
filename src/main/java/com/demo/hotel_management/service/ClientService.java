@@ -1,6 +1,5 @@
 package com.demo.hotel_management.service;
 
-import com.demo.hotel_management.dto.ClientDto;
 import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.exceptions.ClientNotFoundException;
 import com.demo.hotel_management.repository.ClientRepository;
@@ -12,11 +11,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.text.Collator;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -25,60 +22,64 @@ import java.util.stream.StreamSupport;
 public class ClientService {
 
     @Autowired
-    private EntityDtoConverter entityDtoConverter;
-
-    @Autowired
     private ClientRepository clientRepository;
 
-    public ClientDto findById(Long clientId) {
+    public Client findById(Long clientId) {
         log.debug("clientId={}", clientId);
         Client foundClient = clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
         log.debug("clientId={}, foundClient={}", clientId, foundClient);
-        return entityDtoConverter.convertClientEntityToDto(foundClient);
+        return foundClient;
     }
 
-    public List<ClientDto> findAll(){
+    public List<Client> findAll() {
+        //todo add sorting
         return StreamSupport.stream(clientRepository.findAll().spliterator(), false)
-                .map(entityDtoConverter::convertClientEntityToDto)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public Page<ClientDto> findPaginated(Pageable pageable) {
+    public Page<Client> findPaginated(Pageable pageable) {
         log.debug("pageable={}", pageable);
 
-        List<ClientDto> clientDtoList = StreamSupport.stream(clientRepository.findAll().spliterator(), false)
-                .map(entityDtoConverter::convertClientEntityToDto)
-                .collect(Collectors.toCollection(ArrayList::new));
 
-        log.debug("pageable={}", clientDtoList);
+        Collator collator = Collator.getInstance(Locale.forLanguageTag("uk-UA"));
+
+        List<Client> clientList = StreamSupport.stream(clientRepository.findAll().spliterator(), false)
+                .sorted((o1, o2) -> {
+                    int result = 0;
+                    result = collator.compare(o1.getName(), o2.getName());
+                    if (result == 0) {
+                        result = collator.compare(o1.getOtherClientInfo(), o2.getOtherClientInfo());
+                    }
+                    return result;
+                })
+                .collect(Collectors.toList());
+
+        log.debug("pageable={}", clientList);
 
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<ClientDto> list;
+        List<Client> list;
 
-        if (clientDtoList.size() < startItem) {
+        if (clientList.size() < startItem) {
             list = Collections.emptyList();
         } else {
-            int toIndex = Math.min(startItem + pageSize, clientDtoList.size());
-            list = clientDtoList.subList(startItem, toIndex);
+            int toIndex = Math.min(startItem + pageSize, clientList.size());
+            list = clientList.subList(startItem, toIndex);
         }
 
-        log.debug("pageSize={}, currentPage={}, startItem={}, List<ClientDto>={} ", pageSize, currentPage, startItem, list);
+        log.debug("pageSize={}, currentPage={}, startItem={}, List<Client>={} ", pageSize, currentPage, startItem, list);
 
-        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), clientDtoList.size());
+        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), clientList.size());
     }
 
-    public ClientDto saveClient(ClientDto clientDto) {
+    public Client saveClient(Client client) {
 
-        log.debug("clientDto={}", clientDto);
-
-        Client client = entityDtoConverter.convertClientDtoToEntity(clientDto);
+        log.debug("client={}", client);
         Client savedClient = clientRepository.save(client);
-
         log.debug("savedClient={}", savedClient);
 
-        return entityDtoConverter.convertClientEntityToDto(savedClient);
+        return savedClient;
     }
 
     public void removeClient(Long clientId) {

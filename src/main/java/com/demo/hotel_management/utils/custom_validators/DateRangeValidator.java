@@ -1,6 +1,5 @@
 package com.demo.hotel_management.utils.custom_validators;
 
-import com.demo.hotel_management.dto.ClientDto;
 import com.demo.hotel_management.dto.VacationDto;
 import com.demo.hotel_management.entity.Vacation;
 import lombok.extern.slf4j.Slf4j;

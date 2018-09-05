@@ -1,11 +1,8 @@
 package com.demo.hotel_management.controller;
 
-import com.demo.hotel_management.dto.ClientDto;
 import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-//todo add "Add client" button to the view
 @Controller
 @Slf4j
 public class ClientController {
@@ -41,7 +37,7 @@ public class ClientController {
         page.ifPresent(p -> currentPage = p);
         size.ifPresent(s -> pageSize = s);
 
-        Page<ClientDto> clientPage = clientService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+        Page<Client> clientPage = clientService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("clientPage", clientPage);
 
@@ -66,7 +62,7 @@ public class ClientController {
         if (null != clientId) {
             model.addAttribute("clientModel", clientService.findById(clientId));
         } else {
-            model.addAttribute("clientModel", new ClientDto());
+            model.addAttribute("clientModel", new Client());
         }
 
         log.debug("model={}, clientId={}", model, clientId);
@@ -74,17 +70,17 @@ public class ClientController {
     }
 
     @RequestMapping(path = "/clients/update", method = RequestMethod.POST)
-    public String clientEdit(@Valid @ModelAttribute("clientModel") ClientDto clientDto, BindingResult result, Model model) {
-        log.debug("clientDto={}, bindingErrors={}, bindingErrorsFields={}, model={}",
-                clientDto, result.hasErrors(), result.getFieldErrors(), model);
+    public String clientEdit(@Valid @ModelAttribute("clientModel") Client client, BindingResult result, Model model) {
+        log.debug("client={}, bindingErrors={}, bindingErrorsFields={}, model={}",
+                client, result.hasErrors(), result.getFieldErrors(), model);
 
         if (result.hasErrors()) {
-            model.addAttribute("clientModel", clientDto);
+            model.addAttribute("clientModel", client);
             return "clientForm.html";
         }
-        ClientDto savedClient = clientService.saveClient(clientDto);
+        Client savedClient = clientService.saveClient(client);
 
-        log.debug("model={}, savedClientDto={}", model, savedClient);
+        log.debug("model={}, savedClient={}", model, savedClient);
         return "redirect:/clients";
     }
 

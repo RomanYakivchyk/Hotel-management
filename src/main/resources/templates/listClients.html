@@ -29,10 +29,14 @@
 					$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 					var link = $(e.relatedTarget)
 					var clientName = link.data('client');
-					$(this).find('.modal-body h5').text(clientName);
+					$(this).find('.modal-body h4').text(clientName);
 				});
 			});
-		</script>
+
+
+
+
+    </script>
 
 </head>
 <body class="bg-light">
@@ -48,11 +52,11 @@
                 </h3>
             </div>
             <div class="modal-body">
-                <h5></h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Назад</button>
-                <a class="btn btn-danger btn-ok">Видалити</a>
+                <h4></h4>
+                <br><br>
+                <a class="btn btn-primary btn-block btn-ok">Видалити</a>
+                <button type="button" class="btn btn-light text-secondary btn-block" data-dismiss="modal">Назад
+                </button>
             </div>
         </div>
     </div>
@@ -60,18 +64,20 @@
 
 <div class="container">
     <br>
-    <p th:class="text-">Введіть ім'я, номер телефону або email:</p>
+    <p th:class="text-">Введіть ім'я, прізвище або номер телефону:</p>
     <input class="form-control" id="inputSearch" type="text" placeholder="Пошук..">
     <br>
     <div class="my-3 p-3 bg-white rounded shadow-sm">
         <table class="table table-hover">
-            <thead class="thead-dark">
+            <thead class="thead-light">
             <th>
                 <h4>
                     <small>Наші Клієнти</small>
                 </h4>
             </th>
-            <th></th>
+            <th>
+                <a class="btn btn-outline-primary float-right" th:href="@{/clients/add}">Новий клієнт</a>
+            </th>
             </thead>
             <tbody id="clientTable">
             <tr th:each="client : ${clientPage.content}">

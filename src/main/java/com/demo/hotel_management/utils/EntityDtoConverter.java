@@ -1,6 +1,5 @@
 package com.demo.hotel_management.utils;
 
-import com.demo.hotel_management.dto.ClientDto;
 import com.demo.hotel_management.dto.VacationDto;
 import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.entity.RoomVacation;
@@ -12,23 +11,17 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
 //todo change repositories with service layer
 @Component
 public class EntityDtoConverter {
-    @Autowired
-    private ModelMapper modelMapper;
 
     @Autowired
     private VacationRepository vacationRepository;
@@ -38,14 +31,6 @@ public class EntityDtoConverter {
 
     @Autowired
     private ClientRepository clientRepository;
-
-    public ClientDto convertClientEntityToDto(Client client) {
-        return modelMapper.map(client, ClientDto.class);
-    }
-
-    public Client convertClientDtoToEntity(ClientDto clientDto) {
-        return modelMapper.map(clientDto, Client.class);
-    }
 
     public VacationDto convertVacationEntityToDto(Vacation vacation) {
         VacationDto vacationDto = new VacationDto();
@@ -58,6 +43,10 @@ public class EntityDtoConverter {
         vacationDto.setLeaveDayPart(vacation.getVacationDate().getLeaveDayPart().getDayPartNumber());
 
         vacationDto.setClientId(vacation.getClient().getId());
+        vacationDto.setClientName(vacation.getClient().getName());
+        vacationDto.setClientOtherInfo(vacation.getClient().getOtherClientInfo());
+        vacationDto.setClientPhoneNumber(vacation.getClient().getPhoneNumber());
+
         vacationDto.setResidentsCount(vacation.getResidentsCount());
 
         Set<Long> roomIds = vacation.getRoomVacationSet().stream().map(e -> e.getRoom().getId()).collect(Collectors.toSet());
@@ -70,8 +59,10 @@ public class EntityDtoConverter {
 
         Vacation vacation = new Vacation();
         vacation.setId(vacationDto.getVacationId());
-        Client client = clientRepository.findById(vacationDto.getClientId()).orElseThrow(NoSuchElementException::new);
-        vacation.setClient(client);
+
+        vacation.setClient(clientRepository
+                .findById(vacationDto.getClientId()).orElseThrow(NoSuchElementException::new));
+
         vacation.setResidentsCount(vacationDto.getResidentsCount());
 
         Vacation.CustomDate customDate = new Vacation.CustomDate();

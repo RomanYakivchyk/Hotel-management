@@ -11,12 +11,19 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.format.Formatter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 
 import javax.sql.DataSource;
 import java.sql.Date;
+import java.text.Collator;
+import java.text.Normalizer;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+import java.util.Locale;
 
 @Slf4j
 @Configuration
@@ -26,11 +33,6 @@ public class HotelManagementApplication {
     public static void main(String[] args) {
         SpringApplication.run(HotelManagementApplication.class, args);
         log.debug("application started");
-    }
-
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
     }
 
     @Bean
@@ -46,5 +48,20 @@ public class HotelManagementApplication {
         LocalValidatorFactoryBean factoryBean = new LocalValidatorFactoryBean();
         factoryBean.setValidationMessageSource(messageSource());
         return factoryBean;
+    }
+
+    @Bean
+    public Formatter<LocalDate> localDateFormatter() {
+        return new Formatter<LocalDate>() {
+            @Override
+            public LocalDate parse(String text, Locale locale) {
+                return LocalDate.parse(text, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            }
+
+            @Override
+            public String print(LocalDate object, Locale locale) {
+                return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(object);
+            }
+        };
     }
 }
