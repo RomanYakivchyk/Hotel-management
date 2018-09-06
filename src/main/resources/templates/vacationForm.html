@@ -40,6 +40,10 @@
 
 
 
+
+
+
+
     </script>
     <!---->
 
@@ -77,13 +81,21 @@
         });
 
 
+
+
+
+
     </script>
     <!---->
-<style>
+    <style>
     .border {
      border: 2px solid grey;
     }
-</style>
+
+
+
+
+    </style>
 
 </head>
 <body class="bg-light">
@@ -100,21 +112,26 @@
                 <div>
                     <select class="selectpicker form-control"
                             th:field="*{clientId}"
-                            data-live-search="true"  title="Вибрати клієнта"
+                            data-live-search="true" title="Вибрати клієнта"
                             data-style="bg-white border" id="clientName">
                         <option th:each="cl : ${clients}"
                                 th:value="${cl.id}"
                                 th:text="${cl.name}+' '+${cl.otherClientInfo}+' ('+${cl.phoneNumber}+')'"></option>
                     </select>
                 </div>
+                <div th:if="${#fields.hasErrors('clientId')}"><i class="fas fa-exclamation-triangle text-danger"></i>
+                    <span class="text-danger"
+                          th:errors="*{clientId}"></span></div>
             </div>
             <div class="col-md-4 mb-3 form-group">
                 <label for="residentsCount">Кількість гостей</label>
                 <input type="number" min="1" max="20" th:field="*{residentsCount}" value="*{residentsCount}"
                        class="form-control"
                        id="residentsCount">
-                <div class="text-danger" th:if="${#fields.hasErrors('residentsCount')}"
-                     th:errors="*{residentsCount}"></div>
+                <div th:if="${#fields.hasErrors('residentsCount')}"><i
+                        class="fas fa-exclamation-triangle text-danger"></i>
+                    <span class="text-danger"
+                          th:errors="*{residentsCount}"></span></div>
             </div>
         </div>
         <div class="row">
@@ -122,7 +139,9 @@
                 <label for="arrivalDate">Дата приїзду</label>
                 <input type="text" th:field="*{arrivalDate}" value="*{arrivalDate}" class="form-control"
                        id="arrivalDate">
-                <div class="text-danger" th:if="${#fields.hasErrors('arrivalDate')}" th:errors="*{arrivalDate}"></div>
+                <div th:if="${#fields.hasErrors('arrivalDate')}"><i class="fas fa-exclamation-triangle text-danger"></i>
+                    <span class="text-danger"
+                          th:errors="*{arrivalDate}"></span></div>
             </div>
             <div class="col-md-4 mb-3 form-group">
                 <label for="arrivalDayPart">Час</label>
@@ -139,7 +158,10 @@
             <div class="col-md-8 mb-3 form-group">
                 <label for="leaveDate">Дата від'їзду</label>
                 <input type="text" th:field="*{leaveDate}" value="*{leaveDate}" class="form-control" id="leaveDate">
-                <div class="text-danger" th:if="${#fields.hasErrors('leaveDate')}" th:errors="*{leaveDate}"></div>
+                <div th:if="${#fields.hasErrors('leaveDate')}"><i class="fas fa-exclamation-triangle text-danger"></i>
+                    <span class="text-danger"
+                          th:errors="*{leaveDate}"></span>
+                </div>
             </div>
             <div class="col-md-4 mb-3 form-group">
                 <label for="leaveDayPart">Час</label>
@@ -174,10 +196,13 @@
                     <option th:value="9">Кімната 8</option>
                 </optgroup>
             </select>
+            <div th:if="${#fields.hasErrors('roomIds')}"><i class="fas fa-exclamation-triangle text-danger"></i><span
+                    class="text-danger"
+                    th:errors="*{roomIds}"></span></div>
         </div>
         <br>
         <hr class="mt-2">
-        <button class="btn btn-success btn-block" type="submit">Зберегти</button>
+        <button class="btn btn-primary btn-block" type="submit">Зберегти</button>
         <div class="text-center mt-2"><a th:class="text-secondary" th:href="@{/clients}">Відмінити</a></div>
     </form>
 </div>
