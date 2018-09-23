@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/css/mdb.min.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js"></script>
+
+
+
+    <script>
+$(document).ready(function(){
+    var monthLength = 29;
+    var roomCount = 8;
+    console.log('entering');
+    var data = loadTableData();
+    initHeader(monthLength);
+    initBody(roomCount,monthLength);
+    populateTable(data);
+});
+
+function populateTable(data){
+console.log('populateTable function');
+    console.log(data);
+}
+
+function loadTableData(){
+    var result;
+        $.ajax({
+      url: "http://localhost:8080/tableData",
+      cache: false,
+      success: function(data){
+       result = data;
+      },
+        async: false
+    });
+    return result;
+}
+
+
+function initBody(roomCount,monthLength){
+ var $tbody = $('#bookingTable tbody');
+    for(var i=0;i<roomCount;i++){
+
+        var $row = $('<tr></tr>');
+        for(var j = 0;j<monthLength+1;j++){
+            if(j===0){
+                var $cell = $('<th scope="row">'+(i+1)+'</th>');
+            } else {
+                var $cell = $('<td>X</td>');
+            }
+            $cell.appendTo($row);
+        }
+       $row.appendTo($tbody);
+    }
+};
+
+function initHeader(monthLength){
+ var $thead = $('#bookingTable thead');
+ $row = $('<tr></tr>');
+    for(var i=0;i<monthLength+1;i++){
+        if(i===0){
+            $row.append('<th></th>');
+        } else {
+            $row.append('<th scope="col">'+i+'</th>');
+        }
+    }
+    $row.appendTo($thead);
+};
+
+</script>
+
+
+</head>
+<body>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-sm" id="bookingTable">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

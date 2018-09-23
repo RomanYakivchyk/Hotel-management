@@ -13,3 +13,4 @@ INSERT INTO CLIENT (id,name,other_client_info,phone_number,email)
 VALUES (116,'Степан','Гіга','0937955233','gigabyte@gmail.com');
 INSERT INTO CLIENT (id,name,other_client_info,phone_number,email)
 VALUES (117,'Орест','Миронович','0997455233','orest@gmail.com');
+

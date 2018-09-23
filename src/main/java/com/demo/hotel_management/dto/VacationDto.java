@@ -4,6 +4,7 @@ import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.entity.Vacation;
 import com.demo.hotel_management.utils.custom_validators.ValidateDateRange;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Max;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Data
+@ToString
 //@ValidateDateRange
 public class VacationDto {
 
@@ -36,7 +38,7 @@ public class VacationDto {
     private Integer leaveDayPart;
     @NotNull
     @NotEmpty(message = "{validation.vacation.rooms.message}")
-    private Set<Long> roomIds;
+    private Set<Integer> roomNumbers;
     @Min(1)
     @Max(20)
     @NotNull(message = "{validation.vacation.residents.message}")

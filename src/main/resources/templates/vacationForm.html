@@ -176,7 +176,7 @@
 
         <div class="mb-3 form-group">
             <label for="rooms">Кімнати</label>
-            <select class="selectpicker" data-width="100%" th:field="*{roomIds}" th:value="*{roomIds}"
+            <select class="selectpicker" data-width="100%" th:field="*{roomNumbers}" th:value="*{roomNumbers}"
                     data-style="bg-white border" id="rooms"
                     multiple data-size="8" title="Вибрати кімнати">
 
@@ -196,14 +196,14 @@
                     <option th:value="9">Кімната 8</option>
                 </optgroup>
             </select>
-            <div th:if="${#fields.hasErrors('roomIds')}"><i class="fas fa-exclamation-triangle text-danger"></i><span
+            <div th:if="${#fields.hasErrors('roomNumbers')}"><i class="fas fa-exclamation-triangle text-danger"></i><span
                     class="text-danger"
-                    th:errors="*{roomIds}"></span></div>
+                    th:errors="*{roomNumbers}"></span></div>
         </div>
         <br>
         <hr class="mt-2">
         <button class="btn btn-primary btn-block" type="submit">Зберегти</button>
-        <div class="text-center mt-2"><a th:class="text-secondary" th:href="@{/clients}">Відмінити</a></div>
+        <div class="text-center mt-2"><a th:class="text-secondary" th:href="@{/vacations}">Відмінити</a></div>
     </form>
 </div>
 </body>

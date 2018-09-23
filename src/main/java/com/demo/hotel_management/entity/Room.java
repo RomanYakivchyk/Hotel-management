@@ -1,19 +1,26 @@
 package com.demo.hotel_management.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Room {
+
+    public Room(@Min(1) @Max(20) Integer roomNumber, Map<BedType, Integer> beds, List<RoomVacation> roomVacationList, @NotNull Building building) {
+        this.roomNumber = roomNumber;
+        this.beds = beds;
+        this.roomVacationList = roomVacationList;
+        this.building = building;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,17 +34,17 @@ public class Room {
     @CollectionTable(name="beds")
     @MapKeyEnumerated(EnumType.STRING)
     @Column(name="number_of_beds")
-    private Map<BedType, Integer> beds = new HashMap<>();
+    private Map<BedType, Integer> beds;
 
-    @OneToMany(mappedBy = "room")
-    private Set<RoomVacation> roomVacationSet = new HashSet<>();
+    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
+    private List<RoomVacation> roomVacationList;
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "building_id")
     private Building building;
 
-    enum BedType {
+    public enum BedType {
         SINGLE_BED,
         DOUBLE_BED,
         FOLDING_BED

@@ -1,7 +1,9 @@
 package com.demo.hotel_management.service;
 
 import com.demo.hotel_management.dto.VacationDto;
+import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.entity.Vacation;
+import com.demo.hotel_management.repository.RoomVacationRepository;
 import com.demo.hotel_management.repository.VacationRepository;
 import com.demo.hotel_management.utils.EntityDtoConverter;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.Collator;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -26,6 +29,9 @@ public class VacationService {
 
     @Autowired
     private VacationRepository vacationRepository;
+
+    @Autowired
+    private RoomVacationRepository roomVacationRepository;
 
     public VacationDto findById(Long vacationId) {
         log.debug("vacationId={}", vacationId);
@@ -43,7 +49,6 @@ public class VacationService {
         Vacation savedVacation = vacationRepository.save(vacation);
 
         log.debug("savedVacation={}", savedVacation);
-
         return entityDtoConverter.convertVacationEntityToDto(savedVacation);
     }
 
@@ -57,6 +62,7 @@ public class VacationService {
 
     }
 
+    //todo add sorting
     public Page<VacationDto> findPaginated(Pageable pageable) {
         log.debug("pageable={}", pageable);
 
@@ -94,4 +100,13 @@ public class VacationService {
         return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), vacationDtoList.size());
     }
 
+
+    public List<VacationDto> getVacationsTable(LocalDate date) {
+        List<Vacation> vacationList = vacationRepository
+                .findByMonth(LocalDate.of(date.getYear(), date.getMonth(), 1),
+                        LocalDate.of(date.getYear(), date.getMonth(), date.lengthOfMonth()));
+        return vacationList.stream()
+                .map(entityDtoConverter::convertVacationEntityToDto)
+                .collect(Collectors.toList());
+    }
 }

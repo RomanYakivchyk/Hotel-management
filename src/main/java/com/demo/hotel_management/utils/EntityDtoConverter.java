@@ -1,23 +1,21 @@
 package com.demo.hotel_management.utils;
 
 import com.demo.hotel_management.dto.VacationDto;
-import com.demo.hotel_management.entity.Client;
+import com.demo.hotel_management.entity.Room;
 import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.entity.Vacation;
 import com.demo.hotel_management.repository.ClientRepository;
 import com.demo.hotel_management.repository.RoomRepository;
+import com.demo.hotel_management.repository.RoomVacationRepository;
 import com.demo.hotel_management.repository.VacationRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toSet;
 
 //todo change repositories with service layer
 @Component
@@ -31,6 +29,9 @@ public class EntityDtoConverter {
 
     @Autowired
     private ClientRepository clientRepository;
+
+    @Autowired
+    private RoomVacationRepository roomVacationRepository;
 
     public VacationDto convertVacationEntityToDto(Vacation vacation) {
         VacationDto vacationDto = new VacationDto();
@@ -49,19 +50,39 @@ public class EntityDtoConverter {
 
         vacationDto.setResidentsCount(vacation.getResidentsCount());
 
-        Set<Long> roomIds = vacation.getRoomVacationSet().stream().map(e -> e.getRoom().getId()).collect(Collectors.toSet());
+        Set<Integer> roomNumbers = vacation.getRoomVacationList().stream()
+                .map(e -> e.getRoom().getRoomNumber())
+                .collect(Collectors.toSet());
 
-        vacationDto.setRoomIds(roomIds);
+        vacationDto.setRoomNumbers(roomNumbers);
         return vacationDto;
     }
 
     public Vacation convertVacationDtoToEntity(VacationDto vacationDto) {
-
         Vacation vacation = new Vacation();
-        vacation.setId(vacationDto.getVacationId());
+        if (vacationDto.getVacationId() != null) {
+            vacation.setId(vacationDto.getVacationId());
+            roomVacationRepository.findByVacationId(vacation.getId())
+                    .forEach(e -> roomVacationRepository.delete(e));
+        }
+
+        List<RoomVacation> roomVacations = new ArrayList<>();
+        List<Room> rooms = roomRepository.findByRoomNumberIn(vacationDto.getRoomNumbers());
+
+        rooms.forEach(e -> {
+            RoomVacation roomVacation = new RoomVacation();
+            roomVacation.setRoom(e);
+            roomVacation.setVacation(vacation);
+            // roomVacation.setOccupiedBeds(); todo
+            roomVacations.add(roomVacation);
+        });
+
+        vacation.setRoomVacationList(roomVacations);
+
 
         vacation.setClient(clientRepository
-                .findById(vacationDto.getClientId()).orElseThrow(NoSuchElementException::new));
+                .findById(vacationDto.getClientId())
+                .orElseThrow(NoSuchElementException::new));
 
         vacation.setResidentsCount(vacationDto.getResidentsCount());
 
@@ -70,13 +91,7 @@ public class EntityDtoConverter {
         customDate.setArrivalDayPart(Vacation.DayPart.getDayPartByNumber(vacationDto.getArrivalDayPart()));
         customDate.setLeaveDate(vacationDto.getLeaveDate());
         customDate.setLeaveDayPart(Vacation.DayPart.getDayPartByNumber(vacationDto.getLeaveDayPart()));
-
         vacation.setVacationDate(customDate);
-        Set<RoomVacation> roomVacationSet = StreamSupport.stream(vacationRepository.findAll().spliterator(), false)
-                .flatMap(e -> e.getRoomVacationSet().stream())
-                .filter(el -> el.getVacation().getId().equals(vacationDto.getVacationId()))
-                .collect(toSet());
-        vacation.setRoomVacationSet(roomVacationSet);
 
         return vacation;
     }

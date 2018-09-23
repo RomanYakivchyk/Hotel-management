@@ -1,20 +1,18 @@
 package com.demo.hotel_management.entity;
 
-import com.demo.hotel_management.utils.custom_validators.ValidateDateRange;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
 public class Vacation {
 
     @Id
@@ -31,8 +29,8 @@ public class Vacation {
     private CustomDate vacationDate;
     private Boolean withChildren;
 
-    @OneToMany(mappedBy = "vacation")
-    private Set<RoomVacation> roomVacationSet = new HashSet<>();
+    @OneToMany(mappedBy = "vacation",cascade = {CascadeType.ALL})
+    private List<RoomVacation> roomVacationList = new ArrayList<>();
 
     @Embeddable
     @Access(AccessType.FIELD)

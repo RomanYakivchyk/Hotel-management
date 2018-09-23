@@ -1,17 +1,20 @@
 package com.demo.hotel_management.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /*
 * Intermediate table
 */
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class RoomVacation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,12 +28,12 @@ public class RoomVacation {
     private Map<Room.BedType, Integer> occupiedBeds = new HashMap<>();
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_id")
     private Room room;
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "vac_id")
     private Vacation vacation;
 

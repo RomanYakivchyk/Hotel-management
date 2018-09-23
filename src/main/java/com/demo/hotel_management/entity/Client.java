@@ -1,6 +1,6 @@
 package com.demo.hotel_management.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,9 @@ import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class Client {
 
     @Id
