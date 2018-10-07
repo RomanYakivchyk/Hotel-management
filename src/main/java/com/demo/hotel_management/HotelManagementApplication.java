@@ -42,29 +42,29 @@ public class HotelManagementApplication {
     @Bean
     @Primary
     public DataSource postgresDataSource() {
-        String databaseUrl = System.getenv("DATABASE_URL");
-        log.info("Initializing PostgreSQL database: {}", databaseUrl);
-
-        URI dbUri;
-        try {
-            dbUri = new URI(databaseUrl);
-        }
-        catch (URISyntaxException e) {
-            log.error(String.format("Invalid DATABASE_URL: %s", databaseUrl), e);
-            return null;
-        }
-
-        String username = dbUri.getUserInfo().split(":")[1];
-        String password = dbUri.getUserInfo().split(":")[2];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':'
-                + dbUri.getPort() + dbUri.getPath();
-
-        org.apache.tomcat.jdbc.pool.DataSource dataSource
-                = new org.apache.tomcat.jdbc.pool.DataSource();
+//        String databaseUrl = System.getenv("DATABASE_URL");
+////        log.info("Initializing PostgreSQL database: {}", databaseUrl);
+////
+////        URI dbUri;
+////        try {
+////            dbUri = new URI(databaseUrl);
+////        }
+////        catch (URISyntaxException e) {
+////            log.error(String.format("Invalid DATABASE_URL: %s", databaseUrl), e);
+////            return null;
+////        }
+////
+////        String username = dbUri.getUserInfo().split(":")[1];
+////        String password = dbUri.getUserInfo().split(":")[2];
+////        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':'
+////                + dbUri.getPort() + dbUri.getPath();
+//
+//        String dbUrl = databaseUrl.
+        org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl(dbUrl);
-        dataSource.setUsername(username);
-        dataSource.setPassword(password);
+        dataSource.setUrl("jdbc:postgresql://ec2-54-243-147-162.compute-1.amazonaws.com:5432/d4kpiadsgu8ckn");
+        dataSource.setUsername("fhcorgnllxvhkc");
+        dataSource.setPassword("576936a50df4df8e74335d16c99045df829bfb75a2888933ed3d0807b429dc95");
         dataSource.setTestOnBorrow(true);
         dataSource.setTestWhileIdle(true);
         dataSource.setTestOnReturn(true);
