@@ -15,7 +15,7 @@ import javax.validation.constraints.*;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull(message = "{validation.client.name.message}")
     @NotEmpty(message = "{validation.client.name.message}")

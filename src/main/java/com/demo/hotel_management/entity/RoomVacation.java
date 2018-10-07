@@ -17,7 +17,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class RoomVacation {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
 //    @ElementCollection(fetch = FetchType.EAGER)

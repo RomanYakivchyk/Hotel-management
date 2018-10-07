@@ -22,7 +22,7 @@ public class Building {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Min(1)
     @Max(4)
