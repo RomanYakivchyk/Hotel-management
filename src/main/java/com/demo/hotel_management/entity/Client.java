@@ -27,5 +27,6 @@ public class Client {
     private String phoneNumber;
     @Email(message = "{validation.client.email.message}")
     private String email;
+    private Boolean inactive = false;
 
 }

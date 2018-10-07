@@ -9,9 +9,9 @@ import javax.validation.Payload;
 @Target(ElementType.TYPE)
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {DateRangeValidator.class})
-public @interface ValidateDateRange {
-    String message() default "The Leave Date must be after the Arrival Date";
+@Constraint(validatedBy = {RoommateAllowanceValidator.class})
+public @interface ValidateRoommateAllowance {
+    String message() default "Виберіть кімнату для підселення";
 
     Class<?>[] groups() default {};
 

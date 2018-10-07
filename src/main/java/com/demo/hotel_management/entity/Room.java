@@ -14,9 +14,11 @@ import java.util.*;
 @NoArgsConstructor
 public class Room {
 
-    public Room(@Min(1) @Max(20) Integer roomNumber, Map<BedType, Integer> beds, List<RoomVacation> roomVacationList, @NotNull Building building) {
+    public Room(@Min(1) @Max(20) Integer roomNumber,
+//                Map<BedType, Integer> beds,
+                List<RoomVacation> roomVacationList, @NotNull Building building) {
         this.roomNumber = roomNumber;
-        this.beds = beds;
+//        this.beds = beds;
         this.roomVacationList = roomVacationList;
         this.building = building;
     }
@@ -29,12 +31,12 @@ public class Room {
     @Max(20)
     private Integer roomNumber;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @MapKeyColumn(name="bed_type")
-    @CollectionTable(name="beds")
-    @MapKeyEnumerated(EnumType.STRING)
-    @Column(name="number_of_beds")
-    private Map<BedType, Integer> beds;
+//    @ElementCollection(fetch = FetchType.EAGER)
+//    @MapKeyColumn(name="bed_type")
+//    @CollectionTable(name="beds")
+//    @MapKeyEnumerated(EnumType.STRING)
+//    @Column(name="number_of_beds")
+//    private Map<BedType, Integer> beds;
 
     @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
     private List<RoomVacation> roomVacationList;
@@ -44,9 +46,9 @@ public class Room {
     @JoinColumn(name = "building_id")
     private Building building;
 
-    public enum BedType {
-        SINGLE_BED,
-        DOUBLE_BED,
-        FOLDING_BED
-    }
+//    public enum BedType {
+//        SINGLE_BED,
+//        DOUBLE_BED,
+//        FOLDING_BED
+//    }
 }

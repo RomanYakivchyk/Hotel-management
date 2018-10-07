@@ -21,7 +21,7 @@ import java.util.stream.IntStream;
 public class ClientController {
 
     private static int currentPage = 1;
-    private static int pageSize = 5;
+    private static int pageSize = 6;
 
     @Autowired
     private ClientService clientService;
@@ -87,7 +87,7 @@ public class ClientController {
     @RequestMapping(path = "/client/{clientId}/remove", method = RequestMethod.GET)
     public String removeClient(@PathVariable Long clientId) {
         log.debug("clientId={}", clientId);
-        clientService.removeClient(clientId);
+        clientService.inactivateClient(clientId);
         log.debug("clientId={}", clientId);
         return "redirect:/clients";
     }

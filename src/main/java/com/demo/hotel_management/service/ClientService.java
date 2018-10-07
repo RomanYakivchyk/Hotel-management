@@ -44,6 +44,7 @@ public class ClientService {
         Collator collator = Collator.getInstance(Locale.forLanguageTag("uk-UA"));
 
         List<Client> clientList = StreamSupport.stream(clientRepository.findAll().spliterator(), false)
+                .filter(e-> !e.getInactive())
                 .sorted((o1, o2) -> {
                     int result = 0;
                     result = collator.compare(o1.getName(), o2.getName());
@@ -82,13 +83,13 @@ public class ClientService {
         return savedClient;
     }
 
-    public void removeClient(Long clientId) {
+    public void inactivateClient(Long clientId) {
 
         log.debug("clientId={}", clientId);
 
         Client client = clientRepository.findById(clientId).orElseThrow(ClientNotFoundException::new);
-        clientRepository.delete(client);
-        log.debug("Client removed: client={}", client);
+        clientRepository.inactivate(client.getId());
+        log.debug("Client inactivated: client={}", client);
 
     }
 }

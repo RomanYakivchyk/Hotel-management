@@ -14,6 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <!-- end of bootstrap kit-->
+    <link rel="stylesheet" href="/footer.css">
 
 
     <script>
@@ -35,13 +36,36 @@
 
 
 
-
-
-
     </script>
+
+    <style>
+        /* enable absolute positioning */
+.inner-addon {
+    position: relative;
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+
+
+    </style>
 
 </head>
 <body class="bg-light">
+<!--<body style="background-color:#E9EBEE">-->
 <div th:insert="header.html"></div>
 
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -64,47 +88,54 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container col-md-10" style="float: none; margin: 0 auto;">
     <br>
-    <p th:class="text-secondary">Введіть ім'я, прізвище або номер телефону:</p>
-    <input class="form-control" id="inputSearch" type="text" placeholder="Пошук..">
-    <br>
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <table class="table table-hover">
-            <thead class="thead-light">
-            <th>
-                <h4>
-                    <small>Наші Клієнти</small>
-                </h4>
-            </th>
-            <th>
-                <a class="btn btn-outline-primary float-right" th:href="@{/clients/add}">Новий клієнт</a>
-            </th>
-            </thead>
-            <tbody id="clientTable">
-            <tr th:each="client : ${clientPage.content}">
-                <td><span class="font-weight-bold text-secondary" th:text="${client.name}"/>
-                    <span class="font-weight-bold text-secondary" th:text="${client.otherClientInfo}"/>
-                    <div th:with="phoneNumber=${client.phoneNumber}"
-                         th:class="font-weight-light"
-                         th:text="'('+${#strings.substring(phoneNumber,0,3)}+')'
+    <!--<div class="my-3 p-3 bg-light rounded shadow-sm">-->
+    <div class="row mb-2 align-items-end">
+        <div class="col">
+        <h3>Клієнти</h3>
+        </div>
+        <div class="col">
+            <a class="btn btn-sm btn-outline-primary float-right"
+               th:href="@{/clients/add}"><i class="far fa-user"></i>&nbsp;Новий клієнт</a>
+        </div>
+    </div>
+    <!--<span>Клієнти</span>-->
+    <!--<a class="btn btn-outline-primary float-right"-->
+       <!--th:href="@{/clients/add}"><i class="far fa-user"></i>&nbsp;Новий клієнт</a>-->
+    <!--<br>-->
+    <!--<br>-->
+
+    <div class="inner-addon right-addon mb-2">
+        <i class="glyphicon fas fa-search text-secondary"></i>
+        <input class="form-control" id="inputSearch" type="text"
+               placeholder="Введіть ім'я, прізвище або номер телефону">
+    </div>
+    <table class="table table-hover" id="clientListTable">
+        <tbody id="clientTable">
+        <tr th:each="client : ${clientPage.content}">
+            <td><span th:text="${client.name}"/>
+                <span th:text="${client.otherClientInfo}"/> <!-- class="font-weight-bold text-secondary" -->
+                <div th:with="phoneNumber=${client.phoneNumber}"
+                     th:class="font-weight-light"
+                     th:text="'('+${#strings.substring(phoneNumber,0,3)}+')'
 								+' '+${#strings.substring(phoneNumber,3,5)}
 								+'-'+${#strings.substring(phoneNumber,5,7)}
 								+'-'+${#strings.substring(phoneNumber,7)}">
-                    </div>
-                </td>
-                <td><p class="float-right">
+                </div>
+            </td>
+            <td><p class="float-right">
 								<span><a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">
 								<i class="fas fa-pencil-alt" aria-hidden="true"></i></a>&emsp;&emsp;</span>
-                    <span><a href="#" th:data-href="@{/client/{clientId}/remove(clientId=${client.id})}"
-                             th:data-client="${client.name}+' '+${client.otherClientInfo}" data-toggle="modal"
-                             data-target="#confirm-delete">
+                <span><a href="#" th:data-href="@{/client/{clientId}/remove(clientId=${client.id})}"
+                         th:data-client="${client.name}+' '+${client.otherClientInfo}" data-toggle="modal"
+                         data-target="#confirm-delete">
 									<i class="far fa-trash-alt text-secondary" aria-hidden="true"></i></a></span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--</div>-->
     <div>
         <ul th:class="pagination">
             <li th:class="${pageNumber==clientPage.number + 1} ? 'page-item active' : 'page-item'"
@@ -128,5 +159,6 @@
     <!--</ul>-->
 
 </div>
+<div th:insert="footer.html"></div>
 </body>
 </html>

@@ -15,36 +15,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <!-- end of bootstrap kit-->
+
+    <link rel="stylesheet" href="/footer.css">
+
     <!--bootstrap-select-->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
     <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-    <script>
-    $(document).ready(function(){
-        $('select').selectpicker();
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
     <!---->
 
     <!--date picker-->
@@ -54,31 +32,113 @@
             type="text/javascript"></script>
 
     <script type="text/javascript">
-        var arrivalDatePicker, leaveDatePicker, arrivalDateConfig, leaveDateConfig;
-        arrivalDateConfig = {
-            locale: 'ru-ru',
-            format: 'dd/mm/yyyy',
-            uiLibrary: 'bootstrap4',
-            keyboardNavigation: true,
-            modal: true, header: true, footer: true,
-            maxDate: function () {
-                return $('#leaveDate').val();
-            }
-        };
-        leaveDateConfig = {
-            locale: 'ru-ru',
-            format: 'dd/mm/yyyy',
-            uiLibrary: 'bootstrap4',
-            keyboardNavigation: true,
-            modal: true, header: true, footer: true,
-            minDate: function () {
-                return $('#arrivalDate').val();
-            }
-        };
-        $(document).ready(function () {
-            arrivalDatePicker = $('#arrivalDate').datepicker(arrivalDateConfig);
-            leaveDatePicker = $('#leaveDate').datepicker(leaveDateConfig);
+
+var arrivalDatePicker, leaveDatePicker, arrivalDateConfig, leaveDateConfig;
+arrivalDateConfig = {
+	locale: 'ru-ru',
+	format: 'dd/mm/yyyy',
+	uiLibrary: 'bootstrap4',
+	keyboardNavigation: true,
+	modal: true, header: true, footer: true,
+	maxDate: function () {
+		return $('#leaveDate').val();
+	}
+};
+leaveDateConfig = {
+	locale: 'ru-ru',
+	format: 'dd/mm/yyyy',
+	uiLibrary: 'bootstrap4',
+	keyboardNavigation: true,
+	modal: true, header: true, footer: true,
+	minDate: function () {
+		return $('#arrivalDate').val();
+	}
+};
+$(document).ready(function () {
+	$('select').selectpicker();
+	arrivalDatePicker = $('#arrivalDate').datepicker(arrivalDateConfig);
+	leaveDatePicker = $('#leaveDate').datepicker(leaveDateConfig);
+});
+
+
+var roomNameNumberMap = {
+    "Кімната 1":1,"Кімната 2":2,"Кімната 3":3,
+    "Кімната 4":4,"2-й поверх":5,"Кімната 5":6,
+"Кімната 6":7,"Кімната 7":8,"Кімната 8":9};
+
+
+$(document).ready(function(){
+    var noRoomSelected = $('*[data-id="rooms"]').attr("title").split(', ')[0] === "Вибрати кімнати";
+	var $bringInRoomSelect =  $('#BringInRoomsSelect');
+	if(!noRoomSelected){
+	$('#allowBringIn').attr("disabled",false);
+    var title = $('*[data-id="rooms"]').attr("title");
+            var roomNameArray = title.split(', ');
+            $('#BringInRoomsSelect option').each(function(){
+                if(jQuery.inArray($(this).text(), roomNameArray) !== -1){
+                    $(this).attr("disabled",false);
+				} else {
+                    $(this).attr("disabled",true);
+				}
+			});
+            $bringInRoomSelect.parent().parent().css("display","block");
+	} else {
+        $('#allowBringIn').attr("disabled",true);
+        $('#BringInRoomsSelect').parent().parent().css("display","none");
+        $('#BringInRoomsSelect option').each(function(){
+            $(this).attr("disabled",true);
         });
+	}
+	$bringInRoomSelect.selectpicker('refresh');
+});
+
+
+$(document).ready(function () {
+
+    var targetNode = $('*[data-id="rooms"]').get(0);
+    var config = { attributes: true, childList: false, subtree: false, attributeFilter:["title"]};
+
+    var callback = function(mutationsList, observer) {
+        var $checkbox =  $('#allowBringIn');
+
+        var noRoomSelected = $('*[data-id="rooms"]').attr("title").split(', ')[0] === "Вибрати кімнати";
+        if($checkbox.is(':checked')){
+                $($checkbox).trigger( "click" );
+            }
+        if(noRoomSelected){
+            $checkbox.attr("disabled",true);
+        } else {
+            $checkbox.attr("disabled",false);
+        }
+	};
+    var observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+
+
+	$('#allowBringIn').click(function() {
+        var $bringInRoomSelect = $('#BringInRoomsSelect');
+        if(!$(this).is(':checked')) {
+
+			$('#BringInRoomsSelect option').each(function(){
+                $(this).prop("selected",false);
+                $(this).attr("disabled",true);
+			});
+            $bringInRoomSelect.parent().parent().css("display","none");
+
+			} else if($(this).is(':checked')) {
+            var title = $('*[data-id="rooms"]').attr("title");
+            var roomNameArray = title.split(', ');
+            $('#BringInRoomsSelect option').each(function(){
+                if(jQuery.inArray($(this).text(), roomNameArray) !== -1){
+                    $(this).attr("disabled",false);
+				}
+			});
+            $bringInRoomSelect.selectpicker('refresh');
+            $bringInRoomSelect.parent().parent().css("display","block");
+		}
+	});
+});
+
 
 
 
@@ -86,16 +146,14 @@
 
 
     </script>
-    <!---->
-    <style>
-    .border {
-     border: 2px solid grey;
-    }
 
+    <!--<style>-->
 
+       <!--.border {-->
+            <!--border: 2px solid grey;-->
+        <!--}-->
 
-
-    </style>
+    <!--</style>-->
 
 </head>
 <body class="bg-light">
@@ -106,14 +164,15 @@
         <h3 class="mb-3 mt-5" th:text="((*{vacationId} == null)?'Додати':'Редагувати') + ' бронювання'"></h3>
         <input th:type="hidden" th:value="*{vacationId}" th:field="*{vacationId}">
         <div class="row">
-            <div class="col-md-8 mb-3 form-group">
+            <div class="col-8 mb-3 form-group">
                 <label for="clientName">Клієнт</label>
                 <span class="float-right"><a th:href="@{/clients/add}">новий клієнт</a></span>
                 <div>
                     <select class="selectpicker form-control"
                             th:field="*{clientId}"
-                            data-live-search="true" title="Вибрати клієнта"
-                            data-style="bg-white border" id="clientName">
+                            data-live-search="true" data-live-search-normalize="true"
+                            data-none-results-text="Нічого не знайдено"
+                            title="Вибрати клієнта" data-style="bg-white border" id="clientName">
                         <option th:each="cl : ${clients}"
                                 th:value="${cl.id}"
                                 th:text="${cl.name}+' '+${cl.otherClientInfo}+' ('+${cl.phoneNumber}+')'"></option>
@@ -123,31 +182,38 @@
                     <span class="text-danger"
                           th:errors="*{clientId}"></span></div>
             </div>
-            <div class="col-md-4 mb-3 form-group">
-                <label for="residentsCount">Кількість гостей</label>
-                <input type="number" min="1" max="20" th:field="*{residentsCount}" value="*{residentsCount}"
-                       class="form-control"
-                       id="residentsCount">
-                <div th:if="${#fields.hasErrors('residentsCount')}"><i
-                        class="fas fa-exclamation-triangle text-danger"></i>
-                    <span class="text-danger"
-                          th:errors="*{residentsCount}"></span></div>
+            <div class="col-4 mb-3 form-group">
+                <label for="residentsCount">К-cть</label>
+                <select class="selectpicker form-control" data-style="bg-white border"
+                        data-width="100%" data-size="5" id="residentsCount"
+                        th:field="*{residentsCount}" th:value="*{residentsCount}">
+                    <option th:value="1">1</option>
+                    <option th:value="2">2</option>
+                    <option th:value="3">3</option>
+                    <option th:value="4">4</option>
+                    <option th:value="5">5</option>
+                    <option th:value="6">6</option>
+                    <option th:value="7">7</option>
+                    <option th:value="8">8</option>
+                    <option th:value="9">9</option>
+                    <option th:value="10">10</option>
+                </select>
             </div>
         </div>
+        <hr class="mt-2">
         <div class="row">
-            <div class="col-md-8 mb-3 form-group">
+            <div class="col-8 mb-3 form-group">
                 <label for="arrivalDate">Дата приїзду</label>
-                <input type="text" th:field="*{arrivalDate}" value="*{arrivalDate}" class="form-control"
+                <input readonly type="text" th:field="*{arrivalDate}" th:value="*{arrivalDate}" class="form-control"
                        id="arrivalDate">
                 <div th:if="${#fields.hasErrors('arrivalDate')}"><i class="fas fa-exclamation-triangle text-danger"></i>
                     <span class="text-danger"
                           th:errors="*{arrivalDate}"></span></div>
             </div>
-            <div class="col-md-4 mb-3 form-group">
+            <div class="col-4 mb-3 form-group">
                 <label for="arrivalDayPart">Час</label>
                 <select class="selectpicker" data-style="bg-white border" data-width="100%"
-                        th:field="*{arrivalDayPart}"
-                        id="arrivalDayPart">
+                        th:field="*{arrivalDayPart}" th:value="*{arrivalDayPart}" id="arrivalDayPart">
                     <option th:value="1">Ранок</option>
                     <option th:value="2">День</option>
                     <option th:value="3">Вечір</option>
@@ -155,30 +221,32 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 mb-3 form-group">
+            <div class="col-8 mb-3 form-group">
                 <label for="leaveDate">Дата від'їзду</label>
-                <input type="text" th:field="*{leaveDate}" value="*{leaveDate}" class="form-control" id="leaveDate">
+                <input readonly type="text" th:field="*{leaveDate}" value="*{leaveDate}" class="form-control"
+                       id="leaveDate">
                 <div th:if="${#fields.hasErrors('leaveDate')}"><i class="fas fa-exclamation-triangle text-danger"></i>
                     <span class="text-danger"
                           th:errors="*{leaveDate}"></span>
                 </div>
             </div>
-            <div class="col-md-4 mb-3 form-group">
+            <div class="col-4 mb-3 form-group">
                 <label for="leaveDayPart">Час</label>
                 <select class="selectpicker" data-width="100%" th:field="*{leaveDayPart}"
-                        data-style="bg-white border" id="leaveDayPart">
+                        th:value="*{leaveDayPart}" data-style="bg-white border" id="leaveDayPart">
                     <option th:value="1">Ранок</option>
                     <option th:value="2">День</option>
                     <option th:value="3">Вечір</option>
                 </select>
             </div>
         </div>
-
+        <hr class="mb-3">
         <div class="mb-3 form-group">
             <label for="rooms">Кімнати</label>
-            <select class="selectpicker" data-width="100%" th:field="*{roomNumbers}" th:value="*{roomNumbers}"
-                    data-style="bg-white border" id="rooms"
-                    multiple data-size="8" title="Вибрати кімнати">
+            <select class="selectpicker" data-width="100%"
+                    th:field="*{roomNumbers}" th:value="*{roomNumbers}"
+                    data-style="bg-white border" id="rooms" data-size="7"
+                    multiple title="Вибрати кімнати">
 
                 <optgroup label="Будинок 1" data-icon="fas fa-home">
                     <option th:value="1">Кімната 1</option>
@@ -196,15 +264,42 @@
                     <option th:value="9">Кімната 8</option>
                 </optgroup>
             </select>
-            <div th:if="${#fields.hasErrors('roomNumbers')}"><i class="fas fa-exclamation-triangle text-danger"></i><span
+            <div th:if="${#fields.hasErrors('roomNumbers')}"><i
+                    class="fas fa-exclamation-triangle text-danger"></i><span
                     class="text-danger"
                     th:errors="*{roomNumbers}"></span></div>
         </div>
-        <br>
-        <hr class="mt-2">
+        <hr class="mb-3">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" th:field="*{allowRoommate}" th:value="*{allowRoommate}"
+                   class="custom-control-input" id="allowBringIn">
+            <label class="custom-control-label" for="allowBringIn">Можливе підселення</label>
+        </div>
+        <div class="mb-3 mt-3 form-group">
+            <select class="selectpicker" title="кімната для підселення (rename)"
+                    th:field="*{sharedRoomNumbers}" th:value="*{sharedRoomNumbers}"
+                    data-style="bg-white border" id="BringInRoomsSelect"
+                    data-width="100%" data-hide-disabled="true" multiple>
+                <option th:value="1">Кімната 1</option>
+                <option th:value="2">Кімната 2</option>
+                <option th:value="3">Кімната 3</option>
+                <option th:value="4">Кімната 4</option>
+                <option th:value="5">2-й поверх</option>
+                <option th:value="6">Кімната 5</option>
+                <option th:value="7">Кімната 6</option>
+                <option th:value="8">Кімната 7</option>
+                <option th:value="9">Кімната 8</option>
+            </select>
+            <div id="sharedRoomsError" th:if="${#fields.hasErrors('sharedRoomNumbers')}"><i
+                    class="fas fa-exclamation-triangle text-danger"></i><span
+                    class="text-danger"
+                    th:errors="*{sharedRoomNumbers}"></span></div>
+        </div>
+        <hr class="mt-3">
         <button class="btn btn-primary btn-block" type="submit">Зберегти</button>
         <div class="text-center mt-2"><a th:class="text-secondary" th:href="@{/vacations}">Відмінити</a></div>
     </form>
 </div>
+<div th:insert="footer.html"></div>
 </body>
 </html>

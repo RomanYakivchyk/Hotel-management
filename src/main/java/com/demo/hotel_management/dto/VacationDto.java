@@ -1,8 +1,6 @@
 package com.demo.hotel_management.dto;
 
-import com.demo.hotel_management.entity.Client;
-import com.demo.hotel_management.entity.Vacation;
-import com.demo.hotel_management.utils.custom_validators.ValidateDateRange;
+import com.demo.hotel_management.utils.custom_validators.ValidateRoommateAllowance;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,12 +10,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 @Data
 @ToString
-//@ValidateDateRange
+@ValidateRoommateAllowance
 public class VacationDto {
 
     private Long vacationId;
@@ -43,4 +40,11 @@ public class VacationDto {
     @Max(20)
     @NotNull(message = "{validation.vacation.residents.message}")
     private Integer residentsCount;
+
+    private boolean allowRoommate;
+
+    private Set<Integer> sharedRoomNumbers;
+
+    private Boolean inactive;
+
 }

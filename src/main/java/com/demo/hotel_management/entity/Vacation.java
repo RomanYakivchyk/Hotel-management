@@ -19,6 +19,8 @@ public class Vacation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Boolean inactive = false;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     private Client client;

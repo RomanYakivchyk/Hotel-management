@@ -23,77 +23,88 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.9/js/mdb.min.js"></script>
 
 
-
     <script>
-$(document).ready(function(){
-    var monthLength = 29;
-    var roomCount = 8;
-    console.log('entering');
-    var data = loadTableData();
-    initHeader(monthLength);
-    initBody(roomCount,monthLength);
-    populateTable(data);
-});
+    $(document).ready(function(){
+        loadTableData();
+     });
 
-function populateTable(data){
-console.log('populateTable function');
-    console.log(data);
-}
+    function loadTableData(){
+        $.get('http://localhost:8080/tableData', function(data) {
+          $('#bookingTable').html(data);
+          mergeCells();
+          mergeRows();
+        });
+    }
 
-function loadTableData(){
-    var result;
-        $.ajax({
-      url: "http://localhost:8080/tableData",
-      cache: false,
-      success: function(data){
-       result = data;
-      },
-        async: false
-    });
-    return result;
-}
-
-
-function initBody(roomCount,monthLength){
- var $tbody = $('#bookingTable tbody');
-    for(var i=0;i<roomCount;i++){
-
-        var $row = $('<tr></tr>');
-        for(var j = 0;j<monthLength+1;j++){
-            if(j===0){
-                var $cell = $('<th scope="row">'+(i+1)+'</th>');
-            } else {
-                var $cell = $('<td>X</td>');
+    function mergeCells(){
+        var rows = $('#bookingTable').children('tbody').children('tr');
+            for(var i = 0;i<rows.length;i++){
+               var cells = $(rows[i]).children('td');
+               var $primaryCell = $(cells[0]);
+                   for(var j = 1;j<cells.length;j++){
+                        var $currCell = $(cells[j]);
+                        var $prevCell = $(cells[j-1]);
+                        if(hasAttr($currCell,'data-vac') && hasAttr($prevCell,'data-vac')){
+                            if($currCell.data('vac') === $prevCell.data('vac')){
+                                  $currCell.hide();
+                                      if(!hasAttr($primaryCell,'colspan')){
+                                            $primaryCell.attr('colspan',1);
+                                      }
+                                  var currColspan = $primaryCell.attr('colspan');
+                                  $primaryCell.attr('colspan',(parseInt(currColspan)+1));
+                            }
+                        }
+                        if(!sameVacationCells($currCell,$prevCell)){
+                            $primaryCell = $currCell;
+                        }
+                   }
             }
-            $cell.appendTo($row);
-        }
-       $row.appendTo($tbody);
     }
-};
 
-function initHeader(monthLength){
- var $thead = $('#bookingTable thead');
- $row = $('<tr></tr>');
-    for(var i=0;i<monthLength+1;i++){
-        if(i===0){
-            $row.append('<th></th>');
-        } else {
-            $row.append('<th scope="col">'+i+'</th>');
-        }
+    function sameVacationCells($cell1,$cell2){
+    var haveAttr = hasAttr($cell1,'data-vac') && hasAttr($cell2,'data-vac');
+    var sameValues = $cell1.data('vac') === $cell2.data('vac');
+    return haveAttr && sameValues;
     }
-    $row.appendTo($thead);
-};
 
-</script>
+    function hasAttr($element, attrName){
+        var attr = $element.attr(attrName);
+        return typeof attr !== typeof undefined && attr !== false;
+    }
+
+    function mergeRows(){
+
+    }
+
+
+
+
+    </script>
+
+    <style>
+        .table {
+            font-size: 10px;
+        }
+        .table tr,.table td {
+           height: 10px;
+           <!--text-align: center-->
+        }
+        .table>tbody>tr>td, .table>tbody>tr>th,
+        .table>thead>tr>td, .table>thead>tr>th {
+          padding:0;
+        }
+
+
+
+
+    </style>
 
 
 </head>
 <body>
 <div class="container">
     <div class="table-responsive">
-        <table class="table table-sm" id="bookingTable">
-            <thead></thead>
-            <tbody></tbody>
+        <table class="table" id="bookingTable">
         </table>
     </div>
 </div>
