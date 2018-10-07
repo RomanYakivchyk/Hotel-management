@@ -54,8 +54,8 @@ public class HotelManagementApplication {
             return null;
         }
 
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
+        String username = dbUri.getUserInfo().split(":")[1];
+        String password = dbUri.getUserInfo().split(":")[2];
         String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':'
                 + dbUri.getPort() + dbUri.getPath();
 
