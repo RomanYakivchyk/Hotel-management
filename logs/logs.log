@@ -4971,3 +4971,1005 @@ javax.persistence.TransactionRequiredException: Executing an update/delete query
 07-10-2018 12:13:45.171 [Thread-5] WARN  o.s.b.f.s.DisposableBeanAdapter.destroy - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-197]
 07-10-2018 12:13:45.175 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
 07-10-2018 12:13:45.185 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
+07-10-2018 15:12:32.428 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarting - Starting HotelManagementApplication on DESKTOP-04PJQ2P with PID 8768 (started by Roman in C:\MyWork\My Projects\hotel_management)
+07-10-2018 15:12:32.436 [restartedMain] DEBUG c.d.h.HotelManagementApplication.logStarting - Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+07-10-2018 15:12:32.443 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStartupProfileInfo - No active profile set, falling back to default profiles: default
+07-10-2018 15:12:32.740 [restartedMain] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.prepareRefresh - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7dc32651: startup date [Sun Oct 07 15:12:32 EEST 2018]; root of context hierarchy
+07-10-2018 15:12:38.612 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$42a1b77d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-10-2018 15:12:41.072 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8080 (http)
+07-10-2018 15:12:41.176 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-10-2018 15:12:41.179 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet Engine: Apache Tomcat/8.5.32
+07-10-2018 15:12:41.240 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener.log - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;%JAVA_HOME%;%CATALINA_HOME%;%JRE_HOME%;;C:\WINDOWS\System32\OpenSSH\;C:\Users\me\AppData\Local\Microsoft\WindowsApps;.]
+07-10-2018 15:12:41.683 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-10-2018 15:12:41.696 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 8956 ms
+07-10-2018 15:12:43.820 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'characterEncodingFilter' to: [/*]
+07-10-2018 15:12:43.822 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'webMvcMetricsFilter' to: [/*]
+07-10-2018 15:12:43.822 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+07-10-2018 15:12:43.830 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+07-10-2018 15:12:43.831 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'requestContextFilter' to: [/*]
+07-10-2018 15:12:43.834 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpTraceFilter' to: [/*]
+07-10-2018 15:12:43.834 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean.addRegistration - Servlet dispatcherServlet mapped to [/]
+07-10-2018 15:12:44.974 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory - Building JPA container EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:12:45.028 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+07-10-2018 15:12:45.363 [restartedMain] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.2.17.Final}
+07-10-2018 15:12:45.368 [restartedMain] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000206: hibernate.properties not found
+07-10-2018 15:12:45.630 [restartedMain] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+07-10-2018 15:12:46.480 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+07-10-2018 15:12:46.959 [restartedMain] INFO  o.h.e.j.e.i.LobCreatorBuilderImpl.useContextualLobCreation - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.useContextualLobCreation(LobCreatorBuilderImpl.java:113)
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.makeLobCreatorBuilder(LobCreatorBuilderImpl.java:54)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentImpl.<init>(JdbcEnvironmentImpl.java:271)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:114)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:762)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:398)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246)
+	at com.demo.hotel_management.HotelManagementApplication.main(HotelManagementApplication.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+	at org.postgresql.Driver.notImplemented(Driver.java:688)
+	at org.postgresql.jdbc.PgConnection.createClob(PgConnection.java:1269)
+	... 49 common frames omitted
+07-10-2018 15:12:47.194 [restartedMain] INFO  org.hibernate.type.BasicTypeRegistry.register - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1d644e6
+07-10-2018 15:12:48.933 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:12:50.308 [restartedMain] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
+07-10-2018 15:12:51.505 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:12:53.169 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7dc32651: startup date [Sun Oct 07 15:12:32 EEST 2018]; root of context hierarchy
+07-10-2018 15:12:53.300 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-10-2018 15:12:53.385 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/client/{clientId}/remove],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.removeClient(java.lang.Long)
+07-10-2018 15:12:53.389 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEdit(com.demo.hotel_management.entity.Client,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:12:53.390 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/add || /client/{clientId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:12:53.584 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.listClients(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:12:53.594 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/tableData],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.getTableData()
+07-10-2018 15:12:53.662 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/bookingTable],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.showTable()
+07-10-2018 15:12:53.664 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEdit(com.demo.hotel_management.dto.VacationDto,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:12:53.668 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.listVacations(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:12:53.670 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/add || /vacation/{vacationId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:12:54.194 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+07-10-2018 15:12:54.196 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:12:54.270 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:12:54.270 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:12:56.401 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
+07-10-2018 15:12:56.478 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 2 endpoint(s) beneath base path '/actuator'
+07-10-2018 15:12:56.674 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:12:56.678 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:12:58.420 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:12:58.850 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter.afterSingletonsInstantiated - Registering beans for JMX exposure on startup
+07-10-2018 15:12:59.224 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8080 (http) with context path ''
+07-10-2018 15:12:59.246 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarted - Started HotelManagementApplication in 28.02 seconds (JVM running for 29.525)
+07-10-2018 15:12:59.255 [restartedMain] DEBUG c.d.h.HotelManagementApplication.main - application started
+07-10-2018 15:15:08.101 [http-nio-8080-exec-10] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring FrameworkServlet 'dispatcherServlet'
+07-10-2018 15:15:08.101 [http-nio-8080-exec-10] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - FrameworkServlet 'dispatcherServlet': initialization started
+07-10-2018 15:15:08.131 [http-nio-8080-exec-10] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - FrameworkServlet 'dispatcherServlet': initialization completed in 30 ms
+07-10-2018 15:15:08.232 [http-nio-8080-exec-10] DEBUG c.d.h.controller.ClientController.listClients - model={}, page=1, size=6
+07-10-2018 15:15:08.233 [http-nio-8080-exec-10] DEBUG c.d.h.service.ClientService.findPaginated - pageable=Page request [number: 0, size 6, sort: UNSORTED]
+07-10-2018 15:15:08.389 [http-nio-8080-exec-10] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logExceptions - SQL Error: 0, SQLState: 42P01
+07-10-2018 15:15:08.390 [http-nio-8080-exec-10] ERROR o.h.e.jdbc.spi.SqlExceptionHelper.logExceptions - ERROR: relation "client" does not exist
+  Position: 209
+07-10-2018 15:15:08.430 [http-nio-8080-exec-10] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet].log - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet] with root cause
+org.postgresql.util.PSQLException: ERROR: relation "client" does not exist
+  Position: 209
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:150)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:113)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.jdbc.pool.StatementFacade$StatementProxy.invoke(StatementFacade.java:114)
+	at com.sun.proxy.$Proxy137.executeQuery(Unknown Source)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:60)
+	at org.hibernate.loader.Loader.getResultSet(Loader.java:2168)
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1931)
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1893)
+	at org.hibernate.loader.Loader.doQuery(Loader.java:938)
+	at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:341)
+	at org.hibernate.loader.Loader.doList(Loader.java:2692)
+	at org.hibernate.loader.Loader.doList(Loader.java:2675)
+	at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2507)
+	at org.hibernate.loader.Loader.list(Loader.java:2502)
+	at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:502)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:392)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.performList(HQLQueryPlan.java:216)
+	at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1490)
+	at org.hibernate.query.internal.AbstractProducedQuery.doList(AbstractProducedQuery.java:1445)
+	at org.hibernate.query.internal.AbstractProducedQuery.list(AbstractProducedQuery.java:1414)
+	at org.hibernate.query.Query.getResultList(Query.java:146)
+	at org.hibernate.query.criteria.internal.compile.CriteriaQueryTypeQueryAdapter.getResultList(CriteriaQueryTypeQueryAdapter.java:72)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:307)
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findAll(SimpleJpaRepository.java:74)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:377)
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:200)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:629)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.doInvoke(RepositoryFactorySupport.java:593)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$QueryExecutorMethodInterceptor.invoke(RepositoryFactorySupport.java:578)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:59)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:294)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:135)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor.invoke(SurroundingTransactionDetectorMethodInterceptor.java:61)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:185)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+	at com.sun.proxy.$Proxy123.findAll(Unknown Source)
+	at com.demo.hotel_management.service.ClientService.findPaginated(ClientService.java:46)
+	at com.demo.hotel_management.controller.ClientController.listClients(ClientController.java:40)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:90)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:155)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:123)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:108)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:800)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1471)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+07-10-2018 15:16:23.250 [Thread-9] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.doClose - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7dc32651: startup date [Sun Oct 07 15:12:32 EEST 2018]; root of context hierarchy
+07-10-2018 15:16:23.256 [Thread-9] INFO  o.s.j.e.a.AnnotationMBeanExporter.destroy - Unregistering JMX-exposed beans on shutdown
+07-10-2018 15:16:23.285 [Thread-9] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:16:24.404 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarting - Starting HotelManagementApplication on DESKTOP-04PJQ2P with PID 8768 (started by Roman in C:\MyWork\My Projects\hotel_management)
+07-10-2018 15:16:24.405 [restartedMain] DEBUG c.d.h.HotelManagementApplication.logStarting - Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+07-10-2018 15:16:24.406 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStartupProfileInfo - No active profile set, falling back to default profiles: default
+07-10-2018 15:16:24.414 [restartedMain] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.prepareRefresh - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1ac1b668: startup date [Sun Oct 07 15:16:24 EEST 2018]; root of context hierarchy
+07-10-2018 15:16:29.336 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$42a1b77d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-10-2018 15:16:29.854 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8080 (http)
+07-10-2018 15:16:29.856 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-10-2018 15:16:29.859 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet Engine: Apache Tomcat/8.5.32
+07-10-2018 15:16:30.001 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-10-2018 15:16:30.002 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 5588 ms
+07-10-2018 15:16:30.335 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'characterEncodingFilter' to: [/*]
+07-10-2018 15:16:30.336 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'webMvcMetricsFilter' to: [/*]
+07-10-2018 15:16:30.339 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+07-10-2018 15:16:30.340 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+07-10-2018 15:16:30.340 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'requestContextFilter' to: [/*]
+07-10-2018 15:16:30.341 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpTraceFilter' to: [/*]
+07-10-2018 15:16:30.343 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean.addRegistration - Servlet dispatcherServlet mapped to [/]
+07-10-2018 15:16:30.932 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory - Building JPA container EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:16:30.933 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+07-10-2018 15:16:30.961 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+07-10-2018 15:16:31.145 [restartedMain] INFO  o.h.e.j.e.i.LobCreatorBuilderImpl.useContextualLobCreation - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_161]
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.useContextualLobCreation(LobCreatorBuilderImpl.java:113) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.makeLobCreatorBuilder(LobCreatorBuilderImpl.java:54) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentImpl.<init>(JdbcEnvironmentImpl.java:271) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:114) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:762) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:398) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at com.demo.hotel_management.HotelManagementApplication.main(HotelManagementApplication.java:38) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_161]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+	at org.postgresql.Driver.notImplemented(Driver.java:688) ~[postgresql-42.2.4.jar:42.2.4]
+	at org.postgresql.jdbc.PgConnection.createClob(PgConnection.java:1269) ~[postgresql-42.2.4.jar:42.2.4]
+	... 49 common frames omitted
+07-10-2018 15:16:31.149 [restartedMain] INFO  org.hibernate.type.BasicTypeRegistry.register - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1d644e6
+07-10-2018 15:16:31.667 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:16:31.901 [restartedMain] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
+07-10-2018 15:16:32.307 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:16:32.666 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1ac1b668: startup date [Sun Oct 07 15:16:24 EEST 2018]; root of context hierarchy
+07-10-2018 15:16:32.679 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-10-2018 15:16:32.694 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/client/{clientId}/remove],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.removeClient(java.lang.Long)
+07-10-2018 15:16:32.880 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEdit(com.demo.hotel_management.entity.Client,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:16:32.881 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/add || /client/{clientId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:16:32.882 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.listClients(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:16:32.885 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/tableData],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.getTableData()
+07-10-2018 15:16:33.016 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/bookingTable],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.showTable()
+07-10-2018 15:16:33.019 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEdit(com.demo.hotel_management.dto.VacationDto,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:16:33.020 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.listVacations(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:16:33.020 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/add || /vacation/{vacationId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:16:33.024 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+07-10-2018 15:16:33.024 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:16:33.038 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:16:33.039 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:16:33.769 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
+07-10-2018 15:16:33.788 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 2 endpoint(s) beneath base path '/actuator'
+07-10-2018 15:16:33.796 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:16:33.798 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:16:33.799 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:16:33.896 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter.afterSingletonsInstantiated - Registering beans for JMX exposure on startup
+07-10-2018 15:16:34.113 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8080 (http) with context path ''
+07-10-2018 15:16:34.122 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarted - Started HotelManagementApplication in 9.794 seconds (JVM running for 244.401)
+07-10-2018 15:16:34.173 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener.onApplicationEvent - Condition evaluation unchanged
+07-10-2018 15:16:34.173 [restartedMain] DEBUG c.d.h.HotelManagementApplication.main - application started
+07-10-2018 15:16:41.002 [Thread-13] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.doClose - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1ac1b668: startup date [Sun Oct 07 15:16:24 EEST 2018]; root of context hierarchy
+07-10-2018 15:16:41.042 [Thread-13] INFO  o.s.j.e.a.AnnotationMBeanExporter.destroy - Unregistering JMX-exposed beans on shutdown
+07-10-2018 15:16:41.264 [Thread-13] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:16:43.854 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarting - Starting HotelManagementApplication on DESKTOP-04PJQ2P with PID 8768 (started by Roman in C:\MyWork\My Projects\hotel_management)
+07-10-2018 15:16:43.855 [restartedMain] DEBUG c.d.h.HotelManagementApplication.logStarting - Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+07-10-2018 15:16:43.855 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStartupProfileInfo - No active profile set, falling back to default profiles: default
+07-10-2018 15:16:43.858 [restartedMain] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.prepareRefresh - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@255c508b: startup date [Sun Oct 07 15:16:43 EEST 2018]; root of context hierarchy
+07-10-2018 15:16:45.311 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$42a1b77d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-10-2018 15:16:45.718 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8080 (http)
+07-10-2018 15:16:45.720 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-10-2018 15:16:45.721 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet Engine: Apache Tomcat/8.5.32
+07-10-2018 15:16:45.784 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-10-2018 15:16:45.786 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 1928 ms
+07-10-2018 15:16:46.089 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'characterEncodingFilter' to: [/*]
+07-10-2018 15:16:46.090 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'webMvcMetricsFilter' to: [/*]
+07-10-2018 15:16:46.095 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+07-10-2018 15:16:46.096 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+07-10-2018 15:16:46.097 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'requestContextFilter' to: [/*]
+07-10-2018 15:16:46.097 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpTraceFilter' to: [/*]
+07-10-2018 15:16:46.112 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean.addRegistration - Servlet dispatcherServlet mapped to [/]
+07-10-2018 15:16:46.795 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory - Building JPA container EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:16:46.795 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+07-10-2018 15:16:46.825 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+07-10-2018 15:16:46.975 [restartedMain] INFO  o.h.e.j.e.i.LobCreatorBuilderImpl.useContextualLobCreation - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_161]
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.useContextualLobCreation(LobCreatorBuilderImpl.java:113) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.makeLobCreatorBuilder(LobCreatorBuilderImpl.java:54) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentImpl.<init>(JdbcEnvironmentImpl.java:271) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:114) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888) [hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) [spring-orm-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) [spring-beans-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:762) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:398) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246) ~[spring-boot-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at com.demo.hotel_management.HotelManagementApplication.main(HotelManagementApplication.java:38) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_161]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+	at org.postgresql.Driver.notImplemented(Driver.java:688) ~[postgresql-42.2.4.jar:42.2.4]
+	at org.postgresql.jdbc.PgConnection.createClob(PgConnection.java:1269) ~[postgresql-42.2.4.jar:42.2.4]
+	... 49 common frames omitted
+07-10-2018 15:16:47.036 [restartedMain] INFO  org.hibernate.type.BasicTypeRegistry.register - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@1d644e6
+07-10-2018 15:16:47.225 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:16:47.497 [restartedMain] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
+07-10-2018 15:16:47.844 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:16:47.961 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@255c508b: startup date [Sun Oct 07 15:16:43 EEST 2018]; root of context hierarchy
+07-10-2018 15:16:47.967 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-10-2018 15:16:48.001 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/client/{clientId}/remove],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.removeClient(java.lang.Long)
+07-10-2018 15:16:48.035 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEdit(com.demo.hotel_management.entity.Client,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:16:48.036 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/add || /client/{clientId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:16:48.037 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.listClients(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:16:48.038 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/tableData],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.getTableData()
+07-10-2018 15:16:48.065 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/bookingTable],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.showTable()
+07-10-2018 15:16:48.066 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEdit(com.demo.hotel_management.dto.VacationDto,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:16:48.070 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.listVacations(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:16:48.071 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/add || /vacation/{vacationId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:16:48.073 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+07-10-2018 15:16:48.074 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:16:48.094 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:16:48.094 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:16:48.578 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
+07-10-2018 15:16:48.587 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 2 endpoint(s) beneath base path '/actuator'
+07-10-2018 15:16:48.590 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:16:48.591 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:16:48.592 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:16:48.652 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter.afterSingletonsInstantiated - Registering beans for JMX exposure on startup
+07-10-2018 15:16:48.816 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8080 (http) with context path ''
+07-10-2018 15:16:48.823 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarted - Started HotelManagementApplication in 5.037 seconds (JVM running for 259.097)
+07-10-2018 15:16:48.830 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener.onApplicationEvent - Condition evaluation unchanged
+07-10-2018 15:16:48.830 [restartedMain] DEBUG c.d.h.HotelManagementApplication.main - application started
+07-10-2018 15:17:34.183 [Thread-20] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.doClose - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@255c508b: startup date [Sun Oct 07 15:16:43 EEST 2018]; root of context hierarchy
+07-10-2018 15:17:34.186 [Thread-20] INFO  o.s.j.e.a.AnnotationMBeanExporter.destroy - Unregistering JMX-exposed beans on shutdown
+07-10-2018 15:17:34.188 [Thread-20] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:17:41.825 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarting - Starting HotelManagementApplication on DESKTOP-04PJQ2P with PID 12016 (started by Roman in C:\MyWork\My Projects\hotel_management)
+07-10-2018 15:17:41.828 [restartedMain] DEBUG c.d.h.HotelManagementApplication.logStarting - Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+07-10-2018 15:17:41.833 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStartupProfileInfo - No active profile set, falling back to default profiles: default
+07-10-2018 15:17:42.001 [restartedMain] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.prepareRefresh - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@496639f4: startup date [Sun Oct 07 15:17:42 EEST 2018]; root of context hierarchy
+07-10-2018 15:17:48.050 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$48d3a304] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-10-2018 15:17:49.476 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8080 (http)
+07-10-2018 15:17:49.547 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-10-2018 15:17:49.549 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet Engine: Apache Tomcat/8.5.32
+07-10-2018 15:17:49.574 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener.log - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;%JAVA_HOME%;%CATALINA_HOME%;%JRE_HOME%;;C:\WINDOWS\System32\OpenSSH\;C:\Users\me\AppData\Local\Microsoft\WindowsApps;.]
+07-10-2018 15:17:49.786 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-10-2018 15:17:49.786 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 7785 ms
+07-10-2018 15:17:51.105 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'characterEncodingFilter' to: [/*]
+07-10-2018 15:17:51.106 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'webMvcMetricsFilter' to: [/*]
+07-10-2018 15:17:51.107 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+07-10-2018 15:17:51.107 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+07-10-2018 15:17:51.108 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'requestContextFilter' to: [/*]
+07-10-2018 15:17:51.110 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpTraceFilter' to: [/*]
+07-10-2018 15:17:51.111 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean.addRegistration - Servlet dispatcherServlet mapped to [/]
+07-10-2018 15:17:51.958 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory - Building JPA container EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:17:51.999 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+07-10-2018 15:17:52.212 [restartedMain] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.2.17.Final}
+07-10-2018 15:17:52.215 [restartedMain] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000206: hibernate.properties not found
+07-10-2018 15:17:52.306 [restartedMain] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+07-10-2018 15:17:52.644 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+07-10-2018 15:17:52.848 [restartedMain] INFO  o.h.e.j.e.i.LobCreatorBuilderImpl.useContextualLobCreation - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.useContextualLobCreation(LobCreatorBuilderImpl.java:113)
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.makeLobCreatorBuilder(LobCreatorBuilderImpl.java:54)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentImpl.<init>(JdbcEnvironmentImpl.java:271)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:114)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:762)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:398)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246)
+	at com.demo.hotel_management.HotelManagementApplication.main(HotelManagementApplication.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+	at org.postgresql.Driver.notImplemented(Driver.java:688)
+	at org.postgresql.jdbc.PgConnection.createClob(PgConnection.java:1269)
+	... 49 common frames omitted
+07-10-2018 15:17:52.855 [restartedMain] INFO  org.hibernate.type.BasicTypeRegistry.register - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@740e2e33
+07-10-2018 15:17:53.969 [restartedMain] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl.handleException - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlString(SchemaDropperImpl.java:375)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlStrings(SchemaDropperImpl.java:359)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:331)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:230)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:154)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:126)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:112)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:144)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:762)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:398)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246)
+	at com.demo.hotel_management.HotelManagementApplication.main(HotelManagementApplication.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "room" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:307)
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:293)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:270)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:266)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.jdbc.pool.StatementFacade$StatementProxy.invoke(StatementFacade.java:114)
+	at com.sun.proxy.$Proxy112.execute(Unknown Source)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 40 common frames omitted
+07-10-2018 15:17:53.975 [restartedMain] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl.handleException - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlString(SchemaDropperImpl.java:375)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlStrings(SchemaDropperImpl.java:359)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:331)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:230)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:154)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:126)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:112)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:144)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:762)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:398)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246)
+	at com.demo.hotel_management.HotelManagementApplication.main(HotelManagementApplication.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "room_vacation" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:307)
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:293)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:270)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:266)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.jdbc.pool.StatementFacade$StatementProxy.invoke(StatementFacade.java:114)
+	at com.sun.proxy.$Proxy112.execute(Unknown Source)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 40 common frames omitted
+07-10-2018 15:17:53.983 [restartedMain] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl.handleException - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlString(SchemaDropperImpl.java:375)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlStrings(SchemaDropperImpl.java:359)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:331)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:230)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:154)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:126)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:112)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:144)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:762)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:398)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246)
+	at com.demo.hotel_management.HotelManagementApplication.main(HotelManagementApplication.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "room_vacation" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:307)
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:293)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:270)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:266)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.jdbc.pool.StatementFacade$StatementProxy.invoke(StatementFacade.java:114)
+	at com.sun.proxy.$Proxy112.execute(Unknown Source)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 40 common frames omitted
+07-10-2018 15:17:53.991 [restartedMain] WARN  o.h.t.s.i.ExceptionHandlerLoggedImpl.handleException - GenerationTarget encountered exception accepting command : Error executing DDL via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlString(SchemaDropperImpl.java:375)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlStrings(SchemaDropperImpl.java:359)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:331)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:230)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:154)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:126)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:112)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:144)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:72)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:312)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:762)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:398)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246)
+	at com.demo.hotel_management.HotelManagementApplication.main(HotelManagementApplication.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.postgresql.util.PSQLException: ERROR: relation "vacation" does not exist
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:307)
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:293)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:270)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:266)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.tomcat.jdbc.pool.StatementFacade$StatementProxy.invoke(StatementFacade.java:114)
+	at com.sun.proxy.$Proxy112.execute(Unknown Source)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 40 common frames omitted
+07-10-2018 15:17:53.999 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+07-10-2018 15:17:54.000 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - table "building" does not exist, skipping
+07-10-2018 15:17:54.002 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+07-10-2018 15:17:54.002 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - table "client" does not exist, skipping
+07-10-2018 15:17:54.002 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+07-10-2018 15:17:54.003 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - table "room" does not exist, skipping
+07-10-2018 15:17:54.003 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+07-10-2018 15:17:54.004 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - table "room_vacation" does not exist, skipping
+07-10-2018 15:17:54.004 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - SQL Warning Code: 0, SQLState: 00000
+07-10-2018 15:17:54.005 [restartedMain] WARN  o.h.e.jdbc.spi.SqlExceptionHelper.logWarning - table "vacation" does not exist, skipping
+07-10-2018 15:17:54.326 [restartedMain] INFO  o.h.t.s.internal.SchemaCreatorImpl.applyImportSources - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@3db6359c'
+07-10-2018 15:17:54.329 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:17:54.969 [restartedMain] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
+07-10-2018 15:17:55.345 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:17:56.009 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@496639f4: startup date [Sun Oct 07 15:17:42 EEST 2018]; root of context hierarchy
+07-10-2018 15:17:56.150 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-10-2018 15:17:56.242 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEdit(com.demo.hotel_management.entity.Client,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:17:56.244 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/client/{clientId}/remove],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.removeClient(java.lang.Long)
+07-10-2018 15:17:56.246 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/add || /client/{clientId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:17:56.247 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.listClients(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:17:56.251 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/bookingTable],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.showTable()
+07-10-2018 15:17:56.252 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/tableData],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.getTableData()
+07-10-2018 15:17:56.257 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/add || /vacation/{vacationId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:17:56.259 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEdit(com.demo.hotel_management.dto.VacationDto,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:17:56.260 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.listVacations(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:17:56.267 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+07-10-2018 15:17:56.269 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:17:56.352 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:17:56.353 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:17:57.840 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
+07-10-2018 15:17:57.870 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 2 endpoint(s) beneath base path '/actuator'
+07-10-2018 15:17:57.889 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:17:57.890 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:17:57.892 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:17:57.984 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter.afterSingletonsInstantiated - Registering beans for JMX exposure on startup
+07-10-2018 15:17:58.061 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8080 (http) with context path ''
+07-10-2018 15:17:58.066 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarted - Started HotelManagementApplication in 17.211 seconds (JVM running for 18.693)
+07-10-2018 15:17:58.075 [restartedMain] DEBUG c.d.h.HotelManagementApplication.main - application started
+07-10-2018 15:19:47.185 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarting - Starting HotelManagementApplication on DESKTOP-04PJQ2P with PID 6976 (started by Roman in C:\MyWork\My Projects\hotel_management)
+07-10-2018 15:19:47.188 [restartedMain] DEBUG c.d.h.HotelManagementApplication.logStarting - Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+07-10-2018 15:19:47.192 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStartupProfileInfo - No active profile set, falling back to default profiles: default
+07-10-2018 15:19:47.306 [restartedMain] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.prepareRefresh - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1b4cf865: startup date [Sun Oct 07 15:19:47 EEST 2018]; root of context hierarchy
+07-10-2018 15:19:52.144 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d017763] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-10-2018 15:19:53.897 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8080 (http)
+07-10-2018 15:19:53.950 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-10-2018 15:19:53.952 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet Engine: Apache Tomcat/8.5.32
+07-10-2018 15:19:53.970 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener.log - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;%JAVA_HOME%;%CATALINA_HOME%;%JRE_HOME%;;C:\WINDOWS\System32\OpenSSH\;C:\Users\me\AppData\Local\Microsoft\WindowsApps;.]
+07-10-2018 15:19:54.212 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-10-2018 15:19:54.213 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 6907 ms
+07-10-2018 15:19:56.131 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'characterEncodingFilter' to: [/*]
+07-10-2018 15:19:56.133 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'webMvcMetricsFilter' to: [/*]
+07-10-2018 15:19:56.134 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+07-10-2018 15:19:56.134 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+07-10-2018 15:19:56.134 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'requestContextFilter' to: [/*]
+07-10-2018 15:19:56.152 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpTraceFilter' to: [/*]
+07-10-2018 15:19:56.155 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean.addRegistration - Servlet dispatcherServlet mapped to [/]
+07-10-2018 15:19:57.207 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory - Building JPA container EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:19:57.238 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+07-10-2018 15:19:57.471 [restartedMain] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.2.17.Final}
+07-10-2018 15:19:57.474 [restartedMain] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000206: hibernate.properties not found
+07-10-2018 15:19:57.658 [restartedMain] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+07-10-2018 15:19:57.989 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+07-10-2018 15:19:58.418 [restartedMain] INFO  o.h.e.j.e.i.LobCreatorBuilderImpl.useContextualLobCreation - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+java.lang.reflect.InvocationTargetException: null
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.useContextualLobCreation(LobCreatorBuilderImpl.java:113)
+	at org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl.makeLobCreatorBuilder(LobCreatorBuilderImpl.java:54)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentImpl.<init>(JdbcEnvironmentImpl.java:271)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:114)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:88)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:259)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:233)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.engine.jdbc.internal.JdbcServicesImpl.configure(JdbcServicesImpl.java:51)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:94)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:242)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:210)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.handleTypes(MetadataBuildingProcess.java:352)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:111)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1758)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1695)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:573)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:495)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:140)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:762)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:398)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:330)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1258)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1246)
+	at com.demo.hotel_management.HotelManagementApplication.main(HotelManagementApplication.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.sql.SQLFeatureNotSupportedException: Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
+	at org.postgresql.Driver.notImplemented(Driver.java:688)
+	at org.postgresql.jdbc.PgConnection.createClob(PgConnection.java:1269)
+	... 49 common frames omitted
+07-10-2018 15:19:58.424 [restartedMain] INFO  org.hibernate.type.BasicTypeRegistry.register - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@6f98b87d
+07-10-2018 15:20:00.785 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:20:02.234 [restartedMain] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
+07-10-2018 15:20:03.628 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:20:05.040 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1b4cf865: startup date [Sun Oct 07 15:19:47 EEST 2018]; root of context hierarchy
+07-10-2018 15:20:05.180 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-10-2018 15:20:05.288 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEdit(com.demo.hotel_management.entity.Client,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:20:05.294 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/add || /client/{clientId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:20:05.299 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/client/{clientId}/remove],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.removeClient(java.lang.Long)
+07-10-2018 15:20:05.301 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.listClients(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:20:05.776 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/bookingTable],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.showTable()
+07-10-2018 15:20:05.837 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/tableData],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.getTableData()
+07-10-2018 15:20:05.838 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/add || /vacation/{vacationId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:20:05.839 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.listVacations(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:20:05.840 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEdit(com.demo.hotel_management.dto.VacationDto,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:20:05.864 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+07-10-2018 15:20:05.866 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:20:06.020 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:20:06.021 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:20:07.193 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
+07-10-2018 15:20:07.220 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 2 endpoint(s) beneath base path '/actuator'
+07-10-2018 15:20:07.240 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:20:07.242 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:20:07.245 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:20:07.345 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter.afterSingletonsInstantiated - Registering beans for JMX exposure on startup
+07-10-2018 15:20:07.480 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8080 (http) with context path ''
+07-10-2018 15:20:07.485 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarted - Started HotelManagementApplication in 21.02 seconds (JVM running for 26.523)
+07-10-2018 15:20:07.503 [restartedMain] DEBUG c.d.h.HotelManagementApplication.main - application started
+07-10-2018 15:21:22.497 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarting - Starting HotelManagementApplication on DESKTOP-04PJQ2P with PID 3076 (started by Roman in C:\MyWork\My Projects\hotel_management)
+07-10-2018 15:21:22.503 [restartedMain] DEBUG c.d.h.HotelManagementApplication.logStarting - Running with Spring Boot v2.0.4.RELEASE, Spring v5.0.8.RELEASE
+07-10-2018 15:21:22.509 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStartupProfileInfo - No active profile set, falling back to default profiles: default
+07-10-2018 15:21:22.828 [restartedMain] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.prepareRefresh - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2357a46d: startup date [Sun Oct 07 15:21:22 EEST 2018]; root of context hierarchy
+07-10-2018 15:21:28.288 [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$a2d9fcd8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+07-10-2018 15:21:31.321 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 8080 (http)
+07-10-2018 15:21:31.459 [restartedMain] INFO  o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-10-2018 15:21:31.461 [restartedMain] INFO  o.a.catalina.core.StandardEngine.log - Starting Servlet Engine: Apache Tomcat/8.5.32
+07-10-2018 15:21:31.490 [localhost-startStop-1] INFO  o.a.c.core.AprLifecycleListener.log - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_161\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;%JAVA_HOME%;%CATALINA_HOME%;%JRE_HOME%;;C:\WINDOWS\System32\OpenSSH\;C:\Users\me\AppData\Local\Microsoft\WindowsApps;.]
+07-10-2018 15:21:31.811 [localhost-startStop-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-10-2018 15:21:31.814 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 8986 ms
+07-10-2018 15:21:33.892 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'characterEncodingFilter' to: [/*]
+07-10-2018 15:21:33.894 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'webMvcMetricsFilter' to: [/*]
+07-10-2018 15:21:33.894 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+07-10-2018 15:21:33.896 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+07-10-2018 15:21:33.897 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'requestContextFilter' to: [/*]
+07-10-2018 15:21:33.899 [localhost-startStop-1] INFO  o.s.b.w.s.FilterRegistrationBean.configure - Mapping filter: 'httpTraceFilter' to: [/*]
+07-10-2018 15:21:33.899 [localhost-startStop-1] INFO  o.s.b.w.s.ServletRegistrationBean.addRegistration - Servlet dispatcherServlet mapped to [/]
+07-10-2018 15:21:34.836 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory - Building JPA container EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:21:34.898 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+07-10-2018 15:21:35.153 [restartedMain] INFO  org.hibernate.Version.logVersion - HHH000412: Hibernate Core {5.2.17.Final}
+07-10-2018 15:21:35.157 [restartedMain] INFO  org.hibernate.cfg.Environment.<clinit> - HHH000206: hibernate.properties not found
+07-10-2018 15:21:35.274 [restartedMain] INFO  o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+07-10-2018 15:21:35.497 [restartedMain] INFO  org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+07-10-2018 15:21:35.714 [restartedMain] INFO  o.h.e.j.e.i.LobCreatorBuilderImpl.useContextualLobCreation - HHH000421: Disabling contextual LOB creation as hibernate.jdbc.lob.non_contextual_creation is true
+07-10-2018 15:21:35.718 [restartedMain] INFO  org.hibernate.type.BasicTypeRegistry.register - HHH000270: Type registration [java.util.UUID] overrides previous : org.hibernate.type.UUIDBinaryType@6d09088c
+07-10-2018 15:21:36.794 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-10-2018 15:21:37.396 [restartedMain] INFO  o.h.h.i.QueryTranslatorFactoryInitiator.initiateService - HHH000397: Using ASTQueryTranslatorFactory
+07-10-2018 15:21:37.772 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:21:38.299 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter.initControllerAdviceCache - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@2357a46d: startup date [Sun Oct 07 15:21:22 EEST 2018]; root of context hierarchy
+07-10-2018 15:21:38.393 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-10-2018 15:21:38.584 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/client/{clientId}/remove],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.removeClient(java.lang.Long)
+07-10-2018 15:21:38.594 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/add || /client/{clientId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:21:38.595 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.listClients(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:21:38.600 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/clients/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.ClientController.clientEdit(com.demo.hotel_management.entity.Client,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:21:38.619 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/tableData],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.getTableData()
+07-10-2018 15:21:38.622 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/bookingTable],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.TestRestController.showTable()
+07-10-2018 15:21:38.624 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/add || /vacation/{vacationId}/edit],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEditForm(org.springframework.ui.Model,java.lang.Long)
+07-10-2018 15:21:38.625 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations],methods=[GET]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.listVacations(org.springframework.ui.Model,java.util.Optional<java.lang.Integer>,java.util.Optional<java.lang.Integer>)
+07-10-2018 15:21:38.625 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/vacations/update],methods=[POST]}" onto public java.lang.String com.demo.hotel_management.controller.VacationController.vacationEdit(com.demo.hotel_management.dto.VacationDto,org.springframework.validation.BindingResult,org.springframework.ui.Model)
+07-10-2018 15:21:38.633 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+07-10-2018 15:21:38.635 [restartedMain] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping.register - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:21:38.711 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:21:38.712 [restartedMain] INFO  o.s.w.s.h.SimpleUrlHandlerMapping.registerHandler - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+07-10-2018 15:21:40.746 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer.startServer - LiveReload server is running on port 35729
+07-10-2018 15:21:40.798 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 2 endpoint(s) beneath base path '/actuator'
+07-10-2018 15:21:40.858 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:21:40.861 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+07-10-2018 15:21:40.867 [restartedMain] INFO  o.s.b.a.e.w.s.WebMvcEndpointHandlerMapping.register - Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+07-10-2018 15:21:41.083 [restartedMain] INFO  o.s.j.e.a.AnnotationMBeanExporter.afterSingletonsInstantiated - Registering beans for JMX exposure on startup
+07-10-2018 15:21:41.293 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8080 (http) with context path ''
+07-10-2018 15:21:41.296 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarted - Started HotelManagementApplication in 20.552 seconds (JVM running for 22.817)
+07-10-2018 15:21:41.303 [restartedMain] DEBUG c.d.h.HotelManagementApplication.main - application started
+07-10-2018 15:22:03.310 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring FrameworkServlet 'dispatcherServlet'
+07-10-2018 15:22:03.311 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - FrameworkServlet 'dispatcherServlet': initialization started
+07-10-2018 15:22:03.521 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - FrameworkServlet 'dispatcherServlet': initialization completed in 205 ms
+07-10-2018 15:22:03.894 [http-nio-8080-exec-1] DEBUG c.d.h.controller.ClientController.listClients - model={}, page=1, size=6
+07-10-2018 15:22:03.896 [http-nio-8080-exec-1] DEBUG c.d.h.service.ClientService.findPaginated - pageable=Page request [number: 0, size 6, sort: UNSORTED]
+07-10-2018 15:22:04.156 [http-nio-8080-exec-1] DEBUG c.d.h.service.ClientService.findPaginated - pageable=[]
+07-10-2018 15:22:04.157 [http-nio-8080-exec-1] DEBUG c.d.h.service.ClientService.findPaginated - pageSize=6, currentPage=0, startItem=0, List<Client>=[] 
+07-10-2018 15:22:04.165 [http-nio-8080-exec-1] DEBUG c.d.h.controller.ClientController.listClients - model={clientPage=Page 1 of 0 containing UNKNOWN instances}, page=1, size=6
