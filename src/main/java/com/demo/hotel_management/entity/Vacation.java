@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 public class Vacation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Boolean inactive = false;
