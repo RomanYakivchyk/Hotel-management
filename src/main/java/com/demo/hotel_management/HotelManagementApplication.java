@@ -11,14 +11,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PageableArgumentResolver;
 import org.springframework.format.Formatter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
 
 import javax.sql.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -94,6 +99,7 @@ public class HotelManagementApplication {
         factoryBean.setValidationMessageSource(messageSource());
         return factoryBean;
     }
+
 
     @Bean
     public Formatter<LocalDate> localDateFormatter() {

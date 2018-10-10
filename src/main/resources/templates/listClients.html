@@ -3,46 +3,18 @@
 <head>
     <title>Clients</title>
     <meta charset="utf-8">
-    <!--font awesome-->
+    <!--fonts awesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <!-- end of bootstrap kit-->
-    <link rel="stylesheet" href="/footer.css">
+    <link  th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
+    <link th:href="@{/footer.css}" rel="stylesheet">
+    <!-- pagination -->
+    <link th:href="@{/pagination/css/style.css}" rel="stylesheet"/>
 
-    <script>
-			$(document).ready(function(){
-		      jQuery(".contact-info").text(function() {
-              jQuery(this).replaceWith(
-                '<div><a href="tel:' + $(this).text()+ '">' + jQuery(this).text() + "</a></div>"
-              );
-            });
-
-				$("#inputSearch").on("keyup", function() {
-					var value = $(this).val().toLowerCase();
-					$("#clientTable tr").filter(function() {
-						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-					});
-				});
-
-				$('#confirm-delete').on('show.bs.modal', function(e) {
-					$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-					var link = $(e.relatedTarget)
-					var clientName = link.data('client');
-					$(this).find('.modal-body h4').text(clientName);
-				});
-			});
-
-
-
-    </script>
 
     <style>
         /* enable absolute positioning */
@@ -66,10 +38,10 @@
 .right-addon input { padding-right: 30px; }
 
 
-
     </style>
 
 </head>
+
 <body class="bg-light">
 <!--<body style="background-color:#E9EBEE">-->
 <div th:insert="header.html"></div>
@@ -99,18 +71,13 @@
     <!--<div class="my-3 p-3 bg-light rounded shadow-sm">-->
     <div class="row mb-2 align-items-end">
         <div class="col">
-        <h3>Клієнти</h3>
+            <h3>Клієнти</h3>
         </div>
         <div class="col">
             <a class="btn btn-sm btn-link float-right"
                th:href="@{/clients/add}"><i class="far fa-user"></i>&nbsp;Новий клієнт</a>
         </div>
     </div>
-    <!--<span>Клієнти</span>-->
-    <!--<a class="btn btn-outline-primary float-right"-->
-       <!--th:href="@{/clients/add}"><i class="far fa-user"></i>&nbsp;Новий клієнт</a>-->
-    <!--<br>-->
-    <!--<br>-->
 
     <div class="inner-addon left-addon mb-2">
         <i class="glyphicon fas fa-search text-secondary"></i>
@@ -119,9 +86,9 @@
     </div>
     <table class="table table-hover bg-white rounded shadow-sm" id="clientListTable">
         <tbody id="clientTable">
-        <tr th:each="client : ${clientPage.content}">
+        <tr th:each="client : ${clients}">
             <td><span th:text="${client.name}"/>
-                <span th:text="${client.otherClientInfo}"/> <!-- class="font-weight-bold text-secondary" -->
+                <span th:text="${client.otherClientInfo}"/> <!-- class="fonts-weight-bold text-secondary" -->
                 <div th:with="phoneNumber=${client.phoneNumber}"
                      class="contact-info font-weight-light"
                      th:text="'('+${#strings.substring(phoneNumber,0,3)}+')'
@@ -129,7 +96,7 @@
 								+'-'+${#strings.substring(phoneNumber,5,7)}
 								+'-'+${#strings.substring(phoneNumber,7)}">
                 </div>
-                <div  th:class="font-weight-light" th:text="${client.email}"/>
+                <div th:class="font-weight-light" th:text="${client.email}"/>
             </td>
             <td><p class="float-right">
 								<span><a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">
@@ -142,18 +109,62 @@
         </tr>
         </tbody>
     </table>
-    <!--</div>-->
-    <div>
-        <ul th:class="pagination">
-            <li th:class="${pageNumber==clientPage.number + 1} ? 'page-item active' : 'page-item'"
-                th:if="${clientPage.totalPages > 0}"
-                th:each="pageNumber : ${pageNumbers}">
-                <a th:href="@{/clients(size=${clientPage.size}, page=${pageNumber})}"
-                   th:text=${pageNumber}
-                   th:class="page-link"></a>
-            </li>
-        </ul>
+    <div class="row">
+        <div class="form-group col-md-1">
+            <select class="form-control pagination" id="clientsPageSizeSelect">
+                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+            </select>
+        </div>
+        <div th:if="${clients.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+            <ul class="pagination">
+                <li th:class="${clients.number == 0} ? disabled">
+                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                </li>
+                <li th:class="${clients.number == 0} ? disabled">
+                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number})}">&larr;</a>
+                </li>
+                <li th:class="${clients.number == (page - 1)} ? 'page-item active pointer-disabled'"
+                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${page})}"
+                       th:text="${page}"></a>
+                </li>
+                <li th:class="${clients.number + 1 == clients.totalPages} ? disabled">
+                    <a class="page-link"
+                       th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number + 2})}">&rarr;</a>
+                </li>
+                <li th:class="${clients.number + 1 == clients.totalPages} ? disabled">
+                    <a class="page-link"
+                       th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.totalPages})}">&raquo;</a>
+                </li>
+            </ul>
+        </div>
     </div>
+
+
+
+    <!-- Pagination Bar -->
+
+
+
+    <!--</div>-->
+    <!--<div>-->
+        <!--<ul th:class="pagination">-->
+            <!--<li th:if="${clientPage.number+1 > 1}">-->
+                <!--<a th:href="@{/clients(page=${clientPage.number+1-1})}" th:class="page-link">Prev</a>-->
+            <!--</li>-->
+            <!--<li th:class="${pageNumber==clientPage.number + 1} ? 'page-item active' : 'page-item'"-->
+                <!--th:if="${clientPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">-->
+                <!--<a th:href="@{/clients(page=${pageNumber})}"-->
+                   <!--th:text=${pageNumber}-->
+                   <!--th:class="page-link">-->
+                <!--</a>-->
+            <!--</li>-->
+            <!--<li th:if="${clientPage.number+1 < clientPage.totalPages}">-->
+                <!--<a th:href="@{/clients(page=${clientPage.number+1+1})}" th:class="page-link">Next</a>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
 
     <!-- th:class="${pageNumber==clientPage.number + 1} ? 'page-link active':'page-link'"-->
 
@@ -167,5 +178,30 @@
 
 </div>
 <div th:insert="footer.html"></div>
+<script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/ajax/popper.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script>
+			$(document).ready(function(){
+		      jQuery(".contact-info").text(function() {
+              jQuery(this).replaceWith(
+                '<div><a href="tel:' + $(this).text()+ '">' + jQuery(this).text() + "</a></div>"
+              );
+            });
+				$("#inputSearch").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$("#clientTable tr").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+				$('#confirm-delete').on('show.bs.modal', function(e) {
+					$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+					var link = $(e.relatedTarget)
+					var clientName = link.data('client');
+					$(this).find('.modal-body h4').text(clientName);
+				});
+            });
+    </script>
+<script th:src="@{/pagination/js/app.js}"></script>
 </body>
 </html>

@@ -116,7 +116,6 @@ public class TestRestController {
 
     @GetMapping("/bookingTable")
     public String showTable() {
-        System.out.println("showTable()");
         return "calendarTest2.html";
     }
 

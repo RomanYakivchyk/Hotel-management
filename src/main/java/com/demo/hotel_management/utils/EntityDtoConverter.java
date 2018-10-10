@@ -57,8 +57,6 @@ public class EntityDtoConverter {
 
         vacationDto.setRoomNumbers(roomNumbers);
 
-        vacation.getRoomVacationList().forEach(e-> System.out.println(e.getId()));
-
         boolean hasSharedRooms = vacation.getRoomVacationList().stream()
                 .anyMatch(RoomVacation::getAllowRoommate);
 

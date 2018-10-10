@@ -37,41 +37,8 @@ public class ClientService {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public Page<Client> findPaginated(Pageable pageable) {
-        log.debug("pageable={}", pageable);
-
-
-        Collator collator = Collator.getInstance(Locale.forLanguageTag("uk-UA"));
-
-        List<Client> clientList = StreamSupport.stream(clientRepository.findAll().spliterator(), false)
-                .filter(e-> !e.getInactive())
-                .sorted((o1, o2) -> {
-                    int result = 0;
-                    result = collator.compare(o1.getName(), o2.getName());
-                    if (result == 0) {
-                        result = collator.compare(o1.getOtherClientInfo(), o2.getOtherClientInfo());
-                    }
-                    return result;
-                })
-                .collect(Collectors.toList());
-
-        log.debug("pageable={}", clientList);
-
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<Client> list;
-
-        if (clientList.size() < startItem) {
-            list = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, clientList.size());
-            list = clientList.subList(startItem, toIndex);
-        }
-
-        log.debug("pageSize={}, currentPage={}, startItem={}, List<Client>={} ", pageSize, currentPage, startItem, list);
-
-        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), clientList.size());
+    public Page<Client> findAllPageable(Pageable pageable) {
+        return clientRepository.findAll(pageable);
     }
 
     public Client saveClient(Client client) {

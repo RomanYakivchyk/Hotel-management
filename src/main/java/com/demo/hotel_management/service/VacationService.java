@@ -1,6 +1,7 @@
 package com.demo.hotel_management.service;
 
 import com.demo.hotel_management.dto.VacationDto;
+import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.entity.Vacation;
 import com.demo.hotel_management.repository.RoomVacationRepository;
@@ -8,6 +9,7 @@ import com.demo.hotel_management.repository.VacationRepository;
 import com.demo.hotel_management.utils.EntityDtoConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.text.Collator;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -62,43 +65,11 @@ public class VacationService {
 
     }
 
-    //todo add sorting
-    public Page<VacationDto> findPaginated(Pageable pageable) {
-        log.debug("pageable={}", pageable);
-
-        Collator collator = Collator.getInstance(Locale.forLanguageTag("uk-UA"));
-
-        List<VacationDto> vacationDtoList = StreamSupport.stream(vacationRepository.findAll().spliterator(), false)
-                .map(entityDtoConverter::convertVacationEntityToDto)
-                //todo
-//                .sorted((o1, o2) -> {
-//                    int result = 0;
-//                    result = collator.compare(o1.get(), o2.getName());
-//                    if (result == 0) {
-//                        result = collator.compare(o1.getOtherClientInfo(), o2.getOtherClientInfo());
-//                    }
-//                    return result;
-//                })
-                .collect(Collectors.toCollection(ArrayList::new));
-
-        log.debug("pageable={}", vacationDtoList);
-
-        int pageSize = pageable.getPageSize();
-        int currentPage = pageable.getPageNumber();
-        int startItem = currentPage * pageSize;
-        List<VacationDto> list;
-
-        if (vacationDtoList.size() < startItem) {
-            list = Collections.emptyList();
-        } else {
-            int toIndex = Math.min(startItem + pageSize, vacationDtoList.size());
-            list = vacationDtoList.subList(startItem, toIndex);
-        }
-
-        log.debug("pageSize={}, currentPage={}, startItem={}, List<VacationDto>={} ", pageSize, currentPage, startItem, list);
-
-        return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), vacationDtoList.size());
+    public Page<VacationDto> findAllPageable(Pageable pageable) {
+        Page<Vacation> vacationPage = vacationRepository.findAll(pageable);
+        return vacationPage.map(entity -> entityDtoConverter.convertVacationEntityToDto(entity));
     }
+
 
     public List<VacationDto> getAllActiveVacations() {
         return StreamSupport.stream(vacationRepository.findAll().spliterator(), false)

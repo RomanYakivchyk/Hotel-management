@@ -9,32 +9,11 @@
 
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- end of bootstrap kit-->
+    <link th:href="@{/pagination/css/style.css}" rel="stylesheet"/>
+
     <link rel="stylesheet" href="/footer.css">
-
-
-    <script>
-			$(document).ready(function(){
-				$("#inputSearch").on("keyup", function() {
-					var value = $(this).val().toLowerCase();
-					$("#clientTable tr").filter(function() {
-						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-					});
-				});
-
-				$('#confirm-delete').on('show.bs.modal', function(e) {
-					$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-					var link = $(e.relatedTarget)
-					var clientName = link.data('client');
-					$(this).find('.modal-body h5').text(clientName);
-				});
-			});
-
-    </script>
 
 </head>
 <body class="bg-light">
@@ -51,7 +30,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="vacation : ${vacationDtoPage}">
+            <tr th:each="vacation : ${vacations}">
                 <td><span
                         th:text="${vacation.clientName}+' '+${vacation.clientOtherInfo}"></span></td>
                 <td><span
@@ -63,8 +42,66 @@
             </tbody>
         </table>
     </div>
+
+    <div class="row">
+        <div class="form-group col-md-1">
+            <select class="form-control pagination" id="vacationsPageSizeSelect">
+                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
+                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+            </select>
+        </div>
+        <div th:if="${vacations.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+            <ul class="pagination">
+                <li th:class="${vacations.number == 0} ? disabled">
+                    <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                </li>
+                <li th:class="${vacations.number == 0} ? disabled">
+                    <a class="page-link"
+                       th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number})}">&larr;</a>
+                </li>
+                <li th:class="${vacations.number == (page - 1)} ? 'page-item active pointer-disabled'"
+                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                    <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=${page})}"
+                       th:text="${page}"></a>
+                </li>
+                <li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">
+                    <a class="page-link"
+                       th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number + 2})}">&rarr;</a>
+                </li>
+                <li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">
+                    <a class="page-link"
+                       th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.totalPages})}">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div th:insert="footer.html"></div>
+
+<script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/ajax/popper.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+<script>
+			$(document).ready(function(){
+				$("#inputSearch").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$("#clientTable tr").filter(function() {
+						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+					});
+				});
+
+				$('#confirm-delete').on('show.bs.modal', function(e) {
+					$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+					var link = $(e.relatedTarget)
+					var clientName = link.data('client');
+					$(this).find('.modal-body h5').text(clientName);
+				});
+			});
+
+
+</script>
+<script th:src="@{/pagination/js/app.js}"></script>
 </body>
 </html>
