@@ -62,6 +62,8 @@ public class HotelManagementApplication {
 //        String dbUrl = databaseUrl.
         org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
+
+
         dataSource.setUrl("jdbc:postgresql://ec2-54-243-147-162.compute-1.amazonaws.com:5432/d4kpiadsgu8ckn");
         dataSource.setUsername("fhcorgnllxvhkc");
         dataSource.setPassword("576936a50df4df8e74335d16c99045df829bfb75a2888933ed3d0807b429dc95");
@@ -69,6 +71,8 @@ public class HotelManagementApplication {
 //        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
 //        dataSource.setUsername("postgres");
 //        dataSource.setPassword("");
+
+
         dataSource.setTestOnBorrow(true);
         dataSource.setTestWhileIdle(true);
         dataSource.setTestOnReturn(true);

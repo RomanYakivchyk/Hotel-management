@@ -35,6 +35,6 @@ public class RoomVacation {
     @JoinColumn(name = "vac_id")
     private Vacation vacation;
 
-    private Boolean allowRoommate;
+    private Boolean allowRoommate = false;
 
 }

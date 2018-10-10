@@ -40,7 +40,7 @@ public class VacationService {
         return entityDtoConverter.convertVacationEntityToDto(foundVacation);
     }
 
-//todo
+    //todo
     public VacationDto saveVacation(VacationDto vacationDto) {
 
         log.debug("vacationDto={}", vacationDto);
@@ -98,6 +98,13 @@ public class VacationService {
         log.debug("pageSize={}, currentPage={}, startItem={}, List<VacationDto>={} ", pageSize, currentPage, startItem, list);
 
         return new PageImpl<>(list, PageRequest.of(currentPage, pageSize), vacationDtoList.size());
+    }
+
+    public List<VacationDto> getAllActiveVacations() {
+        return StreamSupport.stream(vacationRepository.findAll().spliterator(), false)
+                .filter(e -> !e.getInactive())
+                .map(e -> entityDtoConverter.convertVacationEntityToDto(e))
+                .collect(Collectors.toList());
     }
 
 

@@ -56,6 +56,21 @@ public class EntityDtoConverter {
                 .collect(Collectors.toSet());
 
         vacationDto.setRoomNumbers(roomNumbers);
+
+        vacation.getRoomVacationList().forEach(e-> System.out.println(e.getId()));
+
+        boolean hasSharedRooms = vacation.getRoomVacationList().stream()
+                .anyMatch(RoomVacation::getAllowRoommate);
+
+        if (hasSharedRooms) {
+            Set<Integer> sharedRoomNumbers = vacation.getRoomVacationList().stream()
+                    .filter(RoomVacation::getAllowRoommate)
+                    .map(e -> e.getRoom().getRoomNumber())
+                    .collect(Collectors.toSet());
+
+            vacationDto.setSharedRoomNumbers(sharedRoomNumbers);
+        }
+
         return vacationDto;
     }
 
@@ -74,6 +89,11 @@ public class EntityDtoConverter {
             RoomVacation roomVacation = new RoomVacation();
             roomVacation.setRoom(e);
             roomVacation.setVacation(vacation);
+            if (vacationDto.getSharedRoomNumbers().contains(e.getRoomNumber())) {
+                roomVacation.setAllowRoommate(true);
+            } else {
+                roomVacation.setAllowRoommate(false);
+            }
             // roomVacation.setOccupiedBeds(); todo
             roomVacations.add(roomVacation);
         });

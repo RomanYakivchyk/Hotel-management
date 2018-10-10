@@ -1,6 +1,7 @@
 package com.demo.hotel_management.dto;
 
 import com.demo.hotel_management.utils.custom_validators.ValidateRoommateAllowance;
+import com.demo.hotel_management.utils.custom_validators.ValidateVacation;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @Data
 @ToString
+@ValidateVacation
 @ValidateRoommateAllowance
 public class VacationDto {
 
@@ -41,10 +43,10 @@ public class VacationDto {
     @NotNull(message = "{validation.vacation.residents.message}")
     private Integer residentsCount;
 
-    private boolean allowRoommate;
+    private Boolean hasSharedRooms;
 
     private Set<Integer> sharedRoomNumbers;
 
-    private Boolean inactive;
+    private Boolean inactive = false;
 
 }

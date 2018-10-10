@@ -19,9 +19,9 @@ public class Vacation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Boolean inactive = false;
+    private Boolean inactive;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
@@ -29,9 +29,9 @@ public class Vacation {
 
     @Embedded
     private CustomDate vacationDate;
-    private Boolean withChildren;
+//    private Boolean withChildren;
 
-    @OneToMany(mappedBy = "vacation",cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "vacation", cascade = {CascadeType.ALL})
     private List<RoomVacation> roomVacationList = new ArrayList<>();
 
     @Embeddable

@@ -91,7 +91,8 @@ public class DemoData {
 //        building3 = buildingRepository.save(building3);
 //        Room room8 = new Room(8,
 ////                twoSingleBeds,
-//                new ArrayList<>(), building3);
+//                new ArrayList<>(),
+//                building3);
 //        room8 = roomRepository.save(room8);
 //        Room room9 = new Room(9,
 ////                twoSingleBeds,
@@ -99,7 +100,7 @@ public class DemoData {
 //        room9 = roomRepository.save(room9);
 //
 //        building3.setRoomList(Arrays.asList(room8, room9));
-//
+
 //        Vacation vacation = new Vacation();
 //
 //        RoomVacation roomVacation1 = new RoomVacation();
@@ -128,7 +129,7 @@ public class DemoData {
 //        client.setOtherClientInfo("other info");
 //        client.setPhoneNumber("0937457255");
 //        vacation.setClient(client);
-//        vacation.setWithChildren(false);
+////        vacation.setWithChildren(false);
 //
 //        vacationRepository.save(vacation);
 //
@@ -163,7 +164,7 @@ public class DemoData {
 //        client2.setOtherClientInfo("other info2");
 //        client2.setPhoneNumber("0937457256");
 //        vacation2.setClient(client2);
-//        vacation2.setWithChildren(true);
+////        vacation2.setWithChildren(true);
 //
 //        vacationRepository.save(vacation2);
     }

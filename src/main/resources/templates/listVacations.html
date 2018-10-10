@@ -34,22 +34,15 @@
 				});
 			});
 
-
-
-
-
-
-
     </script>
 
 </head>
 <body class="bg-light">
 <div th:insert="header.html"></div>
 <div class="container">
-
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <table class="table table-bordered">
-            <thead class="thead-dark">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover bg-white rounded shadow-sm mt-4">
+            <thead class="bg-primary">
             <tr>
                 <th>Клієнт</th>
                 <th>К-сть</th>
@@ -57,7 +50,7 @@
                 <th>Відїзд</th>
             </tr>
             </thead>
-            <tbody class="bg-light">
+            <tbody>
             <tr th:each="vacation : ${vacationDtoPage}">
                 <td><span
                         th:text="${vacation.clientName}+' '+${vacation.clientOtherInfo}"></span></td>
@@ -71,6 +64,7 @@
         </table>
     </div>
 </div>
+
 <div th:insert="footer.html"></div>
 </body>
 </html>
