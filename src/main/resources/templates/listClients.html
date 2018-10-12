@@ -4,17 +4,18 @@
     <title>Clients</title>
     <meta charset="utf-8">
     <!--fonts awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
+          <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
 
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link  th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
     <link th:href="@{/footer.css}" rel="stylesheet">
     <!-- pagination -->
     <link th:href="@{/pagination/css/style.css}" rel="stylesheet"/>
 
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
 
     <style>
         /* enable absolute positioning */
@@ -38,12 +39,18 @@
 .right-addon input { padding-right: 30px; }
 
 
+
+
+
+
+
     </style>
 
 </head>
 
-<body class="bg-light">
 <!--<body style="background-color:#E9EBEE">-->
+
+<body class="bg-light">
 <div th:insert="header.html"></div>
 
 <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -51,16 +58,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>
-                    <small>Видалити дані клієнта?</small>
-                </h3>
+                <h5 class="modal-title">Видалити дані клієнта?</h5>
             </div>
             <div class="modal-body">
-                <h4></h4>
-                <br><br>
+                <p class="lead mb-4"></p>
                 <a class="btn btn-primary btn-block btn-ok">Видалити</a>
-                <button type="button" class="btn btn-light text-secondary btn-block" data-dismiss="modal">Назад
-                </button>
+                <div class="text-center"><a class="text-secondary" href="" data-dismiss="modal">Назад</a>
+                </div>
             </div>
         </div>
     </div>
@@ -87,8 +91,13 @@
     <table class="table table-hover bg-white rounded shadow-sm" id="clientListTable">
         <tbody id="clientTable">
         <tr th:each="client : ${clients}">
-            <td><span th:text="${client.name}"/>
-                <span th:text="${client.otherClientInfo}"/> <!-- class="fonts-weight-bold text-secondary" -->
+            <td>
+                <a th:text="${client.name + ' ' + client.otherClientInfo}"
+                   th:href="@{/client/{clientId}/edit(clientId=${client.id})}"
+                   th:class="text-dark"></a>
+                <!--<a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">-->
+                <!--<i class="fal fa-pencil text-secondary" aria-hidden="true"></i></a>-->
+                <!-- class="fonts-weight-bold text-secondary" -->
                 <div th:with="phoneNumber=${client.phoneNumber}"
                      class="contact-info font-weight-light"
                      th:text="'('+${#strings.substring(phoneNumber,0,3)}+')'
@@ -96,33 +105,34 @@
 								+'-'+${#strings.substring(phoneNumber,5,7)}
 								+'-'+${#strings.substring(phoneNumber,7)}">
                 </div>
-                <div th:class="font-weight-light" th:text="${client.email}"/>
+                <div th:class="font-weight-light" th:text="${client.email}"></div>
             </td>
             <td><p class="float-right">
-								<span><a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">
-								<i class="fas fa-pencil-alt" aria-hidden="true"></i></a>&emsp;&emsp;</span>
+                <!--<span><a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">-->
+                <!--<i class="fas fa-pencil-alt" aria-hidden="true"></i></a>&emsp;&emsp;</span>-->
                 <span><a href="#" th:data-href="@{/client/{clientId}/remove(clientId=${client.id})}"
                          th:data-client="${client.name}+' '+${client.otherClientInfo}" data-toggle="modal"
                          data-target="#confirm-delete">
-									<i class="far fa-trash-alt text-secondary" aria-hidden="true"></i></a></span>
+									<i class="fal fa-times text-secondary"></i>
+                </a></span>
             </td>
         </tr>
         </tbody>
     </table>
     <div class="row">
-        <div class="form-group col-md-1">
+        <div class="form-group col-md-1 col-3">
             <select class="form-control pagination" id="clientsPageSizeSelect">
                 <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
                         th:selected="${pageSize} == ${selectedPageSize}"></option>
             </select>
         </div>
-        <div th:if="${clients.totalPages != 1}" class="form-group col-md-11 pagination-centered">
+        <div th:if="${clients.totalPages != 1}" class="form-group col-md-11 col-9 pagination-centered">
             <ul class="pagination">
                 <li th:class="${clients.number == 0} ? disabled">
-                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}"><i class="fal fa-angle-double-left"></i></a>
                 </li>
                 <li th:class="${clients.number == 0} ? disabled">
-                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number})}">&larr;</a>
+                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number})}"><i class="fal fa-angle-left"></i></a>
                 </li>
                 <li th:class="${clients.number == (page - 1)} ? 'page-item active pointer-disabled'"
                     th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
@@ -131,39 +141,37 @@
                 </li>
                 <li th:class="${clients.number + 1 == clients.totalPages} ? disabled">
                     <a class="page-link"
-                       th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number + 2})}">&rarr;</a>
+                       th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number + 2})}"><i class="fal fa-angle-right"></i></a>
                 </li>
                 <li th:class="${clients.number + 1 == clients.totalPages} ? disabled">
                     <a class="page-link"
-                       th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.totalPages})}">&raquo;</a>
+                       th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.totalPages})}"><i class="fal fa-angle-double-right"></i></a>
                 </li>
             </ul>
         </div>
     </div>
 
 
-
     <!-- Pagination Bar -->
-
 
 
     <!--</div>-->
     <!--<div>-->
-        <!--<ul th:class="pagination">-->
-            <!--<li th:if="${clientPage.number+1 > 1}">-->
-                <!--<a th:href="@{/clients(page=${clientPage.number+1-1})}" th:class="page-link">Prev</a>-->
-            <!--</li>-->
-            <!--<li th:class="${pageNumber==clientPage.number + 1} ? 'page-item active' : 'page-item'"-->
-                <!--th:if="${clientPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">-->
-                <!--<a th:href="@{/clients(page=${pageNumber})}"-->
-                   <!--th:text=${pageNumber}-->
-                   <!--th:class="page-link">-->
-                <!--</a>-->
-            <!--</li>-->
-            <!--<li th:if="${clientPage.number+1 < clientPage.totalPages}">-->
-                <!--<a th:href="@{/clients(page=${clientPage.number+1+1})}" th:class="page-link">Next</a>-->
-            <!--</li>-->
-        <!--</ul>-->
+    <!--<ul th:class="pagination">-->
+    <!--<li th:if="${clientPage.number+1 > 1}">-->
+    <!--<a th:href="@{/clients(page=${clientPage.number+1-1})}" th:class="page-link">Prev</a>-->
+    <!--</li>-->
+    <!--<li th:class="${pageNumber==clientPage.number + 1} ? 'page-item active' : 'page-item'"-->
+    <!--th:if="${clientPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">-->
+    <!--<a th:href="@{/clients(page=${pageNumber})}"-->
+    <!--th:text=${pageNumber}-->
+    <!--th:class="page-link">-->
+    <!--</a>-->
+    <!--</li>-->
+    <!--<li th:if="${clientPage.number+1 < clientPage.totalPages}">-->
+    <!--<a th:href="@{/clients(page=${clientPage.number+1+1})}" th:class="page-link">Next</a>-->
+    <!--</li>-->
+    <!--</ul>-->
     <!--</div>-->
 
     <!-- th:class="${pageNumber==clientPage.number + 1} ? 'page-link active':'page-link'"-->
@@ -198,10 +206,10 @@
 					$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 					var link = $(e.relatedTarget)
 					var clientName = link.data('client');
-					$(this).find('.modal-body h4').text(clientName);
+					$(this).find('.modal-body p').text(clientName);
 				});
             });
-    </script>
+</script>
 <script th:src="@{/pagination/js/app.js}"></script>
 </body>
 </html>

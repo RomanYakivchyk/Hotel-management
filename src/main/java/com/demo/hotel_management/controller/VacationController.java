@@ -29,8 +29,8 @@ public class VacationController {
 
     private static final int BUTTONS_TO_SHOW = 5;
     private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 10;
-    private static final int[] PAGE_SIZES = {10, 20, 50};
+    private static final int INITIAL_PAGE_SIZE = 5;
+    private static final int[] PAGE_SIZES = {5, 10, 20};
 
     @Autowired
     private VacationService vacationService;
@@ -44,11 +44,11 @@ public class VacationController {
         List<Client> allClients = clientService.findAll();
         if (null != vacationId) {
             model.addAttribute("vacationModel", vacationService.findById(vacationId));
-            model.addAttribute("clients", allClients);
         } else {
             model.addAttribute("vacationModel", new VacationDto());
-            model.addAttribute("clients", allClients);
         }
+        model.addAttribute("clients", allClients);
+        model.addAttribute("clientModel", new Client());
 
         log.debug("model={}, vacationId={}, clientList={}", model, vacationId, allClients);
         return "vacationForm.html";

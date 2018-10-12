@@ -17,6 +17,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 @Slf4j
 public class ClientService {
@@ -38,7 +40,15 @@ public class ClientService {
     }
 
     public Page<Client> findAllPageable(Pageable pageable) {
-        return clientRepository.findAll(pageable);
+        List<Client> clients =
+                StreamSupport.stream(clientRepository.findAll().spliterator(), false)
+                        .filter(e -> !e.getInactive())
+                        .collect(toList());
+
+        int start = (int) pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > clients.size() ? clients.size() : (start + pageable.getPageSize());
+
+        return new PageImpl<>(clients.subList(start, end), pageable, clients.size());
     }
 
     public Client saveClient(Client client) {

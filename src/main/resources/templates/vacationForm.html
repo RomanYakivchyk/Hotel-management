@@ -6,12 +6,12 @@
     <meta charset="utf-8">
 
     <!--fonts awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
+    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
 
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link  th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/footer.css}" rel="stylesheet">
 
     <!--bootstrap-select-->
@@ -21,12 +21,14 @@
     <!--date picker-->
     <link th:href="@{/date-picker/css/gijgo.min.css}" rel="stylesheet"/>
 
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
 
 
 </head>
-
 <body class="bg-light">
 <div th:insert="header.html"></div>
+<div th:insert="clientFormModal.html"></div>
+
 <div class="container col-md-6" style="float: none; margin: 0 auto;">
     <form class="needs-validation" action="#" th:action="@{/vacations/update}" th:object="${vacationModel}"
           method="post">
@@ -35,7 +37,8 @@
         <div class="row">
             <div class="col-8 mb-3 form-group">
                 <label for="clientName">Клієнт</label>
-                <span class="float-right"><a th:href="@{/clients/add}">новий клієнт</a></span>
+                <a class="float-right" data-toggle="modal"
+                   href="" data-target="#addClassModal">новий клієнт</a>
                 <div>
                     <select class="selectpicker form-control" th:field="*{clientId}" data-live-search="true"
                             data-live-search-normalize="true" data-none-results-text="Нічого не знайдено"
@@ -166,8 +169,10 @@
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/bootstrap-select/bootstrap-select.min.js}"></script>
+<script th:src="@{/moment.js}"></script>
 <script th:src="@{/date-picker/js/gijgo.min.js}"></script>
 <script th:src="@{/date-picker/js/messages.ru-ru.js}" type="text/javascript"></script>
+<script th:src="@{/jquery.mask.js}" type="text/javascript"></script>
 <script type="text/javascript">
         var arrivalDatePicker, leaveDatePicker, arrivalDateConfig, leaveDateConfig;
         arrivalDateConfig = {
@@ -179,7 +184,10 @@
             header: true,
             footer: true,
             maxDate: function() {
-                return $('#leaveDate').val();
+                var arr1 = $('#leaveDate').val().split('/');
+                var leaDate =  new Date(parseInt(arr1[2]),parseInt(arr1[1])-1,parseInt(arr1[0]));
+                var leaveDateMinus1 = moment(leaDate).subtract(1, 'days');
+                return leaveDateMinus1;
             }
         };
         leaveDateConfig = {
@@ -191,7 +199,10 @@
             header: true,
             footer: true,
             minDate: function() {
-                return $('#arrivalDate').val();
+                var arr2 = $('#arrivalDate').val().split('/');
+                var arrDate =  new Date(parseInt(arr2[2]),parseInt(arr2[1])-1,parseInt(arr2[0]));
+                var arrDatePlus1 = moment(arrDate).add(1, 'days');
+                return arrDatePlus1;
             }
         };
         $(document).ready(function() {
@@ -302,7 +313,10 @@
 
         }
 
-    </script>
+
+
+
+</script>
 
 </body>
 

@@ -6,6 +6,7 @@ import com.demo.hotel_management.utils.Pager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,32 +54,6 @@ public class ClientController {
         modelAndView.addObject("pager", pager);
         return modelAndView;
     }
-//    @RequestMapping(value = "/clients", method = RequestMethod.GET)
-//    public String listClients(
-//            Model model,
-//            @RequestParam("page") Optional<Integer> page) {
-//
-//        log.debug("model={}, page={}, size={}", model.toString(), page.orElse(currentPage), pageSize);
-//
-//        page.ifPresent(p -> currentPage = p);
-//
-//        Page<Client> clientPage = clientService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-//
-//        model.addAttribute("clientPage", clientPage);
-//
-//        int totalPages = clientPage.getTotalPages();
-//        if (totalPages > 0) {
-//            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-//                    .boxed()
-//                    .collect(Collectors.toList());
-//            model.addAttribute("pageNumbers", pageNumbers);
-//        }
-//
-//
-//        log.debug("model={}, page={}, size={}", model.toString(), page.orElse(currentPage), pageSize);
-//
-//        return "listClients.html";
-//    }
 
     @RequestMapping(value = {"/clients/add", "/client/{clientId}/edit"}, method = RequestMethod.GET)
     public String clientEditForm(Model model, @PathVariable(required = false) Long clientId) {

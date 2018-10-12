@@ -4,15 +4,16 @@
     <title>Client form</title>
     <meta charset="utf-8">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
+          <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
 
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link  th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- end of bootstrap kit-->
     <link rel="stylesheet" href="/footer.css">
 
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
 
 </head>
 <body class="bg-light">
@@ -25,7 +26,7 @@
             <div class="col-md-6 mb-3 form-group">
                 <label for="clientName">Ім'я</label>
                 <input type="text" th:field="*{name}" value="*{name}" class="form-control" id="clientName">
-                <div th:if="${#fields.hasErrors('name')}"><i class="fas fa-exclamation-triangle text-danger"></i>
+                <div th:if="${#fields.hasErrors('name')}"><i class="fas fa-exclamation text-danger"></i>
                     <span class="text-danger" th:errors="*{name}"></span>
                 </div>
             </div>
@@ -35,7 +36,7 @@
                 <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}" class="form-control"
                        id="otherClientInfo">
                 <div th:if="${#fields.hasErrors('otherClientInfo')}"><i
-                        class="fas fa-exclamation-triangle text-danger"></i>
+                        class="fas fa-exclamation text-danger"></i>
                     <span class="text-danger" th:if="${#fields.hasErrors('otherClientInfo')}"
                           th:errors="*{otherClientInfo}"></span>
                 </div>
@@ -45,7 +46,7 @@
             <label for="phoneNumber">Номер телефону</label>
             <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}" class="form-control"
                    placeholder="(0_ _) _ _-_ _-_ _ _" id="phoneNumber">
-            <div th:if="${#fields.hasErrors('phoneNumber')}"><i class="fas fa-exclamation-triangle text-danger"></i>
+            <div th:if="${#fields.hasErrors('phoneNumber')}"><i class="fas fa-exclamation text-danger"></i>
                 <span class="text-danger" th:errors="*{phoneNumber}"></span>
             </div>
         </div>
@@ -53,7 +54,7 @@
             <label for="email">Email<span class="text-secondary">&nbsp;(Не обов'язково)</span></label>
             <input type="text" th:field="*{email}" value="*{email}" class="form-control" id="email"
                    placeholder="example@gmail.com">
-            <div th:if="${#fields.hasErrors('email')}"><i class="fas fa-exclamation-triangle text-danger"></i>
+            <div th:if="${#fields.hasErrors('email')}"><i class="fas fa-exclamation text-danger"></i>
                 <span class="text-danger" th:errors="*{email}"></span>
             </div>
             <br>

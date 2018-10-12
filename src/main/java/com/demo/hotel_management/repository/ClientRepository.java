@@ -1,6 +1,7 @@
 package com.demo.hotel_management.repository;
 
 import com.demo.hotel_management.entity.Client;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,4 +18,6 @@ public interface ClientRepository extends PagingAndSortingRepository<Client,Long
     @Transactional
     @Query(value = "update Client c set c.inactive = true where c.id = :client_id")
     void inactivate( @Param("client_id") Long clientId);
+
+
 }

@@ -1,0 +1,64 @@
+<div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="addClassModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addClassModalLabel"
+                    th:text="((*{id} == null)?'Додати':'Редагувати') + ' дані клієнта'"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <!--<h5 class="modal-title">Title</h5>-->
+            </div>
+            <div class="modal-body">
+                <form action="#" th:action="@{/clients/update}" th:object="${clientModel}" method="post">
+                    <input th:type="hidden" th:value="*{id}" th:field="*{id}">
+                    <div class="mb-3 form-group">
+                        <label for="clientName">Ім'я</label>
+                        <input type="text" th:field="*{name}" value="*{name}" class="form-control" id="clientName">
+                        <div class="error-alert">
+                            <i class="fas fa-exclamation text-danger"></i>
+                            <span class="text-danger">Заповніть ім'я</span>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label for="otherClientInfo">Додаткові дані
+                            <span class="text-secondary">(Прізвище, Звідки..)</span></label>
+                        <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}"
+                               class="form-control"
+                               id="otherClientInfo">
+                        <div class="error-alert">
+                            <i class="fas fa-exclamation text-danger"></i>
+                            <span class="text-danger">Заповніть додаткові дані</span>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label for="phoneNumber">Номер телефону</label>
+                        <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}" class="form-control phone"
+                               id="phoneNumber">
+                               <!--data-mask="(000) 00-00-000">-->
+                        <div class="error-alert">
+                            <i class="fas fa-exclamation text-danger"></i>
+                            <span class="text-danger">Заповніть номер телефону</span>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-group">
+                        <label for="email">Email<span class="text-secondary">&nbsp;(Не обов'язково)</span></label>
+                        <input type="text" th:field="*{email}" value="*{email}" class="form-control" id="email"
+                               placeholder="example@gmail.com">
+                        <div class="error-alert">
+                            <i class="fas fa-exclamation text-danger"></i>
+                            <span class="text-danger">Неправильний формат</span>
+                        </div>
+                        <br>
+                        <hr class="mt-2">
+                        <button class="btn btn-primary btn-block" type="submit">Зберегти</button>
+                        <div class="text-center mt-2" data-dismiss="modal">
+                            <a th:class="text-secondary">Відмінити</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

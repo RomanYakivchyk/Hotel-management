@@ -23,6 +23,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import static java.util.stream.Collectors.toList;
+
 @Slf4j
 @Service
 public class VacationService {
@@ -66,8 +68,16 @@ public class VacationService {
     }
 
     public Page<VacationDto> findAllPageable(Pageable pageable) {
-        Page<Vacation> vacationPage = vacationRepository.findAll(pageable);
-        return vacationPage.map(entity -> entityDtoConverter.convertVacationEntityToDto(entity));
+        List<VacationDto> vacationDtoList =
+                StreamSupport.stream(vacationRepository.findAll().spliterator(), false)
+                        .filter(e -> !e.getInactive())
+                        .map(entityDtoConverter::convertVacationEntityToDto)
+                        .collect(toList());
+        
+        int start = (int) pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > vacationDtoList.size() ? vacationDtoList.size() : (start + pageable.getPageSize());
+
+        return new PageImpl<>(vacationDtoList.subList(start, end), pageable, vacationDtoList.size());
     }
 
 
@@ -75,7 +85,7 @@ public class VacationService {
         return StreamSupport.stream(vacationRepository.findAll().spliterator(), false)
                 .filter(e -> !e.getInactive())
                 .map(e -> entityDtoConverter.convertVacationEntityToDto(e))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
 
@@ -85,6 +95,6 @@ public class VacationService {
                         LocalDate.of(date.getYear(), date.getMonth(), date.lengthOfMonth()));
         return vacationList.stream()
                 .map(entityDtoConverter::convertVacationEntityToDto)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 }
