@@ -44,8 +44,8 @@
         </div>
         <div class="mb-3 form-group">
             <label for="phoneNumber">Номер телефону</label>
-            <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}" class="form-control"
-                   placeholder="(0_ _) _ _-_ _-_ _ _" id="phoneNumber">
+            <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}"
+                   class="form-control" id="phoneNumber">
             <div th:if="${#fields.hasErrors('phoneNumber')}"><i class="fas fa-exclamation text-danger"></i>
                 <span class="text-danger" th:errors="*{phoneNumber}"></span>
             </div>
