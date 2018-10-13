@@ -5,18 +5,13 @@
     <title>Vacation form</title>
     <meta charset="utf-8">
 
-    <!--fonts awesome-->
-    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
-    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
-
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/footer.css}" rel="stylesheet">
 
     <!--bootstrap-select-->
-    <link th:href="@{/bootstrap-select/bootstrap-select.css}"
-          rel="stylesheet"/>
+    <link th:href="@{/bootstrap-select/bootstrap-select.css}" rel="stylesheet"/>
 
     <!--date picker-->
     <link th:href="@{/date-picker/css/gijgo.min.css}" rel="stylesheet"/>
@@ -25,6 +20,7 @@
 
 
 </head>
+
 <body class="bg-light">
 <div th:insert="header.html"></div>
 <div th:insert="clientFormModal.html"></div>
@@ -34,22 +30,23 @@
           method="post">
         <h3 class="mb-3 mt-5" th:text="((*{vacationId} == null)?'Додати':'Редагувати') + ' бронювання'"></h3>
         <input th:type="hidden" th:value="*{vacationId}" th:field="*{vacationId}">
+
         <div class="row">
             <div class="col-8 mb-3 form-group">
                 <label for="clientName">Клієнт</label>
-                <a class="float-right" data-toggle="modal"
-                   href="" data-target="#addClassModal">новий клієнт</a>
+                <a class="float-right" data-toggle="modal" href="" data-target="#addClassModal">новий клієнт</a>
                 <div>
                     <select class="selectpicker form-control" th:field="*{clientId}" data-live-search="true"
                             data-live-search-normalize="true" data-none-results-text="Нічого не знайдено"
-                            title="Вибрати клієнта" data-style="bg-white border" id="clientName">
+                            title="Вибрати клієнта" data-style="bg-white border" data-size="5" id="clientName">
                         <option th:each="cl : ${clients}" th:value="${cl.id}"
-                                th:text="${cl.name}+' '+${cl.otherClientInfo}+' ('+${cl.phoneNumber}+')'"></option>
+                                th:text="${cl.name}+' '+${cl.otherClientInfo}+' '+${cl.phoneNumber}"></option>
                     </select>
                 </div>
                 <div th:if="${#fields.hasErrors('clientId')}"><i class="fas fa-exclamation-triangle text-danger"></i>
                     <span class="text-danger" th:errors="*{clientId}"></span></div>
             </div>
+
             <div class="col-4 mb-3 form-group">
                 <label for="residentsCount">К-cть</label>
                 <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
@@ -108,10 +105,9 @@
         <hr class="mb-3">
         <div class="mb-3 form-group">
             <label for="rooms">Кімнати</label>
-            <select class="selectpicker form-control" data-width="100%"
-                    th:field="*{roomNumbers}" th:value="*{roomNumbers}"
-                    data-style="bg-white border" id="rooms" data-size="7"
-                    multiple title="Вибрати кімнати">
+            <select class="selectpicker form-control" data-width="100%" th:field="*{roomNumbers}"
+                    th:value="*{roomNumbers}" data-style="bg-white border" id="rooms" data-size="7" multiple
+                    title="Вибрати кімнати">
 
                 <optgroup label="Будинок 1" data-icon="fas fa-home">
                     <option th:value="1">Кімната 1</option>
@@ -173,151 +169,8 @@
 <script th:src="@{/date-picker/js/gijgo.min.js}"></script>
 <script th:src="@{/date-picker/js/messages.ru-ru.js}" type="text/javascript"></script>
 <script th:src="@{/jquery.mask.js}" type="text/javascript"></script>
-<script type="text/javascript">
-        var arrivalDatePicker, leaveDatePicker, arrivalDateConfig, leaveDateConfig;
-        arrivalDateConfig = {
-            locale: 'ru-ru',
-            format: 'dd/mm/yyyy',
-            uiLibrary: 'bootstrap4',
-            keyboardNavigation: true,
-            modal: true,
-            header: true,
-            footer: true,
-            maxDate: function() {
-                var arr1 = $('#leaveDate').val().split('/');
-                var leaDate =  new Date(parseInt(arr1[2]),parseInt(arr1[1])-1,parseInt(arr1[0]));
-                var leaveDateMinus1 = moment(leaDate).subtract(1, 'days');
-                return leaveDateMinus1;
-            }
-        };
-        leaveDateConfig = {
-            locale: 'ru-ru',
-            format: 'dd/mm/yyyy',
-            uiLibrary: 'bootstrap4',
-            keyboardNavigation: true,
-            modal: true,
-            header: true,
-            footer: true,
-            minDate: function() {
-                var arr2 = $('#arrivalDate').val().split('/');
-                var arrDate =  new Date(parseInt(arr2[2]),parseInt(arr2[1])-1,parseInt(arr2[0]));
-                var arrDatePlus1 = moment(arrDate).add(1, 'days');
-                return arrDatePlus1;
-            }
-        };
-        $(document).ready(function() {
-            $('select').selectpicker();
-            arrivalDatePicker = $('#arrivalDate').datepicker(arrivalDateConfig);
-            leaveDatePicker = $('#leaveDate').datepicker(leaveDateConfig);
-        });
-
-
-        var roomNameNumberMap = {
-            "Кімната 1": 1,
-            "Кімната 2": 2,
-            "Кімната 3": 3,
-            "Кімната 4": 4,
-            "2-й поверх": 5,
-            "Кімната 5": 6,
-            "Кімната 6": 7,
-            "Кімната 7": 8,
-            "Кімната 8": 9
-        };
-
-
-
-        $(document).ready(function() {
-
-            initialize();
-
-            observeRoomSelect();
-
-            $('#allowBringIn').click(function() {
-                if (!$(this).is(':checked')) {
-                    actionsAfterUncheck();
-                } else if ($(this).is(':checked')) {
-                    actionsAfterCheck();
-                }
-            });
-
-        });
-
-        function actionsAfterCheck() {
-            var $bringInRoomSelect = $('#BringInRoomsSelect');
-            var title = $('*[data-id="rooms"]').attr("title");
-            var roomNameArray = title.split(', ');
-            $('#BringInRoomsSelect option').each(function() {
-                if (jQuery.inArray($(this).text(), roomNameArray) !== -1) {
-                    $(this).attr("disabled", false);
-                } else {
-                    $(this).attr("disabled", true);
-                }
-            });
-            $bringInRoomSelect.selectpicker('refresh');
-            $bringInRoomSelect.parent().parent().css("display", "block");
-        }
-
-        function actionsAfterUncheck() {
-            var $bringInRoomSelect = $('#BringInRoomsSelect');
-            $('#BringInRoomsSelect option').each(function() {
-                $(this).prop("selected", false);
-                $(this).attr("disabled", true);
-            });
-            $bringInRoomSelect.selectpicker('refresh');
-            $bringInRoomSelect.parent().parent().css("display", "none");
-        }
-
-
-        function observeRoomSelect() {
-
-            var targetNode = $('*[data-id="rooms"]').get(0);
-            var config = {
-                attributes: true,
-                childList: false,
-                subtree: false,
-                attributeFilter: ["title"]
-            };
-
-            var callback = function(mutationsList, observer) {
-                var $checkbox = $('#allowBringIn');
-
-                var noRoomSelected = $('*[data-id="rooms"]').attr("title").split(', ')[0] === "Вибрати кімнати";
-                if ($checkbox.is(':checked')) {
-                    $($checkbox).prop('checked', false);
-                    actionsAfterUncheck();
-                }
-                if (noRoomSelected) {
-                    $checkbox.attr("disabled", true);
-                } else {
-                    $checkbox.attr("disabled", false);
-                }
-            };
-            var observer = new MutationObserver(callback);
-            observer.observe(targetNode, config);
-        }
-
-        function initialize() {
-            var noRoomSelected = $('*[data-id="rooms"]').attr("title").split(', ')[0] === "Вибрати кімнати";
-            var $bringInRoomSelect = $('#BringInRoomsSelect');
-            if (!noRoomSelected) {
-                if( $('#allowBringIn').prop('checked')){
-                    $('#allowBringIn').attr("disabled", false);
-                    actionsAfterCheck();
-                } else {
-                    actionsAfterUncheck();
-                }
-            } else {
-                $('#allowBringIn').attr("disabled", true);
-                actionsAfterUncheck();
-            }
-
-        }
-
-
-
-
-</script>
-
+<script th:src="@{/js/client-modal-ajax.js}" type="text/javascript"></script>
+<script th:src="@{/js/allow-roommate.js}" type="text/javascript"></script>
 </body>
 
 </html>

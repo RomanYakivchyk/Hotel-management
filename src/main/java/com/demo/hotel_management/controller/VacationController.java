@@ -15,9 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -39,7 +42,7 @@ public class VacationController {
     private ClientService clientService;
 
     @RequestMapping(value = {"/vacations/add", "/vacation/{vacationId}/edit"}, method = RequestMethod.GET)
-    public String vacationEditForm(Model model, @PathVariable(required = false) Long vacationId) {
+    public String vacationEditForm(Model model, @PathVariable(required = false) Long vacationId, HttpServletRequest request) {
         log.debug("model={}, vacationId={}", vacationId);
         List<Client> allClients = clientService.findAll();
         if (null != vacationId) {
@@ -49,6 +52,7 @@ public class VacationController {
         }
         model.addAttribute("clients", allClients);
         model.addAttribute("clientModel", new Client());
+
 
         log.debug("model={}, vacationId={}, clientList={}", model, vacationId, allClients);
         return "vacationForm.html";
@@ -71,54 +75,27 @@ public class VacationController {
         return "redirect:/vacations";
     }
 
-//    @RequestMapping(value = "/vacations", method = RequestMethod.GET)
-//    public String listVacations(
-//            Model model,
-//            @RequestParam("page") Optional<Integer> page,
-//            @RequestParam("size") Optional<Integer> size) {
-//
-//        log.debug("model={}, page={}, size={}", model.toString(), page.orElse(currentPage), size.orElse(pageSize));
-//
-//        page.ifPresent(p -> currentPage = p);
-//        size.ifPresent(s -> pageSize = s);
-//
-//        Page<VacationDto> vacationDtoPage = vacationService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
-//
-//        model.addAttribute("vacationDtoPage", vacationDtoPage);
-//
-//        int totalPages = vacationDtoPage.getTotalPages();
-//        if (totalPages > 0) {
-//            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-//                    .boxed()
-//                    .collect(Collectors.toList());
-//            model.addAttribute("pageNumbers", pageNumbers);
-//        }
-//
-//
-//        log.debug("model={}, page={}, size={}", model.toString(), page.orElse(currentPage), size.orElse(pageSize));
-//
-//        return "listVacations.html";
-//    }
-@GetMapping("/vacations")
-public ModelAndView listClients(@RequestParam("pageSize") Optional<Integer> pageSize,
-                                @RequestParam("page") Optional<Integer> page) {
-    ModelAndView modelAndView = new ModelAndView("listVacations.html");
 
-    // Evaluate page size. If requested parameter is null, return initial
-    // page size
-    int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-    // Evaluate page. If requested parameter is null or less than 0 (to
-    // prevent exception), return initial size. Otherwise, return value of
-    // param. decreased by 1.
-    int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+    @GetMapping("/vacations")
+    public ModelAndView listClients(@RequestParam("pageSize") Optional<Integer> pageSize,
+                                    @RequestParam("page") Optional<Integer> page) {
+        ModelAndView modelAndView = new ModelAndView("listVacations.html");
 
-    Page<VacationDto> vacations = vacationService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
-    Pager pager = new Pager(vacations.getTotalPages(), vacations.getNumber(), BUTTONS_TO_SHOW);
+        // Evaluate page size. If requested parameter is null, return initial
+        // page size
+        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+        // Evaluate page. If requested parameter is null or less than 0 (to
+        // prevent exception), return initial size. Otherwise, return value of
+        // param. decreased by 1.
+        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
-    modelAndView.addObject("vacations", vacations);
-    modelAndView.addObject("selectedPageSize", evalPageSize);
-    modelAndView.addObject("pageSizes", PAGE_SIZES);
-    modelAndView.addObject("pager", pager);
-    return modelAndView;
-}
+        Page<VacationDto> vacations = vacationService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
+        Pager pager = new Pager(vacations.getTotalPages(), vacations.getNumber(), BUTTONS_TO_SHOW);
+
+        modelAndView.addObject("vacations", vacations);
+        modelAndView.addObject("selectedPageSize", evalPageSize);
+        modelAndView.addObject("pageSizes", PAGE_SIZES);
+        modelAndView.addObject("pager", pager);
+        return modelAndView;
+    }
 }

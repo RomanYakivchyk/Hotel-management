@@ -57,19 +57,19 @@
                 <li th:class="${vacations.number == 0} ? disabled">
                     <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=1)}"><i class="fal fa-angle-double-left"></i></a>
                 </li>
-                <li th:class="${vacations.number == 0} ? disabled">
-                    <a class="page-link"
-                       th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number})}"><i class="fal fa-angle-left"></i></a>
-                </li>
+                <!--<li th:class="${vacations.number == 0} ? disabled">-->
+                    <!--<a class="page-link"-->
+                       <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number})}"><i class="fal fa-angle-left"></i></a>-->
+                <!--</li>-->
                 <li th:class="${vacations.number == (page - 1)} ? 'page-item active pointer-disabled'"
                     th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
                     <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=${page})}"
                        th:text="${page}"></a>
                 </li>
-                <li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">
-                    <a class="page-link"
-                       th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number + 2})}"><i class="fal fa-angle-right"></i></a>
-                </li>
+                <!--<li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">-->
+                    <!--<a class="page-link"-->
+                       <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number + 2})}"><i class="fal fa-angle-right"></i></a>-->
+                <!--</li>-->
                 <li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">
                     <a class="page-link"
                        th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.totalPages})}"><i class="fal fa-angle-double-right"></i></a>

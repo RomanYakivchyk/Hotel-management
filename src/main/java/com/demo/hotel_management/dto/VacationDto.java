@@ -42,11 +42,10 @@ public class VacationDto {
     @Max(20)
     @NotNull(message = "{validation.vacation.residents.message}")
     private Integer residentsCount;
-
+    @NotNull
     private Boolean hasSharedRooms;
-
     private Set<Integer> sharedRoomNumbers;
-
+    @NotNull
     private Boolean inactive = false;
 
 }

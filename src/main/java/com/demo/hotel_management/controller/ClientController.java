@@ -1,5 +1,6 @@
 package com.demo.hotel_management.controller;
 
+import com.demo.hotel_management.dto.VacationDto;
 import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.service.ClientService;
 import com.demo.hotel_management.utils.Pager;
@@ -8,13 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,7 +40,7 @@ public class ClientController {
 
     @GetMapping("/clients")
     public ModelAndView listClients(@RequestParam("pageSize") Optional<Integer> pageSize,
-                                        @RequestParam("page") Optional<Integer> page) {
+                                    @RequestParam("page") Optional<Integer> page) {
         ModelAndView modelAndView = new ModelAndView("listClients.html");
 
         // Evaluate page size. If requested parameter is null, return initial
@@ -82,6 +88,23 @@ public class ClientController {
 
         log.debug("model={}, savedClient={}", model, savedClient);
         return "redirect:/clients";
+    }
+
+
+    @RequestMapping(path = "/clients/create-ajax", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @ResponseBody
+    public String[] clientEditAjax(Client client) {
+        System.out.println("================================");
+        System.out.println(client);
+        Client createdClient = clientService.saveClient(client);
+        String clientInfo = createdClient.getName() + " " + createdClient.getOtherClientInfo() + " " + createdClient.getPhoneNumber();
+        String clientId = String.valueOf(createdClient.getId());
+
+        String[] arr = new String[2];
+        arr[0] = clientId;
+        arr[1] = clientInfo;
+        return arr;
     }
 
     @RequestMapping(path = "/client/{clientId}/remove", method = RequestMethod.GET)

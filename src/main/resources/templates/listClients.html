@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <!--fonts awesome-->
     <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
-          <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
+    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
 
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,6 +37,7 @@
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
 .right-addon input { padding-right: 30px; }
+
 
 
 
@@ -98,13 +99,14 @@
                 <!--<a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">-->
                 <!--<i class="fal fa-pencil text-secondary" aria-hidden="true"></i></a>-->
                 <!-- class="fonts-weight-bold text-secondary" -->
-                <div th:with="phoneNumber=${client.phoneNumber}"
-                     class="contact-info font-weight-light"
-                     th:text="'('+${#strings.substring(phoneNumber,0,3)}+')'
-								+' '+${#strings.substring(phoneNumber,3,5)}
-								+'-'+${#strings.substring(phoneNumber,5,7)}
-								+'-'+${#strings.substring(phoneNumber,7)}">
-                </div>
+                <!--<div th:with="phoneNumber=${client.phoneNumber}"-->
+                     <!--class="contact-info font-weight-light"-->
+                     <!--th:text="'('+${#strings.substring(phoneNumber,0,3)}+')'-->
+								<!--+' '+${#strings.substring(phoneNumber,3,5)}-->
+								<!--+'-'+${#strings.substring(phoneNumber,5,7)}-->
+								<!--+'-'+${#strings.substring(phoneNumber,7)}">-->
+                <!--</div>-->
+                <div><a th:href="'tel:'+${client.phoneNumber}" th:text="${client.phoneNumber}"></a></div>
                 <div th:class="font-weight-light" th:text="${client.email}"></div>
             </td>
             <td><p class="float-right">
@@ -129,60 +131,31 @@
         <div th:if="${clients.totalPages != 1}" class="form-group col-md-11 col-9 pagination-centered">
             <ul class="pagination">
                 <li th:class="${clients.number == 0} ? disabled">
-                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}"><i class="fal fa-angle-double-left"></i></a>
+                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}"><i
+                            class="fal fa-angle-double-left"></i></a>
                 </li>
-                <li th:class="${clients.number == 0} ? disabled">
-                    <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number})}"><i class="fal fa-angle-left"></i></a>
-                </li>
+                <!--<li th:class="${clients.number == 0} ? disabled">-->
+                    <!--<a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number})}"><i-->
+                            <!--class="fal fa-angle-left"></i></a>-->
+                <!--</li>-->
                 <li th:class="${clients.number == (page - 1)} ? 'page-item active pointer-disabled'"
                     th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
                     <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${page})}"
                        th:text="${page}"></a>
                 </li>
+                <!--<li th:class="${clients.number + 1 == clients.totalPages} ? disabled">-->
+                    <!--<a class="page-link"-->
+                       <!--th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number + 2})}"><i-->
+                            <!--class="fal fa-angle-right"></i></a>-->
+                <!--</li>-->
                 <li th:class="${clients.number + 1 == clients.totalPages} ? disabled">
                     <a class="page-link"
-                       th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number + 2})}"><i class="fal fa-angle-right"></i></a>
-                </li>
-                <li th:class="${clients.number + 1 == clients.totalPages} ? disabled">
-                    <a class="page-link"
-                       th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.totalPages})}"><i class="fal fa-angle-double-right"></i></a>
+                       th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.totalPages})}"><i
+                            class="fal fa-angle-double-right"></i></a>
                 </li>
             </ul>
         </div>
     </div>
-
-
-    <!-- Pagination Bar -->
-
-
-    <!--</div>-->
-    <!--<div>-->
-    <!--<ul th:class="pagination">-->
-    <!--<li th:if="${clientPage.number+1 > 1}">-->
-    <!--<a th:href="@{/clients(page=${clientPage.number+1-1})}" th:class="page-link">Prev</a>-->
-    <!--</li>-->
-    <!--<li th:class="${pageNumber==clientPage.number + 1} ? 'page-item active' : 'page-item'"-->
-    <!--th:if="${clientPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">-->
-    <!--<a th:href="@{/clients(page=${pageNumber})}"-->
-    <!--th:text=${pageNumber}-->
-    <!--th:class="page-link">-->
-    <!--</a>-->
-    <!--</li>-->
-    <!--<li th:if="${clientPage.number+1 < clientPage.totalPages}">-->
-    <!--<a th:href="@{/clients(page=${clientPage.number+1+1})}" th:class="page-link">Next</a>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-
-    <!-- th:class="${pageNumber==clientPage.number + 1} ? 'page-link active':'page-link'"-->
-
-    <!--<ul class="pagination">-->
-    <!--<li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
-    <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
-    <!--<li class="page-item active"><a class="page-link" href="#">2</a></li>-->
-    <!--<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-    <!--<li class="page-item"><a class="page-link" href="#">Next</a></li>-->
-    <!--</ul>-->
 
 </div>
 <div th:insert="footer.html"></div>
@@ -191,11 +164,11 @@
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 <script>
 			$(document).ready(function(){
-		      jQuery(".contact-info").text(function() {
-              jQuery(this).replaceWith(
-                '<div><a href="tel:' + $(this).text()+ '">' + jQuery(this).text() + "</a></div>"
-              );
-            });
+		      <!--jQuery(".contact-info").text(function() {-->
+              <!--jQuery(this).replaceWith(-->
+                <!--'<div><a href="tel:' + $(this).text()+ '">' + jQuery(this).text() + "</a></div>"-->
+              <!--);-->
+            <!--});-->
 				$("#inputSearch").on("keyup", function() {
 					var value = $(this).val().toLowerCase();
 					$("#clientTable tr").filter(function() {
@@ -209,6 +182,7 @@
 					$(this).find('.modal-body p').text(clientName);
 				});
             });
+
 </script>
 <script th:src="@{/pagination/js/app.js}"></script>
 </body>

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
 
     <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
-          <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
+    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
 
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +45,7 @@
         <div class="mb-3 form-group">
             <label for="phoneNumber">Номер телефону</label>
             <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}"
-                   class="form-control" id="phoneNumber">
+                   class="form-control" id="phoneNumber" data-mask="(000) 00-00-000">
             <div th:if="${#fields.hasErrors('phoneNumber')}"><i class="fas fa-exclamation text-danger"></i>
                 <span class="text-danger" th:errors="*{phoneNumber}"></span>
             </div>
