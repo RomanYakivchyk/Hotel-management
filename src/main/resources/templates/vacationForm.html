@@ -38,7 +38,8 @@
                 <div>
                     <select class="selectpicker form-control" th:field="*{clientId}" data-live-search="true"
                             data-live-search-normalize="true" data-none-results-text="Нічого не знайдено"
-                            title="Вибрати клієнта" data-style="bg-white border" data-size="5" id="clientName">
+                            title="Вибрати клієнта" data-style="bg-white border"
+                            data-size="3" data-container="true" id="clientName">
                         <option th:each="cl : ${clients}" th:value="${cl.id}"
                                 th:text="${cl.name}+' '+${cl.otherClientInfo}+' '+${cl.phoneNumber}"></option>
                     </select>

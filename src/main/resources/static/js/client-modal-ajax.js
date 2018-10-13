@@ -39,6 +39,8 @@
                     } else {
                         $('#emailError').css("display", "none");
                     }
+                } else {
+                        $('#emailError').css("display", "none");
                 }
 
                 if (valid) {
