@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface ClientRepository extends PagingAndSortingRepository<Client,Long> {
@@ -18,6 +19,8 @@ public interface ClientRepository extends PagingAndSortingRepository<Client,Long
     @Transactional
     @Query(value = "update Client c set c.inactive = true where c.id = :client_id")
     void inactivate( @Param("client_id") Long clientId);
+
+    List<Client> findByInactiveFalse();
 
 
 }

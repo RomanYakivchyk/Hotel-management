@@ -68,12 +68,8 @@ public class VacationService {
     }
 
     public Page<VacationDto> findAllPageable(Pageable pageable) {
-        List<VacationDto> vacationDtoList =
-                StreamSupport.stream(vacationRepository.findAll().spliterator(), false)
-                        .filter(e -> !e.getInactive())
-                        .map(entityDtoConverter::convertVacationEntityToDto)
-                        .collect(toList());
-        
+        List<VacationDto> vacationDtoList = getAllActiveVacations();
+
         int start = (int) pageable.getOffset();
         int end = (start + pageable.getPageSize()) > vacationDtoList.size() ? vacationDtoList.size() : (start + pageable.getPageSize());
 
@@ -82,13 +78,12 @@ public class VacationService {
 
 
     public List<VacationDto> getAllActiveVacations() {
-        return StreamSupport.stream(vacationRepository.findAll().spliterator(), false)
-                .filter(e -> !e.getInactive())
-                .map(e -> entityDtoConverter.convertVacationEntityToDto(e))
+        return vacationRepository.findByInactiveFalse().stream()
+                .map(entityDtoConverter::convertVacationEntityToDto)
                 .collect(toList());
     }
 
-
+//todo
     public List<VacationDto> getVacationsTable(LocalDate date) {
         List<Vacation> vacationList = vacationRepository
                 .findByMonth(LocalDate.of(date.getYear(), date.getMonth(), 1),

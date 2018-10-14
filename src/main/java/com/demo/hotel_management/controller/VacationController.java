@@ -44,17 +44,18 @@ public class VacationController {
     @RequestMapping(value = {"/vacations/add", "/vacation/{vacationId}/edit"}, method = RequestMethod.GET)
     public String vacationEditForm(Model model, @PathVariable(required = false) Long vacationId, HttpServletRequest request) {
         log.debug("model={}, vacationId={}", vacationId);
-        List<Client> allClients = clientService.findAll();
+//        List<Client> allClients = clientService.findAll();
+        List<Client> allActiveClients = clientService.findAllActive();
         if (null != vacationId) {
             model.addAttribute("vacationModel", vacationService.findById(vacationId));
         } else {
             model.addAttribute("vacationModel", new VacationDto());
         }
-        model.addAttribute("clients", allClients);
+        model.addAttribute("clients", allActiveClients);
         model.addAttribute("clientModel", new Client());
 
 
-        log.debug("model={}, vacationId={}, clientList={}", model, vacationId, allClients);
+        log.debug("model={}, vacationId={}, clientList={}", model, vacationId, allActiveClients);
         return "vacationForm.html";
     }
 
@@ -66,7 +67,8 @@ public class VacationController {
 
         if (result.hasErrors()) {
             model.addAttribute("vacationModel", vacationDto);
-            model.addAttribute("clients", clientService.findAll());
+//            model.addAttribute("clients", clientService.findAll());
+            model.addAttribute("clients", clientService.findAllActive());
             return "vacationForm.html";
         }
         VacationDto savedVacation = vacationService.saveVacation(vacationDto);

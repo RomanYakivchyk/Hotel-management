@@ -40,10 +40,7 @@ public class ClientService {
     }
 
     public Page<Client> findAllPageable(Pageable pageable) {
-        List<Client> clients =
-                StreamSupport.stream(clientRepository.findAll().spliterator(), false)
-                        .filter(e -> !e.getInactive())
-                        .collect(toList());
+        List<Client> clients = clientRepository.findByInactiveFalse();
 
         int start = (int) pageable.getOffset();
         int end = (start + pageable.getPageSize()) > clients.size() ? clients.size() : (start + pageable.getPageSize());
@@ -68,5 +65,9 @@ public class ClientService {
         clientRepository.inactivate(client.getId());
         log.debug("Client inactivated: client={}", client);
 
+    }
+
+    public List<Client> findAllActive() {
+        return clientRepository.findByInactiveFalse();
     }
 }
