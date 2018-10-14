@@ -130,7 +130,7 @@
             <!--</select>-->
             <!--</div>-->
             <hr>
-            <div th:if="${clients.totalPages != 1}" class="form-group pagination-centered">
+            <div th:if="${clients.totalPages != 1}" class="form-group">
                 <ul class="pagination">
                     <li th:class="${clients.number == 0} ? disabled">
                         <a class="page-link shadow-sm" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}"><i

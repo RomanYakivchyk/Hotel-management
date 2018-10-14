@@ -18,51 +18,65 @@
 </head>
 <body class="bg-light">
 <div th:insert="header.html"></div>
+<ol class="breadcrumb bg-white shadow-sm">
+    <li class="breadcrumb-item"><a th:href="@{/}">Домашня сторінка</a></li>
+    <li class="breadcrumb-item"><a th:href="@{/clients}">Клієнти</a></li>
+    <li class="breadcrumb-item active">Створити</li>
+</ol>
 <div class="container col-md-6" style="float: none; margin: 0 auto;">
-    <form class="needs-validation" action="#" th:action="@{/clients/update}" th:object="${clientModel}" method="post">
-        <h3 class="mb-3 mt-4" th:text="((*{id} == null)?'Додати':'Редагувати') + ' дані клієнта'"></h3>
-        <input th:type="hidden" th:value="*{id}" th:field="*{id}">
-        <div class="row">
-            <div class="col-md-6 mb-3 form-group">
-                <label for="clientName">Ім'я</label>
-                <input type="text" th:field="*{name}" value="*{name}" class="form-control" id="clientName">
-                <div th:if="${#fields.hasErrors('name')}"><i class="fas fa-exclamation text-danger"></i>
-                    <span class="text-danger" th:errors="*{name}"></span>
+    <br>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form class="needs-validation" action="#" th:action="@{/clients/update}" th:object="${clientModel}"
+                  method="post">
+                <div class="mb-4">
+                    <h4 class="card-title" th:text="((*{id} == null)?'Додати':'Редагувати') + ' дані клієнта'"></h4>
                 </div>
-            </div>
-            <div class="col-md-6 mb-3 form-group">
-                <label for="otherClientInfo">Додаткові дані
-                    <span class="text-secondary">(Прізвище, Звідки..)</span></label>
-                <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}" class="form-control"
-                       id="otherClientInfo">
-                <div th:if="${#fields.hasErrors('otherClientInfo')}"><i
-                        class="fas fa-exclamation text-danger"></i>
-                    <span class="text-danger" th:if="${#fields.hasErrors('otherClientInfo')}"
-                          th:errors="*{otherClientInfo}"></span>
+
+                <input th:type="hidden" th:value="*{id}" th:field="*{id}">
+                <div class="row">
+                    <div class="col-md-6 mb-3 form-group">
+                        <label for="clientName">Ім'я</label>
+                        <input type="text" th:field="*{name}" value="*{name}" class="form-control" id="clientName">
+                        <div th:if="${#fields.hasErrors('name')}"><i class="fas fa-exclamation text-danger"></i>
+                            <span class="text-danger" th:errors="*{name}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3 form-group">
+                        <label for="otherClientInfo">Додаткові дані
+                            <span class="text-secondary">(Прізвище, Звідки..)</span></label>
+                        <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}" class="form-control"
+                               id="otherClientInfo">
+                        <div th:if="${#fields.hasErrors('otherClientInfo')}"><i
+                                class="fas fa-exclamation text-danger"></i>
+                            <span class="text-danger" th:if="${#fields.hasErrors('otherClientInfo')}"
+                                  th:errors="*{otherClientInfo}"></span>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="mb-3 form-group">
+                    <label for="phoneNumber">Номер телефону</label>
+                    <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}"
+                           class="form-control" id="phoneNumber" data-mask="(000) 00-00-000">
+                    <div th:if="${#fields.hasErrors('phoneNumber')}"><i class="fas fa-exclamation text-danger"></i>
+                        <span class="text-danger" th:errors="*{phoneNumber}"></span>
+                    </div>
+                </div>
+                <div class="mb-3 form-group">
+                    <label for="email">Email<span class="text-secondary">&nbsp;(Не обов'язково)</span></label>
+                    <input type="text" th:field="*{email}" value="*{email}" class="form-control" id="email"
+                           placeholder="example@gmail.com">
+                    <div th:if="${#fields.hasErrors('email')}"><i class="fas fa-exclamation text-danger"></i>
+                        <span class="text-danger" th:errors="*{email}"></span>
+                    </div>
+                    <br>
+                    <hr class="mt-2">
+                    <button class="btn btn-primary btn-block" type="submit">Зберегти</button>
+                    <div class="text-center mt-2"><a th:class="text-secondary" th:href="@{/clients}">Відмінити</a></div>
+                </div>
+            </form>
         </div>
-        <div class="mb-3 form-group">
-            <label for="phoneNumber">Номер телефону</label>
-            <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}"
-                   class="form-control" id="phoneNumber" data-mask="(000) 00-00-000">
-            <div th:if="${#fields.hasErrors('phoneNumber')}"><i class="fas fa-exclamation text-danger"></i>
-                <span class="text-danger" th:errors="*{phoneNumber}"></span>
-            </div>
-        </div>
-        <div class="mb-3 form-group">
-            <label for="email">Email<span class="text-secondary">&nbsp;(Не обов'язково)</span></label>
-            <input type="text" th:field="*{email}" value="*{email}" class="form-control" id="email"
-                   placeholder="example@gmail.com">
-            <div th:if="${#fields.hasErrors('email')}"><i class="fas fa-exclamation text-danger"></i>
-                <span class="text-danger" th:errors="*{email}"></span>
-            </div>
-            <br>
-            <hr class="mt-2">
-            <button class="btn btn-primary btn-block" type="submit">Зберегти</button>
-            <div class="text-center mt-2"><a th:class="text-secondary" th:href="@{/clients}">Відмінити</a></div>
-        </div>
-    </form>
+    </div>
 </div>
 <div th:insert="footer.html"></div>
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>

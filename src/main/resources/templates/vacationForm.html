@@ -23,145 +23,166 @@
 
 <body class="bg-light">
 <div th:insert="header.html"></div>
+<ol class="breadcrumb bg-white shadow-sm">
+    <li class="breadcrumb-item"><a th:href="@{/}">Домашня сторінка</a></li>
+    <li class="breadcrumb-item"><a th:href="@{/vacations}">Бронювання</a></li>
+    <li class="breadcrumb-item active">Створити</li>
+</ol>
 <div th:insert="clientFormModal.html"></div>
 
 <div class="container col-md-6" style="float: none; margin: 0 auto;">
-    <form class="needs-validation" action="#" th:action="@{/vacations/update}" th:object="${vacationModel}"
-          method="post">
-        <h3 class="mb-3 mt-5" th:text="((*{vacationId} == null)?'Додати':'Редагувати') + ' бронювання'"></h3>
-        <input th:type="hidden" th:value="*{vacationId}" th:field="*{vacationId}">
+    <br>
+    <div class="card shadow-sm">
+        <div class="card-body">
 
-        <div class="row">
-            <div class="col-8 mb-3 form-group">
-                <label for="clientName">Клієнт</label>
-                <a class="float-right" data-toggle="modal" href="" data-target="#addClassModal">новий клієнт</a>
-                <div>
-                    <select class="selectpicker form-control" th:field="*{clientId}" data-live-search="true"
-                            data-live-search-normalize="true" data-none-results-text="Нічого не знайдено"
-                            title="Вибрати клієнта" data-style="bg-white border"
-                            data-size="3" id="clientName">
-                        <option th:each="cl : ${clients}" th:value="${cl.id}"
-                                th:text="${cl.name}+' '+${cl.otherClientInfo}+' '+${cl.phoneNumber}"></option>
+            <form class="needs-validation" action="#" th:action="@{/vacations/update}" th:object="${vacationModel}"
+                  method="post">
+                <div class="mb-4">
+                    <h4 class="card-title"
+                        th:text="((*{vacationId} == null)?'Додати':'Редагувати') + ' бронювання'"></h4>
+                </div>
+
+                <input th:type="hidden" th:value="*{vacationId}" th:field="*{vacationId}">
+
+                <div class="row">
+                    <div class="col-8 mb-3 form-group">
+                        <label for="clientName">Клієнт</label>
+                        <a class="float-right" data-toggle="modal" href="" data-target="#addClassModal">новий клієнт</a>
+                        <div>
+                            <select class="selectpicker form-control" th:field="*{clientId}" data-live-search="true"
+                                    data-live-search-normalize="true" data-none-results-text="Нічого не знайдено"
+                                    title="Вибрати клієнта" data-style="bg-white border"
+                                    data-size="3" id="clientName">
+                                <option th:each="cl : ${clients}" th:value="${cl.id}"
+                                        th:text="${cl.name}+' '+${cl.otherClientInfo}+' '+${cl.phoneNumber}"></option>
+                            </select>
+                        </div>
+                        <div th:if="${#fields.hasErrors('clientId')}"><i
+                                class="fas fa-exclamation-triangle text-danger"></i>
+                            <span class="text-danger" th:errors="*{clientId}"></span></div>
+                    </div>
+
+                    <div class="col-4 mb-3 form-group">
+                        <label for="residentsCount">К-cть</label>
+                        <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
+                                id="residentsCount" th:field="*{residentsCount}"
+                                th:value="*{residentsCount}" data-size="8">
+                            <option th:value="1">1</option>
+                            <option th:value="2">2</option>
+                            <option th:value="3">3</option>
+                            <option th:value="4">4</option>
+                            <option th:value="5">5</option>
+                            <option th:value="6">6</option>
+                            <option th:value="7">7</option>
+                            <option th:value="8">8</option>
+                            <!--<option th:value="9">9</option>-->
+                            <!--<option th:value="10">10</option>-->
+                        </select>
+                    </div>
+                </div>
+                <hr class="mt-2">
+                <div class="row">
+                    <div class="col-8 mb-3 form-group">
+                        <label for="arrivalDate">Дата приїзду</label>
+                        <input readonly type="text" th:field="*{arrivalDate}" th:value="*{arrivalDate}"
+                               class="form-control"
+                               id="arrivalDate">
+                        <div th:if="${#fields.hasErrors('arrivalDate')}"><i
+                                class="fas fa-exclamation-triangle text-danger"></i>
+                            <span class="text-danger" th:errors="*{arrivalDate}"></span></div>
+                    </div>
+                    <div class="col-4 mb-3 form-group">
+                        <label for="arrivalDayPart">Час</label>
+                        <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
+                                th:field="*{arrivalDayPart}"
+                                th:value="*{arrivalDayPart}" id="arrivalDayPart">
+                            <option th:value="1">Ранок</option>
+                            <option th:value="2">День</option>
+                            <option th:value="3">Вечір</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 mb-3 form-group">
+                        <label for="leaveDate">Дата від'їзду</label>
+                        <input readonly type="text" th:field="*{leaveDate}" value="*{leaveDate}" class="form-control"
+                               id="leaveDate">
+                        <div th:if="${#fields.hasErrors('leaveDate')}"><i
+                                class="fas fa-exclamation-triangle text-danger"></i>
+                            <span class="text-danger" th:errors="*{leaveDate}"></span>
+                        </div>
+                    </div>
+                    <div class="col-4 mb-3 form-group">
+                        <label for="leaveDayPart">Час</label>
+                        <select class="selectpicker form-control" data-width="100%" th:field="*{leaveDayPart}"
+                                th:value="*{leaveDayPart}" data-style="bg-white border"
+                                id="leaveDayPart">
+                            <option th:value="1">Ранок</option>
+                            <option th:value="2">День</option>
+                            <option th:value="3">Вечір</option>
+                        </select>
+                    </div>
+                </div>
+                <hr class="mb-3">
+                <div class="mb-3 form-group">
+                    <label for="rooms">Кімнати</label>
+                    <select class="selectpicker form-control" data-width="100%" th:field="*{roomNumbers}"
+                            th:value="*{roomNumbers}" data-style="bg-white border" id="rooms" data-size="7"
+                            multiple title="Вибрати кімнати">
+
+                        <!--<optgroup label="Будинок 1" data-icon="fas fa-home">-->
+                        <option th:value="1">Кімната 1</option>
+                        <option th:value="2">Кімната 2</option>
+                        <option th:value="3">Кімната 3</option>
+                        <option th:value="4">Кімната 4</option>
+                        <option th:value="5">2-й поверх</option>
+                        <!--</optgroup>-->
+                        <!--<optgroup label="Будинок 2" data-icon="fas fa-home">-->
+                        <option th:value="6">Кімната 5</option>
+                        <option th:value="7">Кімната 6</option>
+                        <!--</optgroup>-->
+                        <!--<optgroup label="Будинок 3" data-icon="fas fa-home">-->
+                        <option th:value="8">Кімната 7</option>
+                        <option th:value="9">Кімната 8</option>
+                        <!--</optgroup>-->
                     </select>
+                    <div th:if="${#fields.hasErrors('roomNumbers')}"><i
+                            class="fas fa-exclamation-triangle text-danger"></i><span class="text-danger"
+                                                                                      th:errors="*{roomNumbers}"></span>
+                    </div>
                 </div>
-                <div th:if="${#fields.hasErrors('clientId')}"><i class="fas fa-exclamation-triangle text-danger"></i>
-                    <span class="text-danger" th:errors="*{clientId}"></span></div>
-            </div>
-
-            <div class="col-4 mb-3 form-group">
-                <label for="residentsCount">К-cть</label>
-                <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
-                        id="residentsCount" th:field="*{residentsCount}"
-                        th:value="*{residentsCount}" data-size="8">
-                    <option th:value="1">1</option>
-                    <option th:value="2">2</option>
-                    <option th:value="3">3</option>
-                    <option th:value="4">4</option>
-                    <option th:value="5">5</option>
-                    <option th:value="6">6</option>
-                    <option th:value="7">7</option>
-                    <option th:value="8">8</option>
-                    <!--<option th:value="9">9</option>-->
-                    <!--<option th:value="10">10</option>-->
-                </select>
-            </div>
-        </div>
-        <hr class="mt-2">
-        <div class="row">
-            <div class="col-8 mb-3 form-group">
-                <label for="arrivalDate">Дата приїзду</label>
-                <input readonly type="text" th:field="*{arrivalDate}" th:value="*{arrivalDate}" class="form-control"
-                       id="arrivalDate">
-                <div th:if="${#fields.hasErrors('arrivalDate')}"><i class="fas fa-exclamation-triangle text-danger"></i>
-                    <span class="text-danger" th:errors="*{arrivalDate}"></span></div>
-            </div>
-            <div class="col-4 mb-3 form-group">
-                <label for="arrivalDayPart">Час</label>
-                <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
-                        th:field="*{arrivalDayPart}"
-                        th:value="*{arrivalDayPart}" id="arrivalDayPart">
-                    <option th:value="1">Ранок</option>
-                    <option th:value="2">День</option>
-                    <option th:value="3">Вечір</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-8 mb-3 form-group">
-                <label for="leaveDate">Дата від'їзду</label>
-                <input readonly type="text" th:field="*{leaveDate}" value="*{leaveDate}" class="form-control"
-                       id="leaveDate">
-                <div th:if="${#fields.hasErrors('leaveDate')}"><i class="fas fa-exclamation-triangle text-danger"></i>
-                    <span class="text-danger" th:errors="*{leaveDate}"></span>
+                <hr class="mb-3">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" th:field="*{hasSharedRooms}" th:value="*{hasSharedRooms}"
+                           class="custom-control-input" id="allowBringIn">
+                    <label class="custom-control-label" for="allowBringIn">Можливе підселення</label>
                 </div>
-            </div>
-            <div class="col-4 mb-3 form-group">
-                <label for="leaveDayPart">Час</label>
-                <select class="selectpicker form-control" data-width="100%" th:field="*{leaveDayPart}"
-                        th:value="*{leaveDayPart}" data-style="bg-white border"
-                        id="leaveDayPart" >
-                    <option th:value="1">Ранок</option>
-                    <option th:value="2">День</option>
-                    <option th:value="3">Вечір</option>
-                </select>
-            </div>
+                <div class="mb-3 mt-3 form-group">
+                    <select class="selectpicker form-control" title="Кімната для підселення"
+                            th:field="*{sharedRoomNumbers}"
+                            th:value="*{sharedRoomNumbers}" data-style="bg-white border" id="BringInRoomsSelect"
+                            data-width="100%" data-hide-disabled="true" multiple>
+                        <option th:value="1">Кімната 1</option>
+                        <option th:value="2">Кімната 2</option>
+                        <option th:value="3">Кімната 3</option>
+                        <option th:value="4">Кімната 4</option>
+                        <option th:value="5">2-й поверх</option>
+                        <option th:value="6">Кімната 5</option>
+                        <option th:value="7">Кімната 6</option>
+                        <option th:value="8">Кімната 7</option>
+                        <option th:value="9">Кімната 8</option>
+                    </select>
+                    <div id="sharedRoomsError" th:if="${#fields.hasErrors('sharedRoomNumbers')}">
+                        <i class="fas fa-exclamation-triangle text-danger"></i>
+                        <span class="text-danger" th:errors="*{sharedRoomNumbers}"></span>
+                    </div>
+                </div>
+                <hr class="mt-3">
+                <button class="btn btn-primary btn-block" type="submit">Зберегти</button>
+                <div class="text-center mt-2"><a th:class="text-secondary" th:href="@{/vacations}">Відмінити</a></div>
+            </form>
         </div>
-        <hr class="mb-3">
-        <div class="mb-3 form-group">
-            <label for="rooms">Кімнати</label>
-            <select class="selectpicker form-control" data-width="100%" th:field="*{roomNumbers}"
-                    th:value="*{roomNumbers}" data-style="bg-white border" id="rooms" data-size="7"
-                    multiple title="Вибрати кімнати">
-
-                <!--<optgroup label="Будинок 1" data-icon="fas fa-home">-->
-                    <option th:value="1">Кімната 1</option>
-                    <option th:value="2">Кімната 2</option>
-                    <option th:value="3">Кімната 3</option>
-                    <option th:value="4">Кімната 4</option>
-                    <option th:value="5">2-й поверх</option>
-                <!--</optgroup>-->
-                <!--<optgroup label="Будинок 2" data-icon="fas fa-home">-->
-                    <option th:value="6">Кімната 5</option>
-                    <option th:value="7">Кімната 6</option>
-                <!--</optgroup>-->
-                <!--<optgroup label="Будинок 3" data-icon="fas fa-home">-->
-                    <option th:value="8">Кімната 7</option>
-                    <option th:value="9">Кімната 8</option>
-                <!--</optgroup>-->
-            </select>
-            <div th:if="${#fields.hasErrors('roomNumbers')}"><i
-                    class="fas fa-exclamation-triangle text-danger"></i><span class="text-danger"
-                                                                              th:errors="*{roomNumbers}"></span></div>
-        </div>
-        <hr class="mb-3">
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" th:field="*{hasSharedRooms}" th:value="*{hasSharedRooms}"
-                   class="custom-control-input" id="allowBringIn">
-            <label class="custom-control-label" for="allowBringIn">Можливе підселення</label>
-        </div>
-        <div class="mb-3 mt-3 form-group">
-            <select class="selectpicker form-control" title="Кімната для підселення" th:field="*{sharedRoomNumbers}"
-                    th:value="*{sharedRoomNumbers}" data-style="bg-white border" id="BringInRoomsSelect"
-                    data-width="100%" data-hide-disabled="true" multiple>
-                <option th:value="1">Кімната 1</option>
-                <option th:value="2">Кімната 2</option>
-                <option th:value="3">Кімната 3</option>
-                <option th:value="4">Кімната 4</option>
-                <option th:value="5">2-й поверх</option>
-                <option th:value="6">Кімната 5</option>
-                <option th:value="7">Кімната 6</option>
-                <option th:value="8">Кімната 7</option>
-                <option th:value="9">Кімната 8</option>
-            </select>
-            <div id="sharedRoomsError" th:if="${#fields.hasErrors('sharedRoomNumbers')}">
-                <i class="fas fa-exclamation-triangle text-danger"></i>
-                <span class="text-danger" th:errors="*{sharedRoomNumbers}"></span>
-            </div>
-        </div>
-        <hr class="mt-3">
-        <button class="btn btn-primary btn-block" type="submit">Зберегти</button>
-        <div class="text-center mt-2"><a th:class="text-secondary" th:href="@{/vacations}">Відмінити</a></div>
-    </form>
+    </div>
 </div>
 <div th:insert="footer.html"></div>
 
