@@ -39,7 +39,7 @@
                     <select class="selectpicker form-control" th:field="*{clientId}" data-live-search="true"
                             data-live-search-normalize="true" data-none-results-text="Нічого не знайдено"
                             title="Вибрати клієнта" data-style="bg-white border"
-                            data-size="3" id="clientName" data-mobile="true">
+                            data-size="3" id="clientName">
                         <option th:each="cl : ${clients}" th:value="${cl.id}"
                                 th:text="${cl.name}+' '+${cl.otherClientInfo}+' '+${cl.phoneNumber}"></option>
                     </select>
@@ -52,7 +52,7 @@
                 <label for="residentsCount">К-cть</label>
                 <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
                         id="residentsCount" th:field="*{residentsCount}"
-                        th:value="*{residentsCount}" data-size="8" data-mobile="true">
+                        th:value="*{residentsCount}" data-size="8">
                     <option th:value="1">1</option>
                     <option th:value="2">2</option>
                     <option th:value="3">3</option>
@@ -78,7 +78,7 @@
             <div class="col-4 mb-3 form-group">
                 <label for="arrivalDayPart">Час</label>
                 <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
-                        th:field="*{arrivalDayPart}"  data-mobile="true"
+                        th:field="*{arrivalDayPart}"
                         th:value="*{arrivalDayPart}" id="arrivalDayPart">
                     <option th:value="1">Ранок</option>
                     <option th:value="2">День</option>
@@ -99,7 +99,7 @@
                 <label for="leaveDayPart">Час</label>
                 <select class="selectpicker form-control" data-width="100%" th:field="*{leaveDayPart}"
                         th:value="*{leaveDayPart}" data-style="bg-white border"
-                        id="leaveDayPart" data-mobile="true">
+                        id="leaveDayPart" >
                     <option th:value="1">Ранок</option>
                     <option th:value="2">День</option>
                     <option th:value="3">Вечір</option>
