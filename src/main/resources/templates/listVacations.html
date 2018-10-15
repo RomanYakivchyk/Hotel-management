@@ -21,7 +21,7 @@
 <body class="bg-light">
 <div th:insert="header.html"></div>
 <ol class="breadcrumb bg-white shadow-sm">
-    <li class="breadcrumb-item"><a th:href="@{/}">Домашня сторінка</a></li>
+    <li class="breadcrumb-item"><a th:href="@{/}">Домашня</a></li>
     <li class="breadcrumb-item active">Бронювання</li>
 </ol>
 <div class="container">
@@ -59,43 +59,43 @@
                 </table>
             </div>
 
-            <div class="row">
-                <div class="form-group col-md-1 col-3">
-                    <select class="form-control pagination" id="vacationsPageSizeSelect">
-                        <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"
-                                th:selected="${pageSize} == ${selectedPageSize}"></option>
-                    </select>
-                </div>
-                <div th:if="${vacations.totalPages != 1}" class="form-group col-md-11 col-9 pagination-centered">
-                    <ul class="pagination">
-                        <li th:class="${vacations.number == 0} ? disabled">
-                            <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=1)}"><i
-                                    class="fal fa-angle-double-left"></i></a>
-                        </li>
-                        <!--<li th:class="${vacations.number == 0} ? disabled">-->
-                        <!--<a class="page-link"-->
-                        <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number})}"><i class="fal fa-angle-left"></i></a>-->
-                        <!--</li>-->
-                        <li th:class="${vacations.number == (page - 1)} ? 'page-item active pointer-disabled'"
-                            th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                            <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=${page})}"
-                               th:text="${page}"></a>
-                        </li>
-                        <!--<li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">-->
-                        <!--<a class="page-link"-->
-                        <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number + 2})}"><i class="fal fa-angle-right"></i></a>-->
-                        <!--</li>-->
-                        <li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">
-                            <a class="page-link"
-                               th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.totalPages})}"><i
-                                    class="fal fa-angle-double-right"></i></a>
-                        </li>
-                    </ul>
-                </div>
+            <!--<div class="row">-->
+            <!--<div class="form-group col-md-1 col-3">-->
+            <!--<select class="form-control pagination" id="vacationsPageSizeSelect">-->
+            <!--<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"-->
+            <!--th:selected="${pageSize} == ${selectedPageSize}"></option>-->
+            <!--</select>-->
+            <!--</div>-->
+            <div th:if="${vacations.totalPages != 1}" class="form-group">
+                <ul class="pagination">
+                    <li th:class="${vacations.number == 0} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">
+                        <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=1)}"><i
+                                class="fal fa-angle-double-left"></i></a>
+                    </li>
+                    <!--<li th:class="${vacations.number == 0} ? disabled">-->
+                    <!--<a class="page-link"-->
+                    <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number})}"><i class="fal fa-angle-left"></i></a>-->
+                    <!--</li>-->
+                    <li th:class="${vacations.number == (page - 1)} ? 'active pointer-disabled shadow-sm' : 'page-item shadow-sm'"
+                        th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                        <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=${page})}"
+                           th:text="${page}"></a>
+                    </li>
+                    <!--<li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">-->
+                    <!--<a class="page-link"-->
+                    <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number + 2})}"><i class="fal fa-angle-right"></i></a>-->
+                    <!--</li>-->
+                    <li th:class="${vacations.number + 1 == vacations.totalPages} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">
+                        <a class="page-link"
+                           th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.totalPages})}"><i
+                                class="fal fa-angle-double-right"></i></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+<!--</div>-->
 <div th:insert="footer.html"></div>
 
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
@@ -118,6 +118,7 @@
 					$(this).find('.modal-body h5').text(clientName);
 				});
 			});
+
 
 
 

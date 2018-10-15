@@ -32,7 +32,7 @@ public class VacationController {
 
     private static final int BUTTONS_TO_SHOW = 5;
     private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 5;
+    private static final int INITIAL_PAGE_SIZE = 10;
     private static final int[] PAGE_SIZES = {5, 10, 20};
 
     @Autowired
@@ -44,7 +44,7 @@ public class VacationController {
     @RequestMapping(value = {"/vacations/add", "/vacation/{vacationId}/edit"}, method = RequestMethod.GET)
     public String vacationEditForm(Model model, @PathVariable(required = false) Long vacationId, HttpServletRequest request) {
         log.debug("model={}, vacationId={}", vacationId);
-//        List<Client> allClients = clientService.findAll();
+
         List<Client> allActiveClients = clientService.findAllActive();
         if (null != vacationId) {
             model.addAttribute("vacationModel", vacationService.findById(vacationId));
@@ -67,7 +67,7 @@ public class VacationController {
 
         if (result.hasErrors()) {
             model.addAttribute("vacationModel", vacationDto);
-//            model.addAttribute("clients", clientService.findAll());
+
             model.addAttribute("clients", clientService.findAllActive());
             return "vacationForm.html";
         }

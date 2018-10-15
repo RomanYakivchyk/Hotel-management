@@ -1,7 +1,9 @@
 package com.demo.hotel_management.utils.custom_validators;
 
 import com.demo.hotel_management.dto.VacationDto;
+import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.entity.Vacation;
+import com.demo.hotel_management.repository.VacationRepository;
 import com.demo.hotel_management.service.VacationService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,9 +11,12 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 
 public class VacationValidator implements ConstraintValidator<ValidateVacation, VacationDto> {
@@ -19,46 +24,78 @@ public class VacationValidator implements ConstraintValidator<ValidateVacation, 
     @Autowired
     private VacationService vacationService;
 
-    @Override //todo
+    @Autowired
+    private VacationRepository vacationRepository;
+
+    @Override //todo  test this logic
     public boolean isValid(VacationDto vacationDto, ConstraintValidatorContext context) {
 
         boolean isValid = true;
 
         if (vacationDto.getArrivalDate() != null && vacationDto.getLeaveDate() != null) {
 
-            Supplier<Stream<VacationDto>> vacationDtoOverlapSupplier =
-                    () -> vacationService.getAllActiveVacations().stream()
-                            .filter(e -> vacationDto.getArrivalDate().isBefore(e.getLeaveDate()))
-                            .filter(e -> vacationDto.getLeaveDate().isAfter(e.getArrivalDate()))
-                            .filter(e-> !Collections.disjoint(e.getRoomNumbers(), vacationDto.getRoomNumbers()));
+            List<Vacation> allActiveVacations = vacationRepository.findByInactiveFalse();
+
+            List<RoomVacation> overlappedVacations = allActiveVacations.stream()
+                    .filter(e -> dateRangesOverlap(vacationDto.getArrivalDate(), vacationDto.getLeaveDate(),
+                            e.getVacationDate().getArrivalDate(), e.getVacationDate().getLeaveDate()))
+                    .flatMap(e -> e.getRoomVacationList().stream())
+                    .collect(toList());
 
 
-            if (vacationDtoOverlapSupplier.get().findAny().isPresent()) {
+            if (overlappedVacations.size() > 0) {
 
-                if (vacationDto.getHasSharedRooms()) {
+                for (Integer roomNumber : vacationDto.getRoomNumbers()) {
 
-//                    LocalDate startDate = vacationDto.getArrivalDate();
-//                    LocalDate endDate = vacationDto.getLeaveDate();
-//
-//                    for (LocalDate l = startDate; startDate.isBefore(endDate.plusDays(1)); l = l.plusDays(1)) {
-//                        LocalDate curr = l;
-//                        long overlappedVacations = vacationDtoOverlapSupplier.get()
-//                                .filter(e -> curr.isAfter(e.getArrivalDate().minusDays(1)))
-//                                .filter(e -> curr.isBefore(e.getLeaveDate().plusDays(1)))
-//                                .filter(e -> !(curr.equals(startDate) && curr.equals(e.getLeaveDate())))
-//                                .filter(e -> !(curr.equals(endDate) && curr.equals(e.getArrivalDate())))
-//                                .count();
-//                        System.out.println("count= " + overlappedVacations);
-//                        if (overlappedVacations > 1) return false;
-//                    }
+                    List<RoomVacation> allRoomVacations = overlappedVacations.stream()
+                            .filter(e -> e.getRoom().getRoomNumber().equals(roomNumber))
+                            .collect(toList());
 
-                } else {
-                    isValid = vacationDtoOverlapSupplier.get()
-                            .allMatch(e -> Collections.disjoint(e.getRoomNumbers(), vacationDto.getRoomNumbers()));
+                    List<RoomVacation> allowRoommateRoomVacations = allRoomVacations.stream()
+                            .filter(RoomVacation::getAllowRoommate)
+                            .collect(toList());
+
+                    List<RoomVacation> notAllowRoommateRoomVacations = allRoomVacations.stream()
+                            .filter(e -> !e.getAllowRoommate())
+                            .collect(toList());
+
+
+                    if (vacationDto.getSharedRoomNumbers().contains(roomNumber)) {
+
+                        if (notAllowRoommateRoomVacations.size() > 0) isValid = false;
+
+                        if (allowRoommateRoomVacations.size() > 1) {
+                            if (roomVacationsOverlap(allowRoommateRoomVacations)) isValid = false;
+                        }
+
+                    } else {
+                        if (allRoomVacations.size() > 0) isValid = false;
+                    }
+
                 }
             }
         }
         return isValid;
+    }
+
+    private boolean roomVacationsOverlap(List<RoomVacation> roomVacationList) {
+        boolean overlap = false;
+        for (int i = 1; i < roomVacationList.size(); i++) {
+            LocalDate startDate1 = roomVacationList.get(i - 1).getVacation().getVacationDate().getArrivalDate();
+            LocalDate endDate1 = roomVacationList.get(i - 1).getVacation().getVacationDate().getLeaveDate();
+
+            LocalDate startDate2 = roomVacationList.get(i).getVacation().getVacationDate().getArrivalDate();
+            LocalDate endDate2 = roomVacationList.get(i).getVacation().getVacationDate().getLeaveDate();
+
+            if (dateRangesOverlap(startDate1, endDate1, startDate2, endDate2)) {
+                overlap = true;
+            }
+        }
+        return overlap;
+    }
+
+    private boolean dateRangesOverlap(LocalDate start1, LocalDate end1, LocalDate start2, LocalDate end2) {
+        return start1.isBefore(end2) && end1.isAfter(start2);
     }
 
 }

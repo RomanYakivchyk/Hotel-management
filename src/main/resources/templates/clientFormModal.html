@@ -5,49 +5,49 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="addClassModalLabel"
                     th:text="((*{id} == null)?'Додати':'Редагувати') + ' дані клієнта'"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" id="closeClientModal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <a id="clientFormModal" data-href="/clients/create-ajax">
                     <div class="mb-3 form-group">
-                        <label for="newClientName">Ім'я</label>
+                        <label class="form-control-label" for="newClientName">Ім'я</label>
                         <input type="text" class="form-control" id="newClientName">
                         <div class="error-alert" id="clientNameError" style="display:none;">
-                            <i class="fas fa-exclamation text-danger"></i>
-                            <span class="text-danger">Введіть ім'я</span>
+                            <!--<i class="fas fa-exclamation text-danger"></i>-->
+                            <span class="text-danger"><small>Введіть ім'я</small></span>
                         </div>
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="otherClientInfo">Додаткові дані
+                        <label class="form-control-label" for="otherClientInfo">Додаткові дані
                             <span class="text-secondary">(Прізвище, Звідки..)</span></label>
                         <input type="text" class="form-control" id="otherClientInfo">
                         <div class="error-alert" id="otherClientInfoError" style="display:none;">
-                            <i class="fas fa-exclamation text-danger"></i>
-                            <span class="text-danger">Введіть додаткові дані</span>
+                            <!--<i class="fas fa-exclamation text-danger"></i>-->
+                            <span class="text-danger"><small>Введіть додаткові дані</small></span>
                         </div>
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="phoneNumber">Номер телефону</label>
+                        <label class="form-control-label" for="phoneNumber">Номер телефону</label>
                         <input type="text" class="form-control phone" id="phoneNumber" data-mask="(000) 00-00-000">
                         <div class="error-alert" id="phoneNumberError" style="display:none;">
-                            <i class="fas fa-exclamation text-danger"></i>
-                            <span class="text-danger">Введіть номер телефону</span>
+                            <!--<i class="fas fa-exclamation text-danger"></i>-->
+                            <span class="text-danger"><small>Введіть номер телефону</small></span>
                         </div>
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="email">Email<span class="text-secondary">&nbsp;(Не обов'язково)</span></label>
+                        <label class="form-control-label" for="email">Email<span class="text-secondary">&nbsp;(Не обов'язково)</span></label>
                         <input type="text" class="form-control" id="email" placeholder="example@gmail.com">
                         <div class="error-alert" id="emailError" style="display:none;">
-                            <i class="fas fa-exclamation text-danger"></i>
-                            <span class="text-danger">Неправильний формат</span>
+                            <!--<i class="fas fa-exclamation text-danger"></i>-->
+                            <span class="text-danger"><small>Неправильний формат</small></span>
                         </div>
                         <br>
                         <hr class="mt-2">
-                        <button class="btn btn-primary btn-block" id="newClientSubmitButton">Зберегти</button>
-                        <div class="text-center mt-2" data-dismiss="modal">
-                            <a th:class="text-secondary">Відмінити</a>
+                        <button class="btn btn-info btn-block shadow-sm" id="newClientSubmitButton">Зберегти</button>
+                        <div class="text-center mt-2 btn btn-link btn-block" data-dismiss="modal">
+                            <a class="text-secondary">Відмінити</a>
                         </div>
                     </div>
                 </a>

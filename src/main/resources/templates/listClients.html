@@ -47,7 +47,7 @@
 <body class="bg-light">
 <div th:insert="header.html"></div>
 <ol class="breadcrumb bg-white shadow-sm">
-    <li class="breadcrumb-item"><a th:href="@{/}">Домашня сторінка</a></li>
+    <li class="breadcrumb-item"><a th:href="@{/}">Домашня</a></li>
     <li class="breadcrumb-item active">Клієнти</li>
 </ol>
 
@@ -60,8 +60,8 @@
             </div>
             <div class="modal-body">
                 <p class="lead mb-4"></p>
-                <a class="btn btn-primary btn-block btn-ok">Видалити</a>
-                <div class="text-center mt-2"><a class="text-secondary" href="" data-dismiss="modal">Назад</a>
+                <a class="btn btn-info btn-block btn-ok">Видалити</a>
+                <div class="text-center mt-2 btn btn-link btn-block"><a class="text-secondary" href="" data-dismiss="modal">Назад</a>
                 </div>
             </div>
         </div>
@@ -95,11 +95,11 @@
             <!--</div>-->
             <!--</div>-->
 
-            <div class="inner-addon left-addon mb-2">
-                <!--<i class="glyphicon fas fa-search text-secondary"></i>-->
-                <input class="form-control" id="inputSearch" type="text"
-                       placeholder="Введіть ім'я, прізвище або номер телефону">
-            </div>
+            <!--<div class="inner-addon left-addon mb-2">-->
+                <!--&lt;!&ndash;<i class="glyphicon fas fa-search text-secondary"></i>&ndash;&gt;-->
+                <!--<input class="form-control" id="inputSearch" type="text"-->
+                       <!--placeholder="Введіть ім'я, прізвище або номер телефону">-->
+            <!--</div>-->
             <table class="table table-hover bg-white" id="clientListTable">
                 <tbody id="clientTable">
                 <tr th:each="client : ${clients}">
@@ -132,17 +132,17 @@
             <hr>
             <div th:if="${clients.totalPages != 1}" class="form-group">
                 <ul class="pagination">
-                    <li th:class="${clients.number == 0} ? disabled">
-                        <a class="page-link shadow-sm" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}"><i
+                    <li th:class="${clients.number == 0} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">
+                        <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}"><i
                                 class="fal fa-angle-double-left"></i></a>
                     </li>
                     <!--<li th:class="${clients.number == 0} ? disabled">-->
                     <!--<a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number})}"><i-->
                     <!--class="fal fa-angle-left"></i></a>-->
                     <!--</li>-->
-                    <li th:class="${clients.number == (page - 1)} ? 'page-item active pointer-disabled'"
+                    <li th:class="${clients.number == (page - 1)} ? 'active pointer-disabled shadow-sm' : 'page-item shadow-sm'"
                         th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                        <a class="page-link shadow-sm" th:href="@{/clients(pageSize=${selectedPageSize}, page=${page})}"
+                        <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${page})}"
                            th:text="${page}"></a>
                     </li>
                     <!--<li th:class="${clients.number + 1 == clients.totalPages} ? disabled">-->
@@ -150,8 +150,8 @@
                     <!--th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number + 2})}"><i-->
                     <!--class="fal fa-angle-right"></i></a>-->
                     <!--</li>-->
-                    <li th:class="${clients.number + 1 == clients.totalPages} ? disabled">
-                        <a class="page-link shadow-sm"
+                    <li th:class="${clients.number + 1 == clients.totalPages} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">
+                        <a class="page-link"
                            th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.totalPages})}"><i
                                 class="fal fa-angle-double-right"></i></a>
                     </li>
