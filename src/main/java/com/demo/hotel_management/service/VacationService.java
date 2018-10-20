@@ -83,13 +83,16 @@ public class VacationService {
                 .collect(toList());
     }
 
-//todo
-    public List<VacationDto> getVacationsTable(LocalDate date) {
-        List<Vacation> vacationList = vacationRepository
-                .findByMonth(LocalDate.of(date.getYear(), date.getMonth(), 1),
-                        LocalDate.of(date.getYear(), date.getMonth(), date.lengthOfMonth()));
-        return vacationList.stream()
-                .map(entityDtoConverter::convertVacationEntityToDto)
-                .collect(toList());
-    }
+    //todo
+//    public List<VacationDto> getVacationsTable(LocalDate date) {
+//        LocalDate from = LocalDate.of(date.getYear(), date.getMonth(), 1);
+//        LocalDate to = date.plusMonths(1);
+//        to = LocalDate.of(to.getYear(), to.getMonth(), to.lengthOfMonth());
+//
+//        return vacationRepository
+//                .findByMonth(from, to).stream()
+//                .filter(v -> !v.getInactive())
+//                .map(entityDtoConverter::convertVacationEntityToDto)
+//                .collect(toList());
+//    }
 }

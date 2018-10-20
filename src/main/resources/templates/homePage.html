@@ -5,11 +5,11 @@
     <meta charset="utf-8">
 
     <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
-          <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
+    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
 
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link  th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- end of bootstrap kit-->
     <link rel="stylesheet" href="/footer.css">
 
@@ -17,28 +17,56 @@
 
 
     <style>
-        .table {
-            font-size: 10px;
-        }
-        .table tr,.table td {
-           height: 10px;
-           <!--text-align: center-->
-        }
-        .table>tbody>tr>td, .table>tbody>tr>th,
-        .table>thead>tr>td, .table>thead>tr>th {
+        <!--.table {-->
+            <!--font-size: 10px;-->
+        <!--}-->
+        <!--.table tr,.table td {-->
+           <!--height: 10px;-->
+           <!--&lt;!&ndash;text-align: center&ndash;&gt;-->
+        <!--}-->
+        #bookingTable>tbody>tr>td, #bookingTable>tbody>tr>th,
+        #bookingTable>thead>tr>td, #bookingTable>thead>tr>th {
           padding:0;
         }
+
+        #bookingTable { table-layout:fixed; }
+        #bookingTable > tbody > tr > td {
+            overflow: hidden;
+            vertical-align: middle;
+            height:20px;
+        }
+        #bookingTable > thead > tr > th {
+         vertical-align: middle;
+         height:20px;
+         width:26px;
+         }
+
+
+
     </style>
 
 
 </head>
-<body>
+<body class="bg-light">
+<div th:insert="header.html"></div>
+<ol class="breadcrumb bg-white shadow-sm">
+    <li class="breadcrumb-item active"><a th:href="@{/}">Домашня</a></li>
+</ol>
 <div class="container">
-    <div class="table-responsive">
-        <table class="table" id="bookingTable">
-        </table>
+    <br>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="mb-4">
+                <h4 class="card-title">Бронювання</h4>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered" id="bookingTable">
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+<div th:insert="footer.html"></div>
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
@@ -95,6 +123,9 @@
     function mergeRows(){
 
     }
-    </script>
+
+
+
+</script>
 </body>
 </html>

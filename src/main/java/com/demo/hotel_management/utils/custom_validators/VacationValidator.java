@@ -75,6 +75,13 @@ public class VacationValidator implements ConstraintValidator<ValidateVacation, 
                 }
             }
         }
+
+        if (!isValid) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
+                    .addNode("dummyVarForAlert").addConstraintViolation();
+        }
+
         return isValid;
     }
 

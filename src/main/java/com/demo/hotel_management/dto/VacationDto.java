@@ -48,4 +48,6 @@ public class VacationDto {
     @NotNull
     private Boolean inactive = false;
 
+    private Boolean dummyVarForAlert;
+
 }

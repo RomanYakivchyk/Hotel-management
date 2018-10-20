@@ -76,7 +76,7 @@
                     <!--<a class="page-link"-->
                     <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number})}"><i class="fal fa-angle-left"></i></a>-->
                     <!--</li>-->
-                    <li th:class="${vacations.number == (page - 1)} ? 'active pointer-disabled shadow-sm' : 'page-item shadow-sm'"
+                    <li th:class="${vacations.number == (page - 1)} ? 'page-item active pointer-disabled shadow-sm' : 'page-item shadow-sm'"
                         th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
                         <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=${page})}"
                            th:text="${page}"></a>

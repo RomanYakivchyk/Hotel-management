@@ -34,21 +34,22 @@
                 </div>
 
                 <input th:type="hidden" th:value="*{id}" th:field="*{id}">
-                <div class="row">
-                    <div class="col-md-6 mb-3 form-group">
+
+                    <div class="mb-3 form-group">
                         <label class="form-control-label" for="clientName">Ім'я</label>
                         <input type="text" th:field="*{name}" value="*{name}" id="clientName"
                                th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control'">
                         <div class="invalid-feedback" th:errors="*{name}"></div>
                     </div>
-                    <div class="col-md-6 mb-3 form-group">
+
+                    <div class="mb-3 form-group">
                         <label class="form-control-label" for="otherClientInfo">Додаткові дані
                             <span class="text-secondary">(Прізвище, Звідки..)</span></label>
                         <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}" id="otherClientInfo"
                                th:class="${#fields.hasErrors('otherClientInfo')} ? 'form-control is-invalid' : 'form-control'">
                         <div class="invalid-feedback" th:errors="*{otherClientInfo}"></div>
                     </div>
-                </div>
+
                 <div class="mb-3 form-group">
                     <label class="form-control-label" for="phoneNumber">Номер телефону</label>
                     <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}"
@@ -56,17 +57,19 @@
                            th:class="${#fields.hasErrors('phoneNumber')} ? 'form-control is-invalid' : 'form-control'">
                     <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
                 </div>
+
                 <div class="mb-3 form-group">
                     <label class="form-control-label" for="email">Email<span class="text-secondary">&nbsp;(Не обов'язково)</span></label>
                     <input type="text" th:field="*{email}" value="*{email}" id="email" placeholder="example@gmail.com"
                            th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control'">
                     <div class="invalid-feedback" th:errors="*{email}"></div>
+
                     <br>
                     <hr class="mt-2">
                     <button class="btn btn-info btn-block shadow-sm" type="submit">Зберегти</button>
-                    <div class="text-center mt-2 btn btn-block btn-link">
-                        <a th:class="text-secondary" th:href="@{/clients}">Відмінити</a>
-                    </div>
+                    <a th:href="@{/clients}" class="text-center mt-2 btn btn-block btn-link text-secondary">
+                        Відмінити
+                    </a>
                 </div>
             </form>
         </div>

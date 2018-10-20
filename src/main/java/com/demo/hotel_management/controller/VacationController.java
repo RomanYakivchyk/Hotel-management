@@ -41,6 +41,12 @@ public class VacationController {
     @Autowired
     private ClientService clientService;
 
+
+    @GetMapping("/")
+    public String showTable() {
+        return "homePage.html";
+    }
+
     @RequestMapping(value = {"/vacations/add", "/vacation/{vacationId}/edit"}, method = RequestMethod.GET)
     public String vacationEditForm(Model model, @PathVariable(required = false) Long vacationId, HttpServletRequest request) {
         log.debug("model={}, vacationId={}", vacationId);

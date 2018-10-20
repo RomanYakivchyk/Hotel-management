@@ -59,10 +59,9 @@
                 <h5 class="modal-title">Видалити дані клієнта?</h5>
             </div>
             <div class="modal-body">
-                <p class="lead mb-4"></p>
-                <a class="btn btn-info btn-block btn-ok">Видалити</a>
-                <div class="text-center mt-2 btn btn-link btn-block"><a class="text-secondary" href="" data-dismiss="modal">Назад</a>
-                </div>
+                <h4 class="mb-4"></h4>
+                <a class="btn btn-info btn-block btn-ok shadow-sm">Видалити</a>
+                <a class="text-center mt-2 btn btn-link btn-block text-secondary" href="" data-dismiss="modal">Назад</a>
             </div>
         </div>
     </div>
@@ -75,14 +74,14 @@
     <div class="card shadow-sm">
         <div class="card-body">
             <div class="mb-4">
-            <span class="h4 card-title">Клієнти</span>
+                <span class="h4 card-title">Клієнти</span>
                 <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
                 <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-            <a th:href="@{/clients/add}" class="btn btn-sm btn-success float-right mb-2 shadow-sm">
-                <i class="far fa-plus text-white"></i>&nbsp;Новий
-                клієнт
-            </a>
-                </div>
+                <a th:href="@{/clients/add}" class="btn btn-sm btn-success float-right mb-2 shadow-sm">
+                    <i class="far fa-plus text-white"></i>&nbsp;Новий
+                    клієнт
+                </a>
+            </div>
             <!--<a href="#" class="card-link">Another link</a>-->
 
             <!--<div class="row mb-2 align-items-end">-->
@@ -96,9 +95,9 @@
             <!--</div>-->
 
             <!--<div class="inner-addon left-addon mb-2">-->
-                <!--&lt;!&ndash;<i class="glyphicon fas fa-search text-secondary"></i>&ndash;&gt;-->
-                <!--<input class="form-control" id="inputSearch" type="text"-->
-                       <!--placeholder="Введіть ім'я, прізвище або номер телефону">-->
+            <!--&lt;!&ndash;<i class="glyphicon fas fa-search text-secondary"></i>&ndash;&gt;-->
+            <!--<input class="form-control" id="inputSearch" type="text"-->
+            <!--placeholder="Введіть ім'я, прізвище або номер телефону">-->
             <!--</div>-->
             <table class="table table-hover bg-white" id="clientListTable">
                 <tbody id="clientTable">
@@ -140,7 +139,7 @@
                     <!--<a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number})}"><i-->
                     <!--class="fal fa-angle-left"></i></a>-->
                     <!--</li>-->
-                    <li th:class="${clients.number == (page - 1)} ? 'active pointer-disabled shadow-sm' : 'page-item shadow-sm'"
+                    <li th:class="${clients.number == (page - 1)} ? 'page-item active pointer-disabled shadow-sm' : 'page-item shadow-sm'"
                         th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
                         <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${page})}"
                            th:text="${page}"></a>
@@ -185,9 +184,10 @@
 					$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
 					var link = $(e.relatedTarget)
 					var clientName = link.data('client');
-					$(this).find('.modal-body p').text(clientName);
+					$(this).find('.modal-body h4').text(clientName);
 				});
             });
+
 
 
 

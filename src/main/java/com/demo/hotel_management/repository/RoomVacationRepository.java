@@ -5,10 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RoomVacationRepository extends JpaRepository<RoomVacation, Long> {
 
-    @Query("FROM RoomVacation WHERE vac_id=:vacId")
-    List<RoomVacation> findByVacationId(@Param("vacId")Long vacId);
+    @Query(value = "FROM RoomVacation WHERE vac_id=:vacId")
+    List<RoomVacation> findByVacationId(@Param("vacId") Long vacId);
+
+//    @Query(value = "SELECT rv.id FROM RoomVacation rv JOIN Vacation vac on (rv.vac_id = vac.id) " +
+//            "WHERE vac.inactive=false AND ?1 < vac.leave_date AND ?2 > vac.arrival_date"
+//            , nativeQuery = true)
+//    List<RoomVacation> findVacsBetween(LocalDate from, LocalDate to);
 }
