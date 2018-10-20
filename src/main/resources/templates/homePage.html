@@ -76,8 +76,16 @@
         loadTableData();
      });
 
+    <!--function loadTableData(){-->
+        <!--$.get('http://localhost:8080/tableData', function(data) {-->
+          <!--$('#bookingTable').html(data);-->
+          <!--mergeCells();-->
+          <!--mergeRows();-->
+        <!--});-->
+    <!--}-->
+
     function loadTableData(){
-        $.get('http://localhost:8080/tableData', function(data) {
+        $.get('https://quiet-springs-81500.herokuapp.com/tableData', function(data) {
           $('#bookingTable').html(data);
           mergeCells();
           mergeRows();
