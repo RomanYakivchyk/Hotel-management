@@ -42,7 +42,7 @@
         #bookingTable>thead>tr>th {
             vertical-align: middle;
             height: 22px;
-            width: 22px;
+            width: 26px;
         }
 
 
@@ -147,20 +147,21 @@
         $('[data-toggle="popover"]').popover();
     });
 
-    function loadTableData() {
-        $('#loader').show();
-        $.get('http://localhost:8080/tableData', function(data) {
-            $('#loader').hide();
-            $('#bookingTable').html(data);
+    <!--function loadTableData() {-->
+        <!--$('#loader').show();-->
+        <!--$.get('http://localhost:8080/tableData', function(data) {-->
+            <!--$('#loader').hide();-->
+            <!--$('#bookingTable').html(data);-->
 
-            putArrows();
-            mergeRows();
-            mergeCells();
+            <!--putArrows();-->
+            <!--mergeRows();-->
+            <!--mergeCells();-->
+            <!--removeBorders();-->
 
 
-            $('#mainCard').css('display', 'block');
-        });
-    }
+            <!--$('#mainCard').css('display', 'block');-->
+        <!--});-->
+    <!--}-->
 
  function loadTableData() {
         $('#loader').show();
@@ -176,6 +177,25 @@
         });
     }
 
+
+    function removeBorders(){
+
+     var rows = $('#bookingTable').children('tbody').children('tr');
+        for (var i = 0; i < rows.length; i++) {
+            var cells = $(rows[i]).children('td').filter(function() {
+            return (($(this).data('arrival_0') !== true) && ($(this).data('leave_0') !== true) &&
+                    ($(this).data('arrival_1') !== true) && ($(this).data('leave_1') !== true))
+                && hasAttr($(this),'data-vac_0');
+            });
+
+            for (var j = 0; j < cells.length; j++) {
+                $(cells[j]).css('border-left','none');
+                $(cells[j]).css('border-right','none');
+            }
+        }
+     }
+
+
     function putArrows() {
         var rows = $('#bookingTable').children('tbody').children('tr');
         for (var i = 0; i < rows.length; i++) {
@@ -188,7 +208,7 @@
                     (($currCell.data('arrival_1') === true) && ($currCell.data('leave_0') === true))) {
                     $currCell.css('border-left','none');
                     $currCell.css('border-right','none');
-                    $currCell.html('<span class="bg-info btn-block"><i class="fal fa-chevron-right"></i><i class="fal fa-chevron-left"></i></span>');
+                    $currCell.html('<span class="btn-block"><img src="images/Untitled.png" width="26" height="16"></span>');
                 } else if ($currCell.data('arrival_0') === true) {
                     $currCell.css('border-right','none');
                     $currCell.html('<span class="bg-info btn-block" style="border-radius: 10px 0px 0px 10px;"></span>');
@@ -219,6 +239,7 @@
                 var $currCell = $(cells[j]);
                 var $prevCell = $(cells[j - 1]);
 
+
                 if (hasAttr($currCell, 'data-vac_0') && hasAttr($prevCell, 'data-vac_0') &&
                     $currCell.data('vac_0') === $prevCell.data('vac_0')) {
 
@@ -228,8 +249,6 @@
                     }
                     var currColspan = $primaryCell.attr('colspan');
                     $primaryCell.attr('colspan', (parseInt(currColspan) + 1));
-                    $primaryCell.css('border-left','none');
-                    $primaryCell.css('border-right','none');
                 } else {
                     $primaryCell = $currCell;
                 }
@@ -257,6 +276,13 @@
                     $prevCell.children('span').css('height', '30px');
                     $prevCell.children('span').css('text-align', 'center');
                     $prevCell.children('span').css('line-height', '30px');
+
+
+                    if(($prevCell.data('arrival_0') === true && $prevCell.data('leave_1') === true) ||
+                    ($prevCell.data('arrival_1') === true && $prevCell.data('leave_0') === true)){
+                        $prevCell.children('span').html('<img src="images/Untitled2.png" width="26" height="30">');
+                    }
+
                     $currCell.hide();
                 }
             }
