@@ -33,11 +33,6 @@ public class ClientService {
         return foundClient;
     }
 
-    public List<Client> findAll() {
-        //todo add sorting
-        return StreamSupport.stream(clientRepository.findAll().spliterator(), false)
-                .collect(Collectors.toCollection(ArrayList::new));
-    }
 
     public Page<Client> findAllPageable(Pageable pageable) {
         List<Client> clients = clientRepository.findByInactiveFalse();

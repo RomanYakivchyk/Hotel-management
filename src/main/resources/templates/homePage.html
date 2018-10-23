@@ -1,5 +1,7 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <title>Client form</title>
     <meta charset="utf-8">
@@ -17,51 +19,115 @@
 
 
     <style>
-        <!--.table {-->
-            <!--font-size: 10px;-->
-        <!--}-->
-        <!--.table tr,.table td {-->
-           <!--height: 10px;-->
-           <!--&lt;!&ndash;text-align: center&ndash;&gt;-->
-        <!--}-->
-        #bookingTable>tbody>tr>td, #bookingTable>tbody>tr>th,
-        #bookingTable>thead>tr>td, #bookingTable>thead>tr>th {
-          padding:0;
+
+        #bookingTable>tbody>tr>td,
+        #bookingTable>tbody>tr>th,
+        #bookingTable>thead>tr>td,
+        #bookingTable>thead>tr>th {
+            padding: 0;
         }
 
-        #bookingTable { table-layout:fixed; }
-        #bookingTable > tbody > tr > td {
+        #bookingTable {
+            table-layout: fixed;
+        }
+
+        #bookingTable>tbody>tr>td ,
+        #bookingTable>tbody>tr>td>span  {
             overflow: hidden;
+            text-overflow:ellipsis;
             vertical-align: middle;
-            height:20px;
+            height: 16px;
         }
-        #bookingTable > thead > tr > th {
-         vertical-align: middle;
-         height:20px;
-         width:26px;
-         }
 
+        #bookingTable>thead>tr>th {
+            vertical-align: middle;
+            height: 22px;
+            width: 22px;
+        }
+
+
+        #loader {
+            position: absolute;
+            width: 46px;
+            margin: -23px 0 0 -23px;
+            left: 50%;
+            top: 50%;
+            vertical-align: middle;
+            z-index: 1;
+        }
+
+
+        <!--.headcol {-->
+            <!--position: absolute;-->
+            <!--width: 26px;-->
+            <!--< !&#45;&#45;height: 26.5px;&ndash;&gt;-->
+            <!--background-color: white;-->
+            <!--&lt;!&ndash;margin-left: -26px;&ndash;&gt;-->
+        <!--}-->
+
+
+        .roomNum {
+            height: 44px;
+            border-top: 1px solid grey;
+            border-bottom: 1px solid grey;
+        }
 
 
     </style>
 
 
 </head>
+
 <body class="bg-light">
 <div th:insert="header.html"></div>
 <ol class="breadcrumb bg-white shadow-sm">
     <li class="breadcrumb-item active"><a th:href="@{/}">Домашня</a></li>
 </ol>
 <div class="container">
+    <div id="loader" class="text-center"><i class="fas fa-spinner text-secondary fa-spin fa-3x"></i></div>
     <br>
-    <div class="card shadow-sm">
+    <div class="card shadow-sm" id="mainCard" style="display:none;">
         <div class="card-body">
             <div class="mb-4">
                 <h4 class="card-title">Бронювання</h4>
             </div>
-            <div class="table-responsive">
-                <table class="table table-bordered" id="bookingTable">
+            <div class="row mr-2 ml-2">
+                <table class="bg-light" style="float:left;">
+                    <tr>
+                        <th style="height:22px;"></th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum">1</th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum">2</th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum">3</th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum">4</th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum">5</th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum">6</th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum">7</th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum">8</th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum">9</th>
+                    </tr>
                 </table>
+                <div class="table-responsive col" style="padding-left:0px">
+                    <table class="table table-bordered" id="bookingTable">
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -71,69 +137,138 @@
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 
+</body>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         loadTableData();
-     });
+    });
 
-    <!--function loadTableData(){-->
-        <!--$.get('http://localhost:8080/tableData', function(data) {-->
-          <!--$('#bookingTable').html(data);-->
-          <!--mergeCells();-->
-          <!--mergeRows();-->
-        <!--});-->
-    <!--}-->
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover();
+    });
 
-    function loadTableData(){
-        $.get('https://quiet-springs-81500.herokuapp.com/tableData', function(data) {
-          $('#bookingTable').html(data);
-          mergeCells();
-          mergeRows();
+    function loadTableData() {
+        $('#loader').show();
+        $.get('http://localhost:8080/tableData', function(data) {
+            $('#loader').hide();
+            $('#bookingTable').html(data);
+
+            putArrows();
+            mergeRows();
+            mergeCells();
+
+
+            $('#mainCard').css('display', 'block');
         });
     }
 
-    function mergeCells(){
+ function loadTableData() {
+        $('#loader').show();
+        $.get('https://quiet-springs-81500.herokuapp.com/tableData', function(data) {
+            $('#loader').hide();
+            $('#bookingTable').html(data);
+
+            putArrows();
+            mergeRows();
+            mergeCells();
+
+            $('#mainCard').css('display', 'block');
+        });
+    }
+
+    function putArrows() {
         var rows = $('#bookingTable').children('tbody').children('tr');
-            for(var i = 0;i<rows.length;i++){
-               var cells = $(rows[i]).children('td');
-               var $primaryCell = $(cells[0]);
-                   for(var j = 1;j<cells.length;j++){
-                        var $currCell = $(cells[j]);
-                        var $prevCell = $(cells[j-1]);
-                        if(hasAttr($currCell,'data-vac') && hasAttr($prevCell,'data-vac')){
-                            if($currCell.data('vac') === $prevCell.data('vac')){
-                                  $currCell.hide();
-                                      if(!hasAttr($primaryCell,'colspan')){
-                                            $primaryCell.attr('colspan',1);
-                                      }
-                                  var currColspan = $primaryCell.attr('colspan');
-                                  $primaryCell.attr('colspan',(parseInt(currColspan)+1));
-                            }
-                        }
-                        if(!sameVacationCells($currCell,$prevCell)){
-                            $primaryCell = $currCell;
-                        }
-                   }
+        for (var i = 0; i < rows.length; i++) {
+            var cells = $(rows[i]).children('td');
+
+            for (var j = 0; j < cells.length; j++) {
+                var $currCell = $(cells[j]);
+
+                if (($currCell.data('arrival_0') === true && ($currCell.data('leave_1') === true)) ||
+                    (($currCell.data('arrival_1') === true) && ($currCell.data('leave_0') === true))) {
+                    $currCell.css('border-left','none');
+                    $currCell.css('border-right','none');
+                    $currCell.html('<span class="bg-info btn-block"><i class="fal fa-chevron-right"></i><i class="fal fa-chevron-left"></i></span>');
+                } else if ($currCell.data('arrival_0') === true) {
+                    $currCell.css('border-right','none');
+                    $currCell.html('<span class="bg-info btn-block" style="border-radius: 10px 0px 0px 10px;"></span>');
+                    <!--<i class="fal fa-chevron-left"></i>-->
+                } else if ($currCell.data('leave_0') === true) {
+                    $currCell.css('border-left','none');
+                    $currCell.html('<span class="bg-info btn-block" style="border-radius: 0px 10px 10px 0px;"></span>');
+                    <!--<i class="fal fa-chevron-right"></i>-->
+
+                }
+
             }
+        }
     }
 
-    function sameVacationCells($cell1,$cell2){
-    var haveAttr = hasAttr($cell1,'data-vac') && hasAttr($cell2,'data-vac');
-    var sameValues = $cell1.data('vac') === $cell2.data('vac');
-    return haveAttr && sameValues;
+
+    function mergeCells() {
+        var rows = $('#bookingTable').children('tbody').children('tr');
+        for (var i = 0; i < rows.length; i++) {
+            var cells = $(rows[i]).children('td').filter(function() {
+                return (($(this).data('arrival_0') !== true) && ($(this).data('leave_0') !== true) &&
+                    ($(this).data('arrival_1') !== true) && ($(this).data('leave_1') !== true));
+            });
+
+            var $primaryCell = $(cells[0]);
+
+            for (var j = 1; j < cells.length; j++) {
+                var $currCell = $(cells[j]);
+                var $prevCell = $(cells[j - 1]);
+
+                if (hasAttr($currCell, 'data-vac_0') && hasAttr($prevCell, 'data-vac_0') &&
+                    $currCell.data('vac_0') === $prevCell.data('vac_0')) {
+
+                    $currCell.hide();
+                    if (!hasAttr($primaryCell, 'colspan')) {
+                        $primaryCell.attr('colspan', 1);
+                    }
+                    var currColspan = $primaryCell.attr('colspan');
+                    $primaryCell.attr('colspan', (parseInt(currColspan) + 1));
+                    $primaryCell.css('border-left','none');
+                    $primaryCell.css('border-right','none');
+                } else {
+                    $primaryCell = $currCell;
+                }
+            }
+        }
     }
 
-    function hasAttr($element, attrName){
+    function mergeRows() {
+
+        var rows = $('#bookingTable').children('tbody').children('tr');
+
+        for (var i = 1; i < rows.length; i = i + 2) {
+
+            for (var j = 0; j < $(rows[0]).children('td').length; j++) {
+
+                var prevCell = $(rows[i - 1]).children('td')[j];
+                var currCell = $(rows[i]).children('td')[j];
+
+                var $prevCell = $(prevCell);
+                var $currCell = $(currCell);
+
+                if ($currCell.data('vac_0') === $prevCell.data('vac_0')) {
+                    $prevCell.attr('rowspan', 2);
+                    $prevCell.css('height', '44px');
+                    $prevCell.children('span').css('height', '30px');
+                    $prevCell.children('span').css('text-align', 'center');
+                    $prevCell.children('span').css('line-height', '30px');
+                    $currCell.hide();
+                }
+            }
+        }
+
+    }
+
+
+    function hasAttr($element, attrName) {
         var attr = $element.attr(attrName);
         return typeof attr !== typeof undefined && attr !== false;
     }
-
-    function mergeRows(){
-
-    }
-
-
-
 </script>
-</body>
+
 </html>

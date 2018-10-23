@@ -27,6 +27,9 @@ public class Vacation {
 
     private Integer residentsCount;
 
+    private Integer pricePerDay;
+    private Integer totalPrice;
+
     @Embedded
     private CustomDate vacationDate;
 //    private Boolean withChildren;

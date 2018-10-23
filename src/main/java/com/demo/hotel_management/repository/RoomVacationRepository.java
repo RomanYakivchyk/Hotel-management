@@ -13,8 +13,8 @@ public interface RoomVacationRepository extends JpaRepository<RoomVacation, Long
     @Query(value = "FROM RoomVacation WHERE vac_id=:vacId")
     List<RoomVacation> findByVacationId(@Param("vacId") Long vacId);
 
-//    @Query(value = "SELECT rv.id FROM RoomVacation rv JOIN Vacation vac on (rv.vac_id = vac.id) " +
-//            "WHERE vac.inactive=false AND ?1 < vac.leave_date AND ?2 > vac.arrival_date"
-//            , nativeQuery = true)
-//    List<RoomVacation> findVacsBetween(LocalDate from, LocalDate to);
+    @Query(value = "SELECT rv.* FROM room_vacation AS rv INNER JOIN vacation AS vac ON (rv.vac_id = vac.id)" +
+            "WHERE vac.inactive=false AND ?1 < vac.leave_date AND ?2 > vac.arrival_date"
+            , nativeQuery = true)
+    List<RoomVacation> findVacsBetween(LocalDate from, LocalDate to);
 }

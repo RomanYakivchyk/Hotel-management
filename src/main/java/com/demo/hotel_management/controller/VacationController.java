@@ -106,4 +106,13 @@ public class VacationController {
         modelAndView.addObject("pager", pager);
         return modelAndView;
     }
+
+
+    @RequestMapping(path = "/vacation/{vacId}/remove", method = RequestMethod.GET)
+    public String removeVacation(@PathVariable Long vacId) {
+        log.debug("vacId={}", vacId);
+        vacationService.inactivateVacation(vacId);
+        log.debug("vacId={}", vacId);
+        return "redirect:/vacations";
+    }
 }

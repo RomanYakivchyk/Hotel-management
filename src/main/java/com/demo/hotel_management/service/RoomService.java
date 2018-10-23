@@ -1,6 +1,5 @@
 package com.demo.hotel_management.service;
 
-import com.demo.hotel_management.entity.Building;
 import com.demo.hotel_management.entity.Room;
 import com.demo.hotel_management.repository.BuildingRepository;
 import com.demo.hotel_management.repository.RoomRepository;
@@ -15,6 +14,7 @@ public class RoomService {
 
     @Autowired
     private BuildingRepository buildingRepository;
+
     @Autowired
     private RoomRepository roomRepository;
 

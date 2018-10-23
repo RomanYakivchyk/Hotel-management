@@ -51,6 +51,9 @@ public class EntityDtoConverter {
 
         vacationDto.setResidentsCount(vacation.getResidentsCount());
 
+        vacationDto.setPricePerDay(vacation.getPricePerDay());
+        vacationDto.setTotalPrice(vacation.getTotalPrice());
+
         Set<Integer> roomNumbers = vacation.getRoomVacationList().stream()
                 .map(e -> e.getRoom().getRoomNumber())
                 .collect(Collectors.toSet());
@@ -112,6 +115,9 @@ public class EntityDtoConverter {
         customDate.setLeaveDate(vacationDto.getLeaveDate());
         customDate.setLeaveDayPart(Vacation.DayPart.getDayPartByNumber(vacationDto.getLeaveDayPart()));
         vacation.setVacationDate(customDate);
+
+        vacation.setPricePerDay(vacationDto.getPricePerDay());
+        vacation.setTotalPrice(vacationDto.getTotalPrice());
 
         return vacation;
     }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Controller
+import static java.util.stream.Collectors.toList;
+
+@RestController
 public class TestRestController2 {
 
     @Autowired
@@ -31,7 +34,6 @@ public class TestRestController2 {
 
 
     @GetMapping("/tableData")
-    @ResponseBody
     public String getTableData(@RequestParam(value = "initDateString", required = false) String initDateString) {
         // date format is the following: 2018-10-18
         initMonthLengths(initDateString);
@@ -59,16 +61,16 @@ public class TestRestController2 {
         sb.append("<thead><tr>");
         for (int i = 0; i < currMonth.lengthOfMonth() + 1; i++) {
             if (i == 0) {
-                sb.append("<th class='text-center'></th>");
+//                sb.append("<th class='text-center headcol bg-light text-black' style='height:26.5px;'></th>");
             } else {
-                sb.append("<th class='text-center' scope=\"col\">").append(i).append("</th>");
+                sb.append("<th class='text-center bg-secondary'>").append(i).append("</th>");
             }
         }
         for (int i = 1; i <= nextMonth.lengthOfMonth(); i++) {
             if (i == 1) {
-                sb.append("<th class='text-center' scope=\"col\" style=\"border-left: 4px solid #18BC9C;\">").append(i).append("</th>");
+                sb.append("<th class='text-center bg-secondary' style=\"border-left: 4px solid #18BC9C;\">").append(i).append("</th>");
             } else {
-                sb.append("<th class='text-center' scope=\"col\">").append(i).append("</th>");
+                sb.append("<th class='text-center bg-secondary'>").append(i).append("</th>");
             }
         }
         sb.append("</tr></thead>");
@@ -91,58 +93,58 @@ public class TestRestController2 {
         return dateRangesOverlap(startDate1, endDate1, startDate2, endDate2);
     }
 
-//    private void splitVacsToSubLists(List<RoomVacation> list) {
-//
-//        list.stream().filter(e -> !e.getAllowRoommate()).forEach(e -> {
-//            topSubRowVacations.add(e);
-//            bottomSubRowVacations.add(e);
-//        });
-//
-//        List<RoomVacation> roomVacationList = list.stream()
-//                .filter(RoomVacation::getAllowRoommate)
-//                .collect(toList());
-//
-//        list.stream().filter(RoomVacation::getAllowRoommate).forEach(e -> {
-//            if(!topSubRowVacations.contains(e) && !bottomSubRowVacations.contains(e)){
-//
-//            }
-//            splitVacsToSubLists(e, roomVacationList);
-//        });
-//
-//
-//        VacationDto initialVacDto = vacationDtoList.get(0);
-//        topSubRowVacations.add(initialVacDto);
-//        vacationDtoList.remove(0);
-//
-//
-//    }
+    private void splitVacsToSubLists(List<RoomVacation> list) {
 
-//    private void splitVacsToSubLists(RoomVacation rv, List<RoomVacation> list) {
-//        List<RoomVacation> listCopy = new ArrayList<>(list);
-//        listCopy.remove(rv);
-//
-//        list.forEach(e -> {
-//            if (twoVacationOverlap(rv, e)) {
-//                if (topSubRowVacations.contains(rv) && !bottomSubRowVacations.contains(e))
-//                    bottomSubRowVacations.add(e);
-//                else if (!topSubRowVacations.contains(e))
-//                    topSubRowVacations.add(e);
-//                listCopy.remove(rv);
-//                if (list.size() > 0)
-//                    splitVacsToSubLists(e, listCopy);
-//            }
-//        });
-//    }
+        list.stream()
+                .filter(e -> !e.getAllowRoommate())
+                .filter(e -> !topSubRowVacations.contains(e))
+                .filter(e -> !bottomSubRowVacations.contains(e))
+                .forEach(e -> {
+                    topSubRowVacations.add(e);
+                    bottomSubRowVacations.add(e);
+                });
+
+        List<RoomVacation> roomVacationList = list.stream()
+                .filter(RoomVacation::getAllowRoommate)
+                .collect(toList());
+
+        list.stream()
+                .filter(RoomVacation::getAllowRoommate)
+                .filter(e -> !topSubRowVacations.contains(e))
+                .filter(e -> !bottomSubRowVacations.contains(e))
+                .forEach(e -> splitVacsToSubLists(e, roomVacationList));
+
+    }
+
+    private void splitVacsToSubLists(RoomVacation rv, List<RoomVacation> list) {
+        list.remove(rv);
+        List<RoomVacation> listCopy = new ArrayList<>(list);
+
+        if (!topSubRowVacations.contains(rv) && !bottomSubRowVacations.contains(rv)) {
+            topSubRowVacations.add(rv);
+        }
+
+        list.forEach(e -> {
+            if (twoVacationOverlap(rv, e)) {
+                if (topSubRowVacations.contains(rv)) {
+                    bottomSubRowVacations.add(e);
+                } else if (bottomSubRowVacations.contains(rv)) {
+                    topSubRowVacations.add(e);
+                }
+                if (listCopy.size() > 1)
+                    splitVacsToSubLists(e, listCopy);
+            }
+        });
+    }
 
 
     private String buildTableBody() {
 
-//        List<RoomVacation> roomVacationList = roomVacationRepository
-//                .findVacsBetween(LocalDate.of(currMonth.getYear(), currMonth.getMonth(), 1),
-//                        LocalDate.of(nextMonth.getYear(), nextMonth.getMonth(), nextMonth.lengthOfMonth()));
+        List<RoomVacation> roomVacationList = roomVacationRepository
+                .findVacsBetween(LocalDate.of(currMonth.getYear(), currMonth.getMonth(), 1),
+                        LocalDate.of(nextMonth.getYear(), nextMonth.getMonth(), nextMonth.lengthOfMonth()));
 
-
-//        splitVacsToSubLists(roomVacationList);
+        splitVacsToSubLists(roomVacationList);
 
         StringBuilder sb = new StringBuilder();
         sb.append("<tbody>");
@@ -150,20 +152,10 @@ public class TestRestController2 {
         Supplier<Stream<RoomVacation>> topRowStreamSupplier = () -> topSubRowVacations.stream();
         Supplier<Stream<RoomVacation>> bottomRowStreamSupplier = () -> bottomSubRowVacations.stream();
 
-        for (int i = 1; i <= ROOM_COUNT; i++) {
-            int roomNumber = i;
-//            List<RoomVacation> topRowRVList = topRowStreamSupplier.get()
-//                    .filter(e -> e.getRoom().getRoomNumber().equals(roomNumber))
-//                    .collect(toList());
-//
-//            List<RoomVacation> bottomRowRVList = bottomRowStreamSupplier.get()
-//                    .filter(e -> e.getRoom().getRoomNumber().equals(roomNumber))
-//                    .collect(toList());
-//
-//            buildSubRow(i, topRowRVList);
-//            buildSubRow(i, bottomRowRVList);
-            String topSubRow = buildSubRow(i, topSubRowVacations);
-            String bottomSubRow = buildSubRow(i, bottomSubRowVacations);
+        for (int roomNum = 1; roomNum <= ROOM_COUNT; roomNum++) {
+
+            String topSubRow = buildSubRow(roomNum, topSubRowVacations);
+            String bottomSubRow = buildSubRow(roomNum, bottomSubRowVacations);
 
             sb.append(topSubRow);
             sb.append(bottomSubRow);
@@ -188,20 +180,23 @@ public class TestRestController2 {
     private String buildSubRow(int roomNumber, List<RoomVacation> subRow) {
         StringBuilder sb = new StringBuilder();
         sb.append("<tr>");
-        for (int j = 0; j < currMonth.lengthOfMonth() + nextMonth.lengthOfMonth() + 1; j++) {
-            if (j > 0) {
-                LocalDate day = findDayOfMonth(j);
-//                String cell = buildCell(roomNumber, day, subRow);
-                String cell = "<td class='text-center'></td>";
-                sb.append(cell);
-            }
+        for (int j = 1; j < currMonth.lengthOfMonth() + nextMonth.lengthOfMonth() + 1; j++) { // j = 0
+//            if (j == 0) {
+//                sb.append("<th class='text-center headcol bg-light text-black'>").append(roomNumber).append("</th>");
+//            }
+//            else {
+            LocalDate day = findDayOfMonth(j);
+            String cell = buildCell(roomNumber, day, subRow);
+//                String cell = "<td class='text-center'></td>";
+            sb.append(cell);
+//            }
         }
         sb.append("</tr>");
         return sb.toString();
     }
 
 
-    private List<RoomVacation> roomVacationsInDay(LocalDate day, List<RoomVacation> list) {
+    private List<RoomVacation> roomVacationsInDay(LocalDate day, Integer roomNumber, List<RoomVacation> list) {
 
         return list.stream()
                 .filter(e -> {
@@ -212,18 +207,19 @@ public class TestRestController2 {
                             || (day.isAfter(arrival) && day.isBefore(leave));
 
                 })
-                .collect(Collectors.toList());
+                .filter(e -> e.getRoom().getRoomNumber().equals(roomNumber))
+                .collect(toList());
     }
 
     private String buildCell(int roomNumber, LocalDate day, List<RoomVacation> subRow) {
 
         StringBuilder sb = new StringBuilder();
 
-        List<RoomVacation> roomVacations = roomVacationsInDay(day, subRow);
+        List<RoomVacation> roomVacations = roomVacationsInDay(day, roomNumber, subRow);
 
         if (roomVacations.size() != 0) {
 
-            sb.append("<td ");
+            sb.append("<td class='text-center bg-white' ");
             for (int i = 0; i < roomVacations.size(); i++) {
                 boolean isArrivalDate = roomVacations.get(i).getVacation().getVacationDate().getArrivalDate().getDayOfMonth() == day.getDayOfMonth();
                 boolean isLeaveDate = roomVacations.get(i).getVacation().getVacationDate().getLeaveDate().getDayOfMonth() == day.getDayOfMonth();
@@ -234,10 +230,10 @@ public class TestRestController2 {
                 sb.append(String.format("data-arrival_%d=\"%s\" ", i, String.valueOf(isArrivalDate)));
                 sb.append(String.format("data-leave_%d=\"%s\" ", i, String.valueOf(isLeaveDate)));
             }
-            sb.append(String.format(">%s</td>", "X"));
+            sb.append("><span style='text-align:center;line-height:16px;' class='bg-info btn-block'>" + roomVacations.get(0).getVacation().getClient().getName() + "</span></td>");
 
         } else {
-            sb.append(String.format("<td>%s</td>", "X")); //todo replace X
+            sb.append(String.format("<td class='text-center'>%s</td>", "")); //todo replace X
         }
 
         return sb.toString();

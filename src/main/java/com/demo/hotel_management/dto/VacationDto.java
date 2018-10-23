@@ -48,6 +48,9 @@ public class VacationDto {
     @NotNull
     private Boolean inactive = false;
 
+    private Integer pricePerDay;
+    private Integer totalPrice;
+
     private Boolean dummyVarForAlert;
 
 }

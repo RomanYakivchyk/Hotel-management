@@ -37,8 +37,9 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="text-center"><i class="fal fa-exclamation-triangle fa-10x text-warning"></i></div>
-                <h5 class="mb-4 mt-4 text-primary">Кімнати на обраний період часу вже заброньовані. Оберіть іншу дату або інші кімнати.</h5>
-                <button type="button"  data-dismiss="modal" class="btn btn-secondary btn-block shadow-sm">Ок</button>
+                <h5 class="mb-4 mt-4 text-primary text-center">Кімнати на обраний період часу вже заброньовані. Оберіть іншу дату
+                    або інші кімнати.</h5>
+                <button type="button" data-dismiss="modal" class="btn btn-secondary btn-block shadow-sm">Ок</button>
             </div>
         </div>
     </div>
@@ -95,7 +96,7 @@
                 <hr class="mt-2">
                 <div class="row">
                     <div class="col-8 mb-3 form-group">
-                        <label class="form-control-label" for="arrivalDate">Дата приїзду</label>
+                        <label class="form-control-label" for="arrivalDate">Дата заселення</label>
                         <input readonly type="text" th:field="*{arrivalDate}" th:value="*{arrivalDate}"
                                th:class="${#fields.hasErrors('arrivalDate')} ? 'form-control bg-white border-danger' : 'form-control bg-white'"
                                id="arrivalDate">
@@ -115,7 +116,7 @@
                 </div>
                 <div class="row">
                     <div class="col-8 mb-3 form-group">
-                        <label class="form-control-label" for="leaveDate">Дата від'їзду</label>
+                        <label class="form-control-label" for="leaveDate">Дата виселення</label>
                         <input readonly type="text" th:field="*{leaveDate}" value="*{leaveDate}"
                                th:class="${#fields.hasErrors('leaveDate')} ? 'form-control bg-white border-danger' : 'form-control bg-white'"
                                id="leaveDate">
@@ -163,7 +164,7 @@
                         <span class="text-danger small" th:errors="*{roomNumbers}"></span>
                     </div>
                 </div>
-                <hr class="mb-3">
+
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" th:field="*{hasSharedRooms}" th:value="*{hasSharedRooms}"
                            class="custom-control-input" id="allowBringIn">
@@ -188,9 +189,22 @@
                         <span class="text-danger small" th:errors="*{sharedRoomNumbers}"></span>
                     </div>
                 </div>
-
                 <div id="vacValidationError" th:if="${#fields.hasErrors('dummyVarForAlert')}"></div>
 
+                <hr class="mb-3">
+                <div class="row">
+                    <div class="mb-3 col form-group">
+                        <label class="form-control-label" for="pricePerDay">Ціна за добу</label>
+                        <input type="number" th:field="*{pricePerDay}" th:value="*{pricePerDay}"
+                               id="pricePerDay" class="form-control">
+                    </div>
+
+                    <div class="mb-3 col form-group">
+                        <label class="form-control-label" for="totalPrice">Загальна вартість</label>
+                        <input type="number" th:field="*{totalPrice}" th:value="*{totalPrice}"
+                               id="totalPrice" class="form-control">
+                    </div>
+                </div>
                 <hr class="mt-3">
                 <button class="btn btn-info btn-block shadow-sm" type="submit">Зберегти</button>
                 <a th:href="@{/vacations}"

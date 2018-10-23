@@ -4,6 +4,7 @@ import com.demo.hotel_management.dto.VacationDto;
 import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.entity.Vacation;
+import com.demo.hotel_management.exceptions.ClientNotFoundException;
 import com.demo.hotel_management.repository.RoomVacationRepository;
 import com.demo.hotel_management.repository.VacationRepository;
 import com.demo.hotel_management.utils.EntityDtoConverter;
@@ -57,13 +58,12 @@ public class VacationService {
         return entityDtoConverter.convertVacationEntityToDto(savedVacation);
     }
 
-    public void removeVacation(Long vacationId) {
+    public void inactivateVacation(Long vacationId) {
 
         log.debug("vacationId={}", vacationId);
-
-        Vacation vacation = vacationRepository.findById(vacationId).orElseThrow(NoSuchElementException::new);
-        vacationRepository.delete(vacation);
-        log.debug("Vacation removed: vacation={}", vacation);
+        Vacation vacation = vacationRepository.findById(vacationId).orElseThrow(ClientNotFoundException::new);
+        vacationRepository.inactivate(vacationId);
+        log.debug("vacation inactivated: vacation={}", vacation);
 
     }
 
