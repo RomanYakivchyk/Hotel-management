@@ -45,12 +45,12 @@ public class Vacation {
         private LocalDate arrivalDate;
 
         @Enumerated(EnumType.STRING)
-        private Vacation.DayPart arrivalDayPart;
+        private DayPart arrivalDayPart;
 
         private LocalDate leaveDate;
 
         @Enumerated(EnumType.STRING)
-        private Vacation.DayPart leaveDayPart;
+        private DayPart leaveDayPart;
 
     }
 

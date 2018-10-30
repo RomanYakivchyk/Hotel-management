@@ -22,7 +22,7 @@ public interface VacationRepository extends PagingAndSortingRepository<Vacation,
     @Modifying
     @Transactional
     @Query(value = "UPDATE Vacation vac SET vac.inactive = true WHERE vac.id = :vac_id")
-    void inactivate( @Param("vac_id") Long vacId);
+    void inactivate(@Param("vac_id") Long vacId);
 
 }
 

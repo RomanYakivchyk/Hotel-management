@@ -18,7 +18,7 @@ public interface ClientRepository extends PagingAndSortingRepository<Client,Long
     @Modifying
     @Transactional
     @Query(value = "update Client c set c.inactive = true where c.id = :client_id")
-    void inactivate( @Param("client_id") Long clientId);
+    void inactivate(@Param("client_id") Long clientId);
 
     List<Client> findByInactiveFalse();
 
