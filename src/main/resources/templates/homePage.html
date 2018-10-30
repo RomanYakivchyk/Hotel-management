@@ -33,6 +33,7 @@
             overflow: visible;
             border-left: none;
             border-right: none;
+
         }
 
         #roomNumsTable {
@@ -62,6 +63,7 @@
             display: block;
             height: 14px;
         }
+
     </style>
 
 
@@ -113,6 +115,7 @@
                     </tr>
                     <tr>
                         <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 3, односпальне - 2">9</a></th>
+
                     </tr>
                     </thead>
                 </table>
@@ -154,6 +157,7 @@
     function cellPopover() {
 
         var popOverSettings = {
+
             placement: 'top',
             container: 'body',
             html: true,
@@ -171,6 +175,7 @@
                 var clientName = $(this).data('client');
                 var room = $(this).data('room');
                 return range + ", Кім. " + room + "<br>clientName";
+
             }
         }
         $('body').popover(popOverSettings);
@@ -269,6 +274,7 @@
                 }
 
 
+
                 if (rows[i][k].hasOwnProperty('vac_1')) {
                     addAttributes(rows[i][k], cell1, 0);
                     addAttributes(rows[i][k], cell2, 1);
@@ -276,6 +282,8 @@
                     addAttributes(rows[i][k], cell1, 0);
                     addAttributes(rows[i][k], cell2, 0);
                 }
+                roundCorners(cell1, cell2);
+
 
 
 
@@ -315,6 +323,7 @@
         }
     }
 
+
     function hasAttr($element, attrName) {
         var attr = $element.attr(attrName);
         return typeof attr !== typeof undefined && attr !== false;
@@ -344,7 +353,7 @@
         }
     }
 
-    function mergeRows() {
+    <!--function mergeRows() {-->
 
     var rows = $('#bookingTable').children('tbody').children('tr');
 
@@ -366,6 +375,13 @@
                 $prevCell.children('span').css('line-height', '30px');
 
 
+    <!--if ($currCell.data('vac_0') === $prevCell.data('vac_0')) {-->
+    <!--$prevCell.attr('rowspan', 2);-->
+    <!--$prevCell.css('height', '44px');-->
+    <!--$prevCell.children('span').css('height', '30px');-->
+    <!--$prevCell.children('span').css('text-align', 'center');-->
+    <!--$prevCell.children('span').css('line-height', '30px');-->
+
                 if (($prevCell.data('arrival_0') === true && $prevCell.data('leave_1') === true) ||
                     ($prevCell.data('arrival_1') === true && $prevCell.data('leave_0') === true)) {
                     $prevCell.children('span').html('<img src="images/Untitled2.png" width="26" height="30">');
@@ -376,6 +392,7 @@
         }
     }
 }
+
 </script>
 
 </html>
