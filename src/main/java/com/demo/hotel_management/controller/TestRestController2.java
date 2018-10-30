@@ -2,7 +2,6 @@ package com.demo.hotel_management.controller;
 
 import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.repository.RoomVacationRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.*;
-
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -115,6 +112,7 @@ public class TestRestController2 {
             boolean isArrivalDate = arrivalDate.getDayOfMonth() == day.getDayOfMonth();
             boolean isLeaveDate = leaveDate.getDayOfMonth() == day.getDayOfMonth();
 
+
             long vacId = roomVacations.get(i).getVacation().getId();
             String clientName = roomVacations.get(i).getVacation().getClient().getName();
 
@@ -158,12 +156,6 @@ public class TestRestController2 {
 //                .filter(RoomVacation::getAllowRoommate)
 //                .forEach(e -> splitVacsToSubLists(e, roomVacationList));
 
-        list.stream()
-                .filter(e -> !e.getAllowRoommate())
-                .forEach(e -> {
-                    topSubRowVacations.add(e);
-                    bottomSubRowVacations.add(e);
-                });
     }
 
 //    private void splitVacsToSubLists(RoomVacation rv, List<RoomVacation> list) {
@@ -187,6 +179,7 @@ public class TestRestController2 {
 //        });
 //    }
 
+
     private boolean noOverlaps(List<RoomVacation> roomVacationList, RoomVacation rv) {
         return roomVacationList.stream().noneMatch(e -> roomVacOverlap(e, rv));
     }
@@ -198,6 +191,7 @@ public class TestRestController2 {
         LocalDate end2 = rv2.getVacation().getVacationDate().getLeaveDate();
         return start1.isBefore(end2) && end1.isAfter(start2);
     }
+
 
     private LocalDate findDayOfMonth(int counter) {
         int dayOfMonth;
