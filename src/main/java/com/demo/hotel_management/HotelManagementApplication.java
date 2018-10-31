@@ -130,16 +130,16 @@ public class HotelManagementApplication {
     }
 
 
-    @Scheduled(fixedDelay = 600000)
-    public void scheduleFixedDelayTask() throws IOException {
-
-        String url = "https://quiet-springs-81500.herokuapp.com/clients";
-
-        HttpClient client = HttpClientBuilder.create().build();
-        HttpGet request = new HttpGet(url);
-
-        request.addHeader("User-Agent", USER_AGENT);
-        client.execute(request);
-    }
+//    @Scheduled(fixedDelay = 600000)
+//    public void scheduleFixedDelayTask() throws IOException {
+//
+//        String url = "https://quiet-springs-81500.herokuapp.com/clients";
+//
+//        HttpClient client = HttpClientBuilder.create().build();
+//        HttpGet request = new HttpGet(url);
+//
+//        request.addHeader("User-Agent", USER_AGENT);
+//        client.execute(request);
+//    }
 
 }

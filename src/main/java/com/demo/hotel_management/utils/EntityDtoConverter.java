@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -62,6 +63,7 @@ public class EntityDtoConverter {
 
         boolean hasSharedRooms = vacation.getRoomVacationList().stream()
                 .anyMatch(RoomVacation::getAllowRoommate);
+        vacationDto.setHasSharedRooms(hasSharedRooms);
 
         if (hasSharedRooms) {
             Set<Integer> sharedRoomNumbers = vacation.getRoomVacationList().stream()
@@ -79,12 +81,15 @@ public class EntityDtoConverter {
         Vacation vacation = new Vacation();
         if (vacationDto.getVacationId() != null) {
             vacation.setId(vacationDto.getVacationId());
+
             roomVacationRepository.findByVacationId(vacation.getId())
                     .forEach(e -> roomVacationRepository.delete(e));
         }
 
         List<RoomVacation> roomVacations = new ArrayList<>();
-        List<Room> rooms = roomRepository.findByRoomNumberIn(vacationDto.getRoomNumbers());
+        List<Room> rooms = StreamSupport.stream(roomRepository.findAll().spliterator(), false)
+                .filter(e->vacationDto.getRoomNumbers().contains(e.getRoomNumber()))
+                .collect(Collectors.toList());
 
         rooms.forEach(e -> {
             RoomVacation roomVacation = new RoomVacation();

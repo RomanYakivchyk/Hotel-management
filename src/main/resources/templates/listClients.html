@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <title>Clients</title>
     <meta charset="utf-8">
-    <!--fonts awesome-->
-    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
-    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
 
-    <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
     <link th:href="@{/footer.css}" rel="stylesheet">
     <!-- pagination -->
-    <link th:href="@{/pagination/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/pagination/css/style.css}" rel="stylesheet" />
 
     <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/data-tables/datatables.css}">
 
     <!--<style>-->
     <!--/* enable absolute positioning */-->
@@ -40,6 +39,17 @@
 
     <!--</style>-->
 
+    <style>
+        #dataTableButtons button {
+            background-color:#ecf0f1;
+            color:black;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8203125rem;
+            line-height: 1.5;
+        }
+
+    </style>
+
 </head>
 
 <!--<body style="background-color:#E9EBEE">-->
@@ -51,8 +61,8 @@
     <li class="breadcrumb-item active">Клієнти</li>
 </ol>
 
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -77,124 +87,140 @@
                 <span class="h4 card-title">Клієнти</span>
                 <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
                 <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                <a th:href="@{/clients/add}" class="btn btn-sm btn-success float-right mb-2 shadow-sm">
+                <a th:href="@{/clients/update}" class="btn btn-success float-right mb-2 shadow-sm">
                     <i class="far fa-plus text-white"></i>&nbsp;Новий
                     клієнт
                 </a>
             </div>
-            <!--<a href="#" class="card-link">Another link</a>-->
 
-            <!--<div class="row mb-2 align-items-end">-->
-            <!--<div class="col">-->
-            <!--<h3>Клієнти</h3>-->
-            <!--</div>-->
-            <!--<div class="col">-->
-            <!--<a class="btn btn-sm btn-link float-right"-->
-            <!--th:href="@{/clients/add}"><i class="far fa-user"></i>&nbsp;Новий клієнт</a>-->
-            <!--</div>-->
-            <!--</div>-->
 
-            <!--<div class="inner-addon left-addon mb-2">-->
-            <!--&lt;!&ndash;<i class="glyphicon fas fa-search text-secondary"></i>&ndash;&gt;-->
-            <!--<input class="form-control" id="inputSearch" type="text"-->
-            <!--placeholder="Введіть ім'я, прізвище або номер телефону">-->
-            <!--</div>-->
-            <table class="table table-hover bg-white" id="clientListTable">
-                <tbody id="clientTable">
-                <tr th:each="client : ${clients}">
-                    <td>
-                        <a th:text="${client.name + ' ' + client.otherClientInfo}"
-                           th:href="@{/client/{clientId}/edit(clientId=${client.id})}"
-                           th:class="text-primary"></a>
-                        <div><a th:href="'tel:'+${client.phoneNumber}" th:text="${client.phoneNumber}"></a></div>
-                        <div th:class="text-dark" th:text="${client.email}"></div>
-                    </td>
-                    <td><p class="float-right">
-                        <!--<span><a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">-->
-                        <!--<i class="fas fa-pencil-alt" aria-hidden="true"></i></a>&emsp;&emsp;</span>-->
-                        <span><a href="#" th:data-href="@{/client/{clientId}/remove(clientId=${client.id})}"
-                                 th:data-client="${client.name}+' '+${client.otherClientInfo}" data-toggle="modal"
-                                 data-target="#confirm-delete">
-									<i class="fal fa-times text-secondary"></i>
-                </a></span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <!--<div class="row">-->
-            <!--<div class="form-group col-md-1 col-3">-->
-            <!--<select class="form-control pagination" id="clientsPageSizeSelect">-->
-            <!--<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"-->
-            <!--th:selected="${pageSize} == ${selectedPageSize}"></option>-->
-            <!--</select>-->
-            <!--</div>-->
-            <hr>
-            <div th:if="${clients.totalPages != 1}" class="form-group">
-                <ul class="pagination">
-                    <li th:class="${clients.number == 0} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">
-                        <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}"><i
-                                class="fal fa-angle-double-left"></i></a>
-                    </li>
-                    <!--<li th:class="${clients.number == 0} ? disabled">-->
-                    <!--<a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number})}"><i-->
-                    <!--class="fal fa-angle-left"></i></a>-->
-                    <!--</li>-->
-                    <li th:class="${clients.number == (page - 1)} ? 'page-item active pointer-disabled shadow-sm' : 'page-item shadow-sm'"
-                        th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                        <a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${page})}"
-                           th:text="${page}"></a>
-                    </li>
-                    <!--<li th:class="${clients.number + 1 == clients.totalPages} ? disabled">-->
-                    <!--<a class="page-link"-->
-                    <!--th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number + 2})}"><i-->
-                    <!--class="fal fa-angle-right"></i></a>-->
-                    <!--</li>-->
-                    <li th:class="${clients.number + 1 == clients.totalPages} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">
-                        <a class="page-link"
-                           th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.totalPages})}"><i
-                                class="fal fa-angle-double-right"></i></a>
-                    </li>
-                </ul>
+            <div class="table-responsive">
+
+                <table class="table table-hover bg-white" id="clientListTable">
+                    <thead class="bg-dark">
+                    <tr>
+                        <th>Ім'я</th>
+                        <th>Додаткова інф.</th>
+                        <th>Телефон</th>
+                        <th>Email</th>
+                        <!--<th>Статус</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="client : ${clients}">
+                        <td>
+                            <a th:text="${client.name}" th:href="@{/client/{clientId}/edit(clientId=${client.id})}" th:class="text-primary"></a>
+                        </td>
+                        <td>
+                            <div th:text="${client.otherClientInfo}"></div>
+                        </td>
+                        <td>
+                            <div><a th:href="'tel:'+${client.phoneNumber}" th:text="${client.phoneNumber}"></a></div>
+                        </td>
+                        <td>
+                            <div th:class="text-dark" th:text="${client.email}"></div>
+                        </td>
+
+                        <!--<td>-->
+                        <!--&lt;!&ndash;<span><a th:href="@{/client/{clientId}/edit(clientId=${client.id})}">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<i class="fas fa-pencil-alt" aria-hidden="true"></i></a>&emsp;&emsp;</span>&ndash;&gt;-->
+                        <!--<span class="float-right"><a href="#"-->
+                        <!--th:data-href="@{/client/{clientId}/remove(clientId=${client.id})}"-->
+                        <!--th:data-client="${client.name}+' '+${client.otherClientInfo}"-->
+                        <!--data-toggle="modal"-->
+                        <!--data-target="#confirm-delete">-->
+                        <!--<i class="fal fa-times text-secondary"></i>-->
+                        <!--</a></span>-->
+                        <!--</td>-->
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
+            <div class="mt-2 float-left" id="dataTableButtons">
+            </div>
+            <!--<hr>-->
+            <!--<div th:if="${clients.totalPages != 1}" class="form-group">-->
+            <!--<ul class="pagination">-->
+            <!--<li th:class="${clients.number == 0} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">-->
+            <!--<a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=1)}"><i-->
+            <!--class="fal fa-angle-double-left"></i></a>-->
+            <!--</li>-->
+            <!--&lt;!&ndash;<li th:class="${clients.number == 0} ? disabled">&ndash;&gt;-->
+            <!--&lt;!&ndash;<a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number})}"><i&ndash;&gt;-->
+            <!--&lt;!&ndash;class="fal fa-angle-left"></i></a>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--<li th:class="${clients.number == (page - 1)} ? 'page-item active pointer-disabled shadow-sm' : 'page-item shadow-sm'"-->
+            <!--th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">-->
+            <!--<a class="page-link" th:href="@{/clients(pageSize=${selectedPageSize}, page=${page})}"-->
+            <!--th:text="${page}"></a>-->
+            <!--</li>-->
+            <!--&lt;!&ndash;<li th:class="${clients.number + 1 == clients.totalPages} ? disabled">&ndash;&gt;-->
+            <!--&lt;!&ndash;<a class="page-link"&ndash;&gt;-->
+            <!--&lt;!&ndash;th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.number + 2})}"><i&ndash;&gt;-->
+            <!--&lt;!&ndash;class="fal fa-angle-right"></i></a>&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+            <!--<li th:class="${clients.number + 1 == clients.totalPages} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">-->
+            <!--<a class="page-link"-->
+            <!--th:href="@{/clients(pageSize=${selectedPageSize}, page=${clients.totalPages})}"><i-->
+            <!--class="fal fa-angle-double-right"></i></a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
         </div>
 
     </div>
 </div>
-
-
 <!--</div>-->
 <div th:insert="footer.html"></div>
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" charset="utf8" th:src="@{/data-tables/datatables.js}"></script>
+
 <script>
-			$(document).ready(function(){
-		      <!--jQuery(".contact-info").text(function() {-->
-              <!--jQuery(this).replaceWith(-->
-                <!--'<div><a href="tel:' + $(this).text()+ '">' + jQuery(this).text() + "</a></div>"-->
-              <!--);-->
-            <!--});-->
-				$("#inputSearch").on("keyup", function() {
-					var value = $(this).val().toLowerCase();
-					$("#clientTable tr").filter(function() {
-						$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-					});
-				});
-				$('#confirm-delete').on('show.bs.modal', function(e) {
-					$(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-					var link = $(e.relatedTarget)
-					var clientName = link.data('client');
-					$(this).find('.modal-body h4').text(clientName);
-				});
+        $(document).ready(function() {
+
+
+            var table = $('#clientListTable').DataTable({
+                <!--compact: true,-->
+                buttons: ['excel', 'pdf'],
+                "language": {
+                    "sProcessing": "Зачекайте...",
+                    "sLengthMenu": "Показати _MENU_ записів",
+                    "sZeroRecords": "Записи відсутні.",
+                    "sInfo": "Записи з _START_ по _END_ із _TOTAL_ записів",
+                    "sInfoEmpty": "Записи з 0 по 0 із 0 записів",
+                    "sInfoFiltered": "(відфільтровано з _MAX_ записів)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Пошук:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "Перша",
+                        "sPrevious": "<",
+                        "sNext": ">",
+                        "sLast": "Остання"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": активувати для сортування стовпців за зростанням",
+                        "sSortDescending": ": активувати для сортування стовпців за спаданням"
+                    }
+                }
             });
 
+            table.buttons().container().appendTo('#dataTableButtons');
+        });
 
-
-
-
-
-
-</script>
-<script th:src="@{/pagination/js/app.js}"></script>
+        $(document).ready(function() {
+            $('#confirm-delete').on('show.bs.modal', function(e) {
+                $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+                var link = $(e.relatedTarget)
+                var clientName = link.data('client');
+                $(this).find('.modal-body h4').text(clientName);
+            });
+        });
+    </script>
+<!--<script th:src="@{/pagination/js/app.js}"></script>-->
 </body>
+
 </html>

@@ -3,10 +3,13 @@ package com.demo.hotel_management.controller;
 import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.repository.RoomVacationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.*;
@@ -27,30 +30,48 @@ public class TestRestController2 {
     private LocalDate currMonth;
     private LocalDate nextMonth;
 
-    @GetMapping("/tableData")
-    public List<List> getTableData(@RequestParam(value = "initDateString", required = false) String initDateString) {
+    @GetMapping("/tableData/{monthDirection}")
+    public List<List> getTableData(@PathVariable String monthDirection,
+                                   @CookieValue("initDateString") String initDateString,
+                                   HttpServletResponse response) {
         // date format is the following: 2018-10-18
-        System.out.println("initDateString: " + initDateString);
-        initMonthLengths(initDateString);
-        return buildTable();
-    }
-
-    private void initMonthLengths(String initDateString) {
         LocalDate initLocalDate = LocalDate.now();
-        if (initDateString != null) {
-            System.out.println("LOL");
-            initLocalDate = LocalDate.parse(initDateString);
+
+        if (initDateString == null) {
+            initDateString = initLocalDate.toString();
         }
+
+        switch (monthDirection) {
+            case "curr":
+                initLocalDate = LocalDate.now();
+                break;
+            case "prev":
+                initLocalDate = LocalDate.parse(initDateString).minusMonths(1);
+                break;
+            case "next":
+                initLocalDate = LocalDate.parse(initDateString).plusMonths(1);
+                break;
+        }
+        Cookie cookie = new Cookie("initDateString",initLocalDate.toString());
+        response.addCookie(cookie);
+
         currMonth = initLocalDate;
         nextMonth = initLocalDate.plusMonths(1);
-    }
 
+        return buildTable();
+    }
 
     private List<List> buildTable() {
 
         List<RoomVacation> roomVacationList = roomVacationRepository
                 .findVacsBetween(LocalDate.of(currMonth.getYear(), currMonth.getMonth(), 1),
-                        LocalDate.of(nextMonth.getYear(), nextMonth.getMonth(), nextMonth.lengthOfMonth()));
+                        LocalDate.of(nextMonth.getYear(), nextMonth.getMonth(), nextMonth.lengthOfMonth()))
+                .stream()
+                .sorted((rv1, rv2) -> {
+                    LocalDate arrDate1 = rv1.getVacation().getVacationDate().getArrivalDate();
+                    LocalDate arrDate2 = rv2.getVacation().getVacationDate().getArrivalDate();
+                    return (!arrDate1.equals(arrDate2)) ? (arrDate1.isAfter(arrDate2)) ? 1 : -1 : 0;
+                }).collect(toList());
 
         splitVacsToSubLists(roomVacationList);
 
@@ -150,38 +171,12 @@ public class TestRestController2 {
                         bottomSubRowVacations.add(e);
                     }
                 });
-//
-//
-//        list.stream()
-//                .filter(RoomVacation::getAllowRoommate)
-//                .forEach(e -> splitVacsToSubLists(e, roomVacationList));
-
     }
 
-//    private void splitVacsToSubLists(RoomVacation rv, List<RoomVacation> list) {
-//        list.remove(rv);
-//        List<RoomVacation> listCopy = new ArrayList<>(list);
-//
-//        if (!topSubRowVacations.contains(rv) && !bottomSubRowVacations.contains(rv)) {
-//            topSubRowVacations.add(rv);
-//        }
-//
-//        list.forEach(e -> {
-//            if (twoVacationOverlap(rv, e)) {
-//                if (topSubRowVacations.contains(rv) && !bottomSubRowVacations.contains(e)) {
-//                    bottomSubRowVacations.add(e);
-//                } else if (bottomSubRowVacations.contains(rv) && !topSubRowVacations.contains(e)) {
-//                    topSubRowVacations.add(e);
-//                }
-//                if (listCopy.size() > 1)
-//                    splitVacsToSubLists(e, listCopy);
-//            }
-//        });
-//    }
-
-
     private boolean noOverlaps(List<RoomVacation> roomVacationList, RoomVacation rv) {
-        return roomVacationList.stream().noneMatch(e -> roomVacOverlap(e, rv));
+        return roomVacationList.stream()
+                .filter(e -> e.getRoom().getRoomNumber().equals(rv.getRoom().getRoomNumber()))
+                .noneMatch(e -> roomVacOverlap(e, rv));
     }
 
     private boolean roomVacOverlap(RoomVacation rv1, RoomVacation rv2) {
@@ -198,7 +193,8 @@ public class TestRestController2 {
         LocalDate date = currMonth;
         if (counter > currMonth.lengthOfMonth()) {
             date = date.plusMonths(1);
-            dayOfMonth = counter % currMonth.lengthOfMonth();
+            dayOfMonth = counter - currMonth.lengthOfMonth();
+
         } else {
             dayOfMonth = counter;
         }

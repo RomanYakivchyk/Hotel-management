@@ -39,29 +39,35 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping("/clients")
-    public ModelAndView listClients(@RequestParam("pageSize") Optional<Integer> pageSize,
-                                    @RequestParam("page") Optional<Integer> page) {
-        ModelAndView modelAndView = new ModelAndView("listClients.html");
-
-        // Evaluate page size. If requested parameter is null, return initial
-        // page size
-        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-        // Evaluate page. If requested parameter is null or less than 0 (to
-        // prevent exception), return initial size. Otherwise, return value of
-        // param. decreased by 1.
-        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-
-        Page<Client> clients = clientService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
-        Pager pager = new Pager(clients.getTotalPages(), clients.getNumber(), BUTTONS_TO_SHOW);
-
-        modelAndView.addObject("clients", clients);
-        modelAndView.addObject("selectedPageSize", evalPageSize);
-        modelAndView.addObject("pageSizes", PAGE_SIZES);
-        modelAndView.addObject("pager", pager);
-        return modelAndView;
+    public String listClients(Model model) {
+        model.addAttribute("clients", clientService.findAllActive());
+        return "listClients.html";
     }
 
-    @RequestMapping(value = {"/clients/add", "/client/{clientId}/edit"}, method = RequestMethod.GET)
+//    @GetMapping("/clients")
+//    public ModelAndView listClients(@RequestParam("pageSize") Optional<Integer> pageSize,
+//                                    @RequestParam("page") Optional<Integer> page) {
+//        ModelAndView modelAndView = new ModelAndView("listClients.html");
+//
+//        // Evaluate page size. If requested parameter is null, return initial
+//        // page size
+//        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+//        // Evaluate page. If requested parameter is null or less than 0 (to
+//        // prevent exception), return initial size. Otherwise, return value of
+//        // param. decreased by 1.
+//        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+//
+//        Page<Client> clients = clientService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
+//        Pager pager = new Pager(clients.getTotalPages(), clients.getNumber(), BUTTONS_TO_SHOW);
+//
+//        modelAndView.addObject("clients", clients);
+//        modelAndView.addObject("selectedPageSize", evalPageSize);
+//        modelAndView.addObject("pageSizes", PAGE_SIZES);
+//        modelAndView.addObject("pager", pager);
+//        return modelAndView;
+//    }
+
+    @RequestMapping(value = {"/clients/update", "/client/{clientId}/edit"}, method = RequestMethod.GET)
     public String clientEditForm(Model model, @PathVariable(required = false) Long clientId) {
         log.debug("model={}, clientId={}", clientId);
 
@@ -95,8 +101,7 @@ public class ClientController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @ResponseBody
     public String[] clientEditAjax(Client client) {
-        System.out.println("================================");
-        System.out.println(client);
+
         Client createdClient = clientService.saveClient(client);
         String clientInfo = createdClient.getName() + " " + createdClient.getOtherClientInfo() + " " + createdClient.getPhoneNumber();
         String clientId = String.valueOf(createdClient.getId());

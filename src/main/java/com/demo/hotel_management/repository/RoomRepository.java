@@ -11,6 +11,6 @@ import java.util.Set;
 @Repository
 public interface RoomRepository extends CrudRepository<Room, Long> {
 
-    @Query("FROM Room where room_number IN :roomNumbers")
-    List<Room> findByRoomNumberIn(@Param("roomNumbers") Set<Integer> roomNumbers);
+//    @Query("FROM Room where room_number IN :roomNumbers")
+//    List<Room> findByRoomNumberIn(@Param("roomNumbers") Set<Integer> roomNumbers);
 }

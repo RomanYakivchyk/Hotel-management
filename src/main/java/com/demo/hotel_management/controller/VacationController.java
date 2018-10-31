@@ -47,7 +47,7 @@ public class VacationController {
         return "homePage.html";
     }
 
-    @RequestMapping(value = {"/vacations/add", "/vacation/{vacationId}/edit"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/vacations/update", "/vacation/{vacationId}/edit"}, method = RequestMethod.GET)
     public String vacationEditForm(Model model, @PathVariable(required = false) Long vacationId, HttpServletRequest request) {
         log.debug("model={}, vacationId={}", vacationId);
 
@@ -83,29 +83,36 @@ public class VacationController {
         return "redirect:/vacations";
     }
 
-
     @GetMapping("/vacations")
-    public ModelAndView listClients(@RequestParam("pageSize") Optional<Integer> pageSize,
-                                    @RequestParam("page") Optional<Integer> page) {
-        ModelAndView modelAndView = new ModelAndView("listVacations.html");
-
-        // Evaluate page size. If requested parameter is null, return initial
-        // page size
-        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-        // Evaluate page. If requested parameter is null or less than 0 (to
-        // prevent exception), return initial size. Otherwise, return value of
-        // param. decreased by 1.
-        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-
-        Page<VacationDto> vacations = vacationService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
-        Pager pager = new Pager(vacations.getTotalPages(), vacations.getNumber(), BUTTONS_TO_SHOW);
-
-        modelAndView.addObject("vacations", vacations);
-        modelAndView.addObject("selectedPageSize", evalPageSize);
-        modelAndView.addObject("pageSizes", PAGE_SIZES);
-        modelAndView.addObject("pager", pager);
-        return modelAndView;
+    public String listClients(Model model){
+        model.addAttribute("vacations",vacationService.getAllActiveVacations());
+        return "listVacations.html";
     }
+
+//    @GetMapping("/vacations")
+//    public ModelAndView listClients(@RequestParam("pageSize") Optional<Integer> pageSize,
+//                                    @RequestParam("page") Optional<Integer> page) {
+//        ModelAndView modelAndView = new ModelAndView("listVacations.html");
+//
+//        // Evaluate page size. If requested parameter is null, return initial
+//        // page size
+//        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
+//        // Evaluate page. If requested parameter is null or less than 0 (to
+//        // prevent exception), return initial size. Otherwise, return value of
+//        // param. decreased by 1.
+//        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+//
+//        Page<VacationDto> vacations = vacationService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
+//        Pager pager = new Pager(vacations.getTotalPages(), vacations.getNumber(), BUTTONS_TO_SHOW);
+//
+//        modelAndView.addObject("vacations", vacations);
+//        modelAndView.addObject("selectedPageSize", evalPageSize);
+//        modelAndView.addObject("pageSizes", PAGE_SIZES);
+//        modelAndView.addObject("pager", pager);
+//        return modelAndView;
+//    }
+
+
 
 
     @RequestMapping(path = "/vacation/{vacId}/remove", method = RequestMethod.GET)

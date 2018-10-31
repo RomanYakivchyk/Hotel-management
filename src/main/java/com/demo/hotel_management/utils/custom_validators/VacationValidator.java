@@ -27,19 +27,19 @@ public class VacationValidator implements ConstraintValidator<ValidateVacation, 
     @Autowired
     private VacationRepository vacationRepository;
 
-    @Override //todo  test this logic
+    @Override //todo  remake logic to be more simple and straight
     public boolean isValid(VacationDto vacationDto, ConstraintValidatorContext context) {
 
         boolean isValid = true;
 
         if (vacationDto.getArrivalDate() != null && vacationDto.getLeaveDate() != null) {
 
-            List<Vacation> allActiveVacations = vacationRepository.findByInactiveFalse();
 
-            List<RoomVacation> overlappedVacations = allActiveVacations.stream()
+            List<RoomVacation> overlappedVacations = vacationRepository.findByInactiveFalse().stream()
                     .filter(e -> dateRangesOverlap(vacationDto.getArrivalDate(), vacationDto.getLeaveDate(),
                             e.getVacationDate().getArrivalDate(), e.getVacationDate().getLeaveDate()))
                     .flatMap(e -> e.getRoomVacationList().stream())
+                    .filter(e -> !e.getVacation().getId().equals(vacationDto.getVacationId()))
                     .collect(toList());
 
 

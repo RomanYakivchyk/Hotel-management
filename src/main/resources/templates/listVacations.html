@@ -15,7 +15,19 @@
 
     <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" th:href="@{/data-tables/datatables.css}">
+
     <link rel="stylesheet" href="/footer.css">
+
+    <style>
+        #dataTableButtons button {
+            background-color:#ecf0f1;
+            color:black;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8203125rem;
+            line-height: 1.5;
+        }
+    </style>
 
 </head>
 <body class="bg-light">
@@ -32,12 +44,12 @@
                 <span class="h4 card-title">Бронювання</span>
                 <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
                 <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                <a th:href="@{/vacations/add}" class="btn btn-sm btn-success float-right mb-2 shadow-sm">
+                <a th:href="@{/vacations/update}" class="btn btn-success float-right mb-2 shadow-sm">
                     <i class="far fa-plus text-white"></i>&nbsp;Створити</a>
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered table-hover bg-white rounded shadow-sm mt-4">
-                    <thead class="bg-primary">
+                <table id="vacListTable" class="table table-bordered table-hover bg-white rounded shadow-sm mt-4">
+                    <thead class="bg-dark">
                     <tr>
                         <th>Клієнт</th>
                         <th>К-сть</th>
@@ -59,39 +71,36 @@
                 </table>
             </div>
 
-            <!--<div class="row">-->
-            <!--<div class="form-group col-md-1 col-3">-->
-            <!--<select class="form-control pagination" id="vacationsPageSizeSelect">-->
-            <!--<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}"-->
-            <!--th:selected="${pageSize} == ${selectedPageSize}"></option>-->
-            <!--</select>-->
-            <!--</div>-->
-            <div th:if="${vacations.totalPages != 1}" class="form-group">
-                <ul class="pagination">
-                    <li th:class="${vacations.number == 0} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">
-                        <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=1)}"><i
-                                class="fal fa-angle-double-left"></i></a>
-                    </li>
-                    <!--<li th:class="${vacations.number == 0} ? disabled">-->
-                    <!--<a class="page-link"-->
-                    <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number})}"><i class="fal fa-angle-left"></i></a>-->
-                    <!--</li>-->
-                    <li th:class="${vacations.number == (page - 1)} ? 'page-item active pointer-disabled shadow-sm' : 'page-item shadow-sm'"
-                        th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                        <a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=${page})}"
-                           th:text="${page}"></a>
-                    </li>
-                    <!--<li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">-->
-                    <!--<a class="page-link"-->
-                    <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number + 2})}"><i class="fal fa-angle-right"></i></a>-->
-                    <!--</li>-->
-                    <li th:class="${vacations.number + 1 == vacations.totalPages} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">
-                        <a class="page-link"
-                           th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.totalPages})}"><i
-                                class="fal fa-angle-double-right"></i></a>
-                    </li>
-                </ul>
+            <div class="mt-2 float-left" id="dataTableButtons">
             </div>
+
+            <!--<div th:if="${vacations.totalPages != 1}" class="form-group">-->
+                <!--<ul class="pagination">-->
+                    <!--<li th:class="${vacations.number == 0} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">-->
+                        <!--<a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=1)}"><i-->
+                                <!--class="fal fa-angle-double-left"></i></a>-->
+                    <!--</li>-->
+                    <!--&lt;!&ndash;<li th:class="${vacations.number == 0} ? disabled">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a class="page-link"&ndash;&gt;-->
+                    <!--&lt;!&ndash;th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number})}"><i class="fal fa-angle-left"></i></a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                    <!--<li th:class="${vacations.number == (page - 1)} ? 'page-item active pointer-disabled shadow-sm' : 'page-item shadow-sm'"-->
+                        <!--th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">-->
+                        <!--<a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=${page})}"-->
+                           <!--th:text="${page}"></a>-->
+                    <!--</li>-->
+                    <!--&lt;!&ndash;<li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<a class="page-link"&ndash;&gt;-->
+                    <!--&lt;!&ndash;th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number + 2})}"><i class="fal fa-angle-right"></i></a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                    <!--<li th:class="${vacations.number + 1 == vacations.totalPages} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">-->
+                        <!--<a class="page-link"-->
+                           <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.totalPages})}"><i-->
+                                <!--class="fal fa-angle-double-right"></i></a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+
         </div>
     </div>
 </div>
@@ -101,8 +110,41 @@
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script type="text/javascript" charset="utf8" th:src="@{/data-tables/datatables.js}"></script>
 
 <script>
+
+
+$(document).ready( function () {
+    var table = $('#vacListTable').DataTable({
+    buttons: ['excel', 'pdf'],
+    "language": {
+                    "sProcessing": "Зачекайте...",
+                    "sLengthMenu": "Показати _MENU_ записів",
+                    "sZeroRecords": "Записи відсутні.",
+                    "sInfo": "Записи з _START_ по _END_ із _TOTAL_ записів",
+                    "sInfoEmpty": "Записи з 0 по 0 із 0 записів",
+                    "sInfoFiltered": "(відфільтровано з _MAX_ записів)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Пошук:",
+                    "sUrl": "",
+                    "oPaginate": {
+                        "sFirst": "Перша",
+                        "sPrevious": "<",
+                        "sNext": ">",
+                        "sLast": "Остання"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": активувати для сортування стовпців за зростанням",
+                        "sSortDescending": ": активувати для сортування стовпців за спаданням"
+                    }
+                }
+    });
+
+    table.buttons().container().appendTo('#dataTableButtons');
+} );
+
+
 			$(document).ready(function(){
 				$("#inputSearch").on("keyup", function() {
 					var value = $(this).val().toLowerCase();
@@ -123,6 +165,6 @@
 
 
 </script>
-<script th:src="@{/pagination/js/app.js}"></script>
+<!--<script th:src="@{/pagination/js/app.js}"></script>-->
 </body>
 </html>

@@ -1,4 +1,3 @@
-<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
@@ -62,6 +61,10 @@
             display: block;
             height: 14px;
         }
+
+
+
+
     </style>
 
 
@@ -78,8 +81,14 @@
     <div class="card shadow-sm" id="mainCard" style="display:none;">
         <div class="card-body">
             <div class="mb-4">
-                <h4 class="card-title">Бронювання</h4>
+                <span class="card-title h4">Бронювання</span>
+                <span class="btn-group float-right" role="group">
+                        <button type="button" id="prevMonth" class="btn btn-sm btn-info">Prev</button>
+                        <button type="button" id="currMonth" class="btn btn-sm btn-info">Curr</button>
+                        <button type="button" id="nextMonth" class="btn btn-sm btn-info">Next</button>
+                    </span>
             </div>
+
             <div class="row mr-2 ml-2">
                 <table class="bg-light" id="roomNumsTable" style="float:left;">
                     <thead>
@@ -139,10 +148,21 @@
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
 </body>
 <script>
     $(document).ready(function() {
-        loadTableData();
+        loadTableData("curr");
+
+        $('#prevMonth').click(function() {
+            loadTableData("prev");
+        });
+        $('#currMonth').click(function() {
+            loadTableData("curr");
+        });
+        $('#nextMonth').click(function() {
+            loadTableData("next");
+        });
     });
 
     $(document).ready(function() {
@@ -186,11 +206,15 @@
 
     }
 
-    function loadTableData() {
+    function loadTableData(direction) {
         $('#loader').show();
-        $.get('https://quiet-springs-81500.herokuapp.com/tableData', function(data) {
-            <!--https://quiet-springs-81500.herokuapp.com/tableData-->
-            <!--http://localhost:8080/tableData-->
+
+        $('#bookingTable thead').empty();
+        $('#bookingTable tbody').empty();
+
+        $.get('https://quiet-springs-81500.herokuapp.com/tableData/' + direction, function(data) {
+            <!--https://quiet-springs-81500.herokuapp.com/tableData/-->
+            <!--http://localhost:8080/tableData/-->
             $('#loader').hide();
 
             buildTableHeader(data[0]);
@@ -244,7 +268,7 @@
         for (var key in data) {
             if (key.endsWith(index)) {
                 <!--$obj.data(key.slice(0, -2), data[key]);-->
-                $obj.attr('data-'+key.slice(0, -2), data[key]);
+                $obj.attr('data-' + key.slice(0, -2), data[key]);
                 $obj.html("<span class='bg-info innerSpan'></span>");
                 $obj.addClass('cell');
             }
@@ -280,17 +304,17 @@
 
 
                 <!--if(i%2==0){-->
-                    <!--var prevCell1 = tBody.getElementsByTagName("tr")[i-1].cells[j];-->
-                    <!--var prevCell2 = tBody.getElementsByTagName("tr")[i-1].cells[j+1];-->
+                <!--var prevCell1 = tBody.getElementsByTagName("tr")[i-1].cells[j];-->
+                <!--var prevCell2 = tBody.getElementsByTagName("tr")[i-1].cells[j+1];-->
 
-                    <!--if($(prevCell1).data('vac') == $(cell1).data('vac')){-->
-                        <!--$(prevCell1).attr('rowspan',2);-->
-                        <!--$(cell1).hide();-->
-                    <!--}-->
-                    <!--if($(prevCell2).data('vac') == $(cell2).data('vac')){-->
-                        <!--$(prevCell2).attr('rowspan',2);-->
-                        <!--$(cell2).hide();-->
-                    <!--}-->
+                <!--if($(prevCell1).data('vac') == $(cell1).data('vac')){-->
+                <!--$(prevCell1).attr('rowspan',2);-->
+                <!--$(cell1).hide();-->
+                <!--}-->
+                <!--if($(prevCell2).data('vac') == $(cell2).data('vac')){-->
+                <!--$(prevCell2).attr('rowspan',2);-->
+                <!--$(cell2).hide();-->
+                <!--}-->
                 <!--}-->
 
                 roundCorners(cell1, cell2);
@@ -346,36 +370,36 @@
 
     function mergeRows() {
 
-    var rows = $('#bookingTable').children('tbody').children('tr');
+        var rows = $('#bookingTable').children('tbody').children('tr');
 
-    for (var i = 1; i < rows.length; i = i + 2) {
+        for (var i = 1; i < rows.length; i = i + 2) {
 
-        for (var j = 0; j < $(rows[0]).children('td').length; j++) {
+            for (var j = 0; j < $(rows[0]).children('td').length; j++) {
 
-            var prevCell = $(rows[i - 1]).children('td')[j];
-            var currCell = $(rows[i]).children('td')[j];
+                var prevCell = $(rows[i - 1]).children('td')[j];
+                var currCell = $(rows[i]).children('td')[j];
 
-            var $prevCell = $(prevCell);
-            var $currCell = $(currCell);
+                var $prevCell = $(prevCell);
+                var $currCell = $(currCell);
 
-            if ($currCell.data('vac_0') === $prevCell.data('vac_0')) {
-                $prevCell.attr('rowspan', 2);
-                $prevCell.css('height', '44px');
-                $prevCell.children('span').css('height', '30px');
-                $prevCell.children('span').css('text-align', 'center');
-                $prevCell.children('span').css('line-height', '30px');
+                if ($currCell.data('vac_0') === $prevCell.data('vac_0')) {
+                    $prevCell.attr('rowspan', 2);
+                    $prevCell.css('height', '44px');
+                    $prevCell.children('span').css('height', '30px');
+                    $prevCell.children('span').css('text-align', 'center');
+                    $prevCell.children('span').css('line-height', '30px');
 
 
-                if (($prevCell.data('arrival_0') === true && $prevCell.data('leave_1') === true) ||
-                    ($prevCell.data('arrival_1') === true && $prevCell.data('leave_0') === true)) {
-                    $prevCell.children('span').html('<img src="images/Untitled2.png" width="26" height="30">');
+                    if (($prevCell.data('arrival_0') === true && $prevCell.data('leave_1') === true) ||
+                        ($prevCell.data('arrival_1') === true && $prevCell.data('leave_0') === true)) {
+                        $prevCell.children('span').html('<img src="images/Untitled2.png" width="26" height="30">');
+                    }
+
+                    $currCell.hide();
                 }
-
-                $currCell.hide();
             }
         }
     }
-}
 </script>
 
 </html>
