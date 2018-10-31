@@ -32,7 +32,7 @@ public class TestRestController2 {
 
     @GetMapping("/tableData/{monthDirection}")
     public List<List> getTableData(@PathVariable String monthDirection,
-                                   @CookieValue("initDateString") String initDateString,
+                                   @CookieValue(value = "initDateString", required = false) String initDateString,
                                    HttpServletResponse response) {
         // date format is the following: 2018-10-18
         LocalDate initLocalDate = LocalDate.now();
