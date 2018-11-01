@@ -18,7 +18,6 @@
 
     <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
 
-
 </head>
 
 <body class="bg-light">
@@ -78,10 +77,22 @@
                     </div>
 
                     <div class="col-4 mb-3 form-group">
-                        <label class="form-control-label" for="residentsCount">К-cть</label>
-                        <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
-                                id="residentsCount" th:field="*{residentsCount}" data-mobile="true"
-                                th:value="*{residentsCount}" data-size="8">
+                        <!--<label class="form-control-label" for="residentsCount">К-cть</label>-->
+                        <!--<select class="selectpicker form-control" data-style="bg-white border" data-width="100%"-->
+                                <!--id="residentsCount" th:field="*{residentsCount}" data-mobile="true"-->
+                                <!--th:value="*{residentsCount}" data-size="8">-->
+                            <!--<option th:value="1">1</option>-->
+                            <!--<option th:value="2">2</option>-->
+                            <!--<option th:value="3">3</option>-->
+                            <!--<option th:value="4">4</option>-->
+                            <!--<option th:value="5">5</option>-->
+                            <!--<option th:value="6">6</option>-->
+                            <!--<option th:value="7">7</option>-->
+                            <!--<option th:value="8">8</option>-->
+                        <!--</select>-->
+                        <select class="form-control"
+                                th:field="*{residentsCount}"
+                                th:value="*{residentsCount}">
                             <option th:value="1">1</option>
                             <option th:value="2">2</option>
                             <option th:value="3">3</option>
@@ -106,7 +117,7 @@
                     <div class="col-4 mb-3 form-group">
                         <label class="form-control-label" for="arrivalDayPart">Час</label>
                         <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
-                                th:field="*{arrivalDayPart}" data-mobile="true"
+                                th:field="*{arrivalDayPart}"
                                 th:value="*{arrivalDayPart}" id="arrivalDayPart">
                             <option th:value="1">Ранок</option>
                             <option th:value="2">День</option>
@@ -128,7 +139,7 @@
                         <label class="form-control-label" for="leaveDayPart">Час</label>
                         <select class="selectpicker form-control" data-width="100%" th:field="*{leaveDayPart}"
                                 th:value="*{leaveDayPart}" data-style="bg-white border"
-                                id="leaveDayPart" data-mobile="true">
+                                id="leaveDayPart">
                             <option th:value="1">Ранок</option>
                             <option th:value="2">День</option>
                             <option th:value="3">Вечір</option>
@@ -141,8 +152,7 @@
                     <select data-width="100%" th:field="*{roomNumbers}"
                             th:value="*{roomNumbers}" class="form-control selectpicker"
                             th:data-style="${#fields.hasErrors('roomNumbers')} ? 'bg-white border border-danger' : 'bg-white border'"
-                            id="rooms" data-size="7"
-                            multiple title="Вибрати кімнати">
+                            id="rooms" data-size="7" multiple title="Вибрати кімнати">
 
                         <optgroup label="Будинок 1">
                             <option th:value="1">Кімната 1</option>
