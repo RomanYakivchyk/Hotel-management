@@ -10,7 +10,7 @@
 
     <link th:href="@{/footer.css}" rel="stylesheet">
     <!-- pagination -->
-    <link th:href="@{/pagination/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/pagination/css/style.css}" rel="stylesheet"/>
 
     <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
 
@@ -48,6 +48,7 @@
             line-height: 1.5;
         }
 
+
     </style>
 
 </head>
@@ -62,7 +63,8 @@
 </ol>
 
 
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -71,7 +73,7 @@
             <div class="modal-body">
                 <h4 class="mb-4"></h4>
                 <a class="btn btn-info btn-block btn-ok shadow-sm">Видалити</a>
-                <a class="text-center mt-2 btn btn-link btn-block text-secondary" href="" data-dismiss="modal">Назад</a>
+                <a class="text-center mt-2 btn btn-link btn-block text-muted" href="" data-dismiss="modal">Назад</a>
             </div>
         </div>
     </div>
@@ -87,17 +89,16 @@
                 <span class="h4 card-title">Клієнти</span>
                 <!--<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
                 <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                <a th:href="@{/clients/update}" class="btn btn-success float-right mb-2 shadow-sm">
-                    <i class="far fa-plus text-white"></i>&nbsp;Новий
-                    клієнт
+                <a th:href="@{/clients/update}" class="btn btn-outline-primary float-right mb-2 shadow-sm">
+                    Новий клієнт
                 </a>
             </div>
 
 
             <div class="table-responsive">
 
-                <table class="table table-hover bg-white" id="clientListTable">
-                    <thead class="bg-dark">
+                <table class="table table-hover bg-white table-bordered table-striped" id="clientListTable">
+                    <thead>
                     <tr>
                         <th>Ім'я</th>
                         <th>Додаткова інф.</th>
@@ -109,7 +110,8 @@
                     <tbody>
                     <tr th:each="client : ${clients}">
                         <td>
-                            <a th:text="${client.name}" th:href="@{/client/{clientId}/edit(clientId=${client.id})}" th:class="text-primary"></a>
+                            <a th:text="${client.name}" th:href="@{/client/{clientId}/edit(clientId=${client.id})}"
+                               th:class="text-primary"></a>
                         </td>
                         <td>
                             <div th:text="${client.otherClientInfo}"></div>
@@ -137,7 +139,7 @@
                 </table>
             </div>
 
-            <div class="mt-2 float-left" id="dataTableButtons">
+            <div class="mt-2 float-right" id="dataTableButtons">
             </div>
             <!--<hr>-->
             <!--<div th:if="${clients.totalPages != 1}" class="form-group">-->
@@ -219,7 +221,8 @@
                 $(this).find('.modal-body h4').text(clientName);
             });
         });
-    </script>
+
+</script>
 <!--<script th:src="@{/pagination/js/app.js}"></script>-->
 </body>
 

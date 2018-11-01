@@ -44,7 +44,7 @@
 
                     <div class="mb-3 form-group">
                         <label class="form-control-label" for="otherClientInfo">Додаткові дані
-                            <span class="text-secondary">(Прізвище, Звідки..)</span></label>
+                            <span class="text-muted">(Прізвище, Звідки..)</span></label>
                         <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}" id="otherClientInfo"
                                th:class="${#fields.hasErrors('otherClientInfo')} ? 'form-control is-invalid' : 'form-control'">
                         <div class="invalid-feedback" th:errors="*{otherClientInfo}"></div>
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="mb-3 form-group">
-                    <label class="form-control-label" for="email">Email<span class="text-secondary">&nbsp;(Не обов'язково)</span></label>
+                    <label class="form-control-label" for="email">Email<span class="text-muted">&nbsp;(Не обов'язково)</span></label>
                     <input type="text" th:field="*{email}" value="*{email}" id="email" placeholder="example@gmail.com"
                            th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control'">
                     <div class="invalid-feedback" th:errors="*{email}"></div>
@@ -67,7 +67,7 @@
                     <br>
                     <hr class="mt-2">
                     <button class="btn btn-info btn-block shadow-sm" type="submit">Зберегти</button>
-                    <a th:href="@{/clients}" class="text-center mt-2 btn btn-block btn-link text-secondary">
+                    <a th:href="@{/clients}" class="text-center mt-2 btn btn-block btn-link text-muted">
                         Відмінити
                     </a>
                 </div>
