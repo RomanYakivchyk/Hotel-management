@@ -31,7 +31,34 @@
 
 </head>
 <body class="bg-light">
-<div th:insert="header.html"></div>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary" xmlns:th="http://www.w3.org/1999/xhtml">
+    <a class="navbar-brand" th:href="@{/}"><i class="fas fa-home text-white fa-lg"></i></a>
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse dual-collapse2" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item text-nowrap active">
+                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+
 <ol class="breadcrumb bg-white shadow-sm">
     <li class="breadcrumb-item"><a th:href="@{/}">Домашня</a></li>
     <li class="breadcrumb-item active">Бронювання</li>

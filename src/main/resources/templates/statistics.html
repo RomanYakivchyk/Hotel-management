@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Статистика</title>
+    <meta charset="utf-8">
+
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
+    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
+
+    <!-- bootstrap kit-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- end of bootstrap kit-->
+    <link rel="stylesheet" href="/footer.css">
+
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
+
+    <script>
+window.onload = function () {
+
+//Better to construct options first and then pass it as a parameter
+var options = {
+	title: {
+		text: "Річний дохід"
+	},
+	data: [
+	{
+		// Change type to "doughnut", "line", "splineArea", etc.
+		type: "column",
+		dataPoints: [
+			{ label: "2014",  y: 100000  },
+			{ label: "2015", y: 150000  },
+			{ label: "2016", y: 140000  },
+			{ label: "2017",  y: 145000  },
+			{ label: "2018",  y: 155000  }
+		]
+	}
+	]
+};
+$("#chartContainer").CanvasJSChart(options);
+
+}
+
+    </script>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary" xmlns:th="http://www.w3.org/1999/xhtml">
+    <a class="navbar-brand" th:href="@{/}"><i class="fas fa-home text-white fa-lg"></i></a>
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse dual-collapse2" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
+            </li>
+            <li class="nav-item text-nowrap active">
+                <a class="nav-link" th:href="@{/statistic}"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+<ol class="breadcrumb bg-white shadow-sm">
+    <li class="breadcrumb-item"><a th:href="@{/}">Домашня</a></li>
+    <li class="breadcrumb-item active">Статистика</li>
+</ol>
+<div class="container">
+    <br>
+    <!--<div class="card shadow-sm">-->
+        <!--<div class="card-body">-->
+            <div id="chartContainer"></div>
+        <!--</div>-->
+    <!--</div>-->
+</div>
+<div th:insert="footer.html"></div>
+<script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/ajax/popper.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>
