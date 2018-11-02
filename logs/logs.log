@@ -123,3 +123,7 @@
 02-11-2018 18:35:20.011 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 8080 (http) with context path ''
 02-11-2018 18:35:20.021 [restartedMain] INFO  c.d.h.HotelManagementApplication.logStarted - Started HotelManagementApplication in 15.556 seconds (JVM running for 16.921)
 02-11-2018 18:35:20.029 [restartedMain] DEBUG c.d.h.HotelManagementApplication.main - application started
+02-11-2018 18:37:36.041 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring FrameworkServlet 'dispatcherServlet'
+02-11-2018 18:37:36.042 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - FrameworkServlet 'dispatcherServlet': initialization started
+02-11-2018 18:37:36.085 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet.initServletBean - FrameworkServlet 'dispatcherServlet': initialization completed in 43 ms
+02-11-2018 18:39:06.172 [Thread-9] INFO  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext.doClose - Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1532f685: startup date [Fri Nov 02 18:35:05 EET 2018]; root of context hierarchy

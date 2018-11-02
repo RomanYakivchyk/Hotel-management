@@ -82,13 +82,13 @@ public class HotelManagementApplication {
 
         //todo
 
-//        dataSource.setUrl("jdbc:postgresql://ec2-54-243-147-162.compute-1.amazonaws.com:5432/d4kpiadsgu8ckn");
-//        dataSource.setUsername("fhcorgnllxvhkc");
-//        dataSource.setPassword("576936a50df4df8e74335d16c99045df829bfb75a2888933ed3d0807b429dc95");
+        dataSource.setUrl("jdbc:postgresql://ec2-54-243-147-162.compute-1.amazonaws.com:5432/d4kpiadsgu8ckn");
+        dataSource.setUsername("fhcorgnllxvhkc");
+        dataSource.setPassword("576936a50df4df8e74335d16c99045df829bfb75a2888933ed3d0807b429dc95");
 
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("");
+//        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
+//        dataSource.setUsername("postgres");
+//        dataSource.setPassword("");
 
 
         dataSource.setTestOnBorrow(true);
