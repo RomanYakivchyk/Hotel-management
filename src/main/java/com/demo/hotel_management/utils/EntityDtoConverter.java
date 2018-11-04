@@ -80,29 +80,30 @@ public class EntityDtoConverter {
     public Vacation convertVacationDtoToEntity(VacationDto vacationDto) {
         Vacation vacation = new Vacation();
         if (vacationDto.getVacationId() != null) {
-            vacation.setId(vacationDto.getVacationId());
-
+//            vacation.setId(vacationDto.getVacationId());
+            vacation = vacationRepository.findById(vacationDto.getVacationId())
+                    .orElseThrow(NoSuchElementException::new);
+            vacation.getRoomVacationList().clear();
             roomVacationRepository.findByVacationId(vacation.getId())
                     .forEach(e -> roomVacationRepository.delete(e));
         }
 
         List<RoomVacation> roomVacations = new ArrayList<>();
         List<Room> rooms = StreamSupport.stream(roomRepository.findAll().spliterator(), false)
-                .filter(e->vacationDto.getRoomNumbers().contains(e.getRoomNumber()))
+                .filter(e -> vacationDto.getRoomNumbers().contains(e.getRoomNumber()))
                 .collect(Collectors.toList());
 
-        rooms.forEach(e -> {
+        for (Room room : rooms) {
             RoomVacation roomVacation = new RoomVacation();
-            roomVacation.setRoom(e);
+            roomVacation.setRoom(room);
             roomVacation.setVacation(vacation);
-            if (vacationDto.getSharedRoomNumbers().contains(e.getRoomNumber())) {
+            if (vacationDto.getSharedRoomNumbers().contains(room.getRoomNumber())) {
                 roomVacation.setAllowRoommate(true);
             } else {
                 roomVacation.setAllowRoommate(false);
             }
-            // roomVacation.setOccupiedBeds(); todo
             roomVacations.add(roomVacation);
-        });
+        }
 
         vacation.setRoomVacationList(roomVacations);
 

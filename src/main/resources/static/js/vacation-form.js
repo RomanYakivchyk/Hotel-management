@@ -142,9 +142,35 @@ $(document).ready(function() {
 $(document).ready(function() {
 
     var hasError = ($('#vacValidationError').css('display') === 'block') ? true : false;
-    if(hasError){
+    if (hasError) {
         $('#vacValidationErrorAlert').modal('show');
     } else {
         $('#vacValidationErrorAlert').modal('hide');
     }
 });
+
+$(document).ready(function() {
+    $('#residentsCount, #arrivalDate, #leaveDate, #pricePerDay').bind('change', function() {
+
+        $('#totalPrice').val('');
+
+        var pricePerDay = parseInt($('#pricePerDay').val());
+        var residentsCount = parseInt($('#residentsCount').val());
+        var arrivalDate = parseDate($('#arrivalDate').val());
+        var leaveDate = parseDate($('#leaveDate').val());
+        var numberOfDays = datediff(arrivalDate, leaveDate);
+
+        var calculatedTotalPrice = numberOfDays * residentsCount * pricePerDay;
+
+        $('#totalPrice').val(calculatedTotalPrice);
+    });
+});
+
+function parseDate(str) {
+    var mdy = str.split('/');
+    return new Date(mdy[2], mdy[1] - 1, mdy[0]);
+}
+
+function datediff(first, second) {
+    return Math.round(Math.abs((first.getTime() - second.getTime())/(24*60*60*1000)));
+}
