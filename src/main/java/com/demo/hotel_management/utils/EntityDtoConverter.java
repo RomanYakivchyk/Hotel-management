@@ -38,6 +38,7 @@ public class EntityDtoConverter {
         VacationDto vacationDto = new VacationDto();
         vacationDto.setVacationId(vacation.getId());
         vacationDto.setInactive(vacation.getInactive());
+        vacationDto.setApproved(vacation.getApproved());
 
         vacationDto.setArrivalDate(vacation.getVacationDate().getArrivalDate());
         vacationDto.setArrivalDayPart(vacation.getVacationDate().getArrivalDayPart().getDayPartNumber());
@@ -114,6 +115,7 @@ public class EntityDtoConverter {
 
         vacation.setResidentsCount(vacationDto.getResidentsCount());
         vacation.setInactive(vacationDto.getInactive());
+        vacation.setApproved(vacationDto.getApproved());
 
         Vacation.CustomDate customDate = new Vacation.CustomDate();
         customDate.setArrivalDate(vacationDto.getArrivalDate());

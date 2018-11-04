@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <a id="clientFormModal" data-href="/clients/create-ajax">
                     <div class="mb-3 form-group">
-                        <label class="form-control-label" for="newClientName">Ім'я</label>
+                        <label class="form-control-label" for="newClientName">Ім'я<span class="text-danger">&nbsp;*</span></label>
                         <input type="text" class="form-control" id="newClientName">
                         <div class="error-alert" id="clientNameError" style="display:none;">
                             <!--<i class="fas fa-exclamation text-danger"></i>-->
@@ -20,8 +20,7 @@
                         </div>
                     </div>
                     <div class="mb-3 form-group">
-                        <label class="form-control-label" for="otherClientInfo">Додаткові дані
-                            <span class="text-muted">(Прізвище, Звідки..)</span></label>
+                        <label class="form-control-label" for="otherClientInfo">Додаткові дані<span class="text-danger">&nbsp;*</span></label>
                         <input type="text" class="form-control" id="otherClientInfo">
                         <div class="error-alert" id="otherClientInfoError" style="display:none;">
                             <!--<i class="fas fa-exclamation text-danger"></i>-->
@@ -29,7 +28,7 @@
                         </div>
                     </div>
                     <div class="mb-3 form-group">
-                        <label class="form-control-label" for="phoneNumber">Номер телефону</label>
+                        <label class="form-control-label" for="phoneNumber">Номер телефону<span class="text-danger">&nbsp;*</span></label>
                         <input type="text" class="form-control phone" id="phoneNumber" data-mask="(000) 00-00-000">
                         <div class="error-alert" id="phoneNumberError" style="display:none;">
                             <!--<i class="fas fa-exclamation text-danger"></i>-->
@@ -37,7 +36,7 @@
                         </div>
                     </div>
                     <div class="mb-3 form-group">
-                        <label class="form-control-label" for="email">Email<span class="text-muted">&nbsp;(Не обов'язково)</span></label>
+                        <label class="form-control-label" for="email">Email</label>
                         <input type="text" class="form-control" id="email" placeholder="example@gmail.com">
                         <div class="error-alert" id="emailError" style="display:none;">
                             <!--<i class="fas fa-exclamation text-danger"></i>-->

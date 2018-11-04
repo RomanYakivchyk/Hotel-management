@@ -21,6 +21,8 @@ public class Vacation {
 
     private Boolean inactive;
 
+    private Boolean approved;
+
     @OneToOne
     @JoinColumn(name = "client_id")
     private Client client;

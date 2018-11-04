@@ -47,10 +47,12 @@ public class VacationDto {
     private Set<Integer> sharedRoomNumbers;
     @NotNull
     private Boolean inactive = false;
+    @NotNull
+    private Boolean approved = false;
 
     private Integer pricePerDay;
+    @NotNull
     private Integer totalPrice;
 
     private Boolean dummyVarForAlert;
-
 }

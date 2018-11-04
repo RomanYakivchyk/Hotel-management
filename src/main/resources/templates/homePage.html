@@ -62,10 +62,14 @@
             height: 14px;
         }
 
-        .activeVac span {
-            border: 1px solid black;
+        .highlighted span {
+            background-color: #593196 !important;
         }
 
+
+        .popover-header {
+            padding-bottom:0px;
+        }
 
     </style>
 
@@ -203,6 +207,22 @@
     $(document).ready(function() {
         $('.tip').tooltip();
         cellPopover();
+
+        $('body').on('click', '#bookingTable tbody tr td', function() {
+        $('.cell').removeClass('highlighted');
+
+        var vacId = $(this).data('vac');
+
+        var rows = $('#bookingTable').children('tbody').children('tr');
+        for (var i = 0; i < rows.length; i++) {
+            var cells = $(rows[i]).children('td');
+            for (var j = 0; j < cells.length; j++) {
+                if($(cells[j]).data('vac') == vacId){
+                    $(cells[j]).addClass('highlighted');
+                }
+            }
+        }
+        });
     });
 
 
@@ -306,7 +326,7 @@
             if (key.endsWith(index)) {
                 <!--$obj.data(key.slice(0, -2), data[key]);-->
                 $obj.attr('data-' + key.slice(0, -2), data[key]);
-                $obj.html("<span class='innerSpan' style='background-color:#13B955'></span>");
+                $obj.html("<span class='innerSpan' style='background-color:#13B955; border-top:0.5px solid black;border-bottom:0.5px solid black;'></span>");
                 $obj.addClass('cell');
             }
         }
@@ -344,9 +364,13 @@
             for (var j = 0; j < cells.length; j++) {
                 if($(cells[j]).attr('data-arrival') == 'true'){
                     $(cells[j]).find('span').css('border-radius','10px 0px 0px 10px');
+                    $(cells[j]).find('span').css('border-left','0.5px solid black');
+                    $(cells[j]).find('span').css('border-right','none');
                 }
                 if($(cells[j]).attr('data-leave') == 'true'){
                     $(cells[j]).find('span').css('border-radius','0px 10px 10px 0px');
+                    $(cells[j]).find('span').css('border-right','0.5px solid black');
+                    $(cells[j]).find('span').css('border-left','none');
                 }
             }
         }

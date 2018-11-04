@@ -28,16 +28,16 @@
     <div class="collapse navbar-collapse dual-collapse2" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
+                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed fa-lg"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
             </li>
             <li class="nav-item text-nowrap active">
-                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
+                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+                <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line fa-lg"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+                <a class="nav-link" href="#"><i class="far fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
             </li>
         </ul>
     </div>
@@ -61,23 +61,22 @@
 
                 <input th:type="hidden" th:value="*{id}" th:field="*{id}">
 
-                    <div class="mb-3 form-group">
-                        <label class="form-control-label" for="clientName">Ім'я</label>
-                        <input type="text" th:field="*{name}" value="*{name}" id="clientName"
-                               th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control'">
-                        <div class="invalid-feedback" th:errors="*{name}"></div>
-                    </div>
-
-                    <div class="mb-3 form-group">
-                        <label class="form-control-label" for="otherClientInfo">Додаткові дані
-                            <span class="text-muted">(Прізвище, Звідки..)</span></label>
-                        <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}" id="otherClientInfo"
-                               th:class="${#fields.hasErrors('otherClientInfo')} ? 'form-control is-invalid' : 'form-control'">
-                        <div class="invalid-feedback" th:errors="*{otherClientInfo}"></div>
-                    </div>
+                <div class="mb-3 form-group">
+                    <label class="form-control-label" for="clientName">Ім'я<span class="text-danger">&nbsp;*</span></label>
+                    <input type="text" th:field="*{name}" value="*{name}" id="clientName"
+                           th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control'">
+                    <div class="invalid-feedback" th:errors="*{name}"></div>
+                </div>
 
                 <div class="mb-3 form-group">
-                    <label class="form-control-label" for="phoneNumber">Номер телефону</label>
+                    <label class="form-control-label" for="otherClientInfo">Додаткові дані<span class="text-danger">&nbsp;*</span></label>
+                    <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}" id="otherClientInfo"
+                           th:class="${#fields.hasErrors('otherClientInfo')} ? 'form-control is-invalid' : 'form-control'">
+                    <div class="invalid-feedback" th:errors="*{otherClientInfo}"></div>
+                </div>
+
+                <div class="mb-3 form-group">
+                    <label class="form-control-label" for="phoneNumber">Номер телефону<span class="text-danger">&nbsp;*</span></label>
                     <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}"
                            id="phoneNumber" data-mask="(000) 00-00-000"
                            th:class="${#fields.hasErrors('phoneNumber')} ? 'form-control is-invalid' : 'form-control'">
@@ -85,7 +84,7 @@
                 </div>
 
                 <div class="mb-3 form-group">
-                    <label class="form-control-label" for="email">Email<span class="text-muted">&nbsp;(Не обов'язково)</span></label>
+                    <label class="form-control-label" for="email">Email</label>
                     <input type="text" th:field="*{email}" value="*{email}" id="email" placeholder="example@gmail.com"
                            th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control'">
                     <div class="invalid-feedback" th:errors="*{email}"></div>

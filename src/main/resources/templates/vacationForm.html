@@ -88,7 +88,7 @@
 
                 <div class="row">
                     <div class="col-8 mb-3 form-group">
-                        <label class="form-control-label" for="clientName">Клієнт</label>
+                        <label class="form-control-label" for="clientName">Клієнт<span class="text-danger">&nbsp;*</span></label>
                         <a class="float-right" data-toggle="modal" href="" data-target="#addClassModal">новий клієнт</a>
                         <div>
                             <select th:field="*{clientId}" data-live-search="true"
@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="col-4 mb-3 form-group">
-                        <label class="form-control-label" for="residentsCount">К-cть</label>
+                        <label class="form-control-label" for="residentsCount">К-cть<span class="text-danger">&nbsp;*</span></label>
                         <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
                                 id="residentsCount" th:field="*{residentsCount}"
                                 th:value="*{residentsCount}" data-size="8">
@@ -123,7 +123,7 @@
                 <hr class="mt-2">
                 <div class="row">
                     <div class="col-8 mb-3 form-group">
-                        <label class="form-control-label" for="arrivalDate">Дата заселення</label>
+                        <label class="form-control-label" for="arrivalDate">Дата заселення<span class="text-danger">&nbsp;*</span></label>
                         <input readonly type="text" th:field="*{arrivalDate}" th:value="*{arrivalDate}"
                                th:class="${#fields.hasErrors('arrivalDate')} ? 'form-control bg-white border-danger' : 'form-control bg-white'"
                                id="arrivalDate">
@@ -143,7 +143,7 @@
                 </div>
                 <div class="row">
                     <div class="col-8 mb-3 form-group">
-                        <label class="form-control-label" for="leaveDate">Дата виселення</label>
+                        <label class="form-control-label" for="leaveDate">Дата виселення<span class="text-danger">&nbsp;*</span></label>
                         <input readonly type="text" th:field="*{leaveDate}" value="*{leaveDate}"
                                th:class="${#fields.hasErrors('leaveDate')} ? 'form-control bg-white border-danger' : 'form-control bg-white'"
                                id="leaveDate">
@@ -164,7 +164,7 @@
                 </div>
                 <hr class="mb-3">
                 <div class="mb-3 form-group">
-                    <label class="form-control-label" for="rooms">Кімнати</label>
+                    <label class="form-control-label" for="rooms">Кімнати<span class="text-danger">&nbsp;*</span></label>
                     <select data-width="100%" th:field="*{roomNumbers}"
                             th:value="*{roomNumbers}" class="form-control selectpicker"
                             th:data-style="${#fields.hasErrors('roomNumbers')} ? 'bg-white border border-danger' : 'bg-white border'"
@@ -226,7 +226,7 @@
                     </div>
 
                     <div class="mb-3 col form-group">
-                        <label class="form-control-label" for="totalPrice">Загальна вартість</label>
+                        <label class="form-control-label" for="totalPrice">Загальна вартість<span class="text-danger">&nbsp;*</span></label>
                         <input type="number" th:field="*{totalPrice}" th:value="*{totalPrice}"
                                id="totalPrice" class="form-control">
                     </div>
