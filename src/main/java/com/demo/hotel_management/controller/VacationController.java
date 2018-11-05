@@ -89,6 +89,14 @@ public class VacationController {
         return "listVacations.html";
     }
 
+    @GetMapping("/vacation/{id}/approve")
+    @ResponseBody
+    public String approveVacation(@PathVariable(name = "id") Long id,
+                                  @RequestParam(name = "approval") Boolean approval){
+        vacationService.approveVacation(id,approval);
+        return "";
+    }
+
 //    @GetMapping("/vacations")
 //    public ModelAndView listClients(@RequestParam("pageSize") Optional<Integer> pageSize,
 //                                    @RequestParam("page") Optional<Integer> page) {

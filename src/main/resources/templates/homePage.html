@@ -40,7 +40,7 @@
 
         .roomNum {
             height: 44px;
-            border-bottom: 0.5px solid black;
+            border-bottom: 0.5px solid #868e96;
         }
 
         #loader {
@@ -71,6 +71,10 @@
             padding-bottom:0px;
         }
 
+        #mainCard > div {
+            padding-left:10px;
+            padding-right:10px;
+        }
     </style>
 
 
@@ -226,6 +230,27 @@
     });
 
 
+    $(document).ready(function() {
+        $('body').on('click', '#removeButton', function() {
+            confirm("Видалити бронювання?");
+        });
+
+         $('body').on('click', '#approveButton', function() {
+            var popover = $(this).parent().parent().parent();
+            var popoverId = popover.attr('id');
+            var isApproved = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('approved');
+            var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
+            var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/approve';
+            if(isApproved){
+                url = url+'?approval=false';
+            } else {
+                url = url+'?approval=true';
+            }
+            $.get(url, function(data) {});
+            hidePopover(popover);
+        });
+    });
+
     function cellPopover() {
 
         var popOverSettings = {
@@ -235,11 +260,19 @@
             selector: '.cell', //Sepcify the selector here
             title: function() {
                 var id = $(this).data('vac');
+                var approved = $(this).data('approved');
+                var icon;
+                if(approved){
+                    icon = "<i class='far fa-times'></i>";
+                } else {
+                    icon = "<i class='far fa-check'></i>";
+                }
+
                 return "<a href='/vacation/" + id + "/edit'>#" + id + "</a><span class='btn dropdown-toggle pl-2 pr-2 ml-4' data-toggle='dropdown'></span>" +
                     "<div class='dropdown-menu' style='min-width: 50px !important;'>" +
-                    "<a class='dropdown-item' href='#'><i class='far fa-check'></i></a>" +
+                    "<a class='dropdown-item' id='approveButton'>"+ icon +"</a>" +
                     "<div class='dropdown-divider'></div>" +
-                    "<a class='dropdown-item' href='vacation/" + id + "/remove'><i class='far fa-trash'></i></a></div></div>";
+                    "<a class='dropdown-item' id='removeButton'><i class='far fa-trash'></i></a></div></div>";
             },
             content: function() {
                 var range = $(this).data('start').slice(-2) + " - " + $(this).data('end').slice(-2);
@@ -326,7 +359,7 @@
             if (key.endsWith(index)) {
                 <!--$obj.data(key.slice(0, -2), data[key]);-->
                 $obj.attr('data-' + key.slice(0, -2), data[key]);
-                $obj.html("<span class='innerSpan' style='background-color:#13B955; border-top:0.5px solid black;border-bottom:0.5px solid black;'></span>");
+                $obj.html("<span class='innerSpan' style='border-top:0.5px solid #868e96;border-bottom:0.5px solid #868e96;'></span>");
                 $obj.addClass('cell');
             }
         }
@@ -341,13 +374,22 @@
                 var cell1 = row.insertCell(j);
                 var cell2 = row.insertCell(j + 1);
 
-                if (rows[i][k].hasOwnProperty('vac_1')) {
-                    addAttributes(rows[i][k], cell1, 0);
-                    addAttributes(rows[i][k], cell2, 1);
+                var data = rows[i][k];
+
+                if (data.hasOwnProperty('vac_1')) {
+                    addAttributes(data, cell1, 0);
+                    addAttributes(data, cell2, 1);
                 } else {
-                    addAttributes(rows[i][k], cell1, 0);
-                    addAttributes(rows[i][k], cell2, 0);
+                    if(data['arrival_0'] != 'true'){
+                        addAttributes(data, cell1, 0);
+                    }
+                    if(data['leave_0'] != 'true'){
+                        addAttributes(data, cell2, 0);
+                    }
                 }
+
+                markCell(cell1);
+                markCell(cell2);
 
                 if (k%2!=0) {
                         $(cell1).css('background-color', '#f0f0f0');
@@ -357,6 +399,14 @@
         }
     }
 
+function markCell(cell){
+    if($(cell).data('approved')==true){
+        $(cell).find('span').css('background-color','#13B955');
+    }else{
+        $(cell).find('span').css('background-color','#868e96');
+    }
+}
+
     function roundCorners() {
         var rows = $('#bookingTable').children('tbody').children('tr');
         for (var i = 0; i < rows.length; i++) {
@@ -364,12 +414,12 @@
             for (var j = 0; j < cells.length; j++) {
                 if($(cells[j]).attr('data-arrival') == 'true'){
                     $(cells[j]).find('span').css('border-radius','10px 0px 0px 10px');
-                    $(cells[j]).find('span').css('border-left','0.5px solid black');
+                    $(cells[j]).find('span').css('border-left','0.5px solid #868e96');
                     $(cells[j]).find('span').css('border-right','none');
                 }
                 if($(cells[j]).attr('data-leave') == 'true'){
                     $(cells[j]).find('span').css('border-radius','0px 10px 10px 0px');
-                    $(cells[j]).find('span').css('border-right','0.5px solid black');
+                    $(cells[j]).find('span').css('border-right','0.5px solid #868e96');
                     $(cells[j]).find('span').css('border-left','none');
                 }
             }
@@ -377,45 +427,43 @@
     }
 
 
-    function hasAttr($element, attrName) {
-        var attr = $element.attr(attrName);
-        return typeof attr !== typeof undefined && attr !== false;
-    }
-
     function mergeRowsAndCells() {
         var rows = $('#bookingTable').children('tbody').children('tr');
         for (var i = 0; i < rows.length; i++) {
             for (var j = 0; j < $(rows[0]).children('td').length; j++) {
-                <!--if (i % 2 != 0) {-->
-                    <!--var bottomCell = $(rows[i - 1]).children('td')[j];-->
-                    <!--var topCell = $(rows[i]).children('td')[j];-->
+                if (i % 2 != 0) {
+                    var bottomCell = $(rows[i - 1]).children('td')[j];
+                    var topCell = $(rows[i]).children('td')[j];
 
-                    <!--var $bottomCell = $(bottomCell);-->
-                    <!--var $topCell = $(topCell);-->
+                    var $bottomCell = $(bottomCell);
+                    var $topCell = $(topCell);
 
-                    <!--if ($topCell.data('vac') == $bottomCell.data('vac')) {-->
-                        <!--$bottomCell.css('height', '44px');-->
-                        <!--$bottomCell.attr('rowspan', '2');-->
-                        <!--var innerSpan = $bottomCell.children('span')[0];-->
-                        <!--$(innerSpan).css('height', '30px');-->
-                        <!--$topCell.hide();-->
-                    <!--}-->
-                <!--}-->
-
-                if (j % 2 != 0) {
-                    var leftCell = $(rows[i]).children('td')[j - 1];
-                    var rightCell = $(rows[i]).children('td')[j];
-
-                    var $leftCell = $(leftCell);
-                    var $rightCell = $(rightCell);
-
-                    if ($leftCell.data('vac') == $rightCell.data('vac')) {
-                        $leftCell.attr('colspan', '2');
-                        $rightCell.hide();
+                    if ($topCell.data('vac') == $bottomCell.data('vac')) {
+                        $bottomCell.css('height', '44px');
+                        $bottomCell.attr('rowspan', '2');
+                        var innerSpan = $bottomCell.children('span')[0];
+                        $(innerSpan).css('height', '30px');
+                        $topCell.hide();
                     }
                 }
+
+<!--DO NOT UNCOMMENT-->
+
+                <!--if (j % 2 != 0) {-->
+                    <!--var leftCell = $(rows[i]).children('td')[j - 1];-->
+                    <!--var rightCell = $(rows[i]).children('td')[j];-->
+
+                    <!--var $leftCell = $(leftCell);-->
+                    <!--var $rightCell = $(rightCell);-->
+
+                    <!--if ($leftCell.data('vac') == $rightCell.data('vac')) {-->
+                        <!--$leftCell.attr('colspan', '2');-->
+                        <!--$rightCell.hide();-->
+                    <!--}-->
+                <!--}-->
             }
         }
     }
+
 </script>
 </html>

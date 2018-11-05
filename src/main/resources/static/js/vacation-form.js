@@ -140,6 +140,26 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
+     $('#saveVacButton').on('mousedown', stopNavigate);
+     $('#saveVacButton').on('mouseleave', function () {
+              $(window).on('beforeunload', function(){
+                     return 'Are you sure you want to leave?';
+              });
+     });
+     $(window).on('beforeunload', function(){
+           return 'Are you sure you want to leave?';
+     });
+     $(window).on('unload', function(){
+              logout();
+     });
+});
+
+function stopNavigate(){
+    $(window).off('beforeunload');
+}
+
+
+$(document).ready(function() {
 
     var hasError = ($('#vacValidationError').css('display') === 'block') ? true : false;
     if (hasError) {

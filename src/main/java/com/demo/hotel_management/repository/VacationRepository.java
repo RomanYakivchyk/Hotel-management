@@ -24,5 +24,9 @@ public interface VacationRepository extends PagingAndSortingRepository<Vacation,
     @Query(value = "UPDATE Vacation vac SET vac.inactive = true WHERE vac.id = :vac_id")
     void inactivate(@Param("vac_id") Long vacId);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Vacation vac SET vac.approved = :approval WHERE vac.id = :vac_id")
+    void approve(@Param("vac_id") Long id, @Param("approval") Boolean approval);
 }
 

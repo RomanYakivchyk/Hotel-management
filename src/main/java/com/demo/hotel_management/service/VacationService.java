@@ -83,6 +83,10 @@ public class VacationService {
                 .collect(toList());
     }
 
+    public void approveVacation(Long id,Boolean approval) {
+        vacationRepository.approve(id,approval);
+    }
+
     //todo
 //    public List<VacationDto> getVacationsTable(LocalDate date) {
 //        LocalDate from = LocalDate.of(date.getYear(), date.getMonth(), 1);

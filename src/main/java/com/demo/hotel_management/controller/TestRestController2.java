@@ -136,6 +136,7 @@ public class TestRestController2 {
 
             long vacId = roomVacations.get(i).getVacation().getId();
             String clientName = roomVacations.get(i).getVacation().getClient().getName();
+            Boolean approved = roomVacations.get(i).getVacation().getApproved();
 
             cellMap.put("vac_" + i, String.valueOf(vacId));
             cellMap.put("room_" + i, String.valueOf(roomNumber));
@@ -145,6 +146,7 @@ public class TestRestController2 {
             cellMap.put("start_" + i, String.valueOf(arrivalDate));
             cellMap.put("end_" + i, String.valueOf(leaveDate));
             cellMap.put("day_" + i, String.valueOf(day.getDayOfMonth()));
+            cellMap.put("approved_" + i, String.valueOf(approved));
         }
         return cellMap;
     }
