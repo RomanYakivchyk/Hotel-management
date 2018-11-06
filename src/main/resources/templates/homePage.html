@@ -232,7 +232,16 @@
 
     $(document).ready(function() {
         $('body').on('click', '#removeButton', function() {
-            confirm("Видалити бронювання?");
+            var result = confirm("Видалити бронювання?");
+            if(result){
+                var popover = $(this).parent().parent().parent();
+                var popoverId = popover.attr('id');
+                var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
+                var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';
+                <!--https://quiet-springs-81500.herokuapp.com-->
+                $.get(url, function(data) {});
+            }
+            hidePopover(popover);
         });
 
          $('body').on('click', '#approveButton', function() {

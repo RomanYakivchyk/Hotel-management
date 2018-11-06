@@ -130,4 +130,11 @@ public class VacationController {
         log.debug("vacId={}", vacId);
         return "redirect:/vacations";
     }
+
+    @GetMapping(path = "/vacation/{vacId}/remove-ajax")
+    @ResponseBody
+    public String removeVacationAjax(@PathVariable Long vacId) {
+        vacationService.inactivateVacation(vacId);
+        return "";
+    }
 }
