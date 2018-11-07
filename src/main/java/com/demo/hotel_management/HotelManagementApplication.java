@@ -1,13 +1,8 @@
 package com.demo.hotel_management;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,23 +10,15 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.format.Formatter;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.Locale;
-import java.util.stream.Stream;
-
-import static org.apache.http.protocol.HTTP.USER_AGENT;
 
 
 /*
@@ -44,7 +31,6 @@ DATABASE_URL: postgres://fhcorgnllxvhkc:576936a50df4df8e74335d16c99045df829bfb75
 @Slf4j
 @Configuration
 @EnableScheduling
-@EnableOAuth2Sso
 @RestController
 @SpringBootApplication
 public class HotelManagementApplication {
@@ -62,10 +48,10 @@ public class HotelManagementApplication {
         log.debug("application started");
     }
 
-    @RequestMapping(value = "/user")
-    public Principal user(Principal principal) {
-        return principal;
-    }
+//    @GetMapping(value = "/")
+//    public String index() {
+//        return "oauth.html";
+//    }
 
     @Bean
     @Primary
@@ -141,16 +127,16 @@ public class HotelManagementApplication {
     }
 
 
-//    @Scheduled(fixedDelay = 600000)
-//    public void scheduleFixedDelayTask() throws IOException {
-//
-//        String url = "https://quiet-springs-81500.herokuapp.com";
-//
-//        HttpClient client = HttpClientBuilder.create().build();
-//        HttpGet request = new HttpGet(url);
-//
-//        request.addHeader("User-Agent", USER_AGENT);
-//        client.execute(request);
-//    }
+    @Scheduled(fixedDelay = 600000)
+    public void scheduleFixedDelayTask() throws IOException {
+
+        String url = "https://quiet-springs-81500.herokuapp.com";
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpGet request = new HttpGet(url);
+
+        request.addHeader("User-Agent", USER_AGENT);
+        client.execute(request);
+    }
 
 }

@@ -44,7 +44,7 @@ public class VacationController {
 
     @GetMapping("/")
     public String showTable() {
-        return "homePage.html";
+        return "index.html";
     }
 
     @RequestMapping(value = {"/vacations/update", "/vacation/{vacationId}/edit"}, method = RequestMethod.GET)

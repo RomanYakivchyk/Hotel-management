@@ -1,10 +1,478 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset = "ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Client form</title>
+    <meta charset="utf-8">
+
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
+    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
+
+    <!-- bootstrap kit-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- end of bootstrap kit-->
+    <link rel="stylesheet" href="/footer.css">
+
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
+
+
+    <style>
+        #bookingTable {
+            table-layout: fixed;
+        }
+
+        #bookingTable>thead>tr>th,
+        #bookingTable>tbody>tr>td {
+            padding: 0;
+            vertical-align: middle;
+            text-align: center;
+            width: 26px;
+            height: 22px;
+            overflow: visible;
+            border-left: none;
+            border-right: none;
+        }
+
+        #roomNumsTable {
+            float: left;
+        }
+
+        .roomNum {
+            height: 44px;
+            border-bottom: 0.5px solid #868e96;
+        }
+
+        #loader {
+            position: absolute;
+            width: 46px;
+            margin: -23px 0 0 -23px;
+            left: 50%;
+            top: 50%;
+            vertical-align: middle;
+            z-index: 1;
+        }
+
+        .innerSpan {
+            margin-top: 4px;
+            margin-bottom: 4px;
+            margin-left: 0px;
+            margin-right: 0px;
+            display: block;
+            height: 14px;
+        }
+
+        .highlighted span {
+            background-color: #593196 !important;
+        }
+
+
+        .popover-header {
+            padding-bottom:0px;
+        }
+
+        #mainCard > div {
+            padding-left:10px;
+            padding-right:10px;
+        }
+    </style>
+
+
 </head>
-<body>
-<a href = "user">Click here to Google Login</a>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary" xmlns:th="http://www.w3.org/1999/xhtml">
+    <a class="navbar-brand" th:href="@{/}"><i class="fas fa-home text-white fa-lg"></i></a>
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse dual-collapse2" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+
+<ol class="breadcrumb bg-white shadow-sm">
+    <li class="breadcrumb-item active"><a th:href="@{/}">Домашня</a></li>
+</ol>
+<div class="container">
+    <div id="loader" class="text-center"><i class="fas fa-spinner text-muted fa-spin fa-3x"></i></div>
+    <br>
+    <div class="card shadow-sm" id="mainCard" style="display:none;">
+        <div class="card-body">
+            <div class="mb-4">
+                <span class="card-title h4">Бронювання</span>
+                <span class="btn-group float-right" role="group">
+                        <button type="button" value="prev"
+                                class="month-dir btn btn-sm btn-outline-primary">Prev</button>
+                        <button type="button" value="curr"
+                                class="month-dir btn btn-sm btn-outline-primary">Curr</button>
+                        <button type="button" value="next"
+                                class="month-dir btn btn-sm btn-outline-primary">Next</button>
+                    </span>
+            </div>
+
+            <div class="row mr-2 ml-2">
+                <table class="bg-light" id="roomNumsTable" style="float:left;">
+                    <thead>
+                    <tr>
+                        <th style="height:45.5px;"></th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum" style="border-top:0.5px solid black;"><a class="tip" data-placement="right"
+                                                                                     title="Будинок 1, односпальне - 2">1</a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum"><a class="tip" data-placement="right"
+                                               title="Будинок 1, односпальне - 2">2</a></th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum"><a class="tip" data-placement="right"
+                                               title="Будинок 1, односпальне - 2">3</a></th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum"><a class="tip" data-placement="right"
+                                               title="Будинок 1, односпальне - 2">4</a></th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum"><a class="tip" data-placement="right"
+                                               title="Будинок 1, односпальне - 2">5</a></th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum"><a class="tip" data-placement="right"
+                                               title="Будинок 2, односпальне - 2">6</a></th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum"><a class="tip" data-placement="right"
+                                               title="Будинок 2, односпальне - 2">7</a></th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum"><a class="tip" data-placement="right"
+                                               title="Будинок 3, односпальне - 2">8</a></th>
+                    </tr>
+                    <tr>
+                        <th class="roomNum"><a class="tip" data-placement="right"
+                                               title="Будинок 3, односпальне - 2">9</a></th>
+                    </tr>
+                    </thead>
+                </table>
+                <div class="table-responsive col" style="padding-left:0px">
+                    <table class="table table-bordered" id="bookingTable">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dropdown">
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Link 1</a>
+        <a class="dropdown-item" href="#">Link 2</a>
+        <a class="dropdown-item" href="#">Link 3</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Another link</a>
+    </div>
+</div>
+<div th:insert="footer.html"></div>
+<script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/ajax/popper.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
 </body>
+<script>
+    $(document).ready(function() {
+        loadTableData("curr");
+        $('.month-dir').click(function(e) {
+            hidePopover(e);
+            loadTableData($(this).val());
+        });
+    });
+
+    $(document).ready(function() {
+        $('.tip').tooltip();
+        cellPopover();
+
+        $('body').on('click', '#bookingTable tbody tr td', function() {
+        $('.cell').removeClass('highlighted');
+
+        var vacId = $(this).data('vac');
+
+        var rows = $('#bookingTable').children('tbody').children('tr');
+        for (var i = 0; i < rows.length; i++) {
+            var cells = $(rows[i]).children('td');
+            for (var j = 0; j < cells.length; j++) {
+                if($(cells[j]).data('vac') == vacId){
+                    $(cells[j]).addClass('highlighted');
+                }
+            }
+        }
+        });
+    });
+
+
+    $(document).ready(function() {
+        $('body').on('click', '#removeButton', function() {
+            var result = confirm("Видалити бронювання?");
+            if(result){
+                var popover = $(this).parent().parent().parent();
+                var popoverId = popover.attr('id');
+                var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
+                var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';
+                <!--https://quiet-springs-81500.herokuapp.com-->
+                $.get(url, function(data) {});
+            }
+            hidePopover(popover);
+        });
+
+         $('body').on('click', '#approveButton', function() {
+            var popover = $(this).parent().parent().parent();
+            var popoverId = popover.attr('id');
+            var isApproved = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('approved');
+            var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
+            var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/approve';
+            if(isApproved){
+                url = url+'?approval=false';
+            } else {
+                url = url+'?approval=true';
+            }
+            $.get(url, function(data) {});
+            hidePopover(popover);
+        });
+    });
+
+    function cellPopover() {
+
+        var popOverSettings = {
+            placement: 'top',
+            container: '#bookingTable',
+            html: true,
+            selector: '.cell', //Sepcify the selector here
+            title: function() {
+                var id = $(this).data('vac');
+                var approved = $(this).data('approved');
+                var icon;
+                if(approved){
+                    icon = "<i class='far fa-times'></i>";
+                } else {
+                    icon = "<i class='far fa-check'></i>";
+                }
+
+                return "<a href='/vacation/" + id + "/edit'>#" + id + "</a><span class='btn dropdown-toggle pl-2 pr-2 ml-4' data-toggle='dropdown'></span>" +
+                    "<div class='dropdown-menu' style='min-width: 50px !important;'>" +
+                    "<a class='dropdown-item' id='approveButton'>"+ icon +"</a>" +
+                    "<div class='dropdown-divider'></div>" +
+                    "<a class='dropdown-item' id='removeButton'><i class='far fa-trash'></i></a></div></div>";
+            },
+            content: function() {
+                var range = $(this).data('start').slice(-2) + " - " + $(this).data('end').slice(-2);
+                var clientName = $(this).data('client');
+                var room = $(this).data('room');
+                return range + ", Кім. " + room + "<br>"+clientName;
+            }
+        }
+        var $po = $('body').popover(popOverSettings);
+
+        $(document).on('click', function(e) {
+            hidePopover(e);
+        });
+    }
+
+   function hidePopover(e) {
+        $('[data-toggle="popover"],[data-original-title]').each(function() {
+            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                (($(this).popover('hide').data('bs.popover') || {}).inState || {}).click = false // fix for BS 3.3.6
+            }
+        });
+    }
+
+
+    function loadTableData(direction) {
+        $('#bookingTable thead').empty();
+        $('#bookingTable tbody').empty();
+        $('#loader').show();
+
+        $.get('https://quiet-springs-81500.herokuapp.com/tableData/' + direction, function(data) {
+            <!--http://localhost:8080/tableData-->
+            <!--https://quiet-springs-81500.herokuapp.com/tableData-->
+            $('#loader').hide();
+
+            buildTableHeader(data[0]);
+            buildTableBody(data);
+            mergeRowsAndCells();
+            roundCorners();
+            $('#mainCard').css('display', 'block');
+        });
+    }
+
+   function buildTableHeader(headerData) {
+        var tHead = document.getElementById('bookingTable').getElementsByTagName('thead')[0];
+
+        var headerRow0 = tHead.insertRow(0);
+
+        <!--var headerCell1 = document.createElement("TH");-->
+        <!--headerCell1.setAttribute("colspan",parseInt(headerData[0].monthLength)*2);-->
+        <!--headerRow0.appendChild(headerCell1);-->
+        <!--var headerCell2 = document.createElement("TH");-->
+        <!--headerCell2.setAttribute("colspan",parseInt(headerData[headerData.length-1].monthLength)*2);-->
+        <!--headerRow0.appendChild(headerCell2);-->
+
+        var headerRow1 = tHead.insertRow(0);
+        for (var i = 0; i < headerData.length; i++) {
+            var headerCell = document.createElement("TH");
+            headerCell.setAttribute("colspan", "2");
+            headerRow1.appendChild(headerCell);
+            var headerCellText = document.createTextNode(headerData[i].dayOfMonth);
+            headerCell.appendChild(headerCellText);
+            if (i % 2 != 0) {
+                $(headerCell).css('background-color', '#f0f0f0');
+            }
+        }
+
+        var headerRow2 = tHead.insertRow(1);
+        for (var i = 0; i < headerData.length; i++) {
+            var headerCell = document.createElement("TH");
+            headerCell.setAttribute("colspan", "2");
+            headerRow2.appendChild(headerCell);
+            var headerCellText = document.createTextNode(headerData[i].dayOfWeek);
+            headerCell.appendChild(headerCellText);
+            if (i % 2 != 0) {
+                $(headerCell).css('background-color', '#f0f0f0');
+            }
+        }
+   }
+
+
+   function addAttributes(data, obj, index) {
+        var $obj = $(obj);
+        for (var key in data) {
+            if (key.endsWith(index)) {
+                <!--$obj.data(key.slice(0, -2), data[key]);-->
+                $obj.attr('data-' + key.slice(0, -2), data[key]);
+                $obj.html("<span class='innerSpan' style='border-top:0.5px solid #868e96;border-bottom:0.5px solid #868e96;'></span>");
+                $obj.addClass('cell');
+            }
+        }
+   }
+
+
+    function buildTableBody(rows) {
+        var tBody = document.getElementById('bookingTable').getElementsByTagName('tbody')[0];
+        for (var i = 1; i < rows.length; i++) {
+            var row = tBody.insertRow(i - 1);
+            for (var j = 0, k = 0; j < rows[i].length * 2; j = j + 2, k++) {
+                var cell1 = row.insertCell(j);
+                var cell2 = row.insertCell(j + 1);
+
+                var data = rows[i][k];
+
+                if (data.hasOwnProperty('vac_1')) {
+                    addAttributes(data, cell1, 0);
+                    addAttributes(data, cell2, 1);
+                } else {
+                    if(data['arrival_0'] != 'true'){
+                        addAttributes(data, cell1, 0);
+                    }
+                    if(data['leave_0'] != 'true'){
+                        addAttributes(data, cell2, 0);
+                    }
+                }
+
+                markCell(cell1);
+                markCell(cell2);
+
+                if (k%2!=0) {
+                        $(cell1).css('background-color', '#f0f0f0');
+                        $(cell2).css('background-color', '#f0f0f0');
+                }
+            }
+        }
+    }
+
+function markCell(cell){
+    if($(cell).data('approved')==true){
+        $(cell).find('span').css('background-color','#13B955');
+    }else{
+        $(cell).find('span').css('background-color','#868e96');
+    }
+}
+
+    function roundCorners() {
+        var rows = $('#bookingTable').children('tbody').children('tr');
+        for (var i = 0; i < rows.length; i++) {
+        var cells = $(rows[i]).children('td');
+            for (var j = 0; j < cells.length; j++) {
+                if($(cells[j]).attr('data-arrival') == 'true'){
+                    $(cells[j]).find('span').css('border-radius','10px 0px 0px 10px');
+                    $(cells[j]).find('span').css('border-left','0.5px solid #868e96');
+                    $(cells[j]).find('span').css('border-right','none');
+                }
+                if($(cells[j]).attr('data-leave') == 'true'){
+                    $(cells[j]).find('span').css('border-radius','0px 10px 10px 0px');
+                    $(cells[j]).find('span').css('border-right','0.5px solid #868e96');
+                    $(cells[j]).find('span').css('border-left','none');
+                }
+            }
+        }
+    }
+
+
+    function mergeRowsAndCells() {
+        var rows = $('#bookingTable').children('tbody').children('tr');
+        for (var i = 0; i < rows.length; i++) {
+            for (var j = 0; j < $(rows[0]).children('td').length; j++) {
+                if (i % 2 != 0) {
+                    var bottomCell = $(rows[i - 1]).children('td')[j];
+                    var topCell = $(rows[i]).children('td')[j];
+
+                    var $bottomCell = $(bottomCell);
+                    var $topCell = $(topCell);
+
+                    if ($topCell.data('vac') == $bottomCell.data('vac')) {
+                        $bottomCell.css('height', '44px');
+                        $bottomCell.attr('rowspan', '2');
+                        var innerSpan = $bottomCell.children('span')[0];
+                        $(innerSpan).css('height', '30px');
+                        $topCell.hide();
+                    }
+                }
+
+<!--DO NOT UNCOMMENT-->
+
+                <!--if (j % 2 != 0) {-->
+                    <!--var leftCell = $(rows[i]).children('td')[j - 1];-->
+                    <!--var rightCell = $(rows[i]).children('td')[j];-->
+
+                    <!--var $leftCell = $(leftCell);-->
+                    <!--var $rightCell = $(rightCell);-->
+
+                    <!--if ($leftCell.data('vac') == $rightCell.data('vac')) {-->
+                        <!--$leftCell.attr('colspan', '2');-->
+                        <!--$rightCell.hide();-->
+                    <!--}-->
+                <!--}-->
+            }
+        }
+    }
+
+</script>
 </html>
