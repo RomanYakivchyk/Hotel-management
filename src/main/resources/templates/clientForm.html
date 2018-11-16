@@ -56,28 +56,36 @@
             <form class="needs-validation" action="#" th:action="@{/clients/update}" th:object="${clientModel}"
                   method="post">
                 <div class="mb-4">
-                    <h4 class="card-title" th:text="((*{id} == null)?'Додати':'Редагувати') + ' дані клієнта'"></h4>
+                    <span class="h5 card-title"
+                          th:text="((*{id} == null)?'Додати':'Редагувати') + ' дані клієнта'"></span>
+                    <a th:href="@{/client/{id}/remove(id=${clientModel.id})}"
+                       class="btn btn-outline-primary shadow-sm float-right" id="removeButton">
+                        Видалити
+                    </a>
                 </div>
-
-                <input th:type="hidden" th:value="*{id}" th:field="*{id}">
+                <div style="display:none;" id="anyErrors" th:if="${#fields.hasErrors('*')}">true</div>
+                <input th:type="hidden" th:value="*{id}" id="clientId" th:field="*{id}">
 
                 <div class="mb-3 form-group">
-                    <label class="form-control-label" for="clientName">Ім'я<span class="text-danger">&nbsp;*</span></label>
-                    <input type="text" th:field="*{name}" value="*{name}" id="clientName"
+                    <label class="form-control-label" for="clientName">Ім'я<span
+                            class="text-danger">&nbsp;*</span></label>
+                    <input disabled type="text" th:field="*{name}" value="*{name}" id="clientName"
                            th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control'">
                     <div class="invalid-feedback" th:errors="*{name}"></div>
                 </div>
 
                 <div class="mb-3 form-group">
                     <label class="form-control-label" for="otherClientInfo">Додаткові дані<span class="text-danger">&nbsp;*</span></label>
-                    <input type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}" id="otherClientInfo"
+                    <input disabled type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}"
+                           id="otherClientInfo"
                            th:class="${#fields.hasErrors('otherClientInfo')} ? 'form-control is-invalid' : 'form-control'">
                     <div class="invalid-feedback" th:errors="*{otherClientInfo}"></div>
                 </div>
 
                 <div class="mb-3 form-group">
-                    <label class="form-control-label" for="phoneNumber">Номер телефону<span class="text-danger">&nbsp;*</span></label>
-                    <input type="text" th:field="*{phoneNumber}" value="*{phoneNumber}"
+                    <label class="form-control-label" for="phoneNumber">Номер телефону<span
+                            class="text-danger">&nbsp;*</span></label>
+                    <input disabled type="text" th:field="*{phoneNumber}" value="*{phoneNumber}"
                            id="phoneNumber" data-mask="(000) 00-00-000"
                            th:class="${#fields.hasErrors('phoneNumber')} ? 'form-control is-invalid' : 'form-control'">
                     <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
@@ -85,16 +93,25 @@
 
                 <div class="mb-3 form-group">
                     <label class="form-control-label" for="email">Email</label>
-                    <input type="text" th:field="*{email}" value="*{email}" id="email" placeholder="example@gmail.com"
+                    <input disabled type="text" th:field="*{email}" value="*{email}" id="email"
+                           placeholder="example@gmail.com"
                            th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control'">
                     <div class="invalid-feedback" th:errors="*{email}"></div>
 
-                    <br>
-                    <hr class="mt-2">
-                    <button class="btn btn-primary btn-block shadow-sm" type="submit">Зберегти</button>
-                    <a th:href="@{/clients}" class="text-center mt-2 btn btn-block btn-link text-muted">
-                        Відмінити
-                    </a>
+                    <div style="display:none;" id="saveClientSection">
+                        <br>
+                        <hr class="mt-2">
+                        <button class="btn btn-primary btn-block shadow-sm" type="submit">Зберегти</button>
+                        <a th:href="@{/clients}" class="text-center mt-2 btn btn-block btn-link text-muted">
+                            Відмінити
+                        </a>
+                    </div>
+
+                    <div id="editClientSection">
+                        <br>
+                        <hr class="mt-2">
+                        <div class="btn btn-primary btn-block shadow-sm" id="editClientButton">Редагувати</div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -105,5 +122,29 @@
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/jquery.mask.js}" type="text/javascript"></script>
+<script>
+    $(document).ready(function(){
+        $('#editClientButton').click(function(){
+            unlockFields();
+        });
+
+        if($('#anyErrors').text() == 'true' || $('#clientId').val().length == 0){
+            unlockFields();
+        }
+    });
+
+
+    function unlockFields(){
+            $('#saveClientSection').css('display','block');
+            $('#editClientSection').css('display','none');
+            $('#removeButton').addClass('disabled');
+
+            $('#clientName').prop('disabled',false);
+            $('#otherClientInfo').prop('disabled',false);
+            $('#phoneNumber').prop('disabled',false);
+            $('#email').prop('disabled',false);
+    }
+
+</script>
 </body>
 </html>

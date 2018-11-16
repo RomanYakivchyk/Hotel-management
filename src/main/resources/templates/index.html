@@ -54,12 +54,12 @@
         }
 
         .innerSpan {
-            margin-top: 4px;
-            margin-bottom: 4px;
+            margin-top: 0px;
+            margin-bottom: 0px;
             margin-left: 0px;
             margin-right: 0px;
             display: block;
-            height: 14px;
+            height: 22px;
         }
 
         .highlighted span {
@@ -200,6 +200,37 @@
 
 </body>
 <script>
+<!--globalPopoverStatus = false;-->
+
+<!--$(document).ready(function() {-->
+    <!--var first;-->
+    <!--var second;-->
+
+ <!--$('body').on('click', '#bookingTable tbody tr td', function(e) {-->
+    <!--if(!$(this).hasClass('cell') && !globalPopoverStatus){-->
+        <!--if(first == null){-->
+            <!--&lt;!&ndash;first = $(this);&ndash;&gt;-->
+            <!--$(this).css('background-color','red');-->
+        <!--} else if(second == null){-->
+            <!--&lt;!&ndash;second = $(this);&ndash;&gt;-->
+            <!--$(this).css('background-color','red');-->
+            <!--alert('create');-->
+            <!--&lt;!&ndash;popup create vac&ndash;&gt;-->
+        <!--} else {-->
+            <!--first = null;-->
+            <!--second = null;-->
+        <!--}-->
+    <!--}-->
+ <!--});-->
+
+<!--});-->
+
+
+
+
+
+
+
     $(document).ready(function() {
         loadTableData("curr");
         $('.month-dir').click(function(e) {
@@ -214,6 +245,9 @@
 
         $('body').on('click', '#bookingTable tbody tr td', function() {
         $('.cell').removeClass('highlighted');
+
+        <!--if(globalPopoverStatus) globalPopoverStatus = false;-->
+        <!--else globalPopoverStatus = true;-->
 
         var vacId = $(this).data('vac');
 
@@ -237,7 +271,7 @@
                 var popover = $(this).parent().parent().parent();
                 var popoverId = popover.attr('id');
                 var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
-                var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';
+                var url = https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';
                 <!--https://quiet-springs-81500.herokuapp.com-->
                 $.get(url, function(data) {});
             }
@@ -303,6 +337,7 @@
                 (($(this).popover('hide').data('bs.popover') || {}).inState || {}).click = false // fix for BS 3.3.6
             }
         });
+        <!--globalPopoverStatus = false;-->
     }
 
 
@@ -318,8 +353,8 @@
 
             buildTableHeader(data[0]);
             buildTableBody(data);
-            mergeRowsAndCells();
-            roundCorners();
+            <!--mergeRowsAndCells();-->
+            <!--roundCorners();-->
             $('#mainCard').css('display', 'block');
         });
     }
@@ -368,8 +403,10 @@
             if (key.endsWith(index)) {
                 <!--$obj.data(key.slice(0, -2), data[key]);-->
                 $obj.attr('data-' + key.slice(0, -2), data[key]);
-                $obj.html("<span class='innerSpan' style='border-top:0.5px solid #868e96;border-bottom:0.5px solid #868e96;'></span>");
+                <!--$obj.html("<span class='innerSpan' style='border-top:0.5px solid black;border-bottom:0.5px solid black;'></span>");-->
+                $obj.html("<span class='innerSpan'></span>");
                 $obj.addClass('cell');
+                <!--#868e96-->
             }
         }
    }
@@ -404,13 +441,25 @@
                         $(cell1).css('background-color', '#f0f0f0');
                         $(cell2).css('background-color', '#f0f0f0');
                 }
+
+                if(i%2==0){
+                    $(cell1).css('border-top','none');
+                    $(cell2).css('border-top','none');
+
+                    $(cell1).css('border-bottom','0.5px solid grey');
+                    $(cell2).css('border-bottom','0.5px solid grey');
+                } else {
+                    $(cell1).css('border-bottom','none');
+                    $(cell2).css('border-bottom','none');
+                }
             }
         }
     }
 
 function markCell(cell){
     if($(cell).data('approved')==true){
-        $(cell).find('span').css('background-color','#13B955');
+        <!--$(cell).find('span').css('background-color','#13B955');-->
+        $(cell).find('span').css('background-color','#ffc107');
     }else{
         $(cell).find('span').css('background-color','#868e96');
     }
@@ -451,7 +500,7 @@ function markCell(cell){
                         $bottomCell.css('height', '44px');
                         $bottomCell.attr('rowspan', '2');
                         var innerSpan = $bottomCell.children('span')[0];
-                        $(innerSpan).css('height', '30px');
+                        $(innerSpan).css('height', '46px');
                         $topCell.hide();
                     }
                 }

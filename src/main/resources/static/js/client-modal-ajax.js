@@ -66,7 +66,7 @@
                     var url = $('#clientFormModal').data('href');
                     $.ajax({
                         type: 'post', // method attribute of form
-                        url: url, // action attribute of form
+                        url: 'https://quiet-springs-81500.herokuapp.com/clients/create-ajax', // action attribute of form
                         dataType: "json",
                         data: clientObject,
                         success: function(data) {

@@ -31,8 +31,8 @@ leaveDateConfig = {
 };
 $(document).ready(function() {
     $('select').selectpicker();
-    arrivalDatePicker = $('#arrivalDate').datepicker(arrivalDateConfig);
-    leaveDatePicker = $('#leaveDate').datepicker(leaveDateConfig);
+//    arrivalDatePicker = $('#arrivalDate').datepicker(arrivalDateConfig);
+//    leaveDatePicker = $('#leaveDate').datepicker(leaveDateConfig);
 });
 
 
@@ -77,32 +77,38 @@ function actionsAfterUncheck() {
 }
 
 
+
+var globalCounter = 0;
 function observeRoomSelect() {
 
     var targetNode = $('*[data-id="rooms"]').get(0);
     var config = {
         attributes: true,
-        childList: false,
-        subtree: false,
         attributeFilter: ["title"]
     };
 
     var callback = function(mutationsList, observer) {
-        var $checkbox = $('#allowBringIn');
-
-        var noRoomSelected = $('*[data-id="rooms"]').attr("title").split(', ')[0] === "Вибрати кімнати";
-        if ($checkbox.is(':checked')) {
-            $($checkbox).prop('checked', false);
-            actionsAfterUncheck();
+    if(globalCounter > 0){
+        if($('#editVacSection').css('display') != 'block'){
+            var $checkbox = $('#allowBringIn');
+            var noRoomSelected = $('*[data-id="rooms"]').attr("title").split(', ')[0] === "Вибрати кімнати";
+            if ($checkbox.is(':checked')) {
+                $($checkbox).prop('checked', false);
+                actionsAfterUncheck();
+            }
+            if (noRoomSelected) {
+                $checkbox.attr("disabled", true);
+            } else {
+                $checkbox.attr("disabled", false);
+            }
         }
-        if (noRoomSelected) {
-            $checkbox.attr("disabled", true);
-        } else {
-            $checkbox.attr("disabled", false);
-        }
+    }
+            globalCounter = globalCounter + 1;
     };
+
     var observer = new MutationObserver(callback);
     observer.observe(targetNode, config);
+
 }
 
 function initialize() {
@@ -136,27 +142,28 @@ $(document).ready(function() {
         }
     });
 
+    $('#allowBringIn').prop('disabled',true); //remove
 });
 
 
-$(document).ready(function() {
-     $('#saveVacButton').on('mousedown', stopNavigate);
-     $('#saveVacButton').on('mouseleave', function () {
-              $(window).on('beforeunload', function(){
-                     return 'Are you sure you want to leave?';
-              });
-     });
-     $(window).on('beforeunload', function(){
-           return 'Are you sure you want to leave?';
-     });
-     $(window).on('unload', function(){
-              logout();
-     });
-});
-
-function stopNavigate(){
-    $(window).off('beforeunload');
-}
+//$(document).ready(function() {
+//     $('#saveVacButton').on('mousedown', stopNavigate);
+//     $('#saveVacButton').on('mouseleave', function () {
+//              $(window).on('beforeunload', function(){
+//                     return 'Are you sure you want to leave?';
+//              });
+//     });
+//     $(window).on('beforeunload', function(){
+//           return 'Are you sure you want to leave?';
+//     });
+//     $(window).on('unload', function(){
+//              logout();
+//     });
+//});
+//
+//function stopNavigate(){
+//    $(window).off('beforeunload');
+//}
 
 
 $(document).ready(function() {
@@ -194,3 +201,52 @@ function parseDate(str) {
 function datediff(first, second) {
     return Math.round(Math.abs((first.getTime() - second.getTime())/(24*60*60*1000)));
 }
+
+
+
+ $(document).ready(function(){
+
+//        $('#arrivalDate').datepicker('remove');
+//        $('#leaveDate').datepicker('remove');
+
+        $('#editVacButton').click(function(){
+            unlockFields();
+        });
+
+        if($('#anyErrors').text() == 'true' || $('#vacationId').val().length == 0){
+            unlockFields();
+        }
+    });
+
+
+    function unlockFields(){
+            $('#saveVacSection').css('display','block');
+            $('#editVacSection').css('display','none');
+            $('#removeButton').addClass('disabled');
+
+
+            $('#createClientLink').removeClass('disabled');
+            $('#clientName').prop('disabled',false);
+            $('#clientName').selectpicker('refresh');
+            $('#residentsCount').prop('disabled',false);
+            $('#residentsCount').selectpicker('refresh');
+            $('#arrivalDate').datepicker(arrivalDateConfig);
+            $('#arrivalDate').prop('disabled',false);
+            $('#arrivalDayPart').prop('disabled',false);
+            $('#arrivalDayPart').selectpicker('refresh');
+            $('#leaveDate').datepicker(leaveDateConfig);
+            $('#leaveDate').prop('disabled',false);
+            $('#leaveDayPart').prop('disabled',false);
+            $('#leaveDayPart').selectpicker('refresh');
+            $('#rooms').prop('disabled',false);
+            $('#rooms').selectpicker('refresh');
+
+            if($('#vacationId').val().length != 0){
+                $('#allowBringIn').prop('disabled',false);
+            }
+            $('#BringInRoomsSelect').prop('disabled',false);
+            $('#BringInRoomsSelect').selectpicker('refresh');
+            $('#pricePerDay').prop('disabled',false);
+            $('#totalPrice').prop('disabled',false);
+
+    }

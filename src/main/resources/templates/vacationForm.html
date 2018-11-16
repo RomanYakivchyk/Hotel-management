@@ -63,7 +63,8 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="text-center"><i class="fal fa-exclamation-triangle fa-10x text-warning"></i></div>
-                <h5 class="mb-4 mt-4 text-primary text-center">Кімнати на обраний період часу вже заброньовані. Оберіть іншу дату
+                <h5 class="mb-4 mt-4 text-primary text-center">Кімнати на обраний період часу вже заброньовані. Оберіть
+                    іншу дату
                     або інші кімнати.</h5>
                 <button type="button" data-dismiss="modal" class="btn btn-secondary btn-block shadow-sm">Ок</button>
             </div>
@@ -71,7 +72,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container col-md-6" style="float: none; margin: 0 auto;">
     <br>
     <div class="card shadow-sm">
         <div class="card-body">
@@ -79,18 +80,27 @@
             <form class="needs-validation" action="#" th:action="@{/vacations/update}" th:object="${vacationModel}"
                   method="post">
                 <div class="mb-4">
-                    <h4 class="card-title"
-                        th:text="((*{vacationId} == null)?'Додати':'Редагувати') + ' бронювання'"></h4>
+                    <span class="h5 card-title"
+                          th:text="((*{vacationId} == null)?'Додати':'Редагувати') + ' бронювання'"></span>
+
+                    <a th:href="@{/vacation/{vacationId}/remove(vacationId=${vacationModel.vacationId})}"
+                       class="btn btn-outline-primary shadow-sm float-right" id="removeButton">
+                        Видалити
+                    </a>
                 </div>
 
-                <input th:type="hidden" th:value="*{vacationId}" th:field="*{vacationId}">
+                <input th:type="hidden" id="vacationId" th:value="*{vacationId}" th:field="*{vacationId}">
+                <div id="vacValidationError" th:if="${#fields.hasErrors('dummyVarForAlert')}"></div>
+                <div style="display:none;" id="anyErrors" th:if="${#fields.hasErrors('*')}">true</div>
 
                 <div class="row">
                     <div class="col-8 mb-3 form-group">
-                        <label class="form-control-label" for="clientName">Клієнт<span class="text-danger">&nbsp;*</span></label>
-                        <a class="float-right" data-toggle="modal" href="" data-target="#addClassModal">новий клієнт</a>
+                        <label class="form-control-label" for="clientName">Клієнт<span
+                                class="text-danger">&nbsp;*</span></label>
+                        <a class="float-right disabled" id="createClientLink" data-toggle="modal" href=""
+                           data-target="#addClassModal">новий клієнт</a>
                         <div>
-                            <select th:field="*{clientId}" data-live-search="true"
+                            <select disabled th:field="*{clientId}" data-live-search="true"
                                     data-live-search-normalize="true" data-none-results-text="Нічого не знайдено"
                                     title="Вибрати клієнта" data-width="100%" class="form-control selectpicker"
                                     th:data-style="${#fields.hasErrors('clientId')} ? 'bg-white border-danger border' : 'bg-white border'"
@@ -104,8 +114,9 @@
                     </div>
 
                     <div class="col-4 mb-3 form-group">
-                        <label class="form-control-label" for="residentsCount">К-cть<span class="text-danger">&nbsp;*</span></label>
-                        <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
+                        <label class="form-control-label" for="residentsCount">К-cть<span
+                                class="text-danger">&nbsp;*</span></label>
+                        <select disabled class="selectpicker form-control" data-style="bg-white border" data-width="100%"
                                 id="residentsCount" th:field="*{residentsCount}"
                                 th:value="*{residentsCount}" data-size="8">
                             <option th:value="1">1</option>
@@ -123,7 +134,7 @@
                 <div class="row">
                     <div class="col-8 mb-3 form-group">
                         <label class="form-control-label" for="arrivalDate">Дата заселення<span class="text-danger">&nbsp;*</span></label>
-                        <input readonly type="text" th:field="*{arrivalDate}" th:value="*{arrivalDate}"
+                        <input disabled readonly type="text" th:field="*{arrivalDate}" th:value="*{arrivalDate}"
                                th:class="${#fields.hasErrors('arrivalDate')} ? 'form-control bg-white border-danger' : 'form-control bg-white'"
                                id="arrivalDate">
                         <div th:if="${#fields.hasErrors('arrivalDate')}">
@@ -131,7 +142,7 @@
                     </div>
                     <div class="col-4 mb-3 form-group">
                         <label class="form-control-label" for="arrivalDayPart">Час</label>
-                        <select class="selectpicker form-control" data-style="bg-white border" data-width="100%"
+                        <select disabled class="selectpicker form-control" data-style="bg-white border" data-width="100%"
                                 th:field="*{arrivalDayPart}"
                                 th:value="*{arrivalDayPart}" id="arrivalDayPart">
                             <option th:value="1">Ранок</option>
@@ -143,7 +154,7 @@
                 <div class="row">
                     <div class="col-8 mb-3 form-group">
                         <label class="form-control-label" for="leaveDate">Дата виселення<span class="text-danger">&nbsp;*</span></label>
-                        <input readonly type="text" th:field="*{leaveDate}" value="*{leaveDate}"
+                        <input disabled readonly type="text" th:field="*{leaveDate}" value="*{leaveDate}"
                                th:class="${#fields.hasErrors('leaveDate')} ? 'form-control bg-white border-danger' : 'form-control bg-white'"
                                id="leaveDate">
                         <div th:if="${#fields.hasErrors('leaveDate')}">
@@ -152,7 +163,7 @@
                     </div>
                     <div class="col-4 mb-3 form-group">
                         <label class="form-control-label" for="leaveDayPart">Час</label>
-                        <select class="selectpicker form-control" data-width="100%" th:field="*{leaveDayPart}"
+                        <select disabled class="selectpicker form-control" data-width="100%" th:field="*{leaveDayPart}"
                                 th:value="*{leaveDayPart}" data-style="bg-white border"
                                 id="leaveDayPart">
                             <option th:value="1">Ранок</option>
@@ -163,8 +174,9 @@
                 </div>
                 <hr class="mb-3">
                 <div class="mb-3 form-group">
-                    <label class="form-control-label" for="rooms">Кімнати<span class="text-danger">&nbsp;*</span></label>
-                    <select data-width="100%" th:field="*{roomNumbers}"
+                    <label class="form-control-label" for="rooms">Кімнати<span
+                            class="text-danger">&nbsp;*</span></label>
+                    <select disabled data-width="100%" th:field="*{roomNumbers}"
                             th:value="*{roomNumbers}" class="form-control selectpicker"
                             th:data-style="${#fields.hasErrors('roomNumbers')} ? 'bg-white border border-danger' : 'bg-white border'"
                             id="rooms" data-size="7" multiple title="Вибрати кімнати">
@@ -196,7 +208,7 @@
                     <label class="custom-control-label" for="allowBringIn">Можливе підселення</label>
                 </div>
                 <div class="mb-3 mt-3 form-group">
-                    <select title="Кімната для підселення" id="BringInRoomsSelect" class="form-control selectpicker"
+                    <select disabled title="Кімната для підселення" id="BringInRoomsSelect" class="form-control selectpicker"
                             th:field="*{sharedRoomNumbers}" th:value="*{sharedRoomNumbers}"
                             th:data-style="${#fields.hasErrors('sharedRoomNumbers')} ? 'bg-white border border-danger' : 'bg-white border'"
                             data-width="100%" data-hide-disabled="true" multiple>
@@ -214,26 +226,37 @@
                         <span class="text-danger small" th:errors="*{sharedRoomNumbers}"></span>
                     </div>
                 </div>
-                <div id="vacValidationError" th:if="${#fields.hasErrors('dummyVarForAlert')}"></div>
 
                 <hr class="mb-3">
                 <div class="row">
                     <div class="mb-3 col form-group">
                         <label class="form-control-label" for="pricePerDay">Ціна за добу</label>
-                        <input type="number" th:field="*{pricePerDay}" th:value="*{pricePerDay}"
+                        <input disabled type="number" th:field="*{pricePerDay}" th:value="*{pricePerDay}"
                                id="pricePerDay" class="form-control">
                     </div>
 
                     <div class="mb-3 col form-group">
                         <label class="form-control-label" for="totalPrice">Загальна вартість<span class="text-danger">&nbsp;*</span></label>
-                        <input type="number" th:field="*{totalPrice}" th:value="*{totalPrice}"
+                        <input disabled type="number" th:field="*{totalPrice}" th:value="*{totalPrice}"
                                id="totalPrice" class="form-control">
                     </div>
                 </div>
-                <hr class="mt-3">
-                <button class="btn btn-primary btn-block shadow-sm" type="submit" id="saveVacButton">Зберегти</button>
-                <a th:href="@{/vacations}"
-                   class="text-center mt-2 btn btn-link btn-block text-muted">Відмінити</a>
+
+                <div style="display:none;" id="saveVacSection">
+                    <br>
+                    <hr class="mt-2">
+                    <button class="btn btn-primary btn-block shadow-sm" type="submit" id="saveVacButton">Зберегти
+                    </button>
+                    <a th:href="@{/vacations}"
+                       class="text-center mt-2 btn btn-link btn-block text-muted">Відмінити</a>
+                </div>
+
+
+                <div id="editVacSection">
+                    <br>
+                    <hr class="mt-2">
+                    <div class="btn btn-primary btn-block shadow-sm" id="editVacButton">Редагувати</div>
+                </div>
             </form>
         </div>
     </div>

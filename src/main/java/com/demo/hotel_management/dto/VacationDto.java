@@ -11,6 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -44,7 +45,7 @@ public class VacationDto {
     private Integer residentsCount;
     @NotNull
     private Boolean hasSharedRooms;
-    private Set<Integer> sharedRoomNumbers;
+    private Set<Integer> sharedRoomNumbers = new HashSet<>();
     @NotNull
     private Boolean inactive = false;
     @NotNull

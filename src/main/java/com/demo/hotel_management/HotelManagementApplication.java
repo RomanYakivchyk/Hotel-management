@@ -55,10 +55,6 @@ public class HotelManagementApplication {
         log.debug("application started");
     }
 
-//    @GetMapping(value = "/")
-//    public String index() {
-//        return "oauth.html";
-//    }
 
     @Bean
     @Primary
