@@ -63,7 +63,7 @@ public class SpringBot  implements ApplicationListener<ApplicationReadyEvent>{
 //                new TextMessage("Hi " + event.getUser().getName()))));
     }
 
-    @PostMapping(value = "/", produces = "application/json")
+    @PostMapping(value = "/viber", produces = "application/json")
     public String incoming(@RequestBody String json,
                            @RequestHeader("X-Viber-Content-Signature") String serverSideSignature)
             throws ExecutionException, InterruptedException, IOException {
