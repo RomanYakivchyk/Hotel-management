@@ -36,12 +36,9 @@ public class VacationDto {
     private LocalDate leaveDate;
     @NotNull
     private Integer leaveDayPart;
-    @NotNull
     @NotEmpty(message = "{validation.vacation.rooms.message}")
-    private Set<Integer> roomNumbers;
-    @Min(1)
-    @Max(20)
-    @NotNull(message = "{validation.vacation.residents.message}")
+    private Set<Integer> roomNumbers = new HashSet<>();
+
     private Integer residentsCount;
     @NotNull
     private Boolean hasSharedRooms;
@@ -52,7 +49,7 @@ public class VacationDto {
     private Boolean approved = false;
 
     private Integer pricePerDay;
-    @NotNull
+    @NotNull(message = "{validation.vacation.totalPrice.message}")
     private Integer totalPrice;
 
     private Boolean dummyVarForAlert;

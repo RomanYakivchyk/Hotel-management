@@ -2,38 +2,22 @@ package com.demo.hotel_management.controller;
 
 import com.demo.hotel_management.dto.VacationDto;
 import com.demo.hotel_management.entity.Client;
-import com.demo.hotel_management.entity.Vacation;
 import com.demo.hotel_management.service.ClientService;
 import com.demo.hotel_management.service.VacationService;
-import com.demo.hotel_management.utils.Pager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Slf4j
 @Controller
 public class VacationController {
-
-
-    private static final int BUTTONS_TO_SHOW = 5;
-    private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 10;
-    private static final int[] PAGE_SIZES = {5, 10, 20};
 
     @Autowired
     private VacationService vacationService;
@@ -96,31 +80,6 @@ public class VacationController {
         vacationService.approveVacation(id,approval);
         return "";
     }
-
-//    @GetMapping("/vacations")
-//    public ModelAndView listClients(@RequestParam("pageSize") Optional<Integer> pageSize,
-//                                    @RequestParam("page") Optional<Integer> page) {
-//        ModelAndView modelAndView = new ModelAndView("listVacations.html");
-//
-//        // Evaluate page size. If requested parameter is null, return initial
-//        // page size
-//        int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-//        // Evaluate page. If requested parameter is null or less than 0 (to
-//        // prevent exception), return initial size. Otherwise, return value of
-//        // param. decreased by 1.
-//        int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-//
-//        Page<VacationDto> vacations = vacationService.findAllPageable(PageRequest.of(evalPage, evalPageSize));
-//        Pager pager = new Pager(vacations.getTotalPages(), vacations.getNumber(), BUTTONS_TO_SHOW);
-//
-//        modelAndView.addObject("vacations", vacations);
-//        modelAndView.addObject("selectedPageSize", evalPageSize);
-//        modelAndView.addObject("pageSizes", PAGE_SIZES);
-//        modelAndView.addObject("pager", pager);
-//        return modelAndView;
-//    }
-
-
 
 
     @RequestMapping(path = "/vacation/{vacId}/remove", method = RequestMethod.GET)

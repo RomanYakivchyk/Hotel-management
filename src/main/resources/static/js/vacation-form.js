@@ -206,9 +206,6 @@ function datediff(first, second) {
 
  $(document).ready(function(){
 
-//        $('#arrivalDate').datepicker('remove');
-//        $('#leaveDate').datepicker('remove');
-
         $('#editVacButton').click(function(){
             unlockFields();
         });
@@ -225,7 +222,7 @@ function datediff(first, second) {
             $('#removeButton').addClass('disabled');
 
 
-            $('#createClientLink').removeClass('disabled');
+            $('#createClientLink').attr('data-target','#addClassModal');
             $('#clientName').prop('disabled',false);
             $('#clientName').selectpicker('refresh');
             $('#residentsCount').prop('disabled',false);
@@ -248,5 +245,7 @@ function datediff(first, second) {
             $('#BringInRoomsSelect').selectpicker('refresh');
             $('#pricePerDay').prop('disabled',false);
             $('#totalPrice').prop('disabled',false);
+            $('#approved').prop('disabled',false);
+            $('#notApproved').prop('disabled',false);
 
     }

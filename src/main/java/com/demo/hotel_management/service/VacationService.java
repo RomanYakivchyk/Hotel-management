@@ -83,20 +83,16 @@ public class VacationService {
                 .collect(toList());
     }
 
-    public void approveVacation(Long id,Boolean approval) {
-        vacationRepository.approve(id,approval);
+    public void approveVacation(Long id, Boolean approval) {
+        vacationRepository.approve(id, approval);
     }
 
-    //todo
-//    public List<VacationDto> getVacationsTable(LocalDate date) {
-//        LocalDate from = LocalDate.of(date.getYear(), date.getMonth(), 1);
-//        LocalDate to = date.plusMonths(1);
-//        to = LocalDate.of(to.getYear(), to.getMonth(), to.lengthOfMonth());
-//
-//        return vacationRepository
-//                .findByMonth(from, to).stream()
-//                .filter(v -> !v.getInactive())
-//                .map(entityDtoConverter::convertVacationEntityToDto)
-//                .collect(toList());
-//    }
+    public List<VacationDto> getVacationsForTomorrow() {
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+
+        return vacationRepository.findByInactiveFalse().stream()
+                .filter(e -> e.getVacationDate().getArrivalDate().equals(tomorrow))
+                .map(e -> entityDtoConverter.convertVacationEntityToDto(e))
+                .collect(toList());
+    }
 }

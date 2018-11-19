@@ -81,7 +81,7 @@
                   method="post">
                 <div class="mb-4">
                     <span class="h5 card-title"
-                          th:text="((*{vacationId} == null)?'Додати':'Редагувати') + ' бронювання'"></span>
+                          th:text="Бронювання"></span>
 
                     <a th:href="@{/vacation/{vacationId}/remove(vacationId=${vacationModel.vacationId})}"
                        class="btn btn-outline-primary shadow-sm float-right" id="removeButton">
@@ -97,8 +97,8 @@
                     <div class="col-8 mb-3 form-group">
                         <label class="form-control-label" for="clientName">Клієнт<span
                                 class="text-danger">&nbsp;*</span></label>
-                        <a class="float-right disabled" id="createClientLink" data-toggle="modal" href=""
-                           data-target="#addClassModal">новий клієнт</a>
+                        <a class="float-right" id="createClientLink" data-toggle="modal" href=""
+                           data-target="">новий клієнт</a>
                         <div>
                             <select disabled th:field="*{clientId}" data-live-search="true"
                                     data-live-search-normalize="true" data-none-results-text="Нічого не знайдено"
@@ -116,7 +116,8 @@
                     <div class="col-4 mb-3 form-group">
                         <label class="form-control-label" for="residentsCount">К-cть<span
                                 class="text-danger">&nbsp;*</span></label>
-                        <select disabled class="selectpicker form-control" data-style="bg-white border" data-width="100%"
+                        <select disabled class="selectpicker form-control" data-style="bg-white border"
+                                data-width="100%"
                                 id="residentsCount" th:field="*{residentsCount}"
                                 th:value="*{residentsCount}" data-size="8">
                             <option th:value="1">1</option>
@@ -142,7 +143,8 @@
                     </div>
                     <div class="col-4 mb-3 form-group">
                         <label class="form-control-label" for="arrivalDayPart">Час</label>
-                        <select disabled class="selectpicker form-control" data-style="bg-white border" data-width="100%"
+                        <select disabled class="selectpicker form-control" data-style="bg-white border"
+                                data-width="100%"
                                 th:field="*{arrivalDayPart}"
                                 th:value="*{arrivalDayPart}" id="arrivalDayPart">
                             <option th:value="1">Ранок</option>
@@ -208,7 +210,8 @@
                     <label class="custom-control-label" for="allowBringIn">Можливе підселення</label>
                 </div>
                 <div class="mb-3 mt-3 form-group">
-                    <select disabled title="Кімната для підселення" id="BringInRoomsSelect" class="form-control selectpicker"
+                    <select disabled title="Кімната для підселення" id="BringInRoomsSelect"
+                            class="form-control selectpicker"
                             th:field="*{sharedRoomNumbers}" th:value="*{sharedRoomNumbers}"
                             th:data-style="${#fields.hasErrors('sharedRoomNumbers')} ? 'bg-white border border-danger' : 'bg-white border'"
                             data-width="100%" data-hide-disabled="true" multiple>
@@ -232,19 +235,34 @@
                     <div class="mb-3 col form-group">
                         <label class="form-control-label" for="pricePerDay">Ціна за добу</label>
                         <input disabled type="number" th:field="*{pricePerDay}" th:value="*{pricePerDay}"
-                               id="pricePerDay" class="form-control">
+                               id="pricePerDay" class="form-control bg-white">
                     </div>
 
                     <div class="mb-3 col form-group">
                         <label class="form-control-label" for="totalPrice">Загальна вартість<span class="text-danger">&nbsp;*</span></label>
                         <input disabled type="number" th:field="*{totalPrice}" th:value="*{totalPrice}"
-                               id="totalPrice" class="form-control">
+                               id="totalPrice"
+                               th:class="${#fields.hasErrors('totalPrice')} ? 'form-control bg-white border-danger' : 'form-control bg-white'">
+                        <div th:if="${#fields.hasErrors('totalPrice')}">
+                            <span class="text-danger small" th:errors="*{totalPrice}"></span>
+                        </div>
                     </div>
                 </div>
 
+                <hr>
+                <div class="custom-control custom-radio">
+                    <input disabled type="radio" class="custom-control-input" id="approved"
+                           th:value="true" th:field="*{approved}">
+                    <label class="custom-control-label" for="approved">Підтверджено</label>
+                </div>
+                <div class="custom-control custom-radio mt-1">
+                    <input disabled type="radio" class="custom-control-input" id="notApproved"
+                           th:value="false" th:field="*{approved}">
+                    <label class="custom-control-label " for="notApproved">Не підтверджено</label>
+                </div>
+
                 <div style="display:none;" id="saveVacSection">
-                    <br>
-                    <hr class="mt-2">
+                    <hr>
                     <button class="btn btn-primary btn-block shadow-sm" type="submit" id="saveVacButton">Зберегти
                     </button>
                     <a th:href="@{/vacations}"
@@ -253,8 +271,7 @@
 
 
                 <div id="editVacSection">
-                    <br>
-                    <hr class="mt-2">
+                    <hr>
                     <div class="btn btn-primary btn-block shadow-sm" id="editVacButton">Редагувати</div>
                 </div>
             </form>

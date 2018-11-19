@@ -271,8 +271,8 @@
                 var popover = $(this).parent().parent().parent();
                 var popoverId = popover.attr('id');
                 var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
-                var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';
-                <!--https://quiet-springs-81500.herokuapp.com-->
+                <!--var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';-->
+                var url = 'http://localhost:8080/vacation/' + vacId + '/remove-ajax';
                 $.get(url, function(data) {});
             }
             hidePopover(popover);
@@ -283,7 +283,8 @@
             var popoverId = popover.attr('id');
             var isApproved = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('approved');
             var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
-            var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/approve';
+            <!--var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/approve';-->
+            var url = 'http://localhost:8080/vacation/' + vacId + '/approve';
             if(isApproved){
                 url = url+'?approval=false';
             } else {
@@ -346,9 +347,9 @@
         $('#bookingTable tbody').empty();
         $('#loader').show();
 
-        $.get('https://quiet-springs-81500.herokuapp.com/tableData/' + direction, function(data) {
-            <!--http://localhost:8080/tableData-->
-            <!--https://quiet-springs-81500.herokuapp.com/tableData-->
+        <!--$.get('https://quiet-springs-81500.herokuapp.com/tableData/' + direction, function(data) {-->
+        $.get('http://localhost:8080/tableData/' + direction, function(data) {
+
             $('#loader').hide();
 
             buildTableHeader(data[0]);

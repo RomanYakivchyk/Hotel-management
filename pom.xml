@@ -77,7 +77,11 @@
             <artifactId>android-json</artifactId>
             <version>0.0.20131108.vaadin1</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.viber</groupId>
+            <artifactId>viber-bot</artifactId>
+            <version>1.0.11</version>
+        </dependency>
 
 
         <!--<dependency>-->

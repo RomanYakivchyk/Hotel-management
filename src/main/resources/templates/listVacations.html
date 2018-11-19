@@ -100,32 +100,6 @@
             <div class="mt-2 float-right" id="dataTableButtons">
             </div>
 
-            <!--<div th:if="${vacations.totalPages != 1}" class="form-group">-->
-                <!--<ul class="pagination">-->
-                    <!--<li th:class="${vacations.number == 0} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">-->
-                        <!--<a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=1)}"><i-->
-                                <!--class="fal fa-angle-double-left"></i></a>-->
-                    <!--</li>-->
-                    <!--&lt;!&ndash;<li th:class="${vacations.number == 0} ? disabled">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<a class="page-link"&ndash;&gt;-->
-                    <!--&lt;!&ndash;th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number})}"><i class="fal fa-angle-left"></i></a>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                    <!--<li th:class="${vacations.number == (page - 1)} ? 'page-item active pointer-disabled shadow-sm' : 'page-item shadow-sm'"-->
-                        <!--th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">-->
-                        <!--<a class="page-link" th:href="@{/vacations(pageSize=${selectedPageSize}, page=${page})}"-->
-                           <!--th:text="${page}"></a>-->
-                    <!--</li>-->
-                    <!--&lt;!&ndash;<li th:class="${vacations.number + 1 == vacations.totalPages} ? disabled">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<a class="page-link"&ndash;&gt;-->
-                    <!--&lt;!&ndash;th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.number + 2})}"><i class="fal fa-angle-right"></i></a>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
-                    <!--<li th:class="${vacations.number + 1 == vacations.totalPages} ? 'disabled page-item shadow-sm' : 'page-item shadow-sm'">-->
-                        <!--<a class="page-link"-->
-                           <!--th:href="@{/vacations(pageSize=${selectedPageSize}, page=${vacations.totalPages})}"><i-->
-                                <!--class="fal fa-angle-double-right"></i></a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
 
         </div>
     </div>

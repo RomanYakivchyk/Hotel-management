@@ -130,8 +130,8 @@ public class TestRestController2 {
             LocalDate arrivalDate = roomVacations.get(i).getVacation().getVacationDate().getArrivalDate();
             LocalDate leaveDate = roomVacations.get(i).getVacation().getVacationDate().getLeaveDate();
 
-            boolean isArrivalDate = arrivalDate.getDayOfMonth() == day.getDayOfMonth();
-            boolean isLeaveDate = leaveDate.getDayOfMonth() == day.getDayOfMonth();
+            boolean isArrivalDate = arrivalDate.equals(day);
+            boolean isLeaveDate = leaveDate.equals(day);
 
 
             long vacId = roomVacations.get(i).getVacation().getId();

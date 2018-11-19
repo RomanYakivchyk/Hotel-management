@@ -56,8 +56,7 @@
             <form class="needs-validation" action="#" th:action="@{/clients/update}" th:object="${clientModel}"
                   method="post">
                 <div class="mb-4">
-                    <span class="h5 card-title"
-                          th:text="((*{id} == null)?'Додати':'Редагувати') + ' дані клієнта'"></span>
+                    <span class="h5 card-title" th:text="Клієнт"></span>
                     <a th:href="@{/client/{id}/remove(id=${clientModel.id})}"
                        class="btn btn-outline-primary shadow-sm float-right" id="removeButton">
                         Видалити
@@ -70,7 +69,7 @@
                     <label class="form-control-label" for="clientName">Ім'я<span
                             class="text-danger">&nbsp;*</span></label>
                     <input disabled type="text" th:field="*{name}" value="*{name}" id="clientName"
-                           th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control'">
+                           th:class="${#fields.hasErrors('name')} ? 'form-control is-invalid' : 'form-control bg-white'">
                     <div class="invalid-feedback" th:errors="*{name}"></div>
                 </div>
 
@@ -78,7 +77,7 @@
                     <label class="form-control-label" for="otherClientInfo">Додаткові дані<span class="text-danger">&nbsp;*</span></label>
                     <input disabled type="text" th:field="*{otherClientInfo}" value="*{otherClientInfo}"
                            id="otherClientInfo"
-                           th:class="${#fields.hasErrors('otherClientInfo')} ? 'form-control is-invalid' : 'form-control'">
+                           th:class="${#fields.hasErrors('otherClientInfo')} ? 'form-control is-invalid' : 'form-control bg-white'">
                     <div class="invalid-feedback" th:errors="*{otherClientInfo}"></div>
                 </div>
 
@@ -87,7 +86,7 @@
                             class="text-danger">&nbsp;*</span></label>
                     <input disabled type="text" th:field="*{phoneNumber}" value="*{phoneNumber}"
                            id="phoneNumber" data-mask="(000) 00-00-000"
-                           th:class="${#fields.hasErrors('phoneNumber')} ? 'form-control is-invalid' : 'form-control'">
+                           th:class="${#fields.hasErrors('phoneNumber')} ? 'form-control is-invalid' : 'form-control bg-white'">
                     <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
                 </div>
 
@@ -95,7 +94,7 @@
                     <label class="form-control-label" for="email">Email</label>
                     <input disabled type="text" th:field="*{email}" value="*{email}" id="email"
                            placeholder="example@gmail.com"
-                           th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control'">
+                           th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control bg-white'">
                     <div class="invalid-feedback" th:errors="*{email}"></div>
 
                     <div style="display:none;" id="saveClientSection">
