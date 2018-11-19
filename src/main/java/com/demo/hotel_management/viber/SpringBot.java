@@ -37,7 +37,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-public class SpringBot  implements ApplicationListener<ApplicationReadyEvent>{
+public class SpringBot implements ApplicationListener<ApplicationReadyEvent> {
 
     @Autowired
     private VacationService vacationService;
@@ -63,7 +63,7 @@ public class SpringBot  implements ApplicationListener<ApplicationReadyEvent>{
 //                new TextMessage("Hi " + event.getUser().getName()))));
     }
 
-    @PostMapping(value = "/viber", produces = "application/json")
+    @PostMapping(value = "/viber/bot", produces = "application/json")
     public String incoming(@RequestBody String json,
                            @RequestHeader("X-Viber-Content-Signature") String serverSideSignature)
             throws ExecutionException, InterruptedException, IOException {
