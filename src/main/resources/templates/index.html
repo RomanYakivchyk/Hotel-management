@@ -101,7 +101,7 @@
                 <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
             </li>
         </ul>
     </div>
@@ -184,15 +184,15 @@
         </div>
     </div>
 </div>
-<div class="dropdown">
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Link 1</a>
-        <a class="dropdown-item" href="#">Link 2</a>
-        <a class="dropdown-item" href="#">Link 3</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Another link</a>
-    </div>
-</div>
+<!--<div class="dropdown">-->
+    <!--<div class="dropdown-menu">-->
+        <!--<a class="dropdown-item" href="#">Link 1</a>-->
+        <!--<a class="dropdown-item" href="#">Link 2</a>-->
+        <!--<a class="dropdown-item" href="#">Link 3</a>-->
+        <!--<div class="dropdown-divider"></div>-->
+        <!--<a class="dropdown-item" href="#">Another link</a>-->
+    <!--</div>-->
+<!--</div>-->
 <div th:insert="footer.html"></div>
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
 <script th:src="@{/ajax/popper.min.js}"></script>
@@ -272,7 +272,7 @@
                 var popoverId = popover.attr('id');
                 var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
                 <!--var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';-->
-                var url = 'http://localhost:8080/vacation/' + vacId + '/remove-ajax';
+                var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';
                 $.get(url, function(data) {});
             }
             hidePopover(popover);
@@ -284,7 +284,7 @@
             var isApproved = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('approved');
             var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
             <!--var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/approve';-->
-            var url = 'http://localhost:8080/vacation/' + vacId + '/approve';
+            var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/approve';
             if(isApproved){
                 url = url+'?approval=false';
             } else {
@@ -348,7 +348,7 @@
         $('#loader').show();
 
         <!--$.get('https://quiet-springs-81500.herokuapp.com/tableData/' + direction, function(data) {-->
-        $.get('http://localhost:8080/tableData/' + direction, function(data) {
+        $.get('https://quiet-springs-81500.herokuapp.com/tableData/' + direction, function(data) {
 
             $('#loader').hide();
 

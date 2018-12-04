@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Remember Me!</title>
+    <meta charset="utf-8">
+
+    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
+    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
+
+    <!-- bootstrap kit-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- end of bootstrap kit-->
+
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
+
+    <link rel="stylesheet" href="/footer.css">
+
+</head>
+
+<body class="text-center bg-light">
+<div th:if="${param.error}">
+    <div class="alert alert-danger">
+        <h5>Пошта або пароль неправильні! Введіть ще раз</h5>
+    </div>
+</div>
+<div class="container col-md-4" style="float: none; margin: 0 auto;">
+    <br><br><br><br>
+    <div class="card shadow-sm">
+        <h4 class="card-title mt-4"><i class="far fa-lock fa-lg"></i>&nbsp;Введіть логін та пароль</h4>
+        <div class="card-body">
+            <form th:action="@{/login}" class="form-signin" method="post">
+                <div class="mb-4 form-group">
+                    <input type="text" id="inputEmail" name="username" class="form-control form-control-lg" placeholder="Email"
+                           required=""
+                           autofocus="">
+                </div>
+                <div class="mb-4 form-group">
+                    <input type="password" id="inputPassword" name="password" class="form-control form-control-lg"
+                           placeholder="Пароль"
+                           required="">
+                </div>
+                <div class="custom-control custom-checkbox mb-4 float-left">
+                    <input type="checkbox" name="remember-me"
+                           class="custom-control-input" id="rememberMe">
+                    <label class="custom-control-label" for="rememberMe">Запам'ятати мене</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Увійти</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:insert="footer.html"></div>
+<script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/ajax/popper.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

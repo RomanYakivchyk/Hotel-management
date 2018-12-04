@@ -31,6 +31,11 @@ public class VacationController {
         return "index.html";
     }
 
+    @RequestMapping(value = { "/login" })
+    public String login() {
+        return "login.html";
+    }
+
     @RequestMapping(value = {"/vacations/update", "/vacation/{vacationId}/edit"}, method = RequestMethod.GET)
     public String vacationEditForm(Model model, @PathVariable(required = false) Long vacationId, HttpServletRequest request) {
         log.debug("model={}, vacationId={}", vacationId);
