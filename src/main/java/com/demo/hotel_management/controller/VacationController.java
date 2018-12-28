@@ -6,6 +6,7 @@ import com.demo.hotel_management.service.ClientService;
 import com.demo.hotel_management.service.VacationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -79,11 +80,10 @@ public class VacationController {
     }
 
     @GetMapping("/vacation/{id}/approve")
-    @ResponseBody
-    public String approveVacation(@PathVariable(name = "id") Long id,
+    @ResponseStatus(HttpStatus.OK)
+    public void approveVacation(@PathVariable(name = "id") Long id,
                                   @RequestParam(name = "approval") Boolean approval){
         vacationService.approveVacation(id,approval);
-        return "";
     }
 
 
@@ -96,9 +96,8 @@ public class VacationController {
     }
 
     @GetMapping(path = "/vacation/{vacId}/remove-ajax")
-    @ResponseBody
-    public String removeVacationAjax(@PathVariable Long vacId) {
+    @ResponseStatus(HttpStatus.OK)
+    public void removeVacationAjax(@PathVariable Long vacId) {
         vacationService.inactivateVacation(vacId);
-        return "";
     }
 }

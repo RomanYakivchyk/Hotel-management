@@ -3,6 +3,7 @@ package com.demo.hotel_management.controller;
 import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.repository.RoomVacationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 
@@ -20,9 +21,9 @@ import static java.util.stream.Collectors.toList;
 public class TestRestController2 {
 
     @Autowired
-    RoomVacationRepository roomVacationRepository;
-
-    public static final Integer ROOM_COUNT = 9; //todo
+    private RoomVacationRepository roomVacationRepository;
+    @Value("${vac.room.count}")
+    private Integer ROOM_COUNT; //todo
 
     private List<RoomVacation> topSubRowVacations = new ArrayList<>();
     private List<RoomVacation> bottomSubRowVacations = new ArrayList<>();
@@ -102,6 +103,7 @@ public class TestRestController2 {
                 headerCellMap.put("dayOfWeek", dayOfWeek);
                 headerCellMap.put("monthName", currDay.getMonth().getDisplayName(TextStyle.FULL, Locale.forLanguageTag("uk-UA")));
                 headerCellMap.put("monthLength", String.valueOf(currDay.lengthOfMonth()));
+                headerCellMap.put("date", currDay.toString());
                 headerList.add(headerCellMap);
             }
         }
@@ -139,13 +141,13 @@ public class TestRestController2 {
             Boolean approved = roomVacations.get(i).getVacation().getApproved();
 
             cellMap.put("vac_" + i, String.valueOf(vacId));
-            cellMap.put("room_" + i, String.valueOf(roomNumber));
+//            cellMap.put("room_" + i, String.valueOf(roomNumber));
             cellMap.put("client_" + i, clientName);
             cellMap.put("arrival_" + i, String.valueOf(isArrivalDate));
             cellMap.put("leave_" + i, String.valueOf(isLeaveDate));
             cellMap.put("start_" + i, String.valueOf(arrivalDate));
             cellMap.put("end_" + i, String.valueOf(leaveDate));
-            cellMap.put("day_" + i, String.valueOf(day.getDayOfMonth()));
+//            cellMap.put("day_" + i, String.valueOf(day.getDayOfMonth()));
             cellMap.put("approved_" + i, String.valueOf(approved));
         }
         return cellMap;

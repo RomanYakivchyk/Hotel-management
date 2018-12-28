@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.MessageSource;
@@ -42,10 +43,16 @@ DATABASE_URL: postgres://fhcorgnllxvhkc:576936a50df4df8e74335d16c99045df829bfb75
 @SpringBootApplication
 public class HotelManagementApplication {
 
-
-//    private String ipAddress = InetAddress.getLocalHost().getHostAddress();
-//    @Value("${local.server.port}")
-//    private static int port;
+    @Value("${app.domain}")
+    private String domain;
+    @Value("${datasource.driver}")
+    private String datasourceDriver;
+    @Value("${datasource.url}")
+    private String datasourceUrl;
+    @Value("${datasource.username}")
+    private String datasourceUsername;
+    @Value("${datasource.password}")
+    private String datasourcePassword;
 
     public HotelManagementApplication() {
     }
@@ -59,36 +66,19 @@ public class HotelManagementApplication {
     @Bean
     @Primary
     public DataSource postgresDataSource() {
-//        String databaseUrl = System.getenv("DATABASE_URL");
-////        log.info("Initializing PostgreSQL database: {}", databaseUrl);
-////
-////        URI dbUri;
-////        try {
-////            dbUri = new URI(databaseUrl);
-////        }
-////        catch (URISyntaxException e) {
-////            log.error(String.format("Invalid DATABASE_URL: %s", databaseUrl), e);
-////            return null;
-////        }
-////
-////        String username = dbUri.getUserInfo().split(":")[1];
-////        String password = dbUri.getUserInfo().split(":")[2];
-////        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':'
-////                + dbUri.getPort() + dbUri.getPath();
-//
-//        String dbUrl = databaseUrl.
+
         org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setDriverClassName(datasourceDriver);
 
         //todo
 
-        dataSource.setUrl("jdbc:postgresql://ec2-54-243-147-162.compute-1.amazonaws.com:5432/d4kpiadsgu8ckn");
-        dataSource.setUsername("fhcorgnllxvhkc");
-        dataSource.setPassword("576936a50df4df8e74335d16c99045df829bfb75a2888933ed3d0807b429dc95");
+//        dataSource.setUrl("jdbc:postgresql://ec2-54-243-147-162.compute-1.amazonaws.com:5432/d4kpiadsgu8ckn");
+//        dataSource.setUsername("fhcorgnllxvhkc");
+//        dataSource.setPassword("576936a50df4df8e74335d16c99045df829bfb75a2888933ed3d0807b429dc95");
 
-//        dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
-//        dataSource.setUsername("postgres");
-//        dataSource.setPassword("");
+        dataSource.setUrl(datasourceUrl);
+        dataSource.setUsername(datasourceUsername);
+        dataSource.setPassword(datasourcePassword);
 
 
         dataSource.setTestOnBorrow(true);
@@ -131,18 +121,17 @@ public class HotelManagementApplication {
 
 
     @Scheduled(fixedDelay = 600000)
-    public void scheduleFixedDelayTask() throws IOException {
-
-        String url = "https://quiet-springs-81500.herokuapp.com";
+    public void scheduleFixedDelayTask() {
 
         HttpClient client = HttpClientBuilder.create().build();
-        HttpGet request = new HttpGet(url);
+        HttpGet request = new HttpGet(domain);
 
         request.addHeader("User-Agent", USER_AGENT);
-        client.execute(request);
+
+        try {
+            client.execute(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
-
-
-
 }

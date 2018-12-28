@@ -32,6 +32,8 @@
             overflow: visible;
             border-left: none;
             border-right: none;
+            border-bottom: none;
+            border-top: none;
         }
 
         #roomNumsTable {
@@ -39,8 +41,8 @@
         }
 
         .roomNum {
-            height: 44px;
-            border-bottom: 0.5px solid #868e96;
+            height: 44.3px;
+            background-color:rgb(240, 240, 240);
         }
 
         #loader {
@@ -75,6 +77,21 @@
             padding-left:10px;
             padding-right:10px;
         }
+
+        .striped {
+            background-color: #f0f0f0;
+        }
+
+        .selected {
+            background-color: red !important;
+        }
+
+
+<!--.modal-backdrop {-->
+     <!--background-color: rgba(0,0,1,.5) !important;-->
+<!--}-->
+
+
     </style>
 
 
@@ -109,6 +126,32 @@
 </nav>
 
 
+<div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="addClassModalLabel"
+     aria-hidden="true" data-backdrop="static" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addClassModalLabel">Title</h5>
+                <button data-dismiss="modal" id="closeModal" class="close align-right"><i class="far fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row ml-1 mr-2 form-group">
+                    <input type="text" class="col form-control bg-white bg-white" id="startDate">
+                    <input type="text" class="col form-control bg-white bg-white" id="endDate">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+
+
 <ol class="breadcrumb bg-white shadow-sm">
     <li class="breadcrumb-item active"><a th:href="@{/}">Домашня</a></li>
 </ol>
@@ -118,26 +161,27 @@
     <div class="card shadow-sm" id="mainCard" style="display:none;">
         <div class="card-body">
             <div class="mb-4">
-                <span class="card-title h4">Бронювання</span>
+                <span class="card-title h5">Бронювання</span>
                 <span class="btn-group float-right" role="group">
                         <button type="button" value="prev"
-                                class="month-dir btn btn-sm btn-outline-primary">Prev</button>
+                                class="month-dir btn btn-sm btn-outline-primary">Назад</button>
                         <button type="button" value="curr"
-                                class="month-dir btn btn-sm btn-outline-primary">Curr</button>
+                                class="month-dir btn btn-sm btn-outline-primary">Поточний</button>
                         <button type="button" value="next"
-                                class="month-dir btn btn-sm btn-outline-primary">Next</button>
+                                class="month-dir btn btn-sm btn-outline-primary">Вперед</button>
                     </span>
             </div>
 
             <div class="row mr-2 ml-2">
-                <table class="bg-light" id="roomNumsTable" style="float:left;">
+                <table id="roomNumsTable" style="float:left;">
                     <thead>
                     <tr>
-                        <th style="height:45.5px;"></th>
+                        <th style="height:44.2px; background-color:rgb(240, 240, 240);"></th>
                     </tr>
+                    <!--style="border-top:0.5px solid black;"-->
                     <tr>
-                        <th class="roomNum" style="border-top:0.5px solid black;"><a class="tip" data-placement="right"
-                                                                                     title="Будинок 1, односпальне - 2">1</a>
+                        <th class="roomNum"><a class="tip" data-placement="right"
+                                               title="Будинок 1, односпальне - 2">1</a>
                         </th>
                     </tr>
                     <tr>
@@ -175,7 +219,7 @@
                     </thead>
                 </table>
                 <div class="table-responsive col" style="padding-left:0px">
-                    <table class="table table-bordered" id="bookingTable">
+                    <table class="table" id="bookingTable">
                         <thead></thead>
                         <tbody></tbody>
                     </table>
@@ -185,13 +229,13 @@
     </div>
 </div>
 <!--<div class="dropdown">-->
-    <!--<div class="dropdown-menu">-->
-        <!--<a class="dropdown-item" href="#">Link 1</a>-->
-        <!--<a class="dropdown-item" href="#">Link 2</a>-->
-        <!--<a class="dropdown-item" href="#">Link 3</a>-->
-        <!--<div class="dropdown-divider"></div>-->
-        <!--<a class="dropdown-item" href="#">Another link</a>-->
-    <!--</div>-->
+<!--<div class="dropdown-menu">-->
+<!--<a class="dropdown-item" href="#">Link 1</a>-->
+<!--<a class="dropdown-item" href="#">Link 2</a>-->
+<!--<a class="dropdown-item" href="#">Link 3</a>-->
+<!--<div class="dropdown-divider"></div>-->
+<!--<a class="dropdown-item" href="#">Another link</a>-->
+<!--</div>-->
 <!--</div>-->
 <div th:insert="footer.html"></div>
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
@@ -200,34 +244,65 @@
 
 </body>
 <script>
-<!--globalPopoverStatus = false;-->
+    globalPopoverStatus = false;
 
-<!--$(document).ready(function() {-->
-    <!--var first;-->
-    <!--var second;-->
+    $(document).ready(function() {
+        var first;
+        var second;
 
- <!--$('body').on('click', '#bookingTable tbody tr td', function(e) {-->
-    <!--if(!$(this).hasClass('cell') && !globalPopoverStatus){-->
-        <!--if(first == null){-->
-            <!--&lt;!&ndash;first = $(this);&ndash;&gt;-->
-            <!--$(this).css('background-color','red');-->
-        <!--} else if(second == null){-->
-            <!--&lt;!&ndash;second = $(this);&ndash;&gt;-->
-            <!--$(this).css('background-color','red');-->
-            <!--alert('create');-->
-            <!--&lt;!&ndash;popup create vac&ndash;&gt;-->
-        <!--} else {-->
-            <!--first = null;-->
-            <!--second = null;-->
-        <!--}-->
-    <!--}-->
- <!--});-->
+        $('body').on('click', '#bookingTable tbody tr td', function(e) {
+            if (!$(this).hasClass('cell') && !globalPopoverStatus) {
 
-<!--});-->
+                if (first == null) {
+                    first = $(this);
+                    first.addClass('selected');
+                } else if (second == null) {
+                    var roomNum = $(this).data('room');
+                    var column = $(this).data('column');
 
+                    if(first.data('room') === roomNum && parseInt(first.data('column')) < parseInt(column)){
+                        second = $(this);
+                        second.addClass('selected');
+                        if(isVertCellFree(first) && isVertCellFree(second)){
+                            <!--alert('free');-->
+                        }
+                        <!--alert('create');-->
+                    $('#addClassModal').modal('show');
 
+                    } else {
+                        first.removeClass('selected');
+                        first = null;
+                    }
 
+                } else {
+               first.removeClass('selected');
+               second.removeClass('selected');
+               first = null;
+               second = null;
+               }
+            }
 
+        });
+
+        $('#closeModal').click(function(){
+               first.removeClass('selected');
+               second.removeClass('selected');
+               first = null;
+               second = null;
+        });
+
+    });
+
+function isVertCellFree(cell){
+    var row;
+    if(cell.data('ver') === 'top'){
+        row = parseInt(cell.data('id').split('_')[0])+1;
+    } else if(cell.data('ver') === 'bottom'){
+        row = parseInt(cell.data('id').split('_')[0])-1;
+    }
+    var id = row+'_'+cell.data('id').split('_')[1];
+    return !$('#bookingTable tbody tr td[data-id='+id+']').hasClass('cell');
+}
 
 
 
@@ -235,6 +310,7 @@
         loadTableData("curr");
         $('.month-dir').click(function(e) {
             hidePopover(e);
+            globalPopoverStatus = false;
             loadTableData($(this).val());
         });
     });
@@ -244,22 +320,29 @@
         cellPopover();
 
         $('body').on('click', '#bookingTable tbody tr td', function() {
-        $('.cell').removeClass('highlighted');
+            if ($(this).hasClass('cell')) {
+                if (globalPopoverStatus) {
+                    globalPopoverStatus = false;
+                } else {
+                    globalPopoverStatus = true;
+                }
+            } else {
+                globalPopoverStatus = false;
+            }
 
-        <!--if(globalPopoverStatus) globalPopoverStatus = false;-->
-        <!--else globalPopoverStatus = true;-->
+            $('.cell').removeClass('highlighted');
 
-        var vacId = $(this).data('vac');
+            var vacId = $(this).data('vac');
 
-        var rows = $('#bookingTable').children('tbody').children('tr');
-        for (var i = 0; i < rows.length; i++) {
-            var cells = $(rows[i]).children('td');
-            for (var j = 0; j < cells.length; j++) {
-                if($(cells[j]).data('vac') == vacId){
-                    $(cells[j]).addClass('highlighted');
+            var rows = $('#bookingTable').children('tbody').children('tr');
+            for (var i = 0; i < rows.length; i++) {
+                var cells = $(rows[i]).children('td');
+                for (var j = 0; j < cells.length; j++) {
+                    if ($(cells[j]).data('vac') == vacId) {
+                        $(cells[j]).addClass('highlighted');
+                    }
                 }
             }
-        }
         });
     });
 
@@ -267,30 +350,32 @@
     $(document).ready(function() {
         $('body').on('click', '#removeButton', function() {
             var result = confirm("Видалити бронювання?");
-            if(result){
+            if (result) {
                 var popover = $(this).parent().parent().parent();
                 var popoverId = popover.attr('id');
                 var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
-                <!--var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';-->
-                var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/remove-ajax';
-                $.get(url, function(data) {});
+                var url = '/vacation/' + vacId + '/remove-ajax';
+                $.get(url, function(data) {
+                    window.location.reload();
+                });
             }
             hidePopover(popover);
         });
 
-         $('body').on('click', '#approveButton', function() {
+        $('body').on('click', '#approveButton', function() {
             var popover = $(this).parent().parent().parent();
             var popoverId = popover.attr('id');
             var isApproved = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('approved');
             var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
-            <!--var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/approve';-->
-            var url = 'https://quiet-springs-81500.herokuapp.com/vacation/' + vacId + '/approve';
-            if(isApproved){
-                url = url+'?approval=false';
+            var url = '/vacation/' + vacId + '/approve';
+            if (isApproved) {
+                url = url + '?approval=false';
             } else {
-                url = url+'?approval=true';
+                url = url + '?approval=true';
             }
-            $.get(url, function(data) {});
+            $.get(url, function(data) {
+                window.location.reload();
+            });
             hidePopover(popover);
         });
     });
@@ -306,7 +391,7 @@
                 var id = $(this).data('vac');
                 var approved = $(this).data('approved');
                 var icon;
-                if(approved){
+                if (approved) {
                     icon = "<i class='far fa-times'></i>";
                 } else {
                     icon = "<i class='far fa-check'></i>";
@@ -314,7 +399,7 @@
 
                 return "<a href='/vacation/" + id + "/edit'>#" + id + "</a><span class='btn dropdown-toggle pl-2 pr-2 ml-4' data-toggle='dropdown'></span>" +
                     "<div class='dropdown-menu' style='min-width: 50px !important;'>" +
-                    "<a class='dropdown-item' id='approveButton'>"+ icon +"</a>" +
+                    "<a class='dropdown-item' id='approveButton'>" + icon + "</a>" +
                     "<div class='dropdown-divider'></div>" +
                     "<a class='dropdown-item' id='removeButton'><i class='far fa-trash'></i></a></div></div>";
             },
@@ -322,7 +407,7 @@
                 var range = $(this).data('start').slice(-2) + " - " + $(this).data('end').slice(-2);
                 var clientName = $(this).data('client');
                 var room = $(this).data('room');
-                return range + ", Кім. " + room + "<br>"+clientName;
+                return range + ", Кім. " + room + "<br>" + clientName;
             }
         }
         var $po = $('body').popover(popOverSettings);
@@ -332,13 +417,12 @@
         });
     }
 
-   function hidePopover(e) {
+    function hidePopover(e) {
         $('[data-toggle="popover"],[data-original-title]').each(function() {
             if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
                 (($(this).popover('hide').data('bs.popover') || {}).inState || {}).click = false // fix for BS 3.3.6
             }
         });
-        <!--globalPopoverStatus = false;-->
     }
 
 
@@ -347,20 +431,18 @@
         $('#bookingTable tbody').empty();
         $('#loader').show();
 
-        <!--$.get('https://quiet-springs-81500.herokuapp.com/tableData/' + direction, function(data) {-->
-        $.get('https://quiet-springs-81500.herokuapp.com/tableData/' + direction, function(data) {
+        $.get('/tableData/' + direction, function(data) {
 
             $('#loader').hide();
-
             buildTableHeader(data[0]);
-            buildTableBody(data);
-            <!--mergeRowsAndCells();-->
-            <!--roundCorners();-->
+            buildTableBody(data,data[0]);
             $('#mainCard').css('display', 'block');
         });
     }
 
-   function buildTableHeader(headerData) {
+
+
+    function buildTableHeader(headerData) {
         var tHead = document.getElementById('bookingTable').getElementsByTagName('thead')[0];
 
         var headerRow0 = tHead.insertRow(0);
@@ -395,10 +477,10 @@
                 $(headerCell).css('background-color', '#f0f0f0');
             }
         }
-   }
+    }
 
 
-   function addAttributes(data, obj, index) {
+    function addAttributes(data, obj, index) {
         var $obj = $(obj);
         for (var key in data) {
             if (key.endsWith(index)) {
@@ -410,16 +492,41 @@
                 <!--#868e96-->
             }
         }
-   }
+    }
 
 
-    function buildTableBody(rows) {
+    function buildTableBody(rows, header) {
         var tBody = document.getElementById('bookingTable').getElementsByTagName('tbody')[0];
+        var roomNum = 0;
         for (var i = 1; i < rows.length; i++) {
             var row = tBody.insertRow(i - 1);
+            if(i%2!=0){
+                roomNum++;
+            }
+
             for (var j = 0, k = 0; j < rows[i].length * 2; j = j + 2, k++) {
                 var cell1 = row.insertCell(j);
+                $(cell1).attr('data-hor', 'left');
+                $(cell1).attr('data-date', header[k].date);
+                $(cell1).attr('data-room', roomNum);
+                $(cell1).attr('data-column', k);
+                $(cell1).attr('data-id', '' + (i-1)+'_'+j);
+
                 var cell2 = row.insertCell(j + 1);
+                $(cell2).attr('data-hor', 'right');
+                $(cell2).attr('data-date', header[k].date);
+                $(cell2).attr('data-room', roomNum);
+                $(cell2).attr('data-column', k);
+                $(cell2).attr('data-id', '' + (i-1)+'_'+j+1);
+
+
+                if(i%2!=0){
+                    $(cell1).attr('data-ver', 'top');
+                    $(cell2).attr('data-ver', 'top');
+                } else {
+                    $(cell1).attr('data-ver', 'bottom');
+                    $(cell2).attr('data-ver', 'bottom');
+                }
 
                 var data = rows[i][k];
 
@@ -427,10 +534,10 @@
                     addAttributes(data, cell1, 0);
                     addAttributes(data, cell2, 1);
                 } else {
-                    if(data['arrival_0'] != 'true'){
+                    if (data['arrival_0'] != 'true') {
                         addAttributes(data, cell1, 0);
                     }
-                    if(data['leave_0'] != 'true'){
+                    if (data['leave_0'] != 'true') {
                         addAttributes(data, cell2, 0);
                     }
                 }
@@ -438,91 +545,30 @@
                 markCell(cell1);
                 markCell(cell2);
 
-                if (k%2!=0) {
-                        $(cell1).css('background-color', '#f0f0f0');
-                        $(cell2).css('background-color', '#f0f0f0');
+                if (k % 2 != 0) {
+                    $(cell1).addClass('striped');
+                    $(cell2).addClass('striped');
                 }
 
-                if(i%2==0){
-                    $(cell1).css('border-top','none');
-                    $(cell2).css('border-top','none');
-
-                    $(cell1).css('border-bottom','0.5px solid grey');
-                    $(cell2).css('border-bottom','0.5px solid grey');
-                } else {
-                    $(cell1).css('border-bottom','none');
-                    $(cell2).css('border-bottom','none');
+                if (i % 2 == 0) {
+                    $(cell1).css('border-bottom', '0.5px solid grey');
+                    $(cell2).css('border-bottom', '0.5px solid grey');
                 }
             }
         }
     }
 
-function markCell(cell){
-    if($(cell).data('approved')==true){
-        <!--$(cell).find('span').css('background-color','#13B955');-->
-        $(cell).find('span').css('background-color','#ffc107');
-    }else{
-        $(cell).find('span').css('background-color','#868e96');
-    }
-}
-
-    function roundCorners() {
-        var rows = $('#bookingTable').children('tbody').children('tr');
-        for (var i = 0; i < rows.length; i++) {
-        var cells = $(rows[i]).children('td');
-            for (var j = 0; j < cells.length; j++) {
-                if($(cells[j]).attr('data-arrival') == 'true'){
-                    $(cells[j]).find('span').css('border-radius','10px 0px 0px 10px');
-                    $(cells[j]).find('span').css('border-left','0.5px solid #868e96');
-                    $(cells[j]).find('span').css('border-right','none');
-                }
-                if($(cells[j]).attr('data-leave') == 'true'){
-                    $(cells[j]).find('span').css('border-radius','0px 10px 10px 0px');
-                    $(cells[j]).find('span').css('border-right','0.5px solid #868e96');
-                    $(cells[j]).find('span').css('border-left','none');
-                }
-            }
+    function markCell(cell) {
+        if ($(cell).data('approved') == true) {
+            $(cell).find('span').css('background-color', '#ffc107');
+        } else {
+            $(cell).find('span').css('background-color', '#868e96');
         }
     }
 
 
-    function mergeRowsAndCells() {
-        var rows = $('#bookingTable').children('tbody').children('tr');
-        for (var i = 0; i < rows.length; i++) {
-            for (var j = 0; j < $(rows[0]).children('td').length; j++) {
-                if (i % 2 != 0) {
-                    var bottomCell = $(rows[i - 1]).children('td')[j];
-                    var topCell = $(rows[i]).children('td')[j];
 
-                    var $bottomCell = $(bottomCell);
-                    var $topCell = $(topCell);
-
-                    if ($topCell.data('vac') == $bottomCell.data('vac')) {
-                        $bottomCell.css('height', '44px');
-                        $bottomCell.attr('rowspan', '2');
-                        var innerSpan = $bottomCell.children('span')[0];
-                        $(innerSpan).css('height', '46px');
-                        $topCell.hide();
-                    }
-                }
-
-<!--DO NOT UNCOMMENT-->
-
-                <!--if (j % 2 != 0) {-->
-                    <!--var leftCell = $(rows[i]).children('td')[j - 1];-->
-                    <!--var rightCell = $(rows[i]).children('td')[j];-->
-
-                    <!--var $leftCell = $(leftCell);-->
-                    <!--var $rightCell = $(rightCell);-->
-
-                    <!--if ($leftCell.data('vac') == $rightCell.data('vac')) {-->
-                        <!--$leftCell.attr('colspan', '2');-->
-                        <!--$rightCell.hide();-->
-                    <!--}-->
-                <!--}-->
-            }
-        }
-    }
 
 </script>
+
 </html>
