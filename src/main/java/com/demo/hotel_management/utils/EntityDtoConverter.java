@@ -1,8 +1,6 @@
 package com.demo.hotel_management.utils;
 
-import com.demo.hotel_management.dto.ClientDto;
 import com.demo.hotel_management.dto.VacationDto;
-import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.entity.Room;
 import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.entity.Vacation;
@@ -11,7 +9,6 @@ import com.demo.hotel_management.repository.RoomRepository;
 import com.demo.hotel_management.repository.RoomVacationRepository;
 import com.demo.hotel_management.repository.VacationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.*;

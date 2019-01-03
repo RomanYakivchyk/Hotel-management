@@ -208,9 +208,8 @@
             var table = $('#clientListTable').DataTable({
                 "processing": true,
                 "serverSide": true,
-                <!--"pageLength": 10,-->
                 "ajax": {
-                    "url": "/users/paginated",
+                    "url": "/clients/paginated",
                     "dataSrc": function(json) {
                         for (var i = 0, ien = json.data.length; i < ien; i++) {
                             json.data[i].name = '<a href="/client/' + json.data[i].id + '/edit" class="text-primary">' + json.data[i].name + '</a>',

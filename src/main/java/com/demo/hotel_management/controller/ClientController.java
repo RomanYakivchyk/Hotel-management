@@ -1,13 +1,12 @@
 package com.demo.hotel_management.controller;
 
-import com.demo.hotel_management.dto.ClientDto;
+import com.demo.hotel_management.entity.pagination.model.ClientModel;
 import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.entity.pagination.DataTableRequest;
 import com.demo.hotel_management.entity.pagination.DataTableResults;
 import com.demo.hotel_management.entity.pagination.PaginationCriteria;
 import com.demo.hotel_management.service.ClientService;
 import com.demo.hotel_management.utils.AppUtil;
-import com.demo.hotel_management.utils.EntityDtoConverter;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,9 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 @Controller
 @Slf4j
@@ -45,11 +40,6 @@ public class ClientController {
         return "listClients.html";
     }
 
-    @GetMapping("/clients/serverProcessing")
-    @ResponseBody
-    public List<Client> listClients() {
-        return clientService.findAllActive();
-    }
 
     @RequestMapping(value = {"/clients/update", "/client/{clientId}/edit"}, method = RequestMethod.GET)
     public String clientEditForm(Model model, @PathVariable(required = false) Long clientId) {
@@ -105,7 +95,7 @@ public class ClientController {
     }
 
 
-    @RequestMapping(value = "/users/paginated", method = RequestMethod.GET)
+    @RequestMapping(value = "/clients/paginated", method = RequestMethod.GET)
     @ResponseBody
     public String listClientsPaginated(HttpServletRequest request, HttpServletResponse response, Model model) {
 
@@ -117,12 +107,12 @@ public class ClientController {
 
         System.out.println(paginatedQuery);
 
-        Query query = entityManager.createNativeQuery(paginatedQuery, ClientDto.class);
+        Query query = entityManager.createNativeQuery(paginatedQuery, ClientModel.class);
 
         @SuppressWarnings("unchecked")
-        List<ClientDto> clientList = query.getResultList();
+        List<ClientModel> clientList = query.getResultList();
 
-        DataTableResults<ClientDto> dataTableResult = new DataTableResults<>();
+        DataTableResults<ClientModel> dataTableResult = new DataTableResults<>();
         dataTableResult.setDraw(dataTableInRQ.getDraw());
         dataTableResult.setListOfDataObjects(clientList);
         if (!AppUtil.isObjectEmpty(clientList)) {

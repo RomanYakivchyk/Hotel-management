@@ -1,4 +1,4 @@
-package com.demo.hotel_management.dto;
+package com.demo.hotel_management.entity.pagination.model;
 
 import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.AllArgsConstructor;
@@ -11,9 +11,9 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
-public class ClientDto {
+public class ClientModel {
 
-    public ClientDto() {
+    public ClientModel() {
     }
 
     @Id

@@ -74,26 +74,27 @@
                 <a th:href="@{/vacations/update}" class="btn btn-outline-primary float-right mb-2 shadow-sm">Створити</a>
             </div>
             <div class="table-responsive">
-                <table id="vacListTable" class="table table-striped table-bordered table-hover bg-white rounded shadow-sm mt-4">
+                <table id="vacListTable" class="table table-striped table-bordered bg-white rounded shadow-sm mt-4">
                     <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Клієнт</th>
-                        <th>К-сть</th>
                         <th>Приїзд</th>
                         <th>Відїзд</th>
+                        <th>Кімнати</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="vacation : ${vacations}">
-                        <td><span
-                                th:text="${vacation.clientName}+' '+${vacation.clientOtherInfo}"></span></td>
-                        <td><span
-                                th:text="${vacation.residentsCount}"></span></td>
-                        <td><span
-                                th:text="${vacation.arrivalDate}"></span></td>
-                        <td><span
-                                th:text="${vacation.leaveDate}"></span></td>
-                    </tbody>
+                    <!--<tbody>-->
+                    <!--<tr th:each="vacation : ${vacations}">-->
+                        <!--<td><span-->
+                                <!--th:text="${vacation.clientName}+' '+${vacation.clientOtherInfo}"></span></td>-->
+                        <!--<td><span-->
+                                <!--th:text="${vacation.residentsCount}"></span></td>-->
+                        <!--<td><span-->
+                                <!--th:text="${vacation.arrivalDate}"></span></td>-->
+                        <!--<td><span-->
+                                <!--th:text="${vacation.leaveDate}"></span></td>-->
+                    <!--</tbody>-->
                 </table>
             </div>
 
@@ -111,14 +112,67 @@
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 <script type="text/javascript" charset="utf8" th:src="@{/data-tables/datatables.js}"></script>
+<script type="text/javascript" th:src="@{/js/fnSetFilteringEnterPress.js}"></script>
 
 <script>
 
+function formatDayOrMonth(number){
+    if(parseInt(number) < 10) return '0'+number;
+    return number;
+}
 
-$(document).ready( function () {
-    var table = $('#vacListTable').DataTable({
-    buttons: ['excel', 'pdf'],
-    "language": {
+String.prototype.replaceAll = function(search, replacement){
+    var target = this;
+    return target.replace(new RegExp(search,'g'), replacement);
+}
+
+$(document).ready(function() {
+            var table = $('#vacListTable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "/vacations/paginated",
+                    "dataSrc": function(json) {
+                        for (var i = 0, ien = json.data.length; i < ien; i++) {
+                            json.data[i].vacid = '<a href="/vacation/'+json.data[i].vacid+'/edit" >'+json.data[i].vacid +'</a>';
+                            json.data[i].clientname = '<a href="/client/'+json.data[i].clientid+'/edit" >'+ json.data[i].clientname +'</a>';
+                            json.data[i].startdate = json.data[i].startdate.year+'-'+ formatDayOrMonth(json.data[i].startdate.month)+'-'+ formatDayOrMonth(json.data[i].startdate.day);
+                            json.data[i].enddate = json.data[i].enddate.year+'-'+ formatDayOrMonth(json.data[i].enddate.month)+'-'+ formatDayOrMonth(json.data[i].enddate.day);
+                            json.data[i].roomnumbers = json.data[i].roomnumbers
+                            .replaceAll('{|}','')
+                            .replaceAll('"','');
+                        }
+                        return json.data;
+                    }
+                },
+
+                "columns": [{
+                        "data": "vacid",
+                        "name": "ID",
+                        "title": "ID"
+                    },
+                    {
+                        "data": "clientname",
+                        "name": "Клієнт",
+                        "title": "Клієнт"
+                    },
+                    {
+                        "data": "startdate",
+                        "name": "Приїзд",
+                        "title": "Приїзд"
+                    },
+                    {
+                        "data": "enddate",
+                        "name": "Від'їзд",
+                        "title": "Від'їзд"
+                    },
+                     {
+                        "data": "roomnumbers",
+                        "name": "Кімнати",
+                        "title": "Кімнати"
+                    }
+                ],
+                "language": {
                     "sProcessing": "Зачекайте...",
                     "sLengthMenu": "Показати _MENU_ записів",
                     "sZeroRecords": "Записи відсутні.",
@@ -139,10 +193,9 @@ $(document).ready( function () {
                         "sSortDescending": ": активувати для сортування стовпців за спаданням"
                     }
                 }
-    });
-
-    table.buttons().container().appendTo('#dataTableButtons');
-} );
+            });
+            $('#vacListTable').dataTable().fnSetFilteringEnterPress();
+        });
 
 
 			$(document).ready(function(){

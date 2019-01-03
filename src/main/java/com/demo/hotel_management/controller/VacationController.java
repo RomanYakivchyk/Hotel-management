@@ -2,8 +2,15 @@ package com.demo.hotel_management.controller;
 
 import com.demo.hotel_management.dto.VacationDto;
 import com.demo.hotel_management.entity.Client;
+import com.demo.hotel_management.entity.Vacation;
+import com.demo.hotel_management.entity.pagination.DataTableRequest;
+import com.demo.hotel_management.entity.pagination.DataTableResults;
+import com.demo.hotel_management.entity.pagination.PaginationCriteria;
+import com.demo.hotel_management.entity.pagination.model.VacationModel;
 import com.demo.hotel_management.service.ClientService;
 import com.demo.hotel_management.service.VacationService;
+import com.demo.hotel_management.utils.AppUtil;
+import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,9 +19,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Controller
@@ -26,13 +39,15 @@ public class VacationController {
     @Autowired
     private ClientService clientService;
 
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @GetMapping("/")
     public String showTable() {
         return "index.html";
     }
 
-    @RequestMapping(value = { "/login" })
+    @RequestMapping(value = {"/login"})
     public String login() {
         return "login.html";
     }
@@ -41,7 +56,14 @@ public class VacationController {
     public String vacationEditForm(Model model, @PathVariable(required = false) Long vacationId, HttpServletRequest request) {
         log.debug("model={}, vacationId={}", vacationId);
 
-        List<Client> allActiveClients = clientService.findAllActive();
+        List<Client> allActiveClients = clientService.findAllActive().stream()
+                .sorted((c1, c2) -> {
+                    String c1Name = c1.getName() + ' ' + c1.getOtherClientInfo();
+                    String c2Name = c2.getName() + ' ' + c2.getOtherClientInfo();
+                    return c1Name.compareTo(c2Name);
+                })
+                .collect(toList());
+
         if (null != vacationId) {
             model.addAttribute("vacationModel", vacationService.findById(vacationId));
         } else {
@@ -74,16 +96,16 @@ public class VacationController {
     }
 
     @GetMapping("/vacations")
-    public String listClients(Model model){
-        model.addAttribute("vacations",vacationService.getAllActiveVacations());
+    public String listClients(Model model) {
+        model.addAttribute("vacations", vacationService.getAllActiveVacations());
         return "listVacations.html";
     }
 
     @GetMapping("/vacation/{id}/approve")
     @ResponseStatus(HttpStatus.OK)
     public void approveVacation(@PathVariable(name = "id") Long id,
-                                  @RequestParam(name = "approval") Boolean approval){
-        vacationService.approveVacation(id,approval);
+                                @RequestParam(name = "approval") Boolean approval) {
+        vacationService.approveVacation(id, approval);
     }
 
 
@@ -99,5 +121,44 @@ public class VacationController {
     @ResponseStatus(HttpStatus.OK)
     public void removeVacationAjax(@PathVariable Long vacId) {
         vacationService.inactivateVacation(vacId);
+    }
+
+
+    @RequestMapping(value = "/vacations/paginated", method = RequestMethod.GET)
+    @ResponseBody
+    public String listClientsPaginated(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+        DataTableRequest<Vacation> dataTableInRQ = new DataTableRequest<>(request);
+        PaginationCriteria pagination = dataTableInRQ.getPaginationRequest();
+
+        String baseQuery = "SELECT '#'||vacation.id as vacid, client.name||client.other_client_info as clientname, client.id as clientid, to_char(vacation.arrival_date,'YYYY-MM-DD') as startdate," +
+                " to_char(vacation.leave_date,'YYYY-MM-DD') as enddate, array_to_string(array_agg(room.room_number),', ') as roomnumbers,(SELECT COUNT(1) FROM vacation) AS totalrecords FROM vacation" +
+                " JOIN client ON client.id = vacation.client_id" +
+                " JOIN room_vacation ON vacation.id = room_vacation.vac_id" +
+                " JOIN room ON room.id = room_vacation.room_id" +
+                " GROUP BY 1,2,3,4,5,7";
+        String paginatedQuery = AppUtil.buildPaginatedQuery(baseQuery, pagination);
+
+        System.out.println(paginatedQuery);
+
+        Query query = entityManager.createNativeQuery(paginatedQuery, VacationModel.class);
+
+        @SuppressWarnings("unchecked")
+        List<VacationModel> vacationList = query.getResultList();
+
+        DataTableResults<VacationModel> dataTableResult = new DataTableResults<>();
+        dataTableResult.setDraw(dataTableInRQ.getDraw());
+        dataTableResult.setListOfDataObjects(vacationList);
+        if (!AppUtil.isObjectEmpty(vacationList)) {
+            dataTableResult.setRecordsTotal(vacationList.get(0).getTotalrecords()
+                    .toString());
+            if (dataTableInRQ.getPaginationRequest().isFilterByEmpty()) {
+                dataTableResult.setRecordsFiltered(vacationList.get(0).getTotalrecords()
+                        .toString());
+            } else {
+                dataTableResult.setRecordsFiltered(Integer.toString(vacationList.size()));
+            }
+        }
+        return new Gson().toJson(dataTableResult);
     }
 }
