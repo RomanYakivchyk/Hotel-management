@@ -53,7 +53,7 @@ public class TestRestController2 {
                 initLocalDate = LocalDate.parse(initDateString).plusMonths(1);
                 break;
         }
-        Cookie cookie = new Cookie("initDateString",initLocalDate.toString());
+        Cookie cookie = new Cookie("initDateString", initLocalDate.toString());
         response.addCookie(cookie);
 
         currMonth = initLocalDate;
@@ -168,13 +168,75 @@ public class TestRestController2 {
 
         list.stream()
                 .filter(RoomVacation::getAllowRoommate)
+                .sorted((o1, o2) -> {
+                    LocalDate o1ArrivalDate = o1.getVacation()
+                            .getVacationDate()
+                            .getArrivalDate();
+
+                    LocalDate o2ArrivalDate = o2.getVacation()
+                            .getVacationDate()
+                            .getArrivalDate();
+                    return o1ArrivalDate.isEqual(o2ArrivalDate) ? 0 : (o1ArrivalDate.isBefore(o2ArrivalDate) ? -1 : 1);
+                })
                 .forEach(e -> {
-                    if (noOverlaps(topSubRowVacations, e)) {
-                        topSubRowVacations.add(e);
-                    } else if (noOverlaps(bottomSubRowVacations, e)) {
-                        bottomSubRowVacations.add(e);
+
+                    LocalDate previousDateTop = getPreviousRoomVac(topSubRowVacations, e);
+                    LocalDate previousDateBottom = getPreviousRoomVac(bottomSubRowVacations, e);
+
+                    if (previousDateTop != null) {
+                        if (previousDateBottom != null) {
+                            if (previousDateTop.isAfter(previousDateBottom)) {
+                                addElementToSubRow(topSubRowVacations, bottomSubRowVacations, e);
+                            } else {
+                                addElementToSubRow(bottomSubRowVacations, topSubRowVacations, e);
+                            }
+                        } else {
+                            addElementToSubRow(topSubRowVacations, bottomSubRowVacations, e);
+                        }
+                    } else {
+                        if (previousDateBottom != null) {
+                            addElementToSubRow(bottomSubRowVacations, topSubRowVacations, e);
+                        } else {
+                            addElementToSubRow(topSubRowVacations, bottomSubRowVacations, e);
+                        }
                     }
                 });
+    }
+
+    private void addElementToSubRow(List<RoomVacation> roomVacationList1,
+                                    List<RoomVacation> roomVacationList2,
+                                    RoomVacation roomVacation) {
+        if (noOverlaps(roomVacationList1, roomVacation)) {
+            roomVacationList1.add(roomVacation);
+        } else if (noOverlaps(roomVacationList2, roomVacation)) {
+            roomVacationList2.add(roomVacation);
+        }
+    }
+
+    private LocalDate getPreviousRoomVac(List<RoomVacation> subRow, RoomVacation fromRoomVac) {
+        LocalDate fromRoomVacArrivalDate = fromRoomVac.getVacation().getVacationDate().getArrivalDate();
+        RoomVacation rv = subRow.stream()
+                .sorted((o1, o2) -> {
+                    LocalDate o1LeaveDate = o1.getVacation()
+                            .getVacationDate()
+                            .getLeaveDate();
+
+                    LocalDate o2LeaveDate = o2.getVacation()
+                            .getVacationDate()
+                            .getLeaveDate();
+                    return o1LeaveDate.isEqual(o2LeaveDate) ? 0 : (o1LeaveDate.isAfter(o2LeaveDate) ? -1 : 1);
+                })
+                .filter(vac -> vac.getRoom().getRoomNumber().equals(fromRoomVac.getRoom().getRoomNumber()))
+                .filter(vac -> vac.getVacation().getVacationDate().getLeaveDate().isBefore(fromRoomVacArrivalDate)
+                        || vac.getVacation().getVacationDate().getLeaveDate().isEqual(fromRoomVacArrivalDate)
+                )
+                .findFirst()
+                .orElse(null);
+
+        if (rv == null)
+            return null;
+        else
+            return rv.getVacation().getVacationDate().getLeaveDate();
     }
 
     private boolean noOverlaps(List<RoomVacation> roomVacationList, RoomVacation rv) {
