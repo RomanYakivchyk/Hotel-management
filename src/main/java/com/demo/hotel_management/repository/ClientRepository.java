@@ -22,4 +22,6 @@ public interface ClientRepository extends PagingAndSortingRepository<Client,Long
 
     List<Client> findByInactiveFalse();
 
+
+
 }
