@@ -1,6 +1,8 @@
 package com.demo.hotel_management.utils;
 
+import com.demo.hotel_management.dto.ClientDto;
 import com.demo.hotel_management.dto.VacationDto;
+import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.entity.Room;
 import com.demo.hotel_management.entity.RoomVacation;
 import com.demo.hotel_management.entity.Vacation;
@@ -129,4 +131,5 @@ public class EntityDtoConverter {
 
         return vacation;
     }
+
 }
