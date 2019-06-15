@@ -48,9 +48,6 @@ var roomNameNumberMap = {
     "Кімната 8": 9
 };
 
-
-
-
 function actionsAfterCheck() {
     var $bringInRoomSelect = $('#BringInRoomsSelect');
     var title = $('*[data-id="rooms"]').attr("title");
@@ -125,6 +122,7 @@ function initialize() {
         $('#allowBringIn').attr("disabled", true);
         actionsAfterUncheck();
     }
+
 }
 
 
@@ -143,27 +141,11 @@ $(document).ready(function() {
     });
 
     $('#allowBringIn').prop('disabled',true); //remove
+
+    if(window.location.href.indexOf("rooms") > -1){
+            $('#allowBringIn').attr("disabled", false);
+    }
 });
-
-
-//$(document).ready(function() {
-//     $('#saveVacButton').on('mousedown', stopNavigate);
-//     $('#saveVacButton').on('mouseleave', function () {
-//              $(window).on('beforeunload', function(){
-//                     return 'Are you sure you want to leave?';
-//              });
-//     });
-//     $(window).on('beforeunload', function(){
-//           return 'Are you sure you want to leave?';
-//     });
-//     $(window).on('unload', function(){
-//              logout();
-//     });
-//});
-//
-//function stopNavigate(){
-//    $(window).off('beforeunload');
-//}
 
 
 $(document).ready(function() {

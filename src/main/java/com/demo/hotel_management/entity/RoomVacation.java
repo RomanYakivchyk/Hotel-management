@@ -12,20 +12,14 @@ import java.util.Objects;
 * Intermediate table
 */
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 public class RoomVacation {
+
+    public RoomVacation() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @MapKeyColumn(name="bed_type")
-//    @CollectionTable(name="occupied_beds")
-//    @MapKeyEnumerated(EnumType.STRING)
-//    @Column(name="number_of_beds")
-//    private Map<Room.BedType, Integer> occupiedBeds = new HashMap<>();
 
     @ManyToOne//(cascade = CascadeType.ALL)
     @JoinColumn(name = "room_id")
@@ -37,4 +31,36 @@ public class RoomVacation {
 
     private Boolean allowRoommate = false;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Vacation getVacation() {
+        return vacation;
+    }
+
+    public void setVacation(Vacation vacation) {
+        this.vacation = vacation;
+    }
+
+    public Boolean getAllowRoommate() {
+        return allowRoommate;
+    }
+
+    public void setAllowRoommate(Boolean allowRoommate) {
+        this.allowRoommate = allowRoommate;
+    }
 }

@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Client form</title>
+    <title>Клієнт</title>
     <meta charset="utf-8">
-
-    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
-    <!--integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">-->
-
     <!-- bootstrap kit-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -34,7 +30,10 @@
                 <a class="nav-link" th:href="@{/clients}"><i class="far fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line fa-lg"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+                <a class="nav-link" th:href="@{/importExport}"><i class="far fa-download fa-lg"></i>&nbsp;&nbsp;&nbsp;Імпорт/Експорт</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#"><i class="far fa-chart-line fa-lg"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
             </li>
             <li class="nav-item text-nowrap">
                 <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
@@ -90,12 +89,10 @@
                     <div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
                 </div>
 
-                <div class="mb-3 form-group">
-                    <label class="form-control-label" for="email">Email</label>
-                    <input disabled type="text" th:field="*{email}" value="*{email}" id="email"
-                           placeholder="example@gmail.com"
-                           th:class="${#fields.hasErrors('email')} ? 'form-control is-invalid' : 'form-control bg-white'">
-                    <div class="invalid-feedback" th:errors="*{email}"></div>
+                <div class="mb-0 form-group">
+                    <label class="form-control-label" for="comment">Коментар</label>
+                    <textarea disabled type="text" th:field="*{comment}" value="*{comment}" id="comment"
+                              class="form-control bg-white" rows="4"></textarea>
 
                     <div style="display:none;" id="saveClientSection">
                         <br>
@@ -141,7 +138,7 @@
             $('#clientName').prop('disabled',false);
             $('#otherClientInfo').prop('disabled',false);
             $('#phoneNumber').prop('disabled',false);
-            $('#email').prop('disabled',false);
+            $('#comment').prop('disabled',false);
     }
 
 </script>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Vacation form</title>
+    <title>Бронювання</title>
     <meta charset="utf-8">
 
     <!-- bootstrap kit-->
@@ -32,16 +32,19 @@
     <div class="collapse navbar-collapse dual-collapse2" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item text-nowrap active">
-                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
+                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed fa-lg"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
+                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+                <a class="nav-link" th:href="@{/importExport}"><i class="far fa-download fa-lg"></i>&nbsp;&nbsp;&nbsp;Імпорт/Експорт</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+                <a class="nav-link" href="#"><i class="far fa-chart-line fa-lg"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
             </li>
         </ul>
     </div>
@@ -285,11 +288,13 @@
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/bootstrap-select/bootstrap-select.min.js}"></script>
 <script th:src="@{/moment.js}"></script>
-<script th:src="@{/date-picker/js/gijgo.min.js}"></script>
-<script th:src="@{/date-picker/js/messages.ru-ru.js}" type="text/javascript"></script>
+
 <script th:src="@{/jquery.mask.js}" type="text/javascript"></script>
 <script th:src="@{/js/client-modal-ajax.js}" type="text/javascript"></script>
 <script th:src="@{/js/vacation-form.js}" type="text/javascript"></script>
+
+<script th:src="@{/date-picker/js/gijgo.min.js}"></script>
+<script th:src="@{/date-picker/js/messages.ru-ru.js}" type="text/javascript"></script>
 </body>
 
 </html>

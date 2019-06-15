@@ -15,7 +15,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@Slf4j
 public class RoommateAllowanceValidator implements ConstraintValidator<ValidateRoommateAllowance, VacationDto> {
 
 

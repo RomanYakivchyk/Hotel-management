@@ -18,7 +18,7 @@ import java.util.*;
 import static java.util.stream.Collectors.toList;
 
 @RestController
-public class TestRestController2 {
+public class VacationRestController {
 
     @Autowired
     private RoomVacationRepository roomVacationRepository;
@@ -101,9 +101,12 @@ public class TestRestController2 {
                 String dayOfWeek = currDay.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.forLanguageTag("uk-UA"));
                 headerCellMap.put("dayOfMonth", String.valueOf(i));
                 headerCellMap.put("dayOfWeek", dayOfWeek);
-                headerCellMap.put("monthName", currDay.getMonth().getDisplayName(TextStyle.FULL, Locale.forLanguageTag("uk-UA")));
+                headerCellMap.put("monthName", currDay.getMonth().getDisplayName(TextStyle.FULL_STANDALONE, Locale.forLanguageTag("uk-UA")));
                 headerCellMap.put("monthLength", String.valueOf(currDay.lengthOfMonth()));
                 headerCellMap.put("date", currDay.toString());
+                if(currDay.equals(LocalDate.now())){
+                    headerCellMap.put("today", "true");
+                }
                 headerList.add(headerCellMap);
             }
         }

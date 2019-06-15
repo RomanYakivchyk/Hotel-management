@@ -1,10 +1,13 @@
 package com.demo.hotel_management.service;
 
+import com.demo.hotel_management.controller.ClientController;
 import com.demo.hotel_management.entity.Client;
 import com.demo.hotel_management.exceptions.ClientNotFoundException;
 import com.demo.hotel_management.repository.ClientRepository;
 import com.demo.hotel_management.utils.EntityDtoConverter;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -20,8 +23,9 @@ import java.util.stream.StreamSupport;
 import static java.util.stream.Collectors.toList;
 
 @Service
-@Slf4j
 public class ClientService {
+
+    private static Logger log = LoggerFactory.getLogger(ClientService.class);
 
     @Autowired
     private ClientRepository clientRepository;

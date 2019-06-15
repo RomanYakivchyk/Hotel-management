@@ -7,7 +7,7 @@
                 var newClientName = $('#newClientName').val();
                 var otherClientInfo = $('#otherClientInfo').val();
                 var phoneNumber = $('#phoneNumber').val();
-                var email = $('#email').val();
+                var comment = $('#comment').val();
 
                 if (!newClientName) {
                     $('#clientNameError').css("display", "block");
@@ -38,19 +38,7 @@
 
                 var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-                if (email) {
-                    if (!email.match(re)) {
-                        $('#emailError').css("display", "block");
-                        $('#email').addClass("is-invalid");
-                        valid = false;
-                    } else {
-                        $('#emailError').css("display", "none");
-                        $('#email').removeClass("is-invalid");
-                    }
-                } else {
-                        $('#emailError').css("display", "none");
-                        $('#email').removeClass("is-invalid");
-                }
+
 
                 if (valid) {
 
@@ -59,7 +47,7 @@
                         "inactive": false,
                         "name": newClientName,
                         "otherClientInfo": otherClientInfo,
-                        "email": email,
+                        "comment": comment,
                         "phoneNumber": phoneNumber
                     };
 
@@ -67,7 +55,7 @@
                     $.ajax({
                         type: 'post', // method attribute of form
 //                        url: 'https://quiet-springs-81500.herokuapp.com/clients/create-ajax', // action attribute of form
-                        url: 'https://quiet-springs-81500.herokuapp.com/clients/create-ajax', // action attribute of form
+                        url: '/clients/create-ajax', // action attribute of form
                         dataType: "json",
                         data: clientObject,
                         success: function(data) {
@@ -100,8 +88,5 @@
       $('#phoneNumberError').css("display", "none");
       $('#phoneNumber').removeClass("is-invalid");
       $('#phoneNumber').val('');
-
-      $('#emailError').css("display", "none");
-      $('#email').val('');
 
  }

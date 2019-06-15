@@ -1,9 +1,12 @@
 package com.demo.hotel_management;
 
+import com.demo.hotel_management.service.ClientService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,15 +38,16 @@ import static org.apache.http.protocol.HTTP.USER_AGENT;
 Created postgresql-tapered-66973 as DATABASE_URL
 Creating app... done, ⬢ quiet-springs-81500
 https://quiet-springs-81500.herokuapp.com/ | https://git.heroku.com/quiet-springs-81500.git
-
+kurort.nemyriv@gmail.com
 DATABASE_URL: postgres://fhcorgnllxvhkc:576936a50df4df8e74335d16c99045df829bfb75a2888933ed3d0807b429dc95@ec2-54-243-147-162.compute-1.amazonaws.com:5432/d4kpiadsgu8ckn
 */
-@Slf4j
 @Configuration
 @EnableScheduling
 @RestController
 @SpringBootApplication
 public class HotelManagementApplication {
+
+    private static Logger log = LoggerFactory.getLogger(HotelManagementApplication.class);
 
     @Value("${app.domain}")
     private String domain;

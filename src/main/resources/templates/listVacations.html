@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Vacations</title>
+    <title>Список бронювань</title>
     <meta charset="utf-8">
 
     <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
@@ -11,11 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- end of bootstrap kit-->
-    <link th:href="@{/pagination/css/style.css}" rel="stylesheet"/>
-
     <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/data-tables/datatables.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/data-tables/datatables.min.css}">
 
     <link rel="stylesheet" href="/footer.css">
 
@@ -42,16 +40,19 @@
     <div class="collapse navbar-collapse dual-collapse2" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item text-nowrap active">
-                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
+                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed fa-lg"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
+                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+                <a class="nav-link" th:href="@{/importExport}"><i class="far fa-download fa-lg"></i>&nbsp;&nbsp;&nbsp;Імпорт/Експорт</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+                <a class="nav-link" href="#"><i class="far fa-chart-line fa-lg"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
             </li>
         </ul>
     </div>
@@ -111,7 +112,7 @@
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-<script type="text/javascript" charset="utf8" th:src="@{/data-tables/datatables.js}"></script>
+<script type="text/javascript" charset="utf8" th:src="@{/data-tables/datatables.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/fnSetFilteringEnterPress.js}"></script>
 
 <script>
@@ -134,7 +135,7 @@ $(document).ready(function() {
                     "url": "/vacations/paginated",
                     "dataSrc": function(json) {
                         for (var i = 0, ien = json.data.length; i < ien; i++) {
-                            json.data[i].vacid = '<a href="/vacation/'+json.data[i].vacid+'/edit" >'+json.data[i].vacid +'</a>';
+                            json.data[i].vacid = '<a href="/vacation/'+json.data[i].vacid.substr(1)+'/edit" >'+json.data[i].vacid +'</a>';
                             json.data[i].clientname = '<a href="/client/'+json.data[i].clientid+'/edit" >'+ json.data[i].clientname +'</a>';
                             json.data[i].startdate = json.data[i].startdate.year+'-'+ formatDayOrMonth(json.data[i].startdate.month)+'-'+ formatDayOrMonth(json.data[i].startdate.day);
                             json.data[i].enddate = json.data[i].enddate.year+'-'+ formatDayOrMonth(json.data[i].enddate.month)+'-'+ formatDayOrMonth(json.data[i].enddate.day);

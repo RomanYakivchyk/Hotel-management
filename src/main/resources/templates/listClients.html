@@ -2,42 +2,17 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Clients</title>
+    <title>Список клієнтів</title>
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
     <link th:href="@{/footer.css}" rel="stylesheet">
-    <!-- pagination -->
-    <link th:href="@{/pagination/css/style.css}" rel="stylesheet" />
 
     <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/data-tables/datatables.css}">
-
-    <!--<style>-->
-    <!--/* enable absolute positioning */-->
-    <!--.inner-addon {-->
-    <!--position: relative;-->
-    <!--}-->
-
-    <!--/* style icon */-->
-    <!--.inner-addon .glyphicon {-->
-    <!--position: absolute;-->
-    <!--padding: 10px;-->
-    <!--pointer-events: none;-->
-    <!--}-->
-
-    <!--/* align icon */-->
-    <!--.left-addon .glyphicon  { left:  0px;}-->
-    <!--.right-addon .glyphicon { right: 0px;}-->
-
-    <!--/* add padding  */-->
-    <!--.left-addon input  { padding-left:  30px; }-->
-    <!--.right-addon input { padding-right: 30px; }-->
-
-    <!--</style>-->
+    <link rel="stylesheet" type="text/css" th:href="@{/data-tables/datatables.min.css}">
 
     <style>
         #dataTableButtons button {
@@ -48,14 +23,10 @@
             line-height: 1.5;
         }
 
-
-
-
     </style>
 
 </head>
 
-<!--<body style="background-color:#E9EBEE">-->
 
 <body class="bg-light">
 
@@ -70,16 +41,19 @@
     <div class="collapse navbar-collapse dual-collapse2" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
+                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed fa-lg"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
             </li>
             <li class="nav-item text-nowrap active">
-                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
+                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+                <a class="nav-link" th:href="@{/importExport}"><i class="far fa-download fa-lg"></i>&nbsp;&nbsp;&nbsp;Імпорт/Експорт</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+                <a class="nav-link" href="#"><i class="far fa-chart-line fa-lg"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
             </li>
         </ul>
     </div>
@@ -173,7 +147,6 @@
                         <th>Ім'я</th>
                         <th>Додаткова інф.</th>
                         <th>Телефон</th>
-                        <th>Email</th>
                     </tr>
                     </thead>
                 </table>
@@ -190,7 +163,7 @@
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
 <script th:src="@{/ajax/popper.min.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-<script type="text/javascript" charset="utf8" th:src="@{/data-tables/datatables.js}"></script>
+<script type="text/javascript" charset="utf8" th:src="@{/data-tables/datatables.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/fnSetFilteringEnterPress.js}"></script>
 <script>
 
@@ -233,11 +206,6 @@
                         "data": "phonenumber",
                         "name": "phonenumber",
                         "title": "Телефон"
-                    },
-                    {
-                        "data": "email",
-                        "name": "email",
-                        "title": "Email"
                     }
                 ],
 

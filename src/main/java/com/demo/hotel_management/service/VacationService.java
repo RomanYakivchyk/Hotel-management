@@ -9,6 +9,8 @@ import com.demo.hotel_management.repository.RoomVacationRepository;
 import com.demo.hotel_management.repository.VacationRepository;
 import com.demo.hotel_management.utils.EntityDtoConverter;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
@@ -26,9 +28,10 @@ import java.util.stream.StreamSupport;
 
 import static java.util.stream.Collectors.toList;
 
-@Slf4j
 @Service
 public class VacationService {
+
+    private static Logger log = LoggerFactory.getLogger(VacationService.class);
 
     @Autowired
     private EntityDtoConverter entityDtoConverter;

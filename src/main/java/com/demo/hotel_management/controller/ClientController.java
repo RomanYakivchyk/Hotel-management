@@ -9,6 +9,8 @@ import com.demo.hotel_management.service.ClientService;
 import com.demo.hotel_management.utils.AppUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -25,8 +27,9 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@Slf4j
 public class ClientController {
+
+    private static Logger log = LoggerFactory.getLogger(ClientController.class);
 
     @Autowired
     private ClientService clientService;
@@ -102,7 +105,7 @@ public class ClientController {
         DataTableRequest<Client> dataTableInRQ = new DataTableRequest<>(request);
         PaginationCriteria pagination = dataTableInRQ.getPaginationRequest();
 
-        String baseQuery = "SELECT id, name, other_client_info as otherclientinfo, phone_number as phonenumber, email as email,(SELECT COUNT(1) FROM client) AS totalrecords FROM client";
+        String baseQuery = "SELECT id, name, other_client_info as otherclientinfo, phone_number as phonenumber,(SELECT COUNT(1) FROM client) AS totalrecords FROM client";
         String paginatedQuery = AppUtil.buildPaginatedQuery(baseQuery, pagination);
 
         System.out.println(paginatedQuery);

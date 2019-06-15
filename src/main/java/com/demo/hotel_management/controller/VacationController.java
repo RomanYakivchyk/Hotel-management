@@ -12,7 +12,10 @@ import com.demo.hotel_management.service.VacationService;
 import com.demo.hotel_management.utils.AppUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +28,18 @@ import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
-@Slf4j
+
 @Controller
 public class VacationController {
+
+    private static Logger log = LoggerFactory.getLogger(VacationController.class);
+
 
     @Autowired
     private VacationService vacationService;
@@ -53,7 +61,15 @@ public class VacationController {
     }
 
     @RequestMapping(value = {"/vacations/update", "/vacation/{vacationId}/edit"}, method = RequestMethod.GET)
-    public String vacationEditForm(Model model, @PathVariable(required = false) Long vacationId, HttpServletRequest request) {
+    public String vacationEditForm(Model model, HttpServletRequest request,
+                                   @PathVariable(required = false) Long vacationId,
+                                   @DateTimeFormat(pattern = "dd/MM/yyyy")
+                                   @RequestParam(value = "startDate", required = false) LocalDate startDate,
+                                   @DateTimeFormat(pattern = "dd/MM/yyyy")
+                                   @RequestParam(value = "endDate", required = false) LocalDate endDate,
+                                   @RequestParam(value = "rooms", required = false) Set<Integer> rooms,
+                                   @RequestParam(value = "sharedRooms", required = false) Set<Integer> sharedRooms
+    ) {
         log.debug("model={}, vacationId={}", vacationId);
 
         List<Client> allActiveClients = clientService.findAllActive().stream()
@@ -67,7 +83,23 @@ public class VacationController {
         if (null != vacationId) {
             model.addAttribute("vacationModel", vacationService.findById(vacationId));
         } else {
-            model.addAttribute("vacationModel", new VacationDto());
+            VacationDto vacationDto = new VacationDto();
+
+            if (startDate != null) {
+                vacationDto.setArrivalDate(startDate);
+            }
+            if (endDate != null) {
+                vacationDto.setLeaveDate(endDate);
+            }
+            if (rooms != null && !rooms.isEmpty()) {
+                vacationDto.setRoomNumbers(rooms);
+            }
+            if (sharedRooms != null && !sharedRooms.isEmpty()) {
+                vacationDto.setHasSharedRooms(true);
+                vacationDto.setSharedRoomNumbers(sharedRooms);
+            }
+
+            model.addAttribute("vacationModel", vacationDto);
         }
         model.addAttribute("clients", allActiveClients);
         model.addAttribute("clientModel", new Client());

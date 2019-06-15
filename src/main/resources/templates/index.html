@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-    <title>Client form</title>
+    <title>Таблиця бронювань</title>
     <meta charset="utf-8">
 
     <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"-->
@@ -20,6 +20,11 @@
     <style>
         #bookingTable {
             table-layout: fixed;
+        }
+
+        .normalWeightText{
+            font-weight:normal !important;
+            line-height:16px !important;
         }
 
         #bookingTable>thead>tr>th,
@@ -41,8 +46,10 @@
         }
 
         .roomNum {
-            height: 44.3px;
-            background-color:rgb(240, 240, 240);
+            height: 44px;
+            background-color: rgb(240, 240, 240);
+             border-style: solid;
+             border-width: 1px 1px 1px 1px;
         }
 
         #loader {
@@ -55,27 +62,19 @@
             z-index: 1;
         }
 
-        .innerSpan {
-            margin-top: 0px;
-            margin-bottom: 0px;
-            margin-left: 0px;
-            margin-right: 0px;
-            display: block;
-            height: 22px;
-        }
 
-        .highlighted span {
+        .highlighted {
             background-color: #593196 !important;
         }
 
 
         .popover-header {
-            padding-bottom:0px;
+            padding-bottom: 0px;
         }
 
-        #mainCard > div {
-            padding-left:10px;
-            padding-right:10px;
+        #mainCard>div {
+            padding-left: 10px;
+            padding-right: 10px;
         }
 
         .striped {
@@ -83,8 +82,27 @@
         }
 
         .selected {
-            background-color: red !important;
+            background-color: #593196 !important;
         }
+
+        #createVacButton:hover {
+            filter: brightness(90%);
+        }
+
+        #createVacButton {
+            position:fixed;
+            width:60px;
+            height:60px;
+            bottom:40px;
+            right:40px;
+            background-color:#13B955;
+            color:#FFF;
+            border-radius:50px;
+            text-align:center;
+            z-index:1;
+        }
+
+
 
     </style>
 
@@ -93,7 +111,7 @@
 
 <body class="bg-light">
 
-<nav class="navbar navbar-expand-md navbar-dark bg-primary" xmlns:th="http://www.w3.org/1999/xhtml">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" xmlns:th="http://www.w3.org/1999/xhtml">
     <a class="navbar-brand" th:href="@{/}"><i class="fas fa-home text-white fa-lg"></i></a>
     <!-- Toggler/collapsibe Button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -103,161 +121,129 @@
     <div class="collapse navbar-collapse dual-collapse2" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
+                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed fa-lg"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
+                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user fa-lg"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+                <a class="nav-link" th:href="@{/importExport}"><i class="far fa-download fa-lg"></i>&nbsp;&nbsp;&nbsp;Імпорт/Експорт</a>
             </li>
             <li class="nav-item text-nowrap">
-                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+                <a class="nav-link" href="#"><i class="far fa-chart-line fa-lg"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt fa-lg"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
             </li>
         </ul>
     </div>
 
 </nav>
 
-
-<div class="modal fade" id="addClassModal" tabindex="-1" role="dialog" aria-labelledby="addClassModalLabel" aria-hidden="true" data-backdrop="static" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addClassModalLabel">Title</h5>
-                <button data-dismiss="modal" id="closeModal" class="close align-right"><i class="far fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col form-group pr-0">
-                        <input type="text" class="form-control form-control-sm" id="startDate">
-                    </div>
-                    <div class="col form-group pl-0">
-                        <select class="form-control form-control-sm">
-                            <option th:value="1">Січень</option>
-                            <option th:value="2">Лютий</option>
-                            <option th:value="3">Березень</option>
-                            <option th:value="4">Квітень</option>
-                            <option th:value="5">Травень</option>
-                            <option th:value="6">Червень</option>
-                            <option th:value="7">Липень</option>
-                            <option th:value="8">Серпень</option>
-                            <option th:value="9">Вересень</option>
-                            <option th:value="10">Жовтень</option>
-                            <option th:value="11">Листопад</option>
-                            <option th:value="12">Грудень</option>
-                        </select>
-                    </div>
-                    <div class="col form-group pr-0">
-                        <input type="text" class="form-control form-control-sm" id="endDate">
-                    </div>
-                    <div class="col form-group pl-0">
-                        <select class="form-control form-control-sm">
-                            <option th:value="1">Січень</option>
-                            <option th:value="2">Лютий</option>
-                            <option th:value="3">Березень</option>
-                            <option th:value="4">Квітень</option>
-                            <option th:value="5">Травень</option>
-                            <option th:value="6">Червень</option>
-                            <option th:value="7">Липень</option>
-                            <option th:value="8">Серпень</option>
-                            <option th:value="9">Вересень</option>
-                            <option th:value="10">Жовтень</option>
-                            <option th:value="11">Листопад</option>
-                            <option th:value="12">Грудень</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col form-group">
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                    <div class="col form-group">
-                        <input type="number" class="form-control form-control-sm">
-                    </div>
-                </div>
-                <button class="btn btn-block btn-primary">Створити</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
 <ol class="breadcrumb bg-white shadow-sm">
     <li class="breadcrumb-item active"><a th:href="@{/}">Домашня</a></li>
 </ol>
-<div class="container">
+<div class="container-fluid">
     <div id="loader" class="text-center"><i class="fas fa-spinner text-muted fa-spin fa-3x"></i></div>
     <br>
-    <div class="card shadow-sm" id="mainCard" style="display:none;">
+    <!--<div class="card shadow-sm" id="mainCard" style="display:none;">-->
+    <div class="card shadow-sm">
         <div class="card-body">
             <div class="mb-4">
                 <span class="card-title h5">Бронювання</span>
                 <span class="btn-group float-right" role="group">
-                        <button type="button" value="prev" class="month-dir btn btn-sm btn-outline-primary">Назад</button>
-                        <button type="button" value="curr" class="month-dir btn btn-sm btn-outline-primary">Поточний</button>
-                        <button type="button" value="next" class="month-dir btn btn-sm btn-outline-primary">Вперед</button>
+                        <button type="button" value="prev"
+                                class="month-dir btn bg-white"><i class="far fa-angle-left fa-lg"></i></button>
+                        <button type="button" value="curr" id="currMonthsButton"
+                                class="month-dir btn bg-white"></button>
+                        <button type="button" value="next"
+                                class="month-dir btn bg-white"><i class="far fa-angle-right fa-lg"></i></button>
                     </span>
             </div>
-
-            <div class="row mr-2 ml-2">
-                <table id="roomNumsTable" style="float:left;">
-                    <thead>
-                    <tr>
-                        <th style="height:44.2px; background-color:rgb(240, 240, 240);"></th>
-                    </tr>
-                    <!--style="border-top:0.5px solid black;"-->
-                    <tr>
-                        <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 1, односпальне - 2">1</a>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 1, односпальне - 2">2</a></th>
-                    </tr>
-                    <tr>
-                        <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 1, односпальне - 2">3</a></th>
-                    </tr>
-                    <tr>
-                        <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 1, односпальне - 2">4</a></th>
-                    </tr>
-                    <tr>
-                        <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 1, односпальне - 2">5</a></th>
-                    </tr>
-                    <tr>
-                        <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 2, односпальне - 2">6</a></th>
-                    </tr>
-                    <tr>
-                        <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 2, односпальне - 2">7</a></th>
-                    </tr>
-                    <tr>
-                        <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 3, односпальне - 2">8</a></th>
-                    </tr>
-                    <tr>
-                        <th class="roomNum"><a class="tip" data-placement="right" title="Будинок 3, односпальне - 2">9</a></th>
-                    </tr>
-                    </thead>
-                </table>
-                <div class="table-responsive col" style="padding-left:0px">
-                    <table class="table" id="bookingTable">
-                        <thead></thead>
-                        <tbody></tbody>
+            <div id="reloadingPage">
+                <div class="row mr-2 ml-2">
+                    <table id="roomNumsTable" style="float:left;">
+                        <thead>
+                        <tr>
+                            <th style="height:22px; background-color:white;
+                            border-style: solid;
+                            border-width: 1px 0px 1px 1px;"></th>
+                        </tr>
+                        <tr>
+                            <th style="height:44px; background-color:rgb(240, 240, 240);
+                             border-style: solid;
+                             border-width: 1px 1px 1px 1px;"></th>
+                        </tr>
+                        <tr>
+                            <th class="roomNum">
+                                <small style="font-weight: lighter !important;">1&nbsp;&nbsp;&nbsp;</small>
+                                <h6 style="margin-bottom:3px">&nbsp;1&nbsp;</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="roomNum">
+                                <small style="font-weight: lighter !important;">1&nbsp;&nbsp;&nbsp;</small>
+                                <h6 style="margin-bottom:3px">&nbsp;2&nbsp;</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="roomNum">
+                                <small style="font-weight: lighter !important;">1&nbsp;&nbsp;&nbsp;</small>
+                                <h6 style="margin-bottom:3px">&nbsp;3&nbsp;</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="roomNum">
+                                <small style="font-weight: lighter !important;">1&nbsp;&nbsp;&nbsp;</small>
+                                <h6 style="margin-bottom:3px">&nbsp;4&nbsp;</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="roomNum">
+                                <small style="font-weight: lighter !important;">1&nbsp;&nbsp;&nbsp;</small>
+                                <h6 style="margin-bottom:3px">&nbsp;5&nbsp;</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="roomNum">
+                                <small style="font-weight: lighter !important;">2&nbsp;&nbsp;&nbsp;</small>
+                                <h6 style="margin-bottom:3px">&nbsp;6&nbsp;</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="roomNum">
+                                <small style="font-weight: lighter !important;">2&nbsp;&nbsp;&nbsp;</small>
+                                <h6 style="margin-bottom:3px">&nbsp;7&nbsp;</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="roomNum">
+                                <small style="font-weight: lighter !important;">3&nbsp;&nbsp;&nbsp;</small>
+                                <h6 style="margin-bottom:3px">&nbsp;8&nbsp;</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="roomNum">
+                                <small style="font-weight: lighter !important;">3&nbsp;&nbsp;&nbsp;</small>
+                                <h6 style="margin-bottom:3px">&nbsp;9&nbsp;</h6>
+                            </th>
+                        </tr>
+                        </thead>
                     </table>
+                    <div class="table-responsive col" style="padding-left:0px">
+                        <table class="table" id="bookingTable">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <button class="btn shadow" style="display:none;" id="createVacButton"><i class="far fa-plus fa-lg"></i>
+            </button>
         </div>
     </div>
 </div>
-<!--<div class="dropdown">-->
-<!--<div class="dropdown-menu">-->
-<!--<a class="dropdown-item" href="#">Link 1</a>-->
-<!--<a class="dropdown-item" href="#">Link 2</a>-->
-<!--<a class="dropdown-item" href="#">Link 3</a>-->
-<!--<div class="dropdown-divider"></div>-->
-<!--<a class="dropdown-item" href="#">Another link</a>-->
-<!--</div>-->
-<!--</div>-->
+
 <div th:insert="footer.html"></div>
 <script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
 <script th:src="@{/ajax/popper.min.js}"></script>
@@ -265,348 +251,542 @@
 
 </body>
 <script>
-    globalPopoverStatus = false;
+        globalPopoverStatus = false;
+        first = null;
+        second = null;
 
-    $(document).ready(function() {
-        var first;
-        var second;
-
-        $('body').on('click', '#bookingTable tbody tr td', function(e) {
-            if (!$(this).hasClass('cell') && !globalPopoverStatus) {
-
-                if (first == null) {
-                     first = $(this);
-                     var nextCellHor = getNextCellHor(first);
-                     if(first.data('hor')==='left'){
-                         first = nextCellHor;
-                     }
-                    first.addClass('selected');
-                    var nextCellVer = getNextCellVer(first);
-                    if(!nextCellVer.hasClass('cell')) {
-                        nextCellVer.addClass('selected');
-                    }
-
-                } else if (second == null) {
-                    var roomNum = $(this).data('room');
-                    var column = $(this).data('column');
-
-                    if (first.data('room') === roomNum && parseInt(first.data('column')) < parseInt(column)
-                    ) {
-                        second = $(this);
-                        second.addClass('selected');
-                        <!--if (isVertCellFree(first) && isVertCellFree(second)) {-->
-                            <!--&lt;!&ndash;alert('free');&ndash;&gt;-->
-                        <!--}-->
-                        <!--alert('create');-->
-                        $('#addClassModal').modal('show');
-
-                    } else {
-                        first.removeClass('selected');
-                        first = null;
-                    }
-
-                } else {
-                    first.removeClass('selected');
-                    second.removeClass('selected');
-                    first = null;
-                    second = null;
-                }
-            }
-
-        });
-
-        $('#closeModal').click(function() {
-            first.removeClass('selected');
-            second.removeClass('selected');
+        function clearRangeAndButton(){
+            $('#createVacButton').css('display', 'none');
             first = null;
             second = null;
-        });
-
-    });
-
-    function getNextCellVer(cell){
-        var row;
-        if (cell.data('ver') === 'top') {
-            row = parseInt(cell.data('id').split('_')[0]) + 1;
-        } else if (cell.data('ver') === 'bottom') {
-            row = parseInt(cell.data('id').split('_')[0]) - 1;
         }
-        var id = row + '_' + cell.data('id').split('_')[1];
-        return $('#bookingTable tbody tr td[data-id=' + id + ']');
-    }
 
 
-    function getNextCellHor(cell){
-        var col;
-        if (cell.data('hor') === 'left') {
-            col = parseInt(cell.data('id').split('_')[1]) + 1;
-        } else if (cell.data('hor') === 'right') {
-            col = parseInt(cell.data('id').split('_')[1]) - 1;
-        }
-        var id = cell.data('id').split('_')[0]+'_'+col;
-        return $('#bookingTable tbody tr td[data-id=' + id + ']');
-    }
+        $(document).ready(function() {
+             $('#createVacButton').click(function(){
+                var startDate = first.data('date').split('-').reverse().join('/');
+                var endDate = second.data('date').split('-').reverse().join('/');
+
+                var rooms=[];
+                var sharedRooms=[];
 
 
-    $(document).ready(function() {
-        loadTableData("curr");
-        $('.month-dir').click(function(e) {
-            hidePopover(e);
-            globalPopoverStatus = false;
-            loadTableData($(this).val());
-        });
-    });
+                var rows = document.getElementById('bookingTable')
+                    .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
 
-    $(document).ready(function() {
-        $('.tip').tooltip();
-        cellPopover();
+                var from = parseInt(first.data('id').split('_')[1]);
 
-        $('body').on('click', '#bookingTable tbody tr td', function() {
-            if ($(this).hasClass('cell')) {
-                if (globalPopoverStatus) {
-                    globalPopoverStatus = false;
-                } else {
-                    globalPopoverStatus = true;
+                for(var i = 0; i < 9*2; i=i+2){
+                        var topCell = $(rows[i].getElementsByTagName("td")[from]);
+                        var bottomCell = $(rows[i+1].getElementsByTagName("td")[from]);
+
+                        var isTopRowSelected = topCell.hasClass('selected');
+                        var isBottomRowSelected = bottomCell.hasClass('selected');
+                        if (isTopRowSelected && isBottomRowSelected) {
+                            rooms.push(topCell.data('room'));
+                        } else if ((!isTopRowSelected && isBottomRowSelected)
+                        ||(isTopRowSelected && !isBottomRowSelected)) {
+                            rooms.push(topCell.data('room'));
+                            sharedRooms.push(topCell.data('room'));
+                        }
                 }
-            } else {
-                globalPopoverStatus = false;
-            }
 
-            $('.cell').removeClass('highlighted');
+                var url = '/vacations/update?'+'startDate='+startDate+'&&'+'endDate='+endDate;
+                for(var i = 0;i<rooms.length;i++){
+                    url+= '&&rooms='+rooms[i];
+                }
+                for(var i = 0;i<sharedRooms.length;i++){
+                    url+= '&&sharedRooms='+sharedRooms[i];
+                }
 
-            var vacId = $(this).data('vac');
+                window.location=url;
+             });
+        });
 
-            var rows = $('#bookingTable').children('tbody').children('tr');
-            for (var i = 0; i < rows.length; i++) {
-                var cells = $(rows[i]).children('td');
-                for (var j = 0; j < cells.length; j++) {
-                    if ($(cells[j]).data('vac') == vacId) {
-                        $(cells[j]).addClass('highlighted');
+        $(document).ready(function() {
+
+            var rooms;
+            var sharedRooms;
+
+            $('body').on('click', '#bookingTable tbody tr td', function(e) {
+                if (!$(this).hasClass('cell') && !globalPopoverStatus) {
+
+                    var rows = document.getElementById('bookingTable')
+                        .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+                    if (first == null) {
+                        var nextCellHor = getNextCellHor($(this));
+                        if ($(this).data('hor') === 'left' && !nextCellHor.hasClass('cell')) {
+                            first = nextCellHor;
+                        } else if ($(this).data('hor') === 'right') {
+                            first = $(this);
+                        }
+                        var nextCellVer = getNextCellVer(first);
+                        if (!nextCellVer.hasClass('cell')) {
+                            nextCellVer.addClass('selected');
+                        }
+                        first.addClass('selected');
+
+                    } else if (second == null) {
+                        var roomNum = $(this).data('room');
+                        var column = $(this).data('column');
+                        var nextCellHor = getNextCellHor($(this));
+
+
+
+                        if (first.data('room') === roomNum && parseInt(first.data('column')) < parseInt(column)) {
+                            if ($(this).data('hor') === 'right' && !nextCellHor.hasClass('cell')) {
+                                second = nextCellHor;
+                            } else if ($(this).data('hor') === 'left') {
+                                second = $(this);
+                            }
+                            second.addClass('selected');
+
+                            <!--show Add button-->
+                            $('#createVacButton').css('display', 'block');
+
+                            var from = parseInt(first.data('id').split('_')[1]);
+                            var to = parseInt(second.data('id').split('_')[1]);
+
+                            var rn = parseInt(first.data('id').split('_')[0]);
+                            if (rn % 2 != 0) rn--;
+                            var notFreeRowCounter = 0;
+                            for (var i = rn; i <= (rn + 1); i++) {
+                                var row = rows[i];
+                                var isRowFree = noRowElementsHavingClass(from, to, i, 'cell');
+
+                                if (isRowFree) {
+                                    for (var j = from; j <= to; j++) {
+                                        var cell = row.getElementsByTagName("td")[j];
+                                        $(cell).addClass('selected');
+                                    }
+
+                                } else {
+                                    $(row.getElementsByTagName("td")[from]).removeClass('selected');
+                                    $(row.getElementsByTagName("td")[to]).removeClass('selected');
+                                    notFreeRowCounter++;
+                                }
+                            }
+                            if(notFreeRowCounter==2){
+                                $('.selected').removeClass('selected');
+                                clearRangeAndButton();
+                            }
+                        } else {
+                            $('.selected').removeClass('selected');
+                            clearRangeAndButton();
+                        }
+                    } else {
+
+                        var from = parseInt(first.data('id').split('_')[1]);
+                        var to = parseInt(second.data('id').split('_')[1]);
+
+                        var selectedCol = parseInt($(this).data('id').split('_')[1]);
+
+                        var topSubRow = parseInt($(this).data('id').split('_')[0]);
+                        var bottomSubRow;
+                        if (topSubRow % 2 == 0) {
+                            bottomSubRow = topSubRow + 1;
+                        } else {
+                            bottomSubRow = topSubRow;
+                            topSubRow = bottomSubRow - 1;
+                        }
+
+                        var topSubRowSelected = !noRowElementsHavingClass(from, to, topSubRow, 'selected');
+                        var bottomSubRowSelected = !noRowElementsHavingClass(from, to, bottomSubRow, 'selected');
+                        var topSubRowFree = noRowElementsHavingClass(from, to, topSubRow, 'cell');
+                        var bottomSubRowFree = noRowElementsHavingClass(from, to, bottomSubRow, 'cell');
+
+                        if (selectedCol < from || selectedCol > to) {
+                            $('.selected').removeClass('selected');
+                            clearRangeAndButton();
+                        } else if (topSubRowSelected && bottomSubRowSelected) {
+                            setSelectedCells(from,to,bottomSubRow,false);
+                        } else if (topSubRowSelected && !bottomSubRowSelected) {
+                            setSelectedCells(from,to,topSubRow,false);
+                            if($('.selected').length==0){
+                                clearRangeAndButton();
+                            }
+                        } else if (!topSubRowSelected && bottomSubRowSelected) {
+                            setSelectedCells(from,to,bottomSubRow,false);
+                            if($('.selected').length==0){
+                                clearRangeAndButton();
+                            }
+                        } else if (topSubRowFree && bottomSubRowFree) {
+                            setSelectedCells(from,to,topSubRow,true);
+                            setSelectedCells(from,to,bottomSubRow,true);
+                        } else if (topSubRowFree && !bottomSubRowFree) {
+                            setSelectedCells(from,to,topSubRow,true);
+                        } else if (bottomSubRowFree && !topSubRowFree) {
+                            setSelectedCells(from,to,bottomSubRow,true);
+                        }
                     }
                 }
-            }
+
+            });
         });
-    });
+
+        function setSelectedCells(from,to,row,selected){
+            var rows = document.getElementById('bookingTable')
+                .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+            for (var j = from; j <= to; j++) {
+                var cell = rows[row].getElementsByTagName("td")[j];
+                if(selected){
+                    $(cell).addClass('selected');
+                } else {
+                    $(cell).removeClass('selected');
+                }
+            }
+        }
+
+        function noRowElementsHavingClass(from, to, row, cl) {
+            var rows = document.getElementById('bookingTable')
+                .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+            var noElWithClass = true;
+            for (var j = from; j <= to; j++) {
+                var cell = rows[row].getElementsByTagName("td")[j];
+                if ($(cell).hasClass(cl))
+                    noElWithClass = false;
+            }
+            return noElWithClass;
+        }
 
 
-    $(document).ready(function() {
-        $('body').on('click', '#removeButton', function() {
-            var result = confirm("Видалити бронювання?");
-            if (result) {
+
+        function getNextCellVer(cell) {
+            var row;
+            if (cell.data('ver') === 'top') {
+                row = parseInt(cell.data('id').split('_')[0]) + 1;
+            } else if (cell.data('ver') === 'bottom') {
+                row = parseInt(cell.data('id').split('_')[0]) - 1;
+            }
+            var id = row + '_' + cell.data('id').split('_')[1];
+            return $('#bookingTable tbody tr td[data-id=' + id + ']');
+        }
+
+
+        function getNextCellHor(cell) {
+            var col;
+            if (cell.data('hor') === 'left') {
+                col = parseInt(cell.data('id').split('_')[1]) + 1;
+            } else if (cell.data('hor') === 'right') {
+                col = parseInt(cell.data('id').split('_')[1]) - 1;
+            }
+            var id = cell.data('id').split('_')[0] + '_' + col;
+            return $('#bookingTable tbody tr td[data-id=' + id + ']');
+        }
+
+
+        $(document).ready(function() {
+            loadTableData("curr");
+            $('.month-dir').click(function(e) {
+                hidePopover(e);
+                globalPopoverStatus = false;
+                clearRangeAndButton();
+                loadTableData($(this).val());
+            });
+        });
+
+        $(document).ready(function() {
+            $('.tip').tooltip();
+            cellPopover();
+
+            $('body').on('click', '#bookingTable tbody tr td', function() {
+                if ($(this).hasClass('cell')) {
+                    if (globalPopoverStatus) {
+                        globalPopoverStatus = false;
+                    } else {
+                        globalPopoverStatus = true;
+                    }
+                } else {
+                    globalPopoverStatus = false;
+                }
+
+                $('.cell').removeClass('highlighted');
+
+                var vacId = $(this).data('vac');
+
+                var rows = $('#bookingTable').children('tbody').children('tr');
+                for (var i = 0; i < rows.length; i++) {
+                    var cells = $(rows[i]).children('td');
+                    for (var j = 0; j < cells.length; j++) {
+                        if (vacId != undefined && $(cells[j]).data('vac') == vacId) {
+                            $(cells[j]).addClass('highlighted');
+                        }
+                    }
+                }
+            });
+        });
+
+
+        $(document).ready(function() {
+            $('body').on('click', '#removeButton', function() {
+                var result = confirm("Видалити бронювання?");
+                if (result) {
+                    var popover = $(this).parent().parent().parent();
+                    var popoverId = popover.attr('id');
+                    var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
+                    var url = '/vacation/' + vacId + '/remove-ajax';
+                    $.get(url, function(data) {
+                        window.location.reload();
+                    });
+                }
+                hidePopover(popover);
+            });
+
+            $('body').on('click', '#approveButton', function() {
                 var popover = $(this).parent().parent().parent();
                 var popoverId = popover.attr('id');
+                var isApproved = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('approved');
                 var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
-                var url = '/vacation/' + vacId + '/remove-ajax';
+                var url = '/vacation/' + vacId + '/approve';
+                if (isApproved) {
+                    url = url + '?approval=false';
+                } else {
+                    url = url + '?approval=true';
+                }
                 $.get(url, function(data) {
                     window.location.reload();
                 });
-            }
-            hidePopover(popover);
-        });
-
-        $('body').on('click', '#approveButton', function() {
-            var popover = $(this).parent().parent().parent();
-            var popoverId = popover.attr('id');
-            var isApproved = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('approved');
-            var vacId = $('#bookingTable tr td[aria-describedby=' + popoverId + ']').first().data('vac');
-            var url = '/vacation/' + vacId + '/approve';
-            if (isApproved) {
-                url = url + '?approval=false';
-            } else {
-                url = url + '?approval=true';
-            }
-            $.get(url, function(data) {
-                window.location.reload();
+                hidePopover(popover);
             });
-            hidePopover(popover);
         });
-    });
 
-    function cellPopover() {
+        function cellPopover() {
 
-        var popOverSettings = {
-            placement: 'top',
-            container: '#bookingTable',
-            html: true,
-            selector: '.cell', //Sepcify the selector here
-            title: function() {
-                var id = $(this).data('vac');
-                var approved = $(this).data('approved');
-                var icon;
-                if (approved) {
-                    icon = "<i class='far fa-times'></i>";
-                } else {
-                    icon = "<i class='far fa-check'></i>";
+            var popOverSettings = {
+                placement: 'top',
+                container: '#bookingTable',
+                html: true,
+                selector: '.cell', //Sepcify the selector here
+                title: function() {
+                    var id = $(this).data('vac');
+                    var approved = $(this).data('approved');
+                    var icon;
+                    if (approved) {
+                        icon = "<i class='far fa-times'></i>";
+                    } else {
+                        icon = "<i class='far fa-check'></i>";
+                    }
+
+                    return "<a href='/vacation/" + id + "/edit'>#" + id + "</a><span class='btn dropdown-toggle pl-2 pr-2 ml-4' data-toggle='dropdown'></span>" +
+                        "<div class='dropdown-menu' style='min-width: 50px !important;'>" +
+                        "<a class='dropdown-item' id='approveButton'>" + icon + "</a>" +
+                        "<div class='dropdown-divider'></div>" +
+                        "<a class='dropdown-item' id='removeButton'><i class='far fa-trash'></i></a></div></div>";
+                },
+                content: function() {
+                    var range = $(this).data('start').slice(-5).split('-').reverse().join('.') + " - " + $(this).data('end').slice(-5).split('-').reverse().join('.');
+                    var clientName = $(this).data('client');
+                    var room = $(this).data('room');
+                    return range + "<br>" + clientName;
                 }
-
-                return "<a href='/vacation/" + id + "/edit'>#" + id + "</a><span class='btn dropdown-toggle pl-2 pr-2 ml-4' data-toggle='dropdown'></span>" +
-                    "<div class='dropdown-menu' style='min-width: 50px !important;'>" +
-                    "<a class='dropdown-item' id='approveButton'>" + icon + "</a>" +
-                    "<div class='dropdown-divider'></div>" +
-                    "<a class='dropdown-item' id='removeButton'><i class='far fa-trash'></i></a></div></div>";
-            },
-            content: function() {
-                var range = $(this).data('start').slice(-2) + " - " + $(this).data('end').slice(-2);
-                var clientName = $(this).data('client');
-                var room = $(this).data('room');
-                return range + ", Кім. " + room + "<br>" + clientName;
             }
-        }
-        var $po = $('body').popover(popOverSettings);
+            var $po = $('body').popover(popOverSettings);
 
-        $(document).on('click', function(e) {
-            hidePopover(e);
-        });
-    }
-
-    function hidePopover(e) {
-        $('[data-toggle="popover"],[data-original-title]').each(function() {
-            if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                (($(this).popover('hide').data('bs.popover') || {}).inState || {}).click = false // fix for BS 3.3.6
-            }
-        });
-    }
-
-
-    function loadTableData(direction) {
-        $('#bookingTable thead').empty();
-        $('#bookingTable tbody').empty();
-        $('#loader').show();
-
-        $.get('/tableData/' + direction, function(data) {
-
-            $('#loader').hide();
-            buildTableHeader(data[0]);
-            buildTableBody(data, data[0]);
-            $('#mainCard').css('display', 'block');
-        });
-    }
-
-
-
-    function buildTableHeader(headerData) {
-        var tHead = document.getElementById('bookingTable').getElementsByTagName('thead')[0];
-
-        var headerRow0 = tHead.insertRow(0);
-
-        <!--var headerCell1 = document.createElement("TH");-->
-        <!--headerCell1.setAttribute("colspan",parseInt(headerData[0].monthLength)*2);-->
-        <!--headerRow0.appendChild(headerCell1);-->
-        <!--var headerCell2 = document.createElement("TH");-->
-        <!--headerCell2.setAttribute("colspan",parseInt(headerData[headerData.length-1].monthLength)*2);-->
-        <!--headerRow0.appendChild(headerCell2);-->
-
-        var headerRow1 = tHead.insertRow(0);
-        for (var i = 0; i < headerData.length; i++) {
-            var headerCell = document.createElement("TH");
-            headerCell.setAttribute("colspan", "2");
-            headerRow1.appendChild(headerCell);
-            var headerCellText = document.createTextNode(headerData[i].dayOfMonth);
-            headerCell.appendChild(headerCellText);
-            if (i % 2 != 0) {
-                $(headerCell).css('background-color', '#f0f0f0');
-            }
+            $(document).on('click', function(e) {
+                hidePopover(e);
+            });
         }
 
-        var headerRow2 = tHead.insertRow(1);
-        for (var i = 0; i < headerData.length; i++) {
-            var headerCell = document.createElement("TH");
-            headerCell.setAttribute("colspan", "2");
-            headerRow2.appendChild(headerCell);
-            var headerCellText = document.createTextNode(headerData[i].dayOfWeek);
-            headerCell.appendChild(headerCellText);
-            if (i % 2 != 0) {
-                $(headerCell).css('background-color', '#f0f0f0');
-            }
+        function hidePopover(e) {
+            $('[data-toggle="popover"],[data-original-title]').each(function() {
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    (($(this).popover('hide').data('bs.popover') || {}).inState || {}).click = false // fix for BS 3.3.6
+                }
+            });
         }
-    }
 
-
-    function addAttributes(data, obj, index) {
-        var $obj = $(obj);
-        for (var key in data) {
-            if (key.endsWith(index)) {
-                <!--$obj.data(key.slice(0, -2), data[key]);-->
-                $obj.attr('data-' + key.slice(0, -2), data[key]);
-                <!--$obj.html("<span class='innerSpan' style='border-top:0.5px solid black;border-bottom:0.5px solid black;'></span>");-->
-                $obj.html("<span class='innerSpan'></span>");
-                $obj.addClass('cell');
-                <!--#868e96-->
-            }
+        function populateMonthNameOnPage(data){
+            var prevMonthName = data[0].monthName.substring(0,3);
+            var nextMonthName = data[data.length-1].monthName.substring(0,3);
+            $('#currMonthsButton').html(prevMonthName+' - '+nextMonthName);
         }
-    }
+
+        function loadTableData(direction) {
+            $('#bookingTable thead').empty();
+            $('#bookingTable tbody').empty();
+            $('#loader').show();
+
+            $.get('/tableData/' + direction, function(data) {
+
+                $('#loader').hide();
+                populateMonthNameOnPage(data[0]);
+                buildTableHeader(data[0]);
+                buildTableBody(data, data[0]);
+                $('#reloadingPage').css('display', 'block');
+            });
+        }
 
 
-    function buildTableBody(rows, header) {
-        var tBody = document.getElementById('bookingTable').getElementsByTagName('tbody')[0];
-        var roomNum = 0;
-        for (var i = 1; i < rows.length; i++) {
-            var row = tBody.insertRow(i - 1);
-            if (i % 2 != 0) {
-                roomNum++;
+        function widenMonthName(name){
+            var result = '';
+            for(var i = 0; i < name.length; i++){
+                result = result + name.charAt(i)+'\xa0\xa0\xa0';
+            }
+            return result;
+        }
+
+
+        function buildTableHeader(headerData) {
+            var tHead = document.getElementById('bookingTable').getElementsByTagName('thead')[0];
+
+            var headerRow0 = tHead.insertRow(0);
+
+              for (var i = 0; i < headerData.length; i++) {
+                var headerCell = document.createElement("TH");
+                headerCell.setAttribute("colspan", "2");
+                headerRow0.appendChild(headerCell);
+                $(headerCell).css('border-top','1px solid black');
+                if(i==12){
+                   $(headerCell).css('white-space','nowrap');
+                   $(headerCell).text(widenMonthName(headerData[0].monthName));
+                   $(headerCell).addClass('h5');
+                }
+                if(i==parseInt(headerData[0].monthLength)+12){
+                   $(headerCell).css('white-space','nowrap');
+                   $(headerCell).text(headerData[headerData.length-1].monthName);
+                   $(headerCell).text(widenMonthName(headerData[headerData.length-1].monthName));
+                   $(headerCell).addClass('h5');
+                }
+                if(i==parseInt(headerData[0].monthLength)){
+                    $(headerCell).css('border-left','1px solid black');
+                }
             }
 
-            for (var j = 0, k = 0; j < rows[i].length * 2; j = j + 2, k++) {
-                var cell1 = row.insertCell(j);
-                $(cell1).attr('data-hor', 'left');
-                $(cell1).attr('data-date', header[k].date);
-                $(cell1).attr('data-room', roomNum);
-                $(cell1).attr('data-column', k);
-                $(cell1).attr('data-id', '' + (i - 1) + '_' + j);
-
-                var cell2 = row.insertCell(j + 1);
-                $(cell2).attr('data-hor', 'right');
-                $(cell2).attr('data-date', header[k].date);
-                $(cell2).attr('data-room', roomNum);
-                $(cell2).attr('data-column', k);
-                $(cell2).attr('data-id', '' + (i - 1) + '_' + (j + 1));
-
-
+            var headerRow1 = tHead.insertRow(1);
+            for (var i = 0; i < headerData.length; i++) {
+                var headerCell = document.createElement("TH");
+                headerCell.setAttribute("colspan", "2");
+                headerRow1.appendChild(headerCell);
+                var dayOfMonthHeaderCell = document.createTextNode(headerData[i].dayOfMonth);
+                headerCell.appendChild(dayOfMonthHeaderCell);
                 if (i % 2 != 0) {
-                    $(cell1).attr('data-ver', 'top');
-                    $(cell2).attr('data-ver', 'top');
-                } else {
-                    $(cell1).attr('data-ver', 'bottom');
-                    $(cell2).attr('data-ver', 'bottom');
+                    $(headerCell).css('background-color', '#f0f0f0');
                 }
+                $(headerCell).css('border-left','0.5px solid grey');
+                $(headerCell).css('border-right','0.5px solid grey');
+                $(headerCell).css('border-top','1px solid black');
+                if(headerData[i].today === 'true'){
+                    $(headerCell).css('background-color','black');
+                    $(headerCell).css('color','white');
+               }
+            }
 
-                var data = rows[i][k];
 
-                if (data.hasOwnProperty('vac_1')) {
-                    addAttributes(data, cell1, 0);
-                    addAttributes(data, cell2, 1);
-                } else {
-                    if (data['arrival_0'] != 'true') {
-                        addAttributes(data, cell1, 0);
-                    }
-                    if (data['leave_0'] != 'true') {
-                        addAttributes(data, cell2, 0);
-                    }
+            var headerRow2 = tHead.insertRow(2);
+            for (var i = 0; i < headerData.length; i++) {
+                var headerCell = document.createElement("TH");
+                headerCell.setAttribute("colspan", "2");
+                headerRow2.appendChild(headerCell);
+                var dayOfWeekHeaderCell = document.createTextNode(headerData[i].dayOfWeek);
+                headerCell.appendChild(dayOfWeekHeaderCell);
+                if (i % 2 != 0) {
+                    $(headerCell).css('background-color', '#f0f0f0');
                 }
+                $(headerCell).css('border-left','0.5px solid grey');
+                $(headerCell).css('border-right','0.5px solid grey');
+                $(headerCell).css('border-bottom','1px solid black');
+                $(headerCell).addClass("normalWeightText");
+                if(headerData[i].today === 'true'){
+                    $(headerCell).css('background-color','black');
+                    $(headerCell).css('color','white');               }
+            }
 
-                markCell(cell1);
-                markCell(cell2);
+        }
 
-                if (k % 2 != 0) {
-                    $(cell1).addClass('striped');
-                    $(cell2).addClass('striped');
-                }
 
-                if (i % 2 == 0) {
-                    $(cell1).css('border-bottom', '2px solid transparent');
-                    $(cell2).css('border-bottom', '2px solid transparent');
+        function addAttributes(data, obj, index) {
+            var $obj = $(obj);
+            for (var key in data) {
+                if (key.endsWith(index)) {
+                    $obj.attr('data-' + key.slice(0, -2), data[key]);
+                    $obj.addClass('cell');
                 }
             }
         }
-    }
 
-    function markCell(cell) {
-        if ($(cell).data('approved') == true) {
-            $(cell).find('span').css('background-color', '#ffc107');
-        } else {
-            $(cell).find('span').css('background-color', '#868e96');
+
+        function buildTableBody(rows, header) {
+            var tBody = document.getElementById('bookingTable').getElementsByTagName('tbody')[0];
+            var roomNum = 0;
+            for (var i = 1; i < rows.length; i++) {
+                var row = tBody.insertRow(i - 1);
+                if (i % 2 != 0) {
+                    roomNum++;
+                }
+
+                for (var j = 0, k = 0; j < rows[i].length * 2; j = j + 2, k++) {
+                    var cell1 = row.insertCell(j);
+                    $(cell1).attr('data-hor', 'left');
+                    $(cell1).attr('data-date', header[k].date);
+                    $(cell1).attr('data-room', roomNum);
+                    $(cell1).attr('data-column', k);
+                    $(cell1).attr('data-id', '' + (i - 1) + '_' + j);
+                    $(cell1).css('border-left', '0.5px solid grey');
+
+                    var cell2 = row.insertCell(j + 1);
+                    $(cell2).attr('data-hor', 'right');
+                    $(cell2).attr('data-date', header[k].date);
+                    $(cell2).attr('data-room', roomNum);
+                    $(cell2).attr('data-column', k);
+                    $(cell2).attr('data-id', '' + (i - 1) + '_' + (j + 1));
+                    $(cell2).css('border-right', '0.5px solid grey');
+
+                    if(header[k].today === 'true'){
+                        $(cell1).addClass('lightViolet');
+                        $(cell2).addClass('lightViolet');
+                    }
+
+                    if (i % 2 != 0) {
+                        $(cell1).attr('data-ver', 'top');
+                        $(cell2).attr('data-ver', 'top');
+
+                        $(cell1).css('border-top', '0.5px solid black');
+                        $(cell2).css('border-top', '0.5px solid black');
+                    } else {
+                        $(cell1).attr('data-ver', 'bottom');
+                        $(cell2).attr('data-ver', 'bottom');
+
+                        $(cell1).css('border-bottom', '0.5px solid black');
+                        $(cell2).css('border-bottom', '0.5px solid black');
+                    }
+
+                    var data = rows[i][k];
+
+                    if (data.hasOwnProperty('vac_1')) {
+                        addAttributes(data, cell1, 0);
+                        addAttributes(data, cell2, 1);
+                    } else {
+                        if (data['arrival_0'] != 'true') {
+                            addAttributes(data, cell1, 0);
+                        }
+                        if (data['leave_0'] != 'true') {
+                            addAttributes(data, cell2, 0);
+                        }
+                    }
+
+                    markCell(cell1);
+                    markCell(cell2);
+
+                    if (k % 2 != 0) {
+                        $(cell1).addClass('striped');
+                        $(cell2).addClass('striped');
+                    }
+                }
+            }
         }
-    }
+
+        function markCell(cell) {
+            if ($(cell).data('approved') == true) {
+                $(cell).css('background-color', '#13B955');
+            } else if($(cell).data('approved') == false){
+                $(cell).css('background-color', '#868e96');
+            }
+        }
+
+
 </script>
 
 </html>

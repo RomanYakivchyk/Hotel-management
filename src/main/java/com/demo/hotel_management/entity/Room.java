@@ -9,16 +9,13 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
 public class Room {
 
-    public Room(@Min(1) @Max(20) Integer roomNumber,
-//                Map<BedType, Integer> beds,
-                List<RoomVacation> roomVacationList, @NotNull Building building) {
+    public Room() {
+    }
+
+    public Room(@Min(1) @Max(20) Integer roomNumber, List<RoomVacation> roomVacationList, @NotNull Building building) {
         this.roomNumber = roomNumber;
-//        this.beds = beds;
         this.roomVacationList = roomVacationList;
         this.building = building;
     }
@@ -30,14 +27,6 @@ public class Room {
     @Min(1)
     @Max(20)
     private Integer roomNumber;
-
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @MapKeyColumn(name="bed_type")
-//    @CollectionTable(name="beds")
-//    @MapKeyEnumerated(EnumType.STRING)
-//    @Column(name="number_of_beds")
-//    private Map<BedType, Integer> beds;
-
     @OneToMany(mappedBy = "room",cascade = CascadeType.ALL)
     private List<RoomVacation> roomVacationList;
 
@@ -46,9 +35,35 @@ public class Room {
     @JoinColumn(name = "building_id")
     private Building building;
 
-//    public enum BedType {
-//        SINGLE_BED,
-//        DOUBLE_BED,
-//        FOLDING_BED
-//    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public List<RoomVacation> getRoomVacationList() {
+        return roomVacationList;
+    }
+
+    public void setRoomVacationList(List<RoomVacation> roomVacationList) {
+        this.roomVacationList = roomVacationList;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
 }
