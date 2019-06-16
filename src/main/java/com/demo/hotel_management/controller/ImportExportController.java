@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ImportExportController {
@@ -13,16 +14,26 @@ public class ImportExportController {
     @GetMapping("/importExport")
     public String importExport(Model model) {
         model.addAttribute("importExportView", new ImportExportView());
-        return "importExportSelect.html";
+        return "importExport.html";
     }
 
+    @GetMapping("/uploadFile")
+    public String uploadFile() {
+        return "uploadFile.html";
+    }
 
-    @PostMapping("/importExport/select")
-    public String selectedAction(@ModelAttribute ImportExportView importExportView) {
+    @PostMapping("/importExport")
+    public String selectedAction(@ModelAttribute ImportExportView importExportView, RedirectAttributes redirectAttributes) {
+        if (importExportView.getType().equals("client")) {
+            redirectAttributes.addAttribute("message", "Імпорт даних клієнтів");
+        } else if (importExportView.getType().equals("vac")) {
+            redirectAttributes.addAttribute("message", "Імпорт даних бронювання");
+        }
+
         if (importExportView.getAction().equals("export")) {
-            return "ss";
+            return "redirect:/downloadFile";
         } else if (importExportView.getAction().equals("import")) {
-            return "sasds";
+            return "redirect:/uploadFile";
         }
         return null;
     }

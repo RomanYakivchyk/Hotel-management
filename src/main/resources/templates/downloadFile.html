@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Export</title>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+
+    <link th:href="@{/footer.css}" rel="stylesheet">
+
+    <link th:href="@{/fontawesome/css/all.css}" rel="stylesheet">
+
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-md navbar-dark bg-primary" xmlns:th="http://www.w3.org/1999/xhtml">
+    <a class="navbar-brand" th:href="@{/}"><i class="fas fa-home text-white fa-lg"></i></a>
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse dual-collapse2" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/vacations}"><i class="far fa-bed"></i>&nbsp;&nbsp;&nbsp;Бронювання</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/clients}"><i class="far fa-user"></i>&nbsp;&nbsp;&nbsp;Клієнти</a>
+            </li>
+            <li class="nav-item text-nowrap active">
+                <a class="nav-link" th:href="@{/importExport}"><i class="far fa-download fa-lg"></i>&nbsp;&nbsp;&nbsp;Імпорт/Експорт</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/statistics}"><i class="far fa-chart-line"></i>&nbsp;&nbsp;&nbsp;Статистика</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" th:href="@{/logout}"><i class="far fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Вихід</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+
+
+<ol class="breadcrumb bg-white shadow-sm">
+    <li class="breadcrumb-item"><a th:href="@{/}">Домашня</a></li>
+    <li class="breadcrumb-item active">Експорт</li>
+</ol>
+
+<div class="container col-md-4" style="float: none; margin: 0 auto;">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="mb-4">
+                <div class="mb-4">
+                    <span class="h5 card-title">Експорт</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--</div>-->
+<div th:insert="footer.html"></div>
+<script th:src="@{/ajax/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/ajax/popper.min.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

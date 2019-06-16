@@ -16,7 +16,7 @@ public class ClientCsvReaderWriter {
         FileOutputStream fos = new FileOutputStream(csvFile);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
-        String header = "ID,NAME,OTHER_INFO,PHONE,INACTIVE";
+        String header = "ID,NAME,OTHER_INFO,PHONE,COMMENT,INACTIVE";
         bw.write(header);
         bw.newLine();
 
@@ -25,9 +25,10 @@ public class ClientCsvReaderWriter {
             String name = client.getName();
             String otherInfo = client.getOtherClientInfo();
             String phone = client.getPhoneNumber();
+            String comment = client.getComment();
             String inactive = String.valueOf(client.getInactive());
 
-            String clientRecord = String.join(",", id, name, otherInfo, phone, inactive);
+            String clientRecord = String.join(",", id, name, otherInfo, phone, comment, inactive);
             bw.write(clientRecord);
             bw.newLine();
         }
@@ -35,12 +36,10 @@ public class ClientCsvReaderWriter {
         return csvFile;
     }
 
-    public static List<Client> readClientsFromFile(String inputFilePath) throws IOException {
+    public static List<Client> readClientsFromFile(InputStream in) throws IOException {
         List<Client> allClients = new ArrayList<>();
 
-        File csvFile = new File(inputFilePath);
-        FileInputStream fis = new FileInputStream(csvFile);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String header = br.readLine();
         String clientRecord;
         while ((clientRecord = br.readLine()) != null) {
@@ -50,7 +49,8 @@ public class ClientCsvReaderWriter {
             client.setName(clientData[1]);
             client.setOtherClientInfo(clientData[2]);
             client.setPhoneNumber(clientData[3]);
-            client.setInactive(Boolean.valueOf(clientData[4]));
+            client.setComment(clientData[4]);
+            client.setInactive(Boolean.valueOf(clientData[5]));
 
             allClients.add(client);
         }
